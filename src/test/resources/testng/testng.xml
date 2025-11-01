@@ -5,8 +5,14 @@
     </listeners>
     <test name="Regression Tests">
         <classes>
-            <class name="com.framework.AppTest"/>
+            <class name="com.framework.utils.AppTest"/>
             <class name="com.framework.tests.HomePageTest"/>
+        </classes>
+    </test>
+    
+    <test name="SauceDemo Tests - BaseUrl.2">
+        <classes>
+            <class name="com.framework.tests.SauceDemoTest"/>
         </classes>
     </test>
 </suite>

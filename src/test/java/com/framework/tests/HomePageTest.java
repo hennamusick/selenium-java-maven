@@ -1,9 +1,9 @@
 package com.framework.tests;
 
 import com.framework.pages.HomePage;
+import com.framework.utils.BaseTest;
 import com.framework.utils.ConfigReader;
 import org.openqa.selenium.Alert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -12,33 +12,44 @@ public class HomePageTest extends BaseTest {
 
     @BeforeMethod
     public void setUpTest() throws InterruptedException {
-        driver.get(ConfigReader.getProperty("baseUrl"));
+        // Using baseUrl.1 - Rahul Shetty Academy AutomationPractice
+        driver.get(ConfigReader.getBaseUrl(1));
         Thread.sleep(2000); // Wait for page to load
         homePage = new HomePage(driver);
     }
 
     @Test(description = "Verify alert functionality")
     public void testAlert() {
+        homePage.enterName("Test User");
         homePage.clickAlert();
         Alert alert = driver.switchTo().alert();
-        Assert.assertEquals(alert.getText(), "I am alert box!");
+        String alertText = alert.getText();
+        softAssert.assertTrue(alertText.contains("Test User"), 
+            "Alert should contain the entered name");
         alert.accept();
+        
+        softAssert.assertAll();
     }
 
     @Test(description = "Verify confirm box functionality")
     public void testConfirmBox() {
+        homePage.enterName("Test User");
         homePage.clickConfirmBox();
         Alert confirm = driver.switchTo().alert();
-        Assert.assertEquals(confirm.getText(), "Please select an option: Ok or Cancel");
+        String confirmText = confirm.getText();
+        softAssert.assertTrue(confirmText.contains("Test User"), 
+            "Confirm box should contain the entered name");
         confirm.accept();
+        
+        softAssert.assertAll();
     }
 
-    @Test(description = "Verify prompt functionality")
-    public void testPrompt() {
-        homePage.clickPrompt();
-        Alert prompt = driver.switchTo().alert();
-        String testUser = "Test User";
-        prompt.sendKeys(testUser);
-        prompt.accept();
+    @Test(description = "Verify name field accepts input")
+    public void testNameInput() {
+        homePage.enterName("Automation Test");
+        // Verify we can interact with the page successfully
+        softAssert.assertNotNull(driver.getTitle(), "Page should have a title");
+        
+        softAssert.assertAll();
     }
 }

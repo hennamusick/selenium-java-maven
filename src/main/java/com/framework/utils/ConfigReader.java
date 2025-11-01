@@ -22,4 +22,31 @@ public class ConfigReader {
     public static String getProperty(String key) {
         return properties.getProperty(key);
     }
+
+    /**
+     * Get base URL by index
+     * @param index - the index of the base URL (0, 1, 2, etc.)
+     * @return the base URL at the specified index
+     */
+    public static String getBaseUrl(int index) {
+        return properties.getProperty("baseUrl." + index);
+    }
+
+    /**
+     * Get all base URLs as an array
+     * @return array of all configured base URLs
+     */
+    public static String[] getAllBaseUrls() {
+        int count = 0;
+        // Count how many baseUrls are configured
+        while (properties.getProperty("baseUrl." + count) != null) {
+            count++;
+        }
+        
+        String[] urls = new String[count];
+        for (int i = 0; i < count; i++) {
+            urls[i] = properties.getProperty("baseUrl." + i);
+        }
+        return urls;
+    }
 }
