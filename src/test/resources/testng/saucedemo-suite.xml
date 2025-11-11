@@ -3,6 +3,8 @@
     <listeners>
         <listener class-name="com.framework.utils.TestListener"/>
     </listeners>
+    
+    <!-- Tests for https://www.saucedemo.com -->
     <test name="SauceDemo Tests">
         <classes>
             <class name="com.framework.tests.SauceDemoTest"/>

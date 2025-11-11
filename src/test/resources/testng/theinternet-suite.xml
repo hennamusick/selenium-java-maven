@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="The Internet Herokuapp Suite - BaseUrl.3">
+    <listeners>
+        <listener class-name="com.framework.utils.TestListener"/>
+    </listeners>
+    
+    <!-- Tests for https://the-internet.herokuapp.com -->
+    <test name="The Internet Herokuapp Tests">
+        <classes>
+            <!-- Add test classes that use baseUrl.3 here -->
+        </classes>
+    </test>
+</suite>

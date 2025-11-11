@@ -1,12 +1,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Radio Button Test Suite - BaseUrl.1">
+<suite name="Rahul Shetty Academy Suite - BaseUrl.1">
     <listeners>
         <listener class-name="com.framework.utils.TestListener"/>
     </listeners>
     
     <!-- Tests for https://rahulshettyacademy.com/AutomationPractice -->
-    <test name="Radio Button Tests">
+    <test name="Rahul Shetty Academy Tests">
         <classes>
+            <class name="com.framework.tests.HomePageTest"/>
             <class name="com.framework.tests.RadioButtonTest"/>
         </classes>
     </test>
