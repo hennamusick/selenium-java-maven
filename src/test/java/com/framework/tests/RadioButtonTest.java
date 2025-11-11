@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class RadioButtonTest extends BaseTest {
     private HomePage homePage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUpTest() throws InterruptedException {
         // Using baseUrl.1 - Rahul Shetty Academy AutomationPractice
         driver.get(ConfigReader.getBaseUrl(1));
@@ -17,7 +17,7 @@ public class RadioButtonTest extends BaseTest {
         homePage = new HomePage(driver);
     }
 
-    @Test(description = "Verify radio buttons are displayed and enabled")
+    @Test(priority = 1, groups = {"smoke", "regression"}, description = "Verify radio buttons are displayed and enabled")
     public void testRadioButtonsVisibilityAndState() {
         // Best Practice 1: Verify all radio buttons are displayed
         softAssert.assertTrue(homePage.isRadio1Displayed(), "Radio1 should be displayed");
@@ -32,7 +32,7 @@ public class RadioButtonTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify Radio1 selection and mutual exclusivity")
+    @Test(priority = 2, groups = {"functional", "regression"}, description = "Verify Radio1 selection and mutual exclusivity")
     public void testRadio1Selection() {
         // Best Practice 3: Click and verify selection
         homePage.clickRadio1();
@@ -49,7 +49,7 @@ public class RadioButtonTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify Radio2 selection and mutual exclusivity")
+    @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify Radio2 selection and mutual exclusivity")
     public void testRadio2Selection() {
         homePage.clickRadio2();
         
@@ -65,7 +65,7 @@ public class RadioButtonTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify Radio3 selection and mutual exclusivity")
+    @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify Radio3 selection and mutual exclusivity")
     public void testRadio3Selection() {
         homePage.clickRadio3();
         
@@ -81,7 +81,7 @@ public class RadioButtonTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify switching between radio buttons")
+    @Test(priority = 5, groups = {"functional", "regression"}, description = "Verify switching between radio buttons")
     public void testRadioButtonSwitching() {
         // Best Practice 5: Test switching behavior
         
@@ -113,7 +113,7 @@ public class RadioButtonTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify default radio button state (if any)")
+    @Test(priority = 6, groups = {"smoke", "functional", "regression"}, description = "Verify default radio button state (if any)")
     public void testDefaultRadioButtonState() {
         // Best Practice 6: Verify initial/default state
         // Check if any radio button is selected by default

@@ -9,14 +9,14 @@ import org.testng.annotations.Test;
 
 public class SauceDemoTest extends BaseTest {
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUpTest() throws InterruptedException {
         // Using baseUrl.2 - https://www.saucedemo.com
         driver.get(ConfigReader.getBaseUrl(2));
         Thread.sleep(2000); // Wait for page to load
     }
 
-    @Test(description = "Verify SauceDemo login page loads successfully")
+    @Test(priority = 1, groups = {"smoke", "regression"}, description = "Verify SauceDemo login page loads successfully")
     public void testLoginPageLoads() {
         String currentUrl = driver.getCurrentUrl();
         softAssert.assertTrue(currentUrl.contains("saucedemo.com"), 
@@ -34,7 +34,7 @@ public class SauceDemoTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify page title")
+    @Test(priority = 2, groups = {"smoke", "regression"}, description = "Verify page title")
     public void testPageTitle() {
         String pageTitle = driver.getTitle();
         softAssert.assertEquals(pageTitle, "Swag Labs", 
@@ -43,7 +43,7 @@ public class SauceDemoTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify successful login with valid credentials")
+    @Test(priority = 3, groups = {"smoke", "functional", "regression"}, description = "Verify successful login with valid credentials")
     public void testSuccessfulLogin() {
         // Standard user credentials from SauceDemo
         driver.findElement(By.id("user-name")).sendKeys("standard_user");

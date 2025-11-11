@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class HomePageTest extends BaseTest {
     private HomePage homePage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUpTest() throws InterruptedException {
         // Using baseUrl.1 - Rahul Shetty Academy AutomationPractice
         driver.get(ConfigReader.getBaseUrl(1));
@@ -18,7 +18,7 @@ public class HomePageTest extends BaseTest {
         homePage = new HomePage(driver);
     }
 
-    @Test(description = "Verify alert functionality")
+    @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify alert functionality")
     public void testAlert() {
         homePage.enterName("Test User");
         homePage.clickAlert();
@@ -31,7 +31,7 @@ public class HomePageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify confirm box functionality")
+    @Test(priority = 2, groups = {"functional", "regression"}, description = "Verify confirm box functionality")
     public void testConfirmBox() {
         homePage.enterName("Test User");
         homePage.clickConfirmBox();
@@ -44,7 +44,7 @@ public class HomePageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Verify name field accepts input")
+    @Test(priority = 3, groups = {"smoke", "regression"}, description = "Verify name field accepts input")
     public void testNameInput() {
         homePage.enterName("Automation Test");
         // Verify we can interact with the page successfully

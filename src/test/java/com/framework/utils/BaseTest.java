@@ -10,13 +10,13 @@ public class BaseTest {
     protected WebDriver driver;
     protected SoftAssert softAssert;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         driver = DriverManager.getDriver();
         softAssert = new SoftAssert();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         DriverManager.quitDriver();
     }

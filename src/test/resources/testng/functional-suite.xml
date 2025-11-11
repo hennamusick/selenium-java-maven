@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Functional Test Suite">
+    <listeners>
+        <listener class-name="com.framework.utils.TestListener"/>
+    </listeners>
+    
+    <!-- Run only functional tests across all environments -->
+    <test name="Functional Tests">
+        <groups>
+            <run>
+                <include name="functional"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="com.framework.tests.HomePageTest"/>
+            <class name="com.framework.tests.RadioButtonTest"/>
+            <class name="com.framework.tests.SauceDemoTest"/>
+        </classes>
+    </test>
+</suite>
