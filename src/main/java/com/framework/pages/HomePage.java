@@ -1,11 +1,8 @@
 package com.framework.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 
 public class HomePage extends BasePage {
     // Alert Section - Locators for Rahul Shetty Academy AutomationPractice
@@ -34,63 +31,63 @@ public class HomePage extends BasePage {
     }
     
     public void clickAlert() {
-        wait.until(ExpectedConditions.elementToBeClickable(alertButton)).click();
+        clickElement(alertButton);
     }
     
     public void clickConfirmBox() {
-        wait.until(ExpectedConditions.elementToBeClickable(confirmBoxButton)).click();
+        clickElement(confirmBoxButton);
     }
     
     public void enterName(String name) {
-        wait.until(ExpectedConditions.visibilityOf(nameInput)).sendKeys(name);
+        sendKeysToElement(nameInput, name);
     }
     
     // Radio Button Methods
     public void clickRadio1() {
-        wait.until(ExpectedConditions.elementToBeClickable(radio1Button)).click();
+        clickElement(radio1Button);
     }
     
     public void clickRadio2() {
-        wait.until(ExpectedConditions.elementToBeClickable(radio2Button)).click();
+        clickElement(radio2Button);
     }
     
     public void clickRadio3() {
-        wait.until(ExpectedConditions.elementToBeClickable(radio3Button)).click();
+        clickElement(radio3Button);
     }
     
     public boolean isRadio1Selected() {
-        return radio1Button.isSelected();
+        return isElementSelected(radio1Button);
     }
     
     public boolean isRadio2Selected() {
-        return radio2Button.isSelected();
+        return isElementSelected(radio2Button);
     }
     
     public boolean isRadio3Selected() {
-        return radio3Button.isSelected();
+        return isElementSelected(radio3Button);
     }
     
     public boolean isRadio1Enabled() {
-        return radio1Button.isEnabled();
+        return isElementEnabled(radio1Button);
     }
     
     public boolean isRadio2Enabled() {
-        return radio2Button.isEnabled();
+        return isElementEnabled(radio2Button);
     }
     
     public boolean isRadio3Enabled() {
-        return radio3Button.isEnabled();
+        return isElementEnabled(radio3Button);
     }
     
     public boolean isRadio1Displayed() {
-        return radio1Button.isDisplayed();
+        return isElementDisplayed(radio1Button);
     }
     
     public boolean isRadio2Displayed() {
-        return radio2Button.isDisplayed();
+        return isElementDisplayed(radio2Button);
     }
     
     public boolean isRadio3Displayed() {
-        return radio3Button.isDisplayed();
+        return isElementDisplayed(radio3Button);
     }
 }

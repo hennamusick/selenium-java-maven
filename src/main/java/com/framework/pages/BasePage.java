@@ -30,4 +30,59 @@ public abstract class BasePage {
     protected void switchToFrame(WebElement frameElement) {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameElement));
     }
+
+    // Common Explicit Wait Methods
+    protected void clickElement(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+    }
+
+    protected void sendKeysToElement(WebElement element, String text) {
+        wait.until(ExpectedConditions.visibilityOf(element)).sendKeys(text);
+    }
+
+    protected void clearAndSendKeys(WebElement element, String text) {
+        WebElement visibleElement = wait.until(ExpectedConditions.visibilityOf(element));
+        visibleElement.clear();
+        visibleElement.sendKeys(text);
+    }
+
+    protected boolean isElementDisplayed(WebElement element) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean isElementEnabled(WebElement element) {
+        try {
+            return wait.until(ExpectedConditions.visibilityOf(element)).isEnabled();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected boolean isElementSelected(WebElement element) {
+        try {
+            return element.isSelected();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    protected String getElementText(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element)).getText();
+    }
+
+    protected String getElementAttribute(WebElement element, String attribute) {
+        return wait.until(ExpectedConditions.visibilityOf(element)).getAttribute(attribute);
+    }
+
+    protected void waitForElementToBeVisible(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    protected void waitForElementToBeClickable(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
 }
