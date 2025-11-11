@@ -15,13 +15,13 @@ The `BasePage` is an **abstract class** that serves as the template for all page
 ```java
 public abstract class BasePage {
     protected WebDriver driver;
-    protected WebDriverWait wait;
+    protected Wait wait;
 
     public BasePage(WebDriver driver) {
-        this.driver = driver;                                          // 1️⃣
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // 2️⃣
-        PageFactory.initElements(driver, this);                        // 3️⃣
-        switchToDefaultContent();                                      // 4️⃣
+        this.driver = driver;                   // 1️⃣
+        this.wait = new Wait(driver);           // 2️⃣
+        PageFactory.initElements(driver, this); // 3️⃣
+        switchToDefaultContent();               // 4️⃣
     }
 }
 ```
@@ -38,7 +38,7 @@ public abstract class BasePage {
 | Line | Purpose | Why It's Needed |
 |------|---------|-----------------|
 | **1️⃣ `this.driver = driver;`** | Stores WebDriver instance | Makes driver accessible to all methods in page classes |
-| **2️⃣ `this.wait = new WebDriverWait(...)`** | Creates 10-second explicit wait | Centralizes wait configuration, prevents timeouts |
+| **2️⃣ `this.wait = new Wait(driver);`** | Creates Wait utility instance | Provides reusable explicit wait methods with 10-second default timeout |
 | **3️⃣ `PageFactory.initElements(...)`** | Initializes all `@FindBy` elements | Connects WebElement annotations to actual DOM elements |
 | **4️⃣ `switchToDefaultContent()`** | Resets to main frame | Ensures clean state, prevents iframe context issues |
 
@@ -49,6 +49,47 @@ public abstract class BasePage {
 - ✅ **Reliability** - Automatic frame reset prevents errors
 - ✅ **Type Safety** - Polymorphism support for page objects
 
+#### **Wait Utility Class - Centralized Wait Management**
+
+The `Wait` class encapsulates all explicit wait functionality, promoting **separation of concerns** and **reusability**:
+
+```java
+public class Wait {
+    private WebDriverWait wait;
+
+    public Wait(WebDriver driver) {
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    // Element Interaction Methods
+    public void clickElement(WebElement element) { ... }
+    public void sendKeysToElement(WebElement element, String text) { ... }
+    public void clearAndSendKeys(WebElement element, String text) { ... }
+
+    // Element State Methods
+    public boolean isElementDisplayed(WebElement element) { ... }
+    public boolean isElementEnabled(WebElement element) { ... }
+    public boolean isElementSelected(WebElement element) { ... }
+
+    // Data Retrieval Methods
+    public String getElementText(WebElement element) { ... }
+    public String getElementAttribute(WebElement element, String attribute) { ... }
+
+    // Generic Wait Methods
+    public void waitForElementToBeVisible(WebElement element) { ... }
+    public void waitForElementToBeClickable(WebElement element) { ... }
+    public void waitForFrameAndSwitch(String frameId) { ... }
+}
+```
+
+**Wait Class Benefits:**
+- ✅ **Single Responsibility** - Handles only wait logic
+- ✅ **Reusability** - Can be used outside page objects if needed
+- ✅ **Testability** - Easier to mock and unit test
+- ✅ **Flexibility** - Supports custom timeout via constructor overload
+- ✅ **Maintainability** - All wait logic centralized in one place
+- ✅ **Error Handling** - Built-in exception handling for state checks
+
 #### **Example Page Object**
 
 ```java
@@ -56,12 +97,24 @@ public class HomePage extends BasePage {
     @FindBy(id = "alertbtn")
     private WebElement alertButton;
     
+    @FindBy(css = "input[value='radio1']")
+    private WebElement radio1Button;
+    
     public HomePage(WebDriver driver) {
         super(driver); // Calls BasePage constructor
     }
     
+    // Using Wait utility methods
     public void clickAlert() {
-        wait.until(ExpectedConditions.elementToBeClickable(alertButton)).click();
+        clickElement(alertButton); // Inherited from BasePage
+    }
+    
+    public void clickRadio1() {
+        clickElement(radio1Button); // Wait utility handles explicit wait
+    }
+    
+    public boolean isRadio1Selected() {
+        return isElementSelected(radio1Button); // Inherited method
     }
 }
 ```
@@ -69,9 +122,11 @@ public class HomePage extends BasePage {
 **How It Works:**
 1. Test creates page object: `HomePage homePage = new HomePage(driver);`
 2. HomePage calls `super(driver)` → BasePage constructor executes
-3. Driver stored, wait initialized, PageFactory initializes @FindBy elements
+3. Driver stored, Wait utility initialized, PageFactory initializes @FindBy elements
 4. Frame reset to default content
 5. Page object ready to use with all elements initialized
+6. Methods use inherited wait utilities (`clickElement`, `isElementSelected`, etc.)
+7. Wait class handles all explicit waits transparently
 
 ---
 
@@ -114,7 +169,8 @@ selenium-e2e/
 │   │   │   └── utils/
 │   │   │       ├── ConfigReader.java      # Configuration management
 │   │   │       ├── DriverManager.java     # WebDriver lifecycle
-│   │   │       └── LoggerUtil.java        # Logging utilities
+│   │   │       ├── LoggerUtil.java        # Logging utilities
+│   │   │       └── Wait.java              # Explicit wait utility class
 │   │   └── resources/
 │   │       ├── config/
 │   │       │   └── config.properties      # Test configurations
