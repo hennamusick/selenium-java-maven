@@ -1,6 +1,5 @@
 package com.framework.utils;
 
-import com.framework.utils.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

@@ -1,6 +1,5 @@
 package com.framework.utils;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -9,9 +8,9 @@ public class TestListener implements ITestListener {
     
     @Override
     public void onTestFailure(ITestResult result) {
-        WebDriver driver = DriverManager.getDriver();
         LoggerUtil.error("Test Failed: " + result.getMethod().getMethodName());
         // Add screenshot capture logic if needed
+        // WebDriver driver = DriverManager.getDriver();
     }
 
     @Override
