@@ -187,7 +187,11 @@ selenium-e2e/
 │       └── resources/testng/
 │           ├── testng.xml                 # Main test suite
 │           ├── radiobutton-suite.xml      # Radio button suite
-│           └── saucedemo-suite.xml        # SauceDemo suite
+│           ├── saucedemo-suite.xml        # SauceDemo suite
+│           ├── autocomplete-suite.xml     # Autocomplete tests suite
+│           ├── smoke-suite.xml            # Smoke tests
+│           ├── functional-suite.xml       # Functional tests
+│           └── regression-suite.xml       # Regression tests
 └── pom.xml
 ```
 
@@ -207,6 +211,14 @@ mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/radiobutton-suite.xm
 
 # SauceDemo Tests
 mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/saucedemo-suite.xml
+
+# Autocomplete/Suggestion Tests
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/autocomplete-suite.xml
+
+# Run by Test Groups
+mvn test -Dgroups=smoke           # Smoke tests only
+mvn test -Dgroups=functional      # Functional tests only
+mvn test -Dgroups=regression      # Regression tests only
 ```
 
 ### Run Specific Test Class
@@ -277,14 +289,65 @@ The framework includes comprehensive radio button tests demonstrating:
 
 ---
 
+### Autocomplete/Suggestion Search Tests
+
+The framework includes **7 comprehensive autocomplete tests** for validating search suggestion functionality:
+
+#### Test Coverage
+
+1. **testAutocompleteSuggestionsAppear** - Verifies suggestions display when typing
+2. **testSelectSuggestionByText** - Tests selecting suggestion by exact text match
+3. **testSelectSuggestionByIndex** - Tests selecting suggestion by position
+4. **testAutocompleteWithFullCountryName** - Validates full text search
+5. **testAutocompleteClearAndReenter** - Tests clearing and re-entering text
+6. **testAutocompletePartialMatch** - Verifies partial text matching
+7. **testAutocompleteCaseInsensitivity** - Tests case-insensitive search
+
+#### Key Features
+
+```java
+// Enter text and get suggestions
+homePage.enterCountryInAutocomplete("Ind");
+boolean hasSuggestions = homePage.isSuggestionListDisplayed();
+int count = homePage.getSuggestionCount();
+
+// Select by text match
+homePage.selectSuggestionByText("India");
+
+// Select by index
+homePage.selectSuggestionByIndex(0);
+
+// Get all suggestions
+List<String> allSuggestions = homePage.getAllSuggestions();
+
+// Verify selected value
+String value = homePage.getAutocompleteValue();
+```
+
+#### Running Autocomplete Tests
+
+```bash
+# Run autocomplete suite only
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/autocomplete-suite.xml
+```
+
+---
+
 ## 📊 Test Results
 
 All tests use SoftAssert and include detailed reporting:
 
 ```
-Tests run: 13, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 20, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
+
+**Test Breakdown:**
+- **3** HomePageTest (Alert, Confirm, Name Input)
+- **7** Autocomplete/Suggestion Tests
+- **6** RadioButtonTest
+- **3** SauceDemoTest
+- **1** AppTest (Unit test)
 
 ---
 

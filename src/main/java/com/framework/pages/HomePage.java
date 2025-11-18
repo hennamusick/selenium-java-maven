@@ -26,6 +26,13 @@ public class HomePage extends BasePage {
     @FindBy(css = "input[id='name']")
     private WebElement nameInput;
     
+    // Suggestion/Autocomplete Section
+    @FindBy(id = "autocomplete")
+    private WebElement autocompleteInput;
+    
+    @FindBy(css = "ul[id='ui-id-1'] li")
+    private java.util.List<WebElement> suggestionList;
+    
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -89,5 +96,66 @@ public class HomePage extends BasePage {
     
     public boolean isRadio3Displayed() {
         return isElementDisplayed(radio3Button);
+    }
+    
+    // Autocomplete/Suggestion Methods
+    public void enterCountryInAutocomplete(String country) {
+        sendKeysToElement(autocompleteInput, country);
+    }
+    
+    public void clearAutocomplete() {
+        autocompleteInput.clear();
+    }
+    
+    public boolean isSuggestionListDisplayed() {
+        try {
+            waitForElementToBeVisible(suggestionList.get(0));
+            return suggestionList.size() > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public int getSuggestionCount() {
+        try {
+            waitForElementToBeVisible(suggestionList.get(0));
+            return suggestionList.size();
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    
+    public void selectSuggestionByText(String text) {
+        waitForElementToBeVisible(suggestionList.get(0));
+        for (WebElement suggestion : suggestionList) {
+            if (getElementText(suggestion).equalsIgnoreCase(text)) {
+                clickElement(suggestion);
+                break;
+            }
+        }
+    }
+    
+    public void selectSuggestionByIndex(int index) {
+        waitForElementToBeVisible(suggestionList.get(0));
+        if (index < suggestionList.size()) {
+            clickElement(suggestionList.get(index));
+        }
+    }
+    
+    public String getAutocompleteValue() {
+        return getElementAttribute(autocompleteInput, "value");
+    }
+    
+    public java.util.List<String> getAllSuggestions() {
+        java.util.List<String> suggestions = new java.util.ArrayList<>();
+        try {
+            waitForElementToBeVisible(suggestionList.get(0));
+            for (WebElement suggestion : suggestionList) {
+                suggestions.add(getElementText(suggestion));
+            }
+        } catch (Exception e) {
+            // Return empty list if no suggestions found
+        }
+        return suggestions;
     }
 }
