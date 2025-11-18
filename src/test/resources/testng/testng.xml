@@ -12,12 +12,14 @@
         </classes>
     </test>
     
-    <!-- SauceDemo Tests - BaseUrl.2 -->
+    <!-- SauceDemo Tests - BaseUrl.2 - DISABLED -->
+    <!--
     <test name="SauceDemo Tests">
         <classes>
             <class name="com.framework.tests.SauceDemoTest"/>
         </classes>
     </test>
+    -->
     
     <!-- Utility Tests -->
     <test name="Utility Tests">

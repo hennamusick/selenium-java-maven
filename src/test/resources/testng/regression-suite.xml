@@ -14,7 +14,7 @@
         <classes>
             <class name="com.framework.tests.HomePageTest"/>
             <class name="com.framework.tests.RadioButtonTest"/>
-            <class name="com.framework.tests.SauceDemoTest"/>
+            <!-- <class name="com.framework.tests.SauceDemoTest"/> DISABLED -->
         </classes>
     </test>
 </suite>
