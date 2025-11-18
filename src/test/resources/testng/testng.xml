@@ -9,6 +9,7 @@
         <classes>
             <class name="com.framework.tests.HomePageTest"/>
             <class name="com.framework.tests.RadioButtonTest"/>
+            <class name="com.framework.tests.SearchBarTest"/>
         </classes>
     </test>
     

@@ -1,19 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Autocomplete Test Suite" verbose="1">
-    <test name="Autocomplete/Suggestion Tests">
+<suite name="Search Bar Test Suite" verbose="1">
+    <listeners>
+        <listener class-name="com.framework.utils.TestListener"/>
+    </listeners>
+    
+    <test name="Autocomplete/Suggestion Search Tests">
         <classes>
-            <class name="com.framework.tests.HomePageTest">
-                <methods>
-                    <!-- Autocomplete-specific tests -->
-                    <include name="testAutocompleteSuggestionsAppear"/>
-                    <include name="testSelectSuggestionByText"/>
-                    <include name="testSelectSuggestionByIndex"/>
-                    <include name="testAutocompleteWithFullCountryName"/>
-                    <include name="testAutocompleteClearAndReenter"/>
-                    <include name="testAutocompletePartialMatch"/>
-                    <include name="testAutocompleteCaseInsensitivity"/>
-                </methods>
-            </class>
+            <class name="com.framework.tests.SearchBarTest"/>
         </classes>
     </test>
 </suite>
