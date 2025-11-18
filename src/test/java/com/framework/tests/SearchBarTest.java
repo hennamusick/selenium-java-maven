@@ -10,19 +10,17 @@ public class SearchBarTest extends BaseTest {
     private HomePage homePage;
 
     @BeforeMethod(alwaysRun = true)
-    public void setUpTest() throws InterruptedException {
+    public void setUpTest() {
         // Using baseUrl.1 - Rahul Shetty Academy AutomationPractice
         driver.get(ConfigReader.getBaseUrl(1));
-        Thread.sleep(2000); // Wait for page to load
         homePage = new HomePage(driver);
     }
 
     // Autocomplete/Suggestion Search Bar Tests
     
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify autocomplete suggestions appear when typing")
-    public void testAutocompleteSuggestionsAppear() throws InterruptedException {
+    public void testAutocompleteSuggestionsAppear() {
         homePage.enterCountryInAutocomplete("Ind");
-        Thread.sleep(1000); // Wait for suggestions to load
         
         boolean suggestionsDisplayed = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(suggestionsDisplayed, 
@@ -36,12 +34,10 @@ public class SearchBarTest extends BaseTest {
     }
     
     @Test(priority = 2, groups = {"functional", "regression"}, description = "Verify selecting a suggestion from the list")
-    public void testSelectSuggestionByText() throws InterruptedException {
+    public void testSelectSuggestionByText() {
         homePage.enterCountryInAutocomplete("Ind");
-        Thread.sleep(1000); // Wait for suggestions to load
         
         homePage.selectSuggestionByText("India");
-        Thread.sleep(500); // Wait for selection
         
         String selectedValue = homePage.getAutocompleteValue();
         softAssert.assertEquals(selectedValue, "India", 
@@ -51,16 +47,14 @@ public class SearchBarTest extends BaseTest {
     }
     
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify selecting suggestion by index")
-    public void testSelectSuggestionByIndex() throws InterruptedException {
+    public void testSelectSuggestionByIndex() {
         homePage.enterCountryInAutocomplete("co");
-        Thread.sleep(1000); // Wait for suggestions to load
         
         int suggestionCount = homePage.getSuggestionCount();
         softAssert.assertTrue(suggestionCount > 0, 
             "There should be suggestions for 'co'");
         
         homePage.selectSuggestionByIndex(0); // Select first suggestion
-        Thread.sleep(500);
         
         String selectedValue = homePage.getAutocompleteValue();
         softAssert.assertFalse(selectedValue.isEmpty(), 
@@ -70,9 +64,8 @@ public class SearchBarTest extends BaseTest {
     }
     
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify autocomplete with full country name")
-    public void testAutocompleteWithFullCountryName() throws InterruptedException {
+    public void testAutocompleteWithFullCountryName() {
         homePage.enterCountryInAutocomplete("Colombia");
-        Thread.sleep(1000); // Wait for suggestions
         
         java.util.List<String> suggestions = homePage.getAllSuggestions();
         softAssert.assertTrue(suggestions.size() > 0, 
@@ -90,7 +83,6 @@ public class SearchBarTest extends BaseTest {
     public void testAutocompleteClearAndReenter() throws InterruptedException {
         // First search
         homePage.enterCountryInAutocomplete("Ind");
-        Thread.sleep(1000);
         
         boolean firstSuggestions = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(firstSuggestions, 
@@ -98,9 +90,8 @@ public class SearchBarTest extends BaseTest {
         
         // Clear and search again
         homePage.clearAutocomplete();
-        Thread.sleep(500);
+        Thread.sleep(500); // Brief wait for dropdown to close
         homePage.enterCountryInAutocomplete("United");
-        Thread.sleep(1000);
         
         boolean secondSuggestions = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(secondSuggestions, 
@@ -110,9 +101,8 @@ public class SearchBarTest extends BaseTest {
     }
     
     @Test(priority = 6, groups = {"functional", "regression"}, description = "Verify autocomplete with partial text matching multiple countries")
-    public void testAutocompletePartialMatch() throws InterruptedException {
+    public void testAutocompletePartialMatch() {
         homePage.enterCountryInAutocomplete("Co");
-        Thread.sleep(1000); // Wait for suggestions
         
         java.util.List<String> suggestions = homePage.getAllSuggestions();
         softAssert.assertTrue(suggestions.size() > 1, 
@@ -131,18 +121,16 @@ public class SearchBarTest extends BaseTest {
     public void testAutocompleteCaseInsensitivity() throws InterruptedException {
         // Test with lowercase
         homePage.enterCountryInAutocomplete("india");
-        Thread.sleep(1000);
         
         boolean suggestionsLowercase = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(suggestionsLowercase, 
             "Suggestions should appear with lowercase input");
         
         homePage.clearAutocomplete();
-        Thread.sleep(500);
+        Thread.sleep(500); // Brief wait for dropdown to close
         
         // Test with uppercase
         homePage.enterCountryInAutocomplete("INDIA");
-        Thread.sleep(1000);
         
         boolean suggestionsUppercase = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(suggestionsUppercase, 
