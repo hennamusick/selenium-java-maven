@@ -38,6 +38,16 @@ public class HomePage extends BasePage {
     @FindBy(id = "dropdown-class-example")
     private WebElement dropdownElement;
     
+    // Checkbox Section
+    @FindBy(id = "checkBoxOption1")
+    private WebElement checkbox1;
+    
+    @FindBy(id = "checkBoxOption2")
+    private WebElement checkbox2;
+    
+    @FindBy(id = "checkBoxOption3")
+    private WebElement checkbox3;
+    
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -201,5 +211,90 @@ public class HomePage extends BasePage {
     
     public boolean isDropdownDisplayed() {
         return isElementDisplayed(dropdownElement);
+    }
+    
+    // Checkbox Methods
+    public void clickCheckbox1() {
+        clickElement(checkbox1);
+    }
+    
+    public void clickCheckbox2() {
+        clickElement(checkbox2);
+    }
+    
+    public void clickCheckbox3() {
+        clickElement(checkbox3);
+    }
+    
+    public void checkCheckbox1() {
+        if (!isCheckbox1Selected()) {
+            clickElement(checkbox1);
+        }
+    }
+    
+    public void checkCheckbox2() {
+        if (!isCheckbox2Selected()) {
+            clickElement(checkbox2);
+        }
+    }
+    
+    public void checkCheckbox3() {
+        if (!isCheckbox3Selected()) {
+            clickElement(checkbox3);
+        }
+    }
+    
+    public void uncheckCheckbox1() {
+        if (isCheckbox1Selected()) {
+            clickElement(checkbox1);
+        }
+    }
+    
+    public void uncheckCheckbox2() {
+        if (isCheckbox2Selected()) {
+            clickElement(checkbox2);
+        }
+    }
+    
+    public void uncheckCheckbox3() {
+        if (isCheckbox3Selected()) {
+            clickElement(checkbox3);
+        }
+    }
+    
+    public boolean isCheckbox1Selected() {
+        return isElementSelected(checkbox1);
+    }
+    
+    public boolean isCheckbox2Selected() {
+        return isElementSelected(checkbox2);
+    }
+    
+    public boolean isCheckbox3Selected() {
+        return isElementSelected(checkbox3);
+    }
+    
+    public boolean isCheckbox1Displayed() {
+        return isElementDisplayed(checkbox1);
+    }
+    
+    public boolean isCheckbox2Displayed() {
+        return isElementDisplayed(checkbox2);
+    }
+    
+    public boolean isCheckbox3Displayed() {
+        return isElementDisplayed(checkbox3);
+    }
+    
+    public boolean isCheckbox1Enabled() {
+        return isElementEnabled(checkbox1);
+    }
+    
+    public boolean isCheckbox2Enabled() {
+        return isElementEnabled(checkbox2);
+    }
+    
+    public boolean isCheckbox3Enabled() {
+        return isElementEnabled(checkbox3);
     }
 }

@@ -6,16 +6,60 @@
     
     <!-- Run all regression tests for Rahul Shetty Academy -->
     <test name="Rahul Shetty - Regression Tests">
-        <groups>
-            <run>
-                <include name="regression"/>
-            </run>
-        </groups>
         <classes>
-            <class name="com.framework.tests.rahulshetty.HomePageTest"/>
-            <class name="com.framework.tests.rahulshetty.RadioButtonTest"/>
-            <class name="com.framework.tests.rahulshetty.SearchBarTest"/>
-            <class name="com.framework.tests.rahulshetty.DropdownTest"/>
+            <class name="com.framework.tests.rahulshetty.HomePageTest">
+                <methods>
+                    <include name="testAlert"/>
+                    <include name="testConfirmBox"/>
+                    <include name="testNameInput"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.RadioButtonTest">
+                <methods>
+                    <include name="testRadioButtonsVisibilityAndState"/>
+                    <include name="testRadio1Selection"/>
+                    <include name="testRadio2Selection"/>
+                    <include name="testRadio3Selection"/>
+                    <include name="testRadioButtonSwitching"/>
+                    <include name="testDefaultRadioButtonState"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.SearchBarTest">
+                <methods>
+                    <include name="testAutocompleteSuggestionsAppear"/>
+                    <include name="testSelectSuggestionByText"/>
+                    <include name="testSelectSuggestionByIndex"/>
+                    <include name="testAutocompleteWithFullCountryName"/>
+                    <include name="testAutocompleteClearAndReenter"/>
+                    <include name="testAutocompletePartialMatch"/>
+                    <include name="testAutocompleteCaseInsensitivity"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.DropdownTest">
+                <methods>
+                    <include name="testDropdownDisplayed"/>
+                    <include name="testSelectOption1"/>
+                    <include name="testSelectOption2"/>
+                    <include name="testSelectOption3"/>
+                    <include name="testDropdownHasAllOptions"/>
+                    <include name="testSelectDropdownByIndex"/>
+                    <include name="testSelectDropdownByValue"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.CheckboxTest">
+                <methods>
+                    <include name="testCheckboxesVisibilityAndState"/>
+                    <include name="testDefaultUncheckedState"/>
+                    <include name="testCheckCheckbox1"/>
+                    <include name="testCheckCheckbox2"/>
+                    <include name="testCheckCheckbox3"/>
+                    <include name="testUncheckCheckbox1"/>
+                    <include name="testMultipleCheckboxSelection"/>
+                    <include name="testCheckboxToggleBehavior"/>
+                    <include name="testIndependentCheckboxBehavior"/>
+                    <include name="testSelectiveUnchecking"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
