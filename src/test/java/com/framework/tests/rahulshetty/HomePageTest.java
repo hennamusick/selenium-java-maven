@@ -1,4 +1,4 @@
-package com.framework.tests;
+package com.framework.tests.rahulshetty;
 
 import com.framework.pages.HomePage;
 import com.framework.utils.BaseTest;

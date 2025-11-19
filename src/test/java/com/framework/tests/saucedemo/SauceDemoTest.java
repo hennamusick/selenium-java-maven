@@ -1,4 +1,4 @@
-package com.framework.tests;
+package com.framework.tests.saucedemo;
 
 import com.framework.utils.BaseTest;
 import com.framework.utils.ConfigReader;

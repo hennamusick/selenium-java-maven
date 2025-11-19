@@ -7,7 +7,7 @@
     <!-- Tests for https://www.saucedemo.com -->
     <test name="SauceDemo Tests">
         <classes>
-            <class name="com.framework.tests.SauceDemoTest"/>
+            <class name="com.framework.tests.saucedemo.SauceDemoTest"/>
         </classes>
     </test>
 </suite>

@@ -1,4 +1,4 @@
-package com.framework.tests;
+package com.framework.tests.rahulshetty;
 
 import com.framework.pages.HomePage;
 import com.framework.utils.BaseTest;
@@ -36,7 +36,6 @@ public class SearchBarTest extends BaseTest {
     @Test(priority = 2, groups = {"functional", "regression"}, description = "Verify selecting a suggestion from the list")
     public void testSelectSuggestionByText() {
         homePage.enterCountryInAutocomplete("Ind");
-        
         homePage.selectSuggestionByText("India");
         
         String selectedValue = homePage.getAutocompleteValue();

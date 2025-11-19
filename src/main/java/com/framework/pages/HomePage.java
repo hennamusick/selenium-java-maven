@@ -3,6 +3,7 @@ package com.framework.pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class HomePage extends BasePage {
     // Alert Section - Locators for Rahul Shetty Academy AutomationPractice
@@ -32,6 +33,10 @@ public class HomePage extends BasePage {
     
     @FindBy(css = "ul[id='ui-id-1'] li")
     private java.util.List<WebElement> suggestionList;
+    
+    // Dropdown Section
+    @FindBy(id = "dropdown-class-example")
+    private WebElement dropdownElement;
     
     public HomePage(WebDriver driver) {
         super(driver);
@@ -157,5 +162,44 @@ public class HomePage extends BasePage {
             // Return empty list if no suggestions found
         }
         return suggestions;
+    }
+    
+    // Dropdown Methods
+    public void selectDropdownByVisibleText(String text) {
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByVisibleText(text);
+    }
+    
+    public void selectDropdownByValue(String value) {
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByValue(value);
+    }
+    
+    public void selectDropdownByIndex(int index) {
+        Select dropdown = new Select(dropdownElement);
+        dropdown.selectByIndex(index);
+    }
+    
+    public String getSelectedDropdownText() {
+        Select dropdown = new Select(dropdownElement);
+        return dropdown.getFirstSelectedOption().getText();
+    }
+    
+    public String getSelectedDropdownValue() {
+        Select dropdown = new Select(dropdownElement);
+        return dropdown.getFirstSelectedOption().getAttribute("value");
+    }
+    
+    public java.util.List<String> getAllDropdownOptions() {
+        Select dropdown = new Select(dropdownElement);
+        java.util.List<String> options = new java.util.ArrayList<>();
+        for (WebElement option : dropdown.getOptions()) {
+            options.add(option.getText());
+        }
+        return options;
+    }
+    
+    public boolean isDropdownDisplayed() {
+        return isElementDisplayed(dropdownElement);
     }
 }
