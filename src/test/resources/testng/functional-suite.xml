@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Rahul Shetty - Functional Test Suite">
     <listeners>
-        <listener class-name="com.framework.utils.TestListener"/>
+        <listener class-name="com.framework.utils.AllureListener"/>
     </listeners>
     
     <!-- Run only functional tests for Rahul Shetty Academy -->

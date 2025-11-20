@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Rahul Shetty - Smoke Test Suite">
     <listeners>
-        <listener class-name="com.framework.utils.TestListener"/>
+        <listener class-name="com.framework.utils.AllureListener"/>
     </listeners>
     
     <!-- Run only smoke tests for Rahul Shetty Academy -->

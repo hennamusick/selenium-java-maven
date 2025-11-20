@@ -474,16 +474,58 @@ All tests are tagged with priority-based groups:
 - **TestNG 7.8.0**
 - **Maven 3.x**
 - **WebDriverManager 5.6.2**
+- **Allure Reports 2.25.0** - Beautiful HTML test reports
 - **Page Object Model (POM)**
 - **SoftAssert Pattern**
 
 ---
 
+## 📊 Allure Reports
+
+This framework includes **Allure Reports** for comprehensive test reporting with beautiful visualizations.
+
+### Quick Start
+
+1. **Run tests** (Allure results auto-generated):
+   ```bash
+   mvn clean test
+   ```
+
+2. **View report**:
+   ```bash
+   mvn allure:serve
+   ```
+
+The report opens automatically in your browser with:
+- ✅ Test execution dashboard with charts
+- ✅ Screenshots on test failures
+- ✅ Detailed test steps and logs
+- ✅ Timeline view of test execution
+- ✅ Historical trends (if history is preserved)
+
+### Installation
+
+**macOS:**
+```bash
+brew install allure
+```
+
+**Windows:**
+```bash
+scoop install allure
+```
+
+For detailed Allure setup and features, see [ALLURE_REPORTS.md](ALLURE_REPORTS.md)
+
+---
+
 ## 📚 Additional Resources
 
+- [ALLURE_REPORTS.md](ALLURE_REPORTS.md) - Complete Allure Reports guide
 - [USAGE_EXAMPLES.md](USAGE_EXAMPLES.md) - Detailed usage examples
 - [Page Object Model Pattern](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/)
 - [TestNG Documentation](https://testng.org/doc/documentation-main.html)
+- [Allure Reports](https://docs.qameta.io/allure/)
 
 ---
 
