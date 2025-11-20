@@ -220,7 +220,42 @@ Methods use inherited utilities
 
 ---
 
-## 4. Wait Strategy & FluentWait
+## 4. Wait Strategy: Explicit Waits & FluentWait
+
+### 🎯 Understanding Selenium Wait Types
+
+**Three Types of Waits in Selenium:**
+
+| Wait Type | Scope | Behavior | Use Case |
+|-----------|-------|----------|----------|
+| **Implicit Wait** | Global | Applies to all `findElement()` calls | ❌ Not recommended - causes unpredictable delays |
+| **Explicit Wait** | Targeted | Waits for specific condition on specific element | ✅ **Best practice** - clear, predictable |
+| **FluentWait** | Advanced | Explicit wait with custom polling & exception handling | ✅ **Advanced scenarios** - page loads, windows |
+
+### 🔍 What are Explicit Waits?
+
+**Explicit Waits** are intelligent, condition-based waits that poll for specific conditions:
+
+```java
+// WebDriverWait - Most common explicit wait
+WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+// Wait for element to be visible
+wait.until(ExpectedConditions.visibilityOf(element));
+
+// Wait for element to be clickable
+wait.until(ExpectedConditions.elementToBeClickable(element));
+
+// Wait for text to be present
+wait.until(ExpectedConditions.textToBePresentInElement(element, "Expected Text"));
+```
+
+**Why Explicit Waits?**
+- ✅ Targeted - Apply to specific elements/conditions
+- ✅ Intelligent - Poll until condition met or timeout
+- ✅ Clear - Exception messages show expected vs actual
+- ✅ Flexible - Custom timeouts per operation
+- ✅ Maintainable - Centralized in Wait utility class
 
 ### ❌ The Problem with Thread.sleep()
 
@@ -248,6 +283,35 @@ public void testNewWindow() throws InterruptedException {
 - ❌ Blocks thread unnecessarily
 - ❌ try-catch boilerplate everywhere
 - ❌ Hard to maintain (scattered throughout code)
+
+### ✅ Explicit Wait Solution (WebDriverWait)
+
+```java
+// Framework approach - Explicit waits in Wait utility
+public class Wait {
+    private WebDriverWait wait;
+    
+    public Wait(WebDriver driver) {
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+    
+    // Element interaction with explicit wait
+    public void clickElement(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
+    }
+    
+    // Visibility check with explicit wait
+    public boolean isElementDisplayed(WebElement element) {
+        try {
+            wait.until(ExpectedConditions.visibilityOf(element));
+            return element.isDisplayed();
+        } catch (TimeoutException e) {
+            return false;
+        }
+    }
+}
+```
 
 ### ✅ FluentWait Solution
 
@@ -309,27 +373,51 @@ Total wait: 1500ms (not 2000ms or 3000ms!)
 ```java
 // Wait.java utility class
 public class Wait {
-    // Page load wait - Polls document.readyState
-    public void waitForPageLoad() { ... }
+    private WebDriverWait wait;  // For explicit waits (WebDriverWait)
+    private WebDriver driver;    // For FluentWait scenarios
     
-    // Window count wait - Waits for expected windows
-    public void waitForNumberOfWindows(int expected) { ... }
+    // EXPLICIT WAIT METHODS (WebDriverWait-based)
+    public void clickElement(WebElement element) {
+        // Waits until element is clickable, then clicks
+    }
     
-    // Element stability - Handles stale elements
-    public WebElement waitForElementToBeStable(WebElement element) { ... }
+    public void waitForElementToBeVisible(WebElement element) {
+        // Explicit wait for visibility
+    }
     
-    // Custom FluentWait factory
-    public FluentWait<WebDriver> createFluentWait(long timeout, long polling) { ... }
+    public void waitForElementToBeClickable(WebElement element) {
+        // Explicit wait for clickability
+    }
+    
+    public boolean isElementDisplayed(WebElement element) {
+        // Checks visibility with explicit wait
+    }
+    
+    // FLUENTWAIT METHODS (Advanced scenarios)
+    public void waitForPageLoad() {
+        // Polls document.readyState until "complete"
+    }
+    
+    public void waitForNumberOfWindows(int expected) {
+        // Waits for expected window count
+    }
+    
+    public WebElement waitForElementToBeStable(WebElement element) {
+        // Handles stale elements with retry logic
+    }
+    
+    public FluentWait<WebDriver> createFluentWait(long timeout, long polling) {
+        // Custom FluentWait factory for specific scenarios
+    }
 }
 
 // BaseTest.java helpers
 public class BaseTest {
-    // Test-level page load wait
+    // Test-level FluentWait helpers
     protected void waitForPageToLoad() {
         // 10 second timeout, 500ms polling
     }
     
-    // Test-level window count wait
     protected void waitForNumberOfWindows(int expectedWindows) {
         // 10 second timeout, 500ms polling
     }
@@ -1033,9 +1121,16 @@ softAssert.assertEquals(
 #### Smart Waits
 ```java
 // ✅ Use appropriate wait strategies
-waitForPageToLoad();                  // Page loads
-waitForNumberOfWindows(2);            // Window operations
-wait.waitForElementToBeVisible(el);   // Element visibility
+
+// Explicit waits (WebDriverWait) for element interactions
+wait.waitForElementToBeVisible(element);      // Element visibility
+wait.waitForElementToBeClickable(element);    // Element clickability
+wait.clickElement(element);                   // Waits then clicks
+
+// FluentWait for complex scenarios
+waitForPageToLoad();                          // Page loads (document.readyState)
+waitForNumberOfWindows(2);                    // Window count
+wait.waitForElementToBeStable(element);       // Stale element handling
 ```
 
 #### Resource Management
@@ -1090,23 +1185,31 @@ baseUrl.1=https://rahulshettyacademy.com/AutomationPractice
 #### Q: Why use Page Object Model instead of writing tests directly?
 **A:** POM separates test logic from page structure. When the UI changes (button ID, CSS selector), you only update the page class - tests remain untouched. With 46 tests, this saves massive maintenance time.
 
-#### Q: What's the difference between WebDriverWait and FluentWait?
-**A:** WebDriverWait is a specialized FluentWait. FluentWait is more flexible:
-- Custom timeout and polling intervals
-- Can ignore specific exceptions
-- Works with any type, not just WebDriver
-- We use FluentWait for advanced scenarios like page load detection
+#### Q: What's the difference between Explicit Waits, WebDriverWait, and FluentWait?
+**A:** 
+- **Explicit Wait**: The concept of waiting for specific conditions (not global like implicit waits)
+- **WebDriverWait**: Selenium's implementation of explicit waits - most common, easy to use
+- **FluentWait**: Advanced explicit wait with more control:
+  - Custom timeout and polling intervals
+  - Can ignore specific exceptions
+  - Works with any type, not just WebDriver
+  - We use it for complex scenarios (page load detection, window counts)
+
+**Framework Strategy:**
+- Use **WebDriverWait** (explicit waits) for element interactions (90% of cases)
+- Use **FluentWait** for advanced scenarios like `document.readyState` polling, window counts, stale element handling (10% of cases)
 
 #### Q: Why SoftAssert instead of regular Assert?
 **A:** SoftAssert collects all failures and reports them together. With regular Assert, the test stops at the first failure. SoftAssert helps us see ALL issues in one test run - huge time saver for debugging.
 
 #### Q: How do you handle flaky tests?
 **A:** 
-1. Replace Thread.sleep with intelligent waits (FluentWait)
-2. Use proper wait conditions (element clickable, visible, etc.)
-3. Handle stale element exceptions with retry logic
-4. Ensure test independence (each test starts fresh)
-5. Use test isolation (no shared state between tests)
+1. Use explicit waits (WebDriverWait) for all element interactions
+2. Replace Thread.sleep with intelligent waits (FluentWait for complex scenarios)
+3. Use proper wait conditions (element clickable, visible, present)
+4. Handle stale element exceptions with retry logic (FluentWait)
+5. Ensure test independence (each test starts fresh)
+6. Use test isolation (no shared state between tests)
 
 #### Q: Why abstract class for BasePage instead of interface?
 **A:** Abstract class allows:
