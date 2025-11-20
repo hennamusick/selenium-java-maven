@@ -178,20 +178,21 @@ selenium-e2e/
 │   └── test/
 │       ├── java/com/framework/
 │       │   ├── tests/
-│       │   │   ├── HomePageTest.java      # HomePage tests
-│       │   │   ├── RadioButtonTest.java   # Radio button tests
-│       │   │   └── SauceDemoTest.java     # SauceDemo tests
+│       │   │   └── rahulshetty/
+│       │   │       ├── HomePageTest.java       # HomePage tests (alerts, inputs)
+│       │   │       ├── RadioButtonTest.java    # Radio button tests (6 tests)
+│       │   │       ├── SearchBarTest.java      # Autocomplete/search tests (7 tests)
+│       │   │       ├── DropdownTest.java       # Dropdown tests (8 tests)
+│       │   │       ├── CheckboxTest.java       # Checkbox tests (12 tests)
+│       │   │       └── WindowSwitchTest.java   # Window switching tests (10 tests)
 │       │   └── utils/
 │       │       ├── BaseTest.java          # Test base class with SoftAssert
 │       │       └── TestListener.java      # TestNG listeners
 │       └── resources/testng/
-│           ├── testng.xml                 # Main test suite
-│           ├── radiobutton-suite.xml      # Radio button suite
-│           ├── saucedemo-suite.xml        # SauceDemo suite
-│           ├── autocomplete-suite.xml     # Autocomplete tests suite
-│           ├── smoke-suite.xml            # Smoke tests
-│           ├── functional-suite.xml       # Functional tests
-│           └── regression-suite.xml       # Regression tests
+│           ├── smoke-suite.xml            # Smoke tests (11 tests)
+│           ├── functional-suite.xml       # Functional tests (35 tests)
+│           ├── regression-suite.xml       # Regression tests (43 tests)
+│           └── saucedemo-suite.xml        # SauceDemo tests (disabled)
 └── pom.xml
 ```
 
@@ -206,26 +207,27 @@ mvn clean test
 
 ### Run Specific Test Suite
 ```bash
-# Radio Button Tests
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/radiobutton-suite.xml
+# Smoke Tests (11 critical tests)
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/smoke-suite.xml
 
-# SauceDemo Tests
+# Functional Tests (35 detailed tests)
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/functional-suite.xml
+
+# Regression Tests (43 comprehensive tests)
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/regression-suite.xml
+
+# SauceDemo Tests (currently disabled)
 mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/saucedemo-suite.xml
-
-# Autocomplete/Suggestion Tests
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/autocomplete-suite.xml
-
-# Run by Test Groups
-mvn test -Dgroups=smoke           # Smoke tests only
-mvn test -Dgroups=functional      # Functional tests only
-mvn test -Dgroups=regression      # Regression tests only
 ```
 
 ### Run Specific Test Class
 ```bash
-mvn test -Dtest=RadioButtonTest
 mvn test -Dtest=HomePageTest
-mvn test -Dtest=SauceDemoTest
+mvn test -Dtest=RadioButtonTest
+mvn test -Dtest=SearchBarTest
+mvn test -Dtest=DropdownTest
+mvn test -Dtest=CheckboxTest
+mvn test -Dtest=WindowSwitchTest
 ```
 
 ---
@@ -289,11 +291,9 @@ The framework includes comprehensive radio button tests demonstrating:
 
 ---
 
-### Autocomplete/Suggestion Search Tests
+### SearchBarTest - Autocomplete/Suggestion Tests (7 Tests)
 
-The framework includes **7 comprehensive autocomplete tests** for validating search suggestion functionality:
-
-#### Test Coverage
+Comprehensive autocomplete functionality testing:
 
 1. **testAutocompleteSuggestionsAppear** - Verifies suggestions display when typing
 2. **testSelectSuggestionByText** - Tests selecting suggestion by exact text match
@@ -302,8 +302,6 @@ The framework includes **7 comprehensive autocomplete tests** for validating sea
 5. **testAutocompleteClearAndReenter** - Tests clearing and re-entering text
 6. **testAutocompletePartialMatch** - Verifies partial text matching
 7. **testAutocompleteCaseInsensitivity** - Tests case-insensitive search
-
-#### Key Features
 
 ```java
 // Enter text and get suggestions
@@ -324,30 +322,148 @@ List<String> allSuggestions = homePage.getAllSuggestions();
 String value = homePage.getAutocompleteValue();
 ```
 
-#### Running Autocomplete Tests
+---
 
-```bash
-# Run autocomplete suite only
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/autocomplete-suite.xml
+### DropdownTest - Dropdown Selection Tests (8 Tests)
+
+Validates dropdown selection functionality:
+
+1. **testDropdownDisplayed** - Verifies dropdown is visible and enabled
+2. **testSelectOption1** - Tests selecting "Option1" by visible text
+3. **testSelectOption2** - Tests selecting "Option2" by visible text
+4. **testSelectOption3** - Tests selecting "Option3" by visible text
+5. **testDropdownHasAllOptions** - Verifies all expected options are present
+6. **testSelectDropdownByIndex** - Tests selecting option by index position
+7. **testSelectDropdownByValue** - Tests selecting option by value attribute
+8. **testDefaultSelectOption** - Verifies default "Select" option state
+
+```java
+// Select by visible text
+homePage.selectDropdownOption("Option1");
+
+// Select by index
+homePage.selectDropdownByIndex(2);
+
+// Select by value
+homePage.selectDropdownByValue("option2");
+
+// Get selected option
+String selected = homePage.getSelectedDropdownOption();
+
+// Get all options
+List<String> options = homePage.getAllDropdownOptions();
+```
+
+---
+
+### CheckboxTest - Checkbox Interaction Tests (12 Tests)
+
+Comprehensive checkbox testing covering all interaction patterns:
+
+1. **testCheckboxesVisibilityAndState** - Verifies checkboxes are displayed and enabled
+2. **testDefaultUncheckedState** - Validates default unchecked state
+3. **testCheckCheckbox1/2/3** - Tests checking individual checkboxes
+4. **testUncheckCheckbox1** - Tests unchecking functionality
+5. **testMultipleCheckboxSelection** - Validates multiple selections
+6. **testCheckboxToggleBehavior** - Tests toggle on/off behavior
+7. **testIndependentCheckboxBehavior** - Verifies checkboxes work independently
+8. **testSelectiveUnchecking** - Tests selective uncheck operations
+9. **testSafeCheckMethods** - Validates idempotent check methods
+10. **testSafeUncheckMethods** - Validates idempotent uncheck methods
+
+```java
+// Click to toggle
+homePage.clickCheckbox1();
+
+// Safe check (idempotent - won't uncheck if already checked)
+homePage.checkCheckbox1();
+
+// Safe uncheck (idempotent - won't check if already unchecked)
+homePage.uncheckCheckbox1();
+
+// Check state
+boolean isSelected = homePage.isCheckbox1Selected();
+boolean isDisplayed = homePage.isCheckbox1Displayed();
+boolean isEnabled = homePage.isCheckbox1Enabled();
+```
+
+---
+
+### WindowSwitchTest - Window Handling Tests (10 Tests)
+
+Tests window switching and popup handling:
+
+1. **testOpenWindowButtonVisibilityAndState** - Verifies button is displayed and enabled
+2. **testOpenWindowButtonOpensNewWindow** - Tests opening new window
+3. **testNewWindowOpensCorrectUrl** - Verifies new window URL (https://www.qaclickacademy.com/)
+4. **testNewWindowTitle** - Validates new window has proper title
+5. **testSwitchBackToParentWindow** - Tests switching back to parent window
+6. **testParentWindowInteractiveAfterOpeningChild** - Verifies parent remains interactive
+7. **testClosingChildWindowDoesNotAffectParent** - Tests parent unaffected when child closes
+8. **testMultipleWindowOpening** - Validates button reuses same window on multiple clicks
+9. **testWindowHandlesAreUnique** - Verifies window handles are unique
+10. **testNewWindowHasExpectedContent** - Validates new window content
+
+```java
+// Click button to open new window
+homePage.clickOpenWindowButton();
+
+// Get window handles
+String parentHandle = driver.getWindowHandle();
+Set<String> allHandles = driver.getWindowHandles();
+
+// Switch to child window
+for (String handle : allHandles) {
+    if (!handle.equals(parentHandle)) {
+        driver.switchTo().window(handle);
+        break;
+    }
+}
+
+// Verify and close child window
+String url = driver.getCurrentUrl();
+driver.close();
+driver.switchTo().window(parentHandle);
 ```
 
 ---
 
 ## 📊 Test Results
 
-All tests use SoftAssert and include detailed reporting:
+All tests use SoftAssert and include detailed reporting with organized test suites:
 
 ```
-Tests run: 20, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 46, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
-**Test Breakdown:**
-- **3** HomePageTest (Alert, Confirm, Name Input)
-- **7** Autocomplete/Suggestion Tests
-- **6** RadioButtonTest
-- **3** SauceDemoTest
-- **1** AppTest (Unit test)
+### Test Breakdown by Class
+
+| Test Class | Test Count | Focus Area |
+|------------|-----------|------------|
+| **HomePageTest** | 3 | Alert, Confirm Box, Name Input |
+| **RadioButtonTest** | 6 | Radio button selection and state |
+| **SearchBarTest** | 7 | Autocomplete/suggestion functionality |
+| **DropdownTest** | 8 | Dropdown selection methods |
+| **CheckboxTest** | 12 | Checkbox interactions and state |
+| **WindowSwitchTest** | 10 | Window/popup handling |
+| **Total Active Tests** | **46** | Rahul Shetty Academy Practice |
+
+### Test Suite Organization
+
+| Suite | Test Count | Purpose | Execution Time |
+|-------|-----------|---------|----------------|
+| **smoke-suite.xml** | 11 | Critical path tests | ~2-3 min |
+| **functional-suite.xml** | 35 | Detailed feature tests | ~8-10 min |
+| **regression-suite.xml** | 43 | Comprehensive coverage | ~10-12 min |
+| **saucedemo-suite.xml** | 3 (disabled) | SauceDemo tests | N/A |
+
+### Test Groups
+
+All tests are tagged with priority-based groups:
+- **smoke**: Critical, high-priority tests (11 tests)
+- **functional**: Detailed feature validation (35 tests)  
+- **regression**: Comprehensive test coverage (43 tests)
 
 ---
 
