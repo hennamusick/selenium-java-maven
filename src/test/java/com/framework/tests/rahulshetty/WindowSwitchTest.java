@@ -2,6 +2,7 @@ package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
 import com.framework.utils.TestConstants;
+import com.framework.utils.TestMessages;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,9 +18,9 @@ public class WindowSwitchTest extends BaseTest {
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify Open Window button is displayed and enabled")
     public void testOpenWindowButtonVisibilityAndState() {
         softAssert.assertTrue(homePage.isOpenWindowButtonDisplayed(), 
-            "Open Window button should be displayed");
+            TestMessages.OPEN_WINDOW_BUTTON_DISPLAYED);
         softAssert.assertTrue(homePage.isOpenWindowButtonEnabled(), 
-            "Open Window button should be enabled");
+            TestMessages.OPEN_WINDOW_BUTTON_ENABLED);
         
         softAssert.assertAll();
     }
@@ -36,9 +37,9 @@ public class WindowSwitchTest extends BaseTest {
         Set<String> windowHandles = driver.getWindowHandles();
         
         softAssert.assertEquals(windowHandles.size(), 2, 
-            "There should be 2 windows after clicking Open Window button");
+            TestMessages.TWO_WINDOWS_AFTER_OPENING);
         softAssert.assertTrue(windowHandles.contains(parentWindowHandle), 
-            "Parent window handle should still exist");
+            TestMessages.PARENT_WINDOW_HANDLE_EXISTS);
         
         softAssert.assertAll();
     }
@@ -59,7 +60,7 @@ public class WindowSwitchTest extends BaseTest {
         // Verify URL
         String actualUrl = driver.getCurrentUrl();
         softAssert.assertEquals(actualUrl, TestConstants.QA_CLICK_ACADEMY_URL, 
-            "New window should open with QA Click Academy URL");
+            TestMessages.NEW_WINDOW_OPENS_CORRECT_URL);
         
         // Close new window and switch back to parent
         closeCurrentWindowAndSwitchTo(parentWindowHandle);
@@ -82,7 +83,7 @@ public class WindowSwitchTest extends BaseTest {
         // Verify title contains expected text
         String actualTitle = driver.getTitle();
         softAssert.assertFalse(actualTitle.isEmpty(), 
-            "New window should have a title");
+            TestMessages.NEW_WINDOW_HAS_TITLE);
         
         // Close new window and switch back
         closeCurrentWindowAndSwitchTo(parentWindowHandle);
@@ -119,7 +120,7 @@ public class WindowSwitchTest extends BaseTest {
         // Verify we're back on the parent window
         String currentUrl = driver.getCurrentUrl();
         softAssert.assertEquals(currentUrl, parentUrl, 
-            "Should be back on the parent window");
+            TestMessages.BACK_ON_PARENT_WINDOW);
         
         // Close child window
         driver.switchTo().window(childWindowHandle);
@@ -153,9 +154,9 @@ public class WindowSwitchTest extends BaseTest {
         
         // Verify parent window is still interactive
         softAssert.assertTrue(homePage.isOpenWindowButtonDisplayed(), 
-            "Open Window button should still be displayed in parent window");
+            TestMessages.OPEN_WINDOW_BUTTON_VISIBLE_IN_PARENT);
         softAssert.assertTrue(homePage.isOpenWindowButtonEnabled(), 
-            "Open Window button should still be enabled in parent window");
+            TestMessages.OPEN_WINDOW_BUTTON_ENABLED_IN_PARENT);
         
         // Clean up - close child window
         driver.switchTo().window(childWindowHandle);
@@ -194,14 +195,14 @@ public class WindowSwitchTest extends BaseTest {
         // Verify parent window is still functional
         String currentUrl = driver.getCurrentUrl();
         softAssert.assertEquals(currentUrl, parentUrl, 
-            "Parent window should still be at the same URL");
+            TestMessages.PARENT_WINDOW_AT_SAME_URL);
         softAssert.assertTrue(homePage.isOpenWindowButtonDisplayed(), 
-            "Parent window elements should still be accessible");
+            TestMessages.PARENT_WINDOW_ELEMENTS_ACCESSIBLE);
         
         // Verify only one window exists now
         Set<String> remainingWindows = driver.getWindowHandles();
         softAssert.assertEquals(remainingWindows.size(), 1, 
-            "Only parent window should remain after closing child");
+            TestMessages.ONLY_PARENT_WINDOW_REMAINS);
         
         softAssert.assertAll();
     }
@@ -237,7 +238,7 @@ public class WindowSwitchTest extends BaseTest {
         // Check number of windows - should still be 2 (button reuses same window)
         Set<String> windowHandlesAfterSecondClick = driver.getWindowHandles();
         softAssert.assertEquals(windowHandlesAfterSecondClick.size(), 2, 
-            "There should be 2 windows (button reuses the same child window)");
+            TestMessages.TWO_WINDOWS_BUTTON_REUSES);
         
         // Verify the child window handle is the same
         String secondChildWindowHandle = null;
@@ -249,7 +250,7 @@ public class WindowSwitchTest extends BaseTest {
         }
         
         softAssert.assertEquals(secondChildWindowHandle, firstChildWindowHandle,
-            "Clicking Open Window button multiple times should reuse the same window");
+            TestMessages.BUTTON_REUSES_SAME_WINDOW);
         
         // Close child window
         driver.switchTo().window(secondChildWindowHandle);
@@ -273,7 +274,7 @@ public class WindowSwitchTest extends BaseTest {
         Set<String> windowHandles = driver.getWindowHandles();
         
         softAssert.assertEquals(windowHandles.size(), 2, 
-            "Should have 2 unique window handles");
+            TestMessages.TWO_UNIQUE_WINDOW_HANDLES);
         
         // Get child window handle
         String childWindowHandle = null;
@@ -285,9 +286,9 @@ public class WindowSwitchTest extends BaseTest {
         }
         
         softAssert.assertNotNull(childWindowHandle, 
-            "Child window handle should not be null");
+            TestMessages.CHILD_WINDOW_HANDLE_NOT_NULL);
         softAssert.assertNotEquals(parentWindowHandle, childWindowHandle, 
-            "Parent and child window handles should be different");
+            TestMessages.WINDOW_HANDLES_DIFFERENT);
         
         // Clean up
         driver.switchTo().window(childWindowHandle);
@@ -321,10 +322,10 @@ public class WindowSwitchTest extends BaseTest {
         
         // Verify page contains expected content
         String pageSource = driver.getPageSource();
-        softAssert.assertTrue(pageSource.contains("qaclickacademy") || 
-                            pageSource.contains("QA Click Academy") ||
-                            pageSource.contains("CLICK ACADEMY"), 
-            "New window should contain QA Click Academy content");
+        softAssert.assertTrue(pageSource.contains(TestConstants.QA_CLICK_ACADEMY_TEXT_LOWER) || 
+                            pageSource.contains(TestConstants.QA_CLICK_ACADEMY_TEXT_MIXED) ||
+                            pageSource.contains(TestConstants.QA_CLICK_ACADEMY_TEXT_UPPER), 
+            TestMessages.NEW_WINDOW_HAS_QA_ACADEMY_CONTENT);
         
         // Clean up
         driver.close();

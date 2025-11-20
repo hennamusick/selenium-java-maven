@@ -55,7 +55,7 @@ public class AlertTest extends BaseTest {
 
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify alert message format and content")
     public void testAlertMessageFormat() {
-        String testName = "Selenium Automation";
+        String testName = TestConstants.SAMPLE_NAME_SELENIUM;
         homePage.enterName(testName);
         homePage.clickAlert();
         
@@ -64,11 +64,11 @@ public class AlertTest extends BaseTest {
         
         // Verify alert contains the name
         softAssert.assertTrue(alertText.contains(testName), 
-            "Alert should contain the exact name entered: " + testName);
+            TestMessages.ALERT_CONTAINS_EXACT_NAME + ": " + testName);
         
         // Verify alert has standard format (starts with "Hello")
         softAssert.assertTrue(alertText.startsWith("Hello"), 
-            "Alert message should start with 'Hello'");
+            TestMessages.ALERT_STARTS_WITH_HELLO);
         
         alert.accept();
         
@@ -86,7 +86,7 @@ public class AlertTest extends BaseTest {
         
         String alertText = alert.getText();
         softAssert.assertFalse(alertText.isEmpty(), 
-            "Alert should display message even with empty name");
+            TestMessages.ALERT_DISPLAY_MESSAGE_EMPTY_NAME);
         
         alert.accept();
         
@@ -105,14 +105,14 @@ public class AlertTest extends BaseTest {
         softAssert.assertTrue(homePage.isAlertButtonDisplayed(), 
             TestMessages.PAGE_INTERACTIVE_AFTER_ALERT);
         softAssert.assertTrue(homePage.isNameInputDisplayed(), 
-            "Name input should still be displayed after alert");
+            TestMessages.NAME_INPUT_DISPLAYED_AFTER_ALERT);
         
         // Verify we can interact with elements
         homePage.clearName();
-        homePage.enterName("New Name");
+        homePage.enterName(TestConstants.NEW_NAME);
         String nameValue = homePage.getNameValue();
-        softAssert.assertEquals(nameValue, "New Name", 
-            "Should be able to enter new text after handling alert");
+        softAssert.assertEquals(nameValue, TestConstants.NEW_NAME, 
+            TestMessages.ENTER_TEXT_AFTER_ALERT);
         
         softAssert.assertAll();
     }
@@ -120,22 +120,22 @@ public class AlertTest extends BaseTest {
     @Test(priority = 6, groups = {"functional", "regression"}, description = "Verify alert can be triggered multiple times")
     public void testMultipleAlertTriggers() {
         // First alert
-        homePage.enterName("First Alert");
+        homePage.enterName(TestConstants.FIRST_ALERT_NAME);
         homePage.clickAlert();
         Alert alert1 = driver.switchTo().alert();
         String firstAlertText = alert1.getText();
-        softAssert.assertTrue(firstAlertText.contains("First Alert"), 
-            "First alert should contain 'First Alert'");
+        softAssert.assertTrue(firstAlertText.contains(TestConstants.FIRST_ALERT_NAME), 
+            TestMessages.FIRST_ALERT_CONTAINS_TEXT);
         alert1.accept();
         
         // Second alert with different name
         homePage.clearName();
-        homePage.enterName("Second Alert");
+        homePage.enterName(TestConstants.SECOND_ALERT_NAME);
         homePage.clickAlert();
         Alert alert2 = driver.switchTo().alert();
         String secondAlertText = alert2.getText();
-        softAssert.assertTrue(secondAlertText.contains("Second Alert"), 
-            "Second alert should contain 'Second Alert'");
+        softAssert.assertTrue(secondAlertText.contains(TestConstants.SECOND_ALERT_NAME), 
+            TestMessages.SECOND_ALERT_CONTAINS_TEXT);
         alert2.accept();
         
         softAssert.assertAll();
@@ -143,14 +143,14 @@ public class AlertTest extends BaseTest {
 
     @Test(priority = 7, groups = {"regression"}, description = "Verify alert with special characters in name")
     public void testAlertWithSpecialCharacters() {
-        String specialName = "Test@User#2025!";
+        String specialName = TestConstants.SPECIAL_CHARS_NAME;
         homePage.enterName(specialName);
         homePage.clickAlert();
         
         Alert alert = driver.switchTo().alert();
         String alertText = alert.getText();
         softAssert.assertTrue(alertText.contains(specialName), 
-            "Alert should display special characters correctly");
+            TestMessages.ALERT_DISPLAYS_SPECIAL_CHARS);
         
         alert.accept();
         
@@ -159,14 +159,14 @@ public class AlertTest extends BaseTest {
 
     @Test(priority = 8, groups = {"regression"}, description = "Verify alert with very long name")
     public void testAlertWithLongName() {
-        String longName = "This is a very long name to test how the alert handles extended text input";
+        String longName = TestConstants.LONG_NAME;
         homePage.enterName(longName);
         homePage.clickAlert();
         
         Alert alert = driver.switchTo().alert();
         String alertText = alert.getText();
         softAssert.assertTrue(alertText.contains(longName), 
-            "Alert should display long names correctly");
+            TestMessages.ALERT_DISPLAYS_LONG_NAMES);
         
         alert.accept();
         
@@ -206,7 +206,7 @@ public class AlertTest extends BaseTest {
 
     @Test(priority = 11, groups = {"functional", "regression"}, description = "Verify confirm box message format")
     public void testConfirmBoxMessageFormat() {
-        String testName = "Confirm Test";
+        String testName = TestConstants.SAMPLE_NAME_CONFIRM;
         homePage.enterName(testName);
         homePage.clickConfirmBox();
         
@@ -215,11 +215,11 @@ public class AlertTest extends BaseTest {
         
         // Verify confirm box contains the name
         softAssert.assertTrue(confirmText.contains(testName), 
-            "Confirm box should contain the entered name: " + testName);
+            TestMessages.CONFIRM_BOX_CONTAINS_NAME + ": " + testName);
         
         // Verify confirm box has standard format
         softAssert.assertTrue(confirmText.startsWith("Hello"), 
-            "Confirm message should start with 'Hello'");
+            TestMessages.CONFIRM_STARTS_WITH_HELLO);
         
         confirm.accept();
         
@@ -228,13 +228,13 @@ public class AlertTest extends BaseTest {
 
     @Test(priority = 12, groups = {"functional", "regression"}, description = "Verify accepting confirm box")
     public void testAcceptConfirmBox() {
-        homePage.enterName("Accept Test");
+        homePage.enterName(TestConstants.ACCEPT_TEST_NAME);
         homePage.clickConfirmBox();
         
         Alert confirm = driver.switchTo().alert();
         String confirmText = confirm.getText();
-        softAssert.assertTrue(confirmText.contains("Accept Test"), 
-            "Confirm box should display entered name");
+        softAssert.assertTrue(confirmText.contains(TestConstants.ACCEPT_TEST_NAME), 
+            TestMessages.CONFIRM_DISPLAYS_ENTERED_NAME);
         
         // Accept the confirm box
         confirm.accept();
@@ -242,20 +242,20 @@ public class AlertTest extends BaseTest {
         // Verify no alert is present after accepting
         boolean alertPresent = isAlertPresent();
         softAssert.assertFalse(alertPresent, 
-            "No alert should be present after accepting confirm box");
+            TestMessages.NO_ALERT_AFTER_ACCEPTING);
         
         softAssert.assertAll();
     }
 
     @Test(priority = 13, groups = {"functional", "regression"}, description = "Verify dismissing confirm box")
     public void testDismissConfirmBox() {
-        homePage.enterName("Dismiss Test");
+        homePage.enterName(TestConstants.DISMISS_TEST_NAME);
         homePage.clickConfirmBox();
         
         Alert confirm = driver.switchTo().alert();
         String confirmText = confirm.getText();
-        softAssert.assertTrue(confirmText.contains("Dismiss Test"), 
-            "Confirm box should display entered name");
+        softAssert.assertTrue(confirmText.contains(TestConstants.DISMISS_TEST_NAME), 
+            TestMessages.CONFIRM_DISPLAYS_ENTERED_NAME);
         
         // Dismiss the confirm box
         confirm.dismiss();
@@ -279,7 +279,7 @@ public class AlertTest extends BaseTest {
         
         String confirmText = confirm.getText();
         softAssert.assertFalse(confirmText.isEmpty(), 
-            "Confirm box should display message even with empty name");
+            TestMessages.CONFIRM_DISPLAYS_MESSAGE_EMPTY_NAME);
         
         confirm.accept();
         
@@ -288,7 +288,7 @@ public class AlertTest extends BaseTest {
 
     @Test(priority = 15, groups = {"functional", "regression"}, description = "Verify page remains interactive after handling confirm box")
     public void testPageInteractiveAfterConfirmBox() {
-        homePage.enterName("Interactive Test");
+        homePage.enterName(TestConstants.INTERACTIVE_TEST_NAME);
         homePage.clickConfirmBox();
         
         Alert confirm = driver.switchTo().alert();
@@ -298,14 +298,14 @@ public class AlertTest extends BaseTest {
         softAssert.assertTrue(homePage.isConfirmBoxButtonDisplayed(), 
             TestMessages.PAGE_INTERACTIVE_AFTER_CONFIRM);
         softAssert.assertTrue(homePage.isNameInputDisplayed(), 
-            "Name input should still be displayed after confirm box");
+            TestMessages.NAME_INPUT_DISPLAYED_AFTER_CONFIRM);
         
         // Verify we can interact with elements
         homePage.clearName();
-        homePage.enterName("After Confirm");
+        homePage.enterName(TestConstants.AFTER_CONFIRM_NAME);
         String nameValue = homePage.getNameValue();
-        softAssert.assertEquals(nameValue, "After Confirm", 
-            "Should be able to enter new text after handling confirm box");
+        softAssert.assertEquals(nameValue, TestConstants.AFTER_CONFIRM_NAME, 
+            TestMessages.ENTER_TEXT_AFTER_CONFIRM);
         
         softAssert.assertAll();
     }
@@ -313,20 +313,20 @@ public class AlertTest extends BaseTest {
     @Test(priority = 16, groups = {"functional", "regression"}, description = "Verify multiple confirm box triggers")
     public void testMultipleConfirmBoxTriggers() {
         // First confirm box - Accept
-        homePage.enterName("First Confirm");
+        homePage.enterName(TestConstants.FIRST_CONFIRM_NAME);
         homePage.clickConfirmBox();
         Alert confirm1 = driver.switchTo().alert();
-        softAssert.assertTrue(confirm1.getText().contains("First Confirm"), 
-            "First confirm should contain 'First Confirm'");
+        softAssert.assertTrue(confirm1.getText().contains(TestConstants.FIRST_CONFIRM_NAME), 
+            TestMessages.FIRST_CONFIRM_CONTAINS_TEXT);
         confirm1.accept();
         
         // Second confirm box - Dismiss
         homePage.clearName();
-        homePage.enterName("Second Confirm");
+        homePage.enterName(TestConstants.SECOND_CONFIRM_NAME);
         homePage.clickConfirmBox();
         Alert confirm2 = driver.switchTo().alert();
-        softAssert.assertTrue(confirm2.getText().contains("Second Confirm"), 
-            "Second confirm should contain 'Second Confirm'");
+        softAssert.assertTrue(confirm2.getText().contains(TestConstants.SECOND_CONFIRM_NAME), 
+            TestMessages.SECOND_CONFIRM_CONTAINS_TEXT);
         confirm2.dismiss();
         
         softAssert.assertAll();
@@ -334,14 +334,14 @@ public class AlertTest extends BaseTest {
 
     @Test(priority = 17, groups = {"regression"}, description = "Verify confirm box with special characters")
     public void testConfirmBoxWithSpecialCharacters() {
-        String specialName = "Confirm@Test#2025!";
+        String specialName = TestConstants.CONFIRM_SPECIAL_CHARS_NAME;
         homePage.enterName(specialName);
         homePage.clickConfirmBox();
         
         Alert confirm = driver.switchTo().alert();
         String confirmText = confirm.getText();
         softAssert.assertTrue(confirmText.contains(specialName), 
-            "Confirm box should display special characters correctly");
+            TestMessages.CONFIRM_DISPLAYS_SPECIAL_CHARS);
         
         confirm.accept();
         
@@ -362,10 +362,10 @@ public class AlertTest extends BaseTest {
 
     @Test(priority = 19, groups = {"functional", "regression"}, description = "Verify name input field accepts text")
     public void testNameInputAcceptsText() {
-        homePage.enterName("Test Input");
+        homePage.enterName(TestConstants.TEST_INPUT_NAME);
         String value = homePage.getNameValue();
         
-        softAssert.assertEquals(value, "Test Input", 
+        softAssert.assertEquals(value, TestConstants.TEST_INPUT_NAME, 
             TestMessages.NAME_INPUT_ACCEPTS_TEXT);
         
         softAssert.assertAll();
@@ -373,14 +373,14 @@ public class AlertTest extends BaseTest {
 
     @Test(priority = 20, groups = {"functional", "regression"}, description = "Verify name input can be cleared")
     public void testNameInputCanBeCleared() {
-        homePage.enterName("Clear Me");
-        softAssert.assertEquals(homePage.getNameValue(), "Clear Me", 
-            "Name should be entered");
+        homePage.enterName(TestConstants.CLEAR_TEST_NAME);
+        softAssert.assertEquals(homePage.getNameValue(), TestConstants.CLEAR_TEST_NAME, 
+            TestMessages.NAME_SHOULD_BE_ENTERED);
         
         homePage.clearName();
         String clearedValue = homePage.getNameValue();
         softAssert.assertTrue(clearedValue.isEmpty(), 
-            "Name input should be empty after clearing");
+            TestMessages.NAME_INPUT_EMPTY_AFTER_CLEAR);
         
         softAssert.assertAll();
     }

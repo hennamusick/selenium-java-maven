@@ -1,6 +1,7 @@
 package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
+import com.framework.utils.TestMessages;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,14 +15,14 @@ public class RadioButtonTest extends BaseTest {
     @Test(priority = 1, groups = {"smoke", "regression"}, description = "Verify radio buttons are displayed and enabled")
     public void testRadioButtonsVisibilityAndState() {
         // Best Practice 1: Verify all radio buttons are displayed
-        softAssert.assertTrue(homePage.isRadio1Displayed(), "Radio1 should be displayed");
-        softAssert.assertTrue(homePage.isRadio2Displayed(), "Radio2 should be displayed");
-        softAssert.assertTrue(homePage.isRadio3Displayed(), "Radio3 should be displayed");
+        softAssert.assertTrue(homePage.isRadio1Displayed(), TestMessages.RADIO1_DISPLAYED);
+        softAssert.assertTrue(homePage.isRadio2Displayed(), TestMessages.RADIO2_DISPLAYED);
+        softAssert.assertTrue(homePage.isRadio3Displayed(), TestMessages.RADIO3_DISPLAYED);
         
         // Best Practice 2: Verify all radio buttons are enabled
-        softAssert.assertTrue(homePage.isRadio1Enabled(), "Radio1 should be enabled");
-        softAssert.assertTrue(homePage.isRadio2Enabled(), "Radio2 should be enabled");
-        softAssert.assertTrue(homePage.isRadio3Enabled(), "Radio3 should be enabled");
+        softAssert.assertTrue(homePage.isRadio1Enabled(), TestMessages.RADIO1_ENABLED);
+        softAssert.assertTrue(homePage.isRadio2Enabled(), TestMessages.RADIO2_ENABLED);
+        softAssert.assertTrue(homePage.isRadio3Enabled(), TestMessages.RADIO3_ENABLED);
         
         softAssert.assertAll();
     }
@@ -32,13 +33,13 @@ public class RadioButtonTest extends BaseTest {
         homePage.clickRadio1();
         
         softAssert.assertTrue(homePage.isRadio1Selected(), 
-            "Radio1 should be selected after clicking");
+            TestMessages.RADIO1_SELECTED_AFTER_CLICK);
         
         // Best Practice 4: Verify mutual exclusivity (only one can be selected)
         softAssert.assertFalse(homePage.isRadio2Selected(), 
-            "Radio2 should NOT be selected when Radio1 is selected");
+            TestMessages.RADIO2_NOT_SELECTED_WHEN_RADIO1_SELECTED);
         softAssert.assertFalse(homePage.isRadio3Selected(), 
-            "Radio3 should NOT be selected when Radio1 is selected");
+            TestMessages.RADIO3_NOT_SELECTED_WHEN_RADIO1_SELECTED);
         
         softAssert.assertAll();
     }
@@ -48,13 +49,13 @@ public class RadioButtonTest extends BaseTest {
         homePage.clickRadio2();
         
         softAssert.assertTrue(homePage.isRadio2Selected(), 
-            "Radio2 should be selected after clicking");
+            TestMessages.RADIO2_SELECTED_AFTER_CLICK);
         
         // Verify others are not selected
         softAssert.assertFalse(homePage.isRadio1Selected(), 
-            "Radio1 should NOT be selected when Radio2 is selected");
+            TestMessages.RADIO1_NOT_SELECTED_WHEN_RADIO2_SELECTED);
         softAssert.assertFalse(homePage.isRadio3Selected(), 
-            "Radio3 should NOT be selected when Radio2 is selected");
+            TestMessages.RADIO3_NOT_SELECTED_WHEN_RADIO2_SELECTED);
         
         softAssert.assertAll();
     }
@@ -64,13 +65,13 @@ public class RadioButtonTest extends BaseTest {
         homePage.clickRadio3();
         
         softAssert.assertTrue(homePage.isRadio3Selected(), 
-            "Radio3 should be selected after clicking");
+            TestMessages.RADIO3_SELECTED_AFTER_CLICK);
         
         // Verify others are not selected
         softAssert.assertFalse(homePage.isRadio1Selected(), 
-            "Radio1 should NOT be selected when Radio3 is selected");
+            TestMessages.RADIO1_NOT_SELECTED_WHEN_RADIO3_SELECTED);
         softAssert.assertFalse(homePage.isRadio2Selected(), 
-            "Radio2 should NOT be selected when Radio3 is selected");
+            TestMessages.RADIO2_NOT_SELECTED_WHEN_RADIO3_SELECTED);
         
         softAssert.assertAll();
     }
@@ -81,28 +82,28 @@ public class RadioButtonTest extends BaseTest {
         
         // Select Radio1
         homePage.clickRadio1();
-        softAssert.assertTrue(homePage.isRadio1Selected(), "Radio1 should be selected");
+        softAssert.assertTrue(homePage.isRadio1Selected(), TestMessages.RADIO1_SELECTED);
         
         // Switch to Radio2
         homePage.clickRadio2();
         softAssert.assertFalse(homePage.isRadio1Selected(), 
-            "Radio1 should be deselected after switching to Radio2");
+            TestMessages.RADIO1_DESELECTED_AFTER_RADIO2);
         softAssert.assertTrue(homePage.isRadio2Selected(), 
-            "Radio2 should be selected");
+            TestMessages.RADIO2_SELECTED);
         
         // Switch to Radio3
         homePage.clickRadio3();
         softAssert.assertFalse(homePage.isRadio2Selected(), 
-            "Radio2 should be deselected after switching to Radio3");
+            TestMessages.RADIO2_DESELECTED_AFTER_RADIO3);
         softAssert.assertTrue(homePage.isRadio3Selected(), 
-            "Radio3 should be selected");
+            TestMessages.RADIO3_SELECTED);
         
         // Switch back to Radio1
         homePage.clickRadio1();
         softAssert.assertFalse(homePage.isRadio3Selected(), 
-            "Radio3 should be deselected after switching to Radio1");
+            TestMessages.RADIO3_DESELECTED_AFTER_RADIO1);
         softAssert.assertTrue(homePage.isRadio1Selected(), 
-            "Radio1 should be selected again");
+            TestMessages.RADIO1_SELECTED_AGAIN);
         
         softAssert.assertAll();
     }
@@ -127,7 +128,7 @@ public class RadioButtonTest extends BaseTest {
                           (radio3Selected ? 1 : 0);
         
         softAssert.assertTrue(selectedCount <= 1, 
-            "At most one radio button should be selected by default");
+            TestMessages.MAX_ONE_RADIO_SELECTED_DEFAULT);
         
         softAssert.assertAll();
     }

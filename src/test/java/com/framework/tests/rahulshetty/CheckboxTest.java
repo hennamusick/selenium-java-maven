@@ -1,6 +1,7 @@
 package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
+import com.framework.utils.TestMessages;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -15,19 +16,19 @@ public class CheckboxTest extends BaseTest {
     public void testCheckboxesVisibilityAndState() {
         // Verify all checkboxes are displayed
         softAssert.assertTrue(homePage.isCheckbox1Displayed(), 
-            "Checkbox1 should be displayed");
+            TestMessages.CHECKBOX1_DISPLAYED);
         softAssert.assertTrue(homePage.isCheckbox2Displayed(), 
-            "Checkbox2 should be displayed");
+            TestMessages.CHECKBOX2_DISPLAYED);
         softAssert.assertTrue(homePage.isCheckbox3Displayed(), 
-            "Checkbox3 should be displayed");
+            TestMessages.CHECKBOX3_DISPLAYED);
         
         // Verify all checkboxes are enabled
         softAssert.assertTrue(homePage.isCheckbox1Enabled(), 
-            "Checkbox1 should be enabled");
+            TestMessages.CHECKBOX1_ENABLED);
         softAssert.assertTrue(homePage.isCheckbox2Enabled(), 
-            "Checkbox2 should be enabled");
+            TestMessages.CHECKBOX2_ENABLED);
         softAssert.assertTrue(homePage.isCheckbox3Enabled(), 
-            "Checkbox3 should be enabled");
+            TestMessages.CHECKBOX3_ENABLED);
         
         softAssert.assertAll();
     }
@@ -36,11 +37,11 @@ public class CheckboxTest extends BaseTest {
     public void testDefaultUncheckedState() {
         // Verify all checkboxes are unchecked by default
         softAssert.assertFalse(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be unchecked by default");
+            TestMessages.CHECKBOX1_UNCHECKED_DEFAULT);
         softAssert.assertFalse(homePage.isCheckbox2Selected(), 
-            "Checkbox2 should be unchecked by default");
+            TestMessages.CHECKBOX2_UNCHECKED_DEFAULT);
         softAssert.assertFalse(homePage.isCheckbox3Selected(), 
-            "Checkbox3 should be unchecked by default");
+            TestMessages.CHECKBOX3_UNCHECKED_DEFAULT);
         
         softAssert.assertAll();
     }
@@ -50,7 +51,7 @@ public class CheckboxTest extends BaseTest {
         homePage.clickCheckbox1();
         
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be checked after clicking");
+            TestMessages.CHECKBOX1_CHECKED_AFTER_CLICK);
         
         softAssert.assertAll();
     }
@@ -60,7 +61,7 @@ public class CheckboxTest extends BaseTest {
         homePage.clickCheckbox2();
         
         softAssert.assertTrue(homePage.isCheckbox2Selected(), 
-            "Checkbox2 should be checked after clicking");
+            TestMessages.CHECKBOX2_CHECKED_AFTER_CLICK);
         
         softAssert.assertAll();
     }
@@ -70,7 +71,7 @@ public class CheckboxTest extends BaseTest {
         homePage.clickCheckbox3();
         
         softAssert.assertTrue(homePage.isCheckbox3Selected(), 
-            "Checkbox3 should be checked after clicking");
+            TestMessages.CHECKBOX3_CHECKED_AFTER_CLICK);
         
         softAssert.assertAll();
     }
@@ -80,12 +81,12 @@ public class CheckboxTest extends BaseTest {
         // First check it
         homePage.clickCheckbox1();
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be checked");
+            TestMessages.CHECKBOX1_SELECTED);
         
         // Then uncheck it
         homePage.clickCheckbox1();
         softAssert.assertFalse(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be unchecked after clicking again");
+            TestMessages.CHECKBOX1_UNCHECKED_AFTER_CLICK);
         
         softAssert.assertAll();
     }
@@ -99,11 +100,11 @@ public class CheckboxTest extends BaseTest {
         
         // Verify all are checked
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be checked");
+            TestMessages.CHECKBOX1_SELECTED);
         softAssert.assertTrue(homePage.isCheckbox2Selected(), 
-            "Checkbox2 should be checked");
+            TestMessages.CHECKBOX2_SELECTED);
         softAssert.assertTrue(homePage.isCheckbox3Selected(), 
-            "Checkbox3 should be checked");
+            TestMessages.CHECKBOX3_SELECTED);
         
         softAssert.assertAll();
     }
@@ -113,15 +114,15 @@ public class CheckboxTest extends BaseTest {
         // Checkbox1: Check -> Uncheck -> Check
         homePage.clickCheckbox1();
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be checked on first click");
+            TestMessages.CHECKBOX1_CHECKED_FIRST_CLICK);
         
         homePage.clickCheckbox1();
         softAssert.assertFalse(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be unchecked on second click");
+            TestMessages.CHECKBOX1_UNCHECKED_SECOND_CLICK);
         
         homePage.clickCheckbox1();
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be checked again on third click");
+            TestMessages.CHECKBOX1_CHECKED_THIRD_CLICK);
         
         softAssert.assertAll();
     }
@@ -131,29 +132,29 @@ public class CheckboxTest extends BaseTest {
         // Check Checkbox1
         homePage.clickCheckbox1();
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be checked");
+            TestMessages.CHECKBOX1_SELECTED);
         softAssert.assertFalse(homePage.isCheckbox2Selected(), 
-            "Checkbox2 should remain unchecked");
+            TestMessages.CHECKBOX2_UNCHECKED);
         softAssert.assertFalse(homePage.isCheckbox3Selected(), 
-            "Checkbox3 should remain unchecked");
+            TestMessages.CHECKBOX3_UNCHECKED);
         
         // Check Checkbox2
         homePage.clickCheckbox2();
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should remain checked");
+            TestMessages.CHECKBOX1_REMAINS_CHECKED);
         softAssert.assertTrue(homePage.isCheckbox2Selected(), 
-            "Checkbox2 should be checked");
+            TestMessages.CHECKBOX2_SELECTED);
         softAssert.assertFalse(homePage.isCheckbox3Selected(), 
-            "Checkbox3 should remain unchecked");
+            TestMessages.CHECKBOX3_UNCHECKED);
         
         // Check Checkbox3
         homePage.clickCheckbox3();
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should remain checked");
+            TestMessages.CHECKBOX1_REMAINS_CHECKED);
         softAssert.assertTrue(homePage.isCheckbox2Selected(), 
-            "Checkbox2 should remain checked");
+            TestMessages.CHECKBOX2_REMAINS_CHECKED);
         softAssert.assertTrue(homePage.isCheckbox3Selected(), 
-            "Checkbox3 should be checked");
+            TestMessages.CHECKBOX3_SELECTED);
         
         softAssert.assertAll();
     }
@@ -169,11 +170,11 @@ public class CheckboxTest extends BaseTest {
         homePage.clickCheckbox2();
         
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should remain checked");
+            TestMessages.CHECKBOX1_REMAINS_CHECKED);
         softAssert.assertFalse(homePage.isCheckbox2Selected(), 
-            "Checkbox2 should be unchecked");
+            TestMessages.CHECKBOX2_UNCHECKED);
         softAssert.assertTrue(homePage.isCheckbox3Selected(), 
-            "Checkbox3 should remain checked");
+            TestMessages.CHECKBOX3_REMAINS_CHECKED);
         
         softAssert.assertAll();
     }
@@ -183,12 +184,12 @@ public class CheckboxTest extends BaseTest {
         // Use safe check method - should check the checkbox
         homePage.checkCheckbox1();
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be checked");
+            TestMessages.CHECKBOX1_SELECTED);
         
         // Call again - should remain checked (idempotent)
         homePage.checkCheckbox1();
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should remain checked after calling checkCheckbox1 again");
+            TestMessages.CHECKBOX1_REMAINS_CHECKED_AGAIN);
         
         softAssert.assertAll();
     }
@@ -198,17 +199,17 @@ public class CheckboxTest extends BaseTest {
         // First check the checkbox
         homePage.checkCheckbox1();
         softAssert.assertTrue(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be checked");
+            TestMessages.CHECKBOX1_SELECTED);
         
         // Use safe uncheck method
         homePage.uncheckCheckbox1();
         softAssert.assertFalse(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should be unchecked");
+            TestMessages.CHECKBOX1_UNCHECKED);
         
         // Call again - should remain unchecked (idempotent)
         homePage.uncheckCheckbox1();
         softAssert.assertFalse(homePage.isCheckbox1Selected(), 
-            "Checkbox1 should remain unchecked after calling uncheckCheckbox1 again");
+            TestMessages.CHECKBOX1_REMAINS_UNCHECKED_AGAIN);
         
         softAssert.assertAll();
     }

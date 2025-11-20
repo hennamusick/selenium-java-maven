@@ -1,6 +1,8 @@
 package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
+import com.framework.utils.TestConstants;
+import com.framework.utils.TestMessages;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,40 +21,40 @@ public class DropdownTest extends BaseTest {
     public void testDropdownDisplayed() {
         boolean isDisplayed = homePage.isDropdownDisplayed();
         softAssert.assertTrue(isDisplayed, 
-            "Dropdown should be displayed on the page");
+            TestMessages.DROPDOWN_DISPLAYED);
         
         softAssert.assertAll();
     }
     
     @Test(priority = 2, groups = {"functional", "regression"}, description = "Verify selecting 'Option1' from dropdown")
     public void testSelectOption1() {
-        homePage.selectDropdownByVisibleText("Option1");
+        homePage.selectDropdownByVisibleText(TestConstants.DROPDOWN_OPTION1);
         
         String selectedText = homePage.getSelectedDropdownText();
-        softAssert.assertEquals(selectedText, "Option1", 
-            "Selected dropdown text should be 'Option1'");
+        softAssert.assertEquals(selectedText, TestConstants.DROPDOWN_OPTION1, 
+            TestMessages.DROPDOWN_SELECTED_TEXT_OPTION1);
         
         softAssert.assertAll();
     }
     
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify selecting 'Option2' from dropdown")
     public void testSelectOption2() {
-        homePage.selectDropdownByVisibleText("Option2");
+        homePage.selectDropdownByVisibleText(TestConstants.DROPDOWN_OPTION2);
         
         String selectedText = homePage.getSelectedDropdownText();
-        softAssert.assertEquals(selectedText, "Option2", 
-            "Selected dropdown text should be 'Option2'");
+        softAssert.assertEquals(selectedText, TestConstants.DROPDOWN_OPTION2, 
+            TestMessages.DROPDOWN_SELECTED_TEXT_OPTION2);
         
         softAssert.assertAll();
     }
     
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify selecting 'Option3' from dropdown")
     public void testSelectOption3() {
-        homePage.selectDropdownByVisibleText("Option3");
+        homePage.selectDropdownByVisibleText(TestConstants.DROPDOWN_OPTION3);
         
         String selectedText = homePage.getSelectedDropdownText();
-        softAssert.assertEquals(selectedText, "Option3", 
-            "Selected dropdown text should be 'Option3'");
+        softAssert.assertEquals(selectedText, TestConstants.DROPDOWN_OPTION3, 
+            TestMessages.DROPDOWN_SELECTED_TEXT_OPTION3);
         
         softAssert.assertAll();
     }
@@ -62,13 +64,13 @@ public class DropdownTest extends BaseTest {
         List<String> options = homePage.getAllDropdownOptions();
         
         softAssert.assertTrue(options.contains("Select"), 
-            "Dropdown should contain 'Select' option");
-        softAssert.assertTrue(options.contains("Option1"), 
-            "Dropdown should contain 'Option1'");
-        softAssert.assertTrue(options.contains("Option2"), 
-            "Dropdown should contain 'Option2'");
-        softAssert.assertTrue(options.contains("Option3"), 
-            "Dropdown should contain 'Option3'");
+            TestMessages.DROPDOWN_CONTAINS_SELECT);
+        softAssert.assertTrue(options.contains(TestConstants.DROPDOWN_OPTION1), 
+            TestMessages.DROPDOWN_CONTAINS_OPTION1);
+        softAssert.assertTrue(options.contains(TestConstants.DROPDOWN_OPTION2), 
+            TestMessages.DROPDOWN_CONTAINS_OPTION2);
+        softAssert.assertTrue(options.contains(TestConstants.DROPDOWN_OPTION3), 
+            TestMessages.DROPDOWN_CONTAINS_OPTION3);
         
         softAssert.assertAll();
     }
@@ -79,8 +81,8 @@ public class DropdownTest extends BaseTest {
         homePage.selectDropdownByIndex(1);
         
         String selectedText = homePage.getSelectedDropdownText();
-        softAssert.assertEquals(selectedText, "Option1", 
-            "Selecting index 1 should select 'Option1'");
+        softAssert.assertEquals(selectedText, TestConstants.DROPDOWN_OPTION1, 
+            TestMessages.DROPDOWN_INDEX_1_IS_OPTION1);
         
         softAssert.assertAll();
     }
@@ -91,11 +93,11 @@ public class DropdownTest extends BaseTest {
         
         String selectedValue = homePage.getSelectedDropdownValue();
         softAssert.assertEquals(selectedValue, "option1", 
-            "Selected dropdown value should be 'option1'");
+            TestMessages.DROPDOWN_VALUE_OPTION1);
         
         String selectedText = homePage.getSelectedDropdownText();
-        softAssert.assertEquals(selectedText, "Option1", 
-            "Selected dropdown text should be 'Option1'");
+        softAssert.assertEquals(selectedText, TestConstants.DROPDOWN_OPTION1, 
+            TestMessages.DROPDOWN_SELECTED_TEXT_OPTION1);
         
         softAssert.assertAll();
     }
@@ -105,9 +107,9 @@ public class DropdownTest extends BaseTest {
         List<String> options = homePage.getAllDropdownOptions();
         
         softAssert.assertFalse(options.isEmpty(), 
-            "Dropdown should have options");
+            TestMessages.DROPDOWN_HAS_OPTIONS);
         softAssert.assertEquals(options.get(0), "Select", 
-            "First option should be 'Select'");
+            TestMessages.DROPDOWN_FIRST_OPTION_SELECT);
         
         softAssert.assertAll();
     }
