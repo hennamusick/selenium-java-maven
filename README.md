@@ -51,38 +51,57 @@ public abstract class BasePage {
 
 #### **Wait Utility Class - Centralized Wait Management**
 
-The `Wait` class encapsulates all explicit wait functionality, promoting **separation of concerns** and **reusability**:
+The `Wait` class encapsulates all **explicit wait** and **FluentWait** functionality, promoting **separation of concerns** and **reusability**.
+
+**What are Explicit Waits?**
+
+Explicit waits are intelligent, targeted waits that poll for specific conditions before proceeding. Unlike implicit waits (which apply globally to all elements), explicit waits:
+- ✅ Wait for specific conditions (visibility, clickability, presence)
+- ✅ Apply to individual elements or scenarios
+- ✅ Have configurable timeouts
+- ✅ Provide clear exception messages when conditions aren't met
+- ✅ Are more reliable than `Thread.sleep()` or implicit waits
+
+**WebDriverWait vs FluentWait:**
+
+| Feature | WebDriverWait | FluentWait |
+|---------|--------------|------------|
+| **Type** | Specialized implementation | Generic, flexible base class |
+| **Polling Interval** | Fixed (500ms default) | Customizable |
+| **Exception Handling** | Standard | Can ignore specific exceptions |
+| **Use Case** | Common element waits | Advanced scenarios (page load, windows) |
+| **Timeout** | Configurable | Configurable |
 
 ```java
 public class Wait {
-    private WebDriverWait wait;
-    private WebDriver driver;
+    private WebDriverWait wait;  // For standard explicit waits
+    private WebDriver driver;    // For FluentWait scenarios
 
     public Wait(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
-    // Element Interaction Methods
+    // Element Interaction Methods (with built-in explicit waits)
     public void clickElement(WebElement element) { ... }
     public void sendKeysToElement(WebElement element, String text) { ... }
     public void clearAndSendKeys(WebElement element, String text) { ... }
 
-    // Element State Methods
+    // Element State Methods (with explicit wait verification)
     public boolean isElementDisplayed(WebElement element) { ... }
     public boolean isElementEnabled(WebElement element) { ... }
     public boolean isElementSelected(WebElement element) { ... }
 
-    // Data Retrieval Methods
+    // Data Retrieval Methods (wait until element is visible)
     public String getElementText(WebElement element) { ... }
     public String getElementAttribute(WebElement element, String attribute) { ... }
 
-    // Generic Wait Methods
+    // Explicit Wait Methods (WebDriverWait-based)
     public void waitForElementToBeVisible(WebElement element) { ... }
     public void waitForElementToBeClickable(WebElement element) { ... }
     public void waitForFrameAndSwitch(String frameId) { ... }
     
-    // FluentWait Methods - Intelligent Polling
+    // FluentWait Methods - Advanced Polling for Complex Scenarios
     public void waitForPageLoad() { ... }
     public void waitForNumberOfWindows(int expectedWindows) { ... }
     public WebElement waitForElementToBeStable(WebElement element) { ... }
@@ -91,6 +110,7 @@ public class Wait {
 ```
 
 **Wait Class Benefits:**
+- ✅ **Explicit Waits** - Targeted, condition-based waiting (not global like implicit waits)
 - ✅ **Single Responsibility** - Handles only wait logic
 - ✅ **Reusability** - Can be used outside page objects if needed
 - ✅ **Testability** - Easier to mock and unit test
@@ -99,6 +119,7 @@ public class Wait {
 - ✅ **Error Handling** - Built-in exception handling for state checks
 - ✅ **Intelligent Waiting** - FluentWait polls conditions instead of hard delays
 - ✅ **Performance** - No wasted time waiting when conditions are already met
+- ✅ **Clear Failures** - Timeout exceptions show expected condition vs actual state
 
 #### **Example Page Object**
 
