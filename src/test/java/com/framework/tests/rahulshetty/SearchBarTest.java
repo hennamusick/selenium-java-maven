@@ -89,7 +89,6 @@ public class SearchBarTest extends BaseTest {
         
         // Clear and search again
         homePage.clearAutocomplete();
-        Thread.sleep(500); // Brief wait for dropdown to close
         homePage.enterCountryInAutocomplete("United");
         
         boolean secondSuggestions = homePage.isSuggestionListDisplayed();
@@ -126,7 +125,6 @@ public class SearchBarTest extends BaseTest {
             "Suggestions should appear with lowercase input");
         
         homePage.clearAutocomplete();
-        Thread.sleep(500); // Brief wait for dropdown to close
         
         // Test with uppercase
         homePage.enterCountryInAutocomplete("INDIA");

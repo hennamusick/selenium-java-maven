@@ -1,20 +1,25 @@
 package com.framework.utils;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 public class Wait {
     private WebDriverWait wait;
+    private WebDriver driver;
 
     public Wait(WebDriver driver) {
+        this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public Wait(WebDriver driver, int timeoutInSeconds) {
+        this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds));
     }
 
@@ -78,5 +83,66 @@ public class Wait {
 
     public void waitForFrameAndSwitch(WebElement frameElement) {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(frameElement));
+    }
+
+    /**
+     * Creates a FluentWait with custom timeout and polling interval
+     * @param timeoutInSeconds Maximum time to wait
+     * @param pollingIntervalInMillis How often to check the condition
+     * @return FluentWait instance
+     */
+    public FluentWait<WebDriver> createFluentWait(int timeoutInSeconds, int pollingIntervalInMillis) {
+        return new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(timeoutInSeconds))
+                .pollingEvery(Duration.ofMillis(pollingIntervalInMillis))
+                .ignoring(NoSuchElementException.class);
+    }
+
+    /**
+     * Wait for page to load completely (document.readyState = 'complete')
+     */
+    public void waitForPageLoad() {
+        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(30))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(Exception.class);
+        
+        fluentWait.until(driver -> 
+            ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("return document.readyState")
+                .equals("complete")
+        );
+    }
+
+    /**
+     * Wait for a specific number of windows to be available
+     * Useful for window switching scenarios
+     */
+    public void waitForNumberOfWindows(int expectedWindows) {
+        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(Exception.class);
+        
+        fluentWait.until(driver -> driver.getWindowHandles().size() == expectedWindows);
+    }
+
+    /**
+     * Wait for element to be present and stable (not stale)
+     */
+    public void waitForElementToBeStable(WebElement element) {
+        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofMillis(500))
+                .ignoring(org.openqa.selenium.StaleElementReferenceException.class);
+        
+        fluentWait.until(driver -> {
+            try {
+                element.isDisplayed();
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        });
     }
 }

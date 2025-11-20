@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 public class SauceDemoTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
-    public void setUpTest() throws InterruptedException {
+    public void setUpTest() {
         // Using baseUrl.2 - https://www.saucedemo.com
         driver.get(ConfigReader.getBaseUrl(2));
-        Thread.sleep(2000); // Wait for page to load
+        waitForPageToLoad(); // Wait for page to load completely
     }
 
     @Test(priority = 1, groups = {"smoke", "regression"}, description = "Verify SauceDemo login page loads successfully")

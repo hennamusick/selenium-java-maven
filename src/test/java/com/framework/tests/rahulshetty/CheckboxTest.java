@@ -10,10 +10,10 @@ public class CheckboxTest extends BaseTest {
     private HomePage homePage;
 
     @BeforeMethod(alwaysRun = true)
-    public void setUpTest() throws InterruptedException {
+    public void setUpTest() {
         // Using baseUrl.1 - Rahul Shetty Academy AutomationPractice
         driver.get(ConfigReader.getBaseUrl(1));
-        Thread.sleep(2000);
+        waitForPageToLoad();
         homePage = new HomePage(driver);
     }
 

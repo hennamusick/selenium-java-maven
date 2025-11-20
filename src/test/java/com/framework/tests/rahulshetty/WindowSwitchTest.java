@@ -12,10 +12,10 @@ public class WindowSwitchTest extends BaseTest {
     private HomePage homePage;
 
     @BeforeMethod(alwaysRun = true)
-    public void setUpTest() throws InterruptedException {
+    public void setUpTest() {
         // Using baseUrl.1 - Rahul Shetty Academy AutomationPractice
         driver.get(ConfigReader.getBaseUrl(1));
-        Thread.sleep(2000);
+        waitForPageToLoad();
         homePage = new HomePage(driver);
     }
 
@@ -66,11 +66,7 @@ public class WindowSwitchTest extends BaseTest {
         }
         
         // Wait for new window to load
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitForPageToLoad();
         
         // Verify URL
         String actualUrl = driver.getCurrentUrl();
@@ -102,11 +98,7 @@ public class WindowSwitchTest extends BaseTest {
         }
         
         // Wait for page to load
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitForPageToLoad();
         
         // Verify title contains expected text
         String actualTitle = driver.getTitle();
@@ -141,11 +133,7 @@ public class WindowSwitchTest extends BaseTest {
         }
         
         // Wait for new window
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitForPageToLoad();
         
         // Switch back to parent window
         driver.switchTo().window(parentWindowHandle);
@@ -248,11 +236,7 @@ public class WindowSwitchTest extends BaseTest {
         // Click Open Window button first time
         homePage.clickOpenWindowButton();
         
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitForNumberOfWindows(2);
         
         // Get the child window handle
         Set<String> windowHandles = driver.getWindowHandles();
@@ -270,11 +254,7 @@ public class WindowSwitchTest extends BaseTest {
         // Click Open Window button second time
         homePage.clickOpenWindowButton();
         
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitForPageToLoad();
         
         // Check number of windows - should still be 2 (button reuses same window)
         Set<String> windowHandlesAfterSecondClick = driver.getWindowHandles();
@@ -309,11 +289,7 @@ public class WindowSwitchTest extends BaseTest {
         // Click Open Window button
         homePage.clickOpenWindowButton();
         
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitForNumberOfWindows(2);
         
         // Get all window handles
         Set<String> windowHandles = driver.getWindowHandles();
@@ -363,11 +339,7 @@ public class WindowSwitchTest extends BaseTest {
         }
         
         // Wait for page to load
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitForPageToLoad();
         
         // Verify page contains expected content
         String pageSource = driver.getPageSource();

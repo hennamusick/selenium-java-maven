@@ -68,4 +68,17 @@ public abstract class BasePage {
     protected void waitForElementToBeClickable(WebElement element) {
         wait.waitForElementToBeClickable(element);
     }
+
+    // FluentWait methods - replacing Thread.sleep()
+    protected void waitForPageLoad() {
+        wait.waitForPageLoad();
+    }
+
+    protected void waitForNumberOfWindows(int expectedWindows) {
+        wait.waitForNumberOfWindows(expectedWindows);
+    }
+
+    protected void waitForElementToBeStable(WebElement element) {
+        wait.waitForElementToBeStable(element);
+    }
 }
