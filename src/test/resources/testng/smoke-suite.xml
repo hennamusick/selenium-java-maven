@@ -38,6 +38,12 @@
                     <include name="testSafeCheckMethods"/>
                 </methods>
             </class>
+            <class name="com.framework.tests.rahulshetty.WindowSwitchTest">
+                <methods>
+                    <include name="testOpenWindowButtonVisibilityAndState"/>
+                    <include name="testOpenWindowButtonOpensNewWindow"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

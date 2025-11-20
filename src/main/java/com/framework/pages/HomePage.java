@@ -48,6 +48,10 @@ public class HomePage extends BasePage {
     @FindBy(id = "checkBoxOption3")
     private WebElement checkbox3;
     
+    // Switch Window Section
+    @FindBy(id = "openwindow")
+    private WebElement openWindowButton;
+    
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -296,5 +300,18 @@ public class HomePage extends BasePage {
     
     public boolean isCheckbox3Enabled() {
         return isElementEnabled(checkbox3);
+    }
+    
+    // Switch Window Methods
+    public void clickOpenWindowButton() {
+        clickElement(openWindowButton);
+    }
+    
+    public boolean isOpenWindowButtonDisplayed() {
+        return isElementDisplayed(openWindowButton);
+    }
+    
+    public boolean isOpenWindowButtonEnabled() {
+        return isElementEnabled(openWindowButton);
     }
 }

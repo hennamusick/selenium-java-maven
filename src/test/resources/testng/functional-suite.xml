@@ -56,6 +56,19 @@
                     <include name="testSafeUncheckMethods"/>
                 </methods>
             </class>
+            <class name="com.framework.tests.rahulshetty.WindowSwitchTest">
+                <methods>
+                    <include name="testOpenWindowButtonVisibilityAndState"/>
+                    <include name="testOpenWindowButtonOpensNewWindow"/>
+                    <include name="testNewWindowOpensCorrectUrl"/>
+                    <include name="testNewWindowTitle"/>
+                    <include name="testSwitchBackToParentWindow"/>
+                    <include name="testParentWindowInteractiveAfterOpeningChild"/>
+                    <include name="testClosingChildWindowDoesNotAffectParent"/>
+                    <include name="testWindowHandlesAreUnique"/>
+                    <include name="testNewWindowHasExpectedContent"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
