@@ -56,8 +56,10 @@ The `Wait` class encapsulates all explicit wait functionality, promoting **separ
 ```java
 public class Wait {
     private WebDriverWait wait;
+    private WebDriver driver;
 
     public Wait(WebDriver driver) {
+        this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
@@ -79,6 +81,12 @@ public class Wait {
     public void waitForElementToBeVisible(WebElement element) { ... }
     public void waitForElementToBeClickable(WebElement element) { ... }
     public void waitForFrameAndSwitch(String frameId) { ... }
+    
+    // FluentWait Methods - Intelligent Polling
+    public void waitForPageLoad() { ... }
+    public void waitForNumberOfWindows(int expectedWindows) { ... }
+    public WebElement waitForElementToBeStable(WebElement element) { ... }
+    public FluentWait<WebDriver> createFluentWait(long timeout, long polling) { ... }
 }
 ```
 
@@ -89,6 +97,8 @@ public class Wait {
 - ✅ **Flexibility** - Supports custom timeout via constructor overload
 - ✅ **Maintainability** - All wait logic centralized in one place
 - ✅ **Error Handling** - Built-in exception handling for state checks
+- ✅ **Intelligent Waiting** - FluentWait polls conditions instead of hard delays
+- ✅ **Performance** - No wasted time waiting when conditions are already met
 
 #### **Example Page Object**
 
@@ -153,6 +163,53 @@ public class RadioButtonTest extends BaseTest {
 - ✅ Comprehensive failure reports showing all issues
 - ✅ Better test coverage - validates all conditions
 - ✅ Saves debugging time - see all failures in one run
+
+### FluentWait - Intelligent Waiting
+
+The framework uses **FluentWait** instead of `Thread.sleep()` for reliable, adaptive waiting:
+
+```java
+// Page Load Wait - Polls document.readyState until complete
+waitForPageToLoad();
+
+// Window Count Wait - Waits for expected number of windows
+waitForNumberOfWindows(2);
+
+// Element Stability - Handles stale elements during DOM updates
+WebElement stableElement = wait.waitForElementToBeStable(element);
+```
+
+**FluentWait vs Thread.sleep:**
+
+| Aspect | Thread.sleep() ❌ | FluentWait ✅ |
+|--------|-------------------|---------------|
+| **Speed** | Always waits full duration (e.g., 2000ms) | Returns immediately when condition met |
+| **Reliability** | Fixed delay, may be too short or too long | Polls until condition met or timeout |
+| **Adaptability** | Same on all systems | Adapts to system speed |
+| **Resource Usage** | Blocks thread unnecessarily | Efficient polling with intervals |
+| **Maintenance** | Hard-coded delays throughout code | Centralized wait logic |
+
+**Example - Page Load Wait:**
+```java
+// Before: Hard-coded 2-second wait
+Thread.sleep(2000); // Always waits 2 seconds, even if page loads in 200ms
+
+// After: Intelligent wait
+waitForPageToLoad(); // Returns as soon as document.readyState === "complete"
+```
+
+**Implementation Details:**
+- **Default Timeout:** 10-30 seconds (configurable)
+- **Polling Interval:** 500ms (checks condition twice per second)
+- **Exception Handling:** Ignores transient exceptions (NoSuchElementException, StaleElementReferenceException)
+- **Document Ready Check:** Uses JavascriptExecutor to poll `document.readyState`
+
+**Benefits:**
+- ✅ **Faster Test Execution** - No wasted waiting time
+- ✅ **More Reliable** - Adapts to varying page load speeds
+- ✅ **Self-Healing** - Handles timing issues automatically
+- ✅ **Better Debugging** - Clear timeout exceptions with expected conditions
+- ✅ **Cleaner Code** - No try-catch blocks for InterruptedException
 
 ---
 
