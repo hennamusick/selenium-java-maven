@@ -1,22 +1,17 @@
 package com.framework.tests.rahulshetty;
 
-import com.framework.pages.HomePage;
 import com.framework.utils.BaseTest;
-import com.framework.utils.ConfigReader;
+import com.framework.utils.TestConstants;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Set;
 
 public class WindowSwitchTest extends BaseTest {
-    private HomePage homePage;
 
     @BeforeMethod(alwaysRun = true)
     public void setUpTest() {
-        // Using baseUrl.1 - Rahul Shetty Academy AutomationPractice
-        driver.get(ConfigReader.getBaseUrl(1));
-        waitForPageToLoad();
-        homePage = new HomePage(driver);
+        initializeHomePage(); // Uses default baseUrl.1 - Rahul Shetty Academy
     }
 
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify Open Window button is displayed and enabled")
@@ -32,7 +27,7 @@ public class WindowSwitchTest extends BaseTest {
     @Test(priority = 2, groups = {"smoke", "functional", "regression"}, description = "Verify clicking Open Window button opens new window")
     public void testOpenWindowButtonOpensNewWindow() {
         // Get the current window handle
-        String parentWindowHandle = driver.getWindowHandle();
+        String parentWindowHandle = getParentWindowHandle();
         
         // Click the Open Window button
         homePage.clickOpenWindowButton();
@@ -51,31 +46,23 @@ public class WindowSwitchTest extends BaseTest {
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify new window opens with correct URL")
     public void testNewWindowOpensCorrectUrl() {
         // Get parent window handle
-        String parentWindowHandle = driver.getWindowHandle();
+        String parentWindowHandle = getParentWindowHandle();
         
         // Click Open Window button
         homePage.clickOpenWindowButton();
+        waitForNumberOfWindows(2);
         
         // Switch to the new window
-        Set<String> windowHandles = driver.getWindowHandles();
-        for (String handle : windowHandles) {
-            if (!handle.equals(parentWindowHandle)) {
-                driver.switchTo().window(handle);
-                break;
-            }
-        }
-        
-        // Wait for new window to load
+        switchToChildWindow(parentWindowHandle);
         waitForPageToLoad();
         
         // Verify URL
         String actualUrl = driver.getCurrentUrl();
-        softAssert.assertEquals(actualUrl, "https://www.qaclickacademy.com/", 
+        softAssert.assertEquals(actualUrl, TestConstants.QA_CLICK_ACADEMY_URL, 
             "New window should open with QA Click Academy URL");
         
         // Close new window and switch back to parent
-        driver.close();
-        driver.switchTo().window(parentWindowHandle);
+        closeCurrentWindowAndSwitchTo(parentWindowHandle);
         
         softAssert.assertAll();
     }
@@ -83,21 +70,13 @@ public class WindowSwitchTest extends BaseTest {
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify new window title")
     public void testNewWindowTitle() {
         // Get parent window handle
-        String parentWindowHandle = driver.getWindowHandle();
+        String parentWindowHandle = getParentWindowHandle();
         
         // Click Open Window button
         homePage.clickOpenWindowButton();
         
         // Switch to new window
-        Set<String> windowHandles = driver.getWindowHandles();
-        for (String handle : windowHandles) {
-            if (!handle.equals(parentWindowHandle)) {
-                driver.switchTo().window(handle);
-                break;
-            }
-        }
-        
-        // Wait for page to load
+        switchToChildWindow(parentWindowHandle);
         waitForPageToLoad();
         
         // Verify title contains expected text
@@ -106,8 +85,7 @@ public class WindowSwitchTest extends BaseTest {
             "New window should have a title");
         
         // Close new window and switch back
-        driver.close();
-        driver.switchTo().window(parentWindowHandle);
+        closeCurrentWindowAndSwitchTo(parentWindowHandle);
         
         softAssert.assertAll();
     }

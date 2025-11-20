@@ -2,6 +2,7 @@ package com.framework.tests.saucedemo;
 
 import com.framework.utils.BaseTest;
 import com.framework.utils.ConfigReader;
+import com.framework.utils.TestConstants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
@@ -13,14 +14,14 @@ public class SauceDemoTest extends BaseTest {
     public void setUpTest() {
         // Using baseUrl.2 - https://www.saucedemo.com
         driver.get(ConfigReader.getBaseUrl(2));
-        waitForPageToLoad(); // Wait for page to load completely
+        waitForPageToLoad();
     }
 
     @Test(priority = 1, groups = {"smoke", "regression"}, description = "Verify SauceDemo login page loads successfully")
     public void testLoginPageLoads() {
         String currentUrl = driver.getCurrentUrl();
-        softAssert.assertTrue(currentUrl.contains("saucedemo.com"), 
-            "Expected URL to contain 'saucedemo.com' but got: " + currentUrl);
+        softAssert.assertTrue(currentUrl.contains(TestConstants.SAUCEDEMO_DOMAIN), 
+            "Expected URL to contain '" + TestConstants.SAUCEDEMO_DOMAIN + "' but got: " + currentUrl);
         
         // Verify login elements are present
         WebElement usernameField = driver.findElement(By.id("user-name"));

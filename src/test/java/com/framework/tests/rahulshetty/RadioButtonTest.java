@@ -1,20 +1,14 @@
 package com.framework.tests.rahulshetty;
 
-import com.framework.pages.HomePage;
 import com.framework.utils.BaseTest;
-import com.framework.utils.ConfigReader;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class RadioButtonTest extends BaseTest {
-    private HomePage homePage;
 
     @BeforeMethod(alwaysRun = true)
     public void setUpTest() {
-        // Using baseUrl.1 - Rahul Shetty Academy AutomationPractice
-        driver.get(ConfigReader.getBaseUrl(1));
-        waitForPageToLoad();
-        homePage = new HomePage(driver);
+        initializeHomePage(); // Uses default baseUrl.1 - Rahul Shetty Academy
     }
 
     @Test(priority = 1, groups = {"smoke", "regression"}, description = "Verify radio buttons are displayed and enabled")

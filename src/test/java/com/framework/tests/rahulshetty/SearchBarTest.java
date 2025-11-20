@@ -1,19 +1,14 @@
 package com.framework.tests.rahulshetty;
 
-import com.framework.pages.HomePage;
 import com.framework.utils.BaseTest;
-import com.framework.utils.ConfigReader;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SearchBarTest extends BaseTest {
-    private HomePage homePage;
 
     @BeforeMethod(alwaysRun = true)
     public void setUpTest() {
-        // Using baseUrl.1 - Rahul Shetty Academy AutomationPractice
-        driver.get(ConfigReader.getBaseUrl(1));
-        homePage = new HomePage(driver);
+        initializeHomePage(); // Uses default baseUrl.1 - Rahul Shetty Academy
     }
 
     // Autocomplete/Suggestion Search Bar Tests

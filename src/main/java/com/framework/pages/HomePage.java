@@ -52,6 +52,10 @@ public class HomePage extends BasePage {
     @FindBy(id = "openwindow")
     private WebElement openWindowButton;
     
+    // Switch Tab Section
+    @FindBy(id = "opentab")
+    private WebElement openTabButton;
+    
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -313,5 +317,18 @@ public class HomePage extends BasePage {
     
     public boolean isOpenWindowButtonEnabled() {
         return isElementEnabled(openWindowButton);
+    }
+    
+    // Switch Tab Methods
+    public void clickOpenTabButton() {
+        clickElement(openTabButton);
+    }
+    
+    public boolean isOpenTabButtonDisplayed() {
+        return isElementDisplayed(openTabButton);
+    }
+    
+    public boolean isOpenTabButtonEnabled() {
+        return isElementEnabled(openTabButton);
     }
 }
