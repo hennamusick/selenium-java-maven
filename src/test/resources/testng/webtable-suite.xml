@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Web Table Test Suite" verbose="1">
+    <test name="Web Table Validation Tests">
+        <classes>
+            <class name="com.framework.tests.rahulshetty.WebTableTest">
+                <methods>
+                    <include name="testTableIsDisplayed"/>
+                    <include name="testTableHeaders"/>
+                    <include name="testTableDimensions"/>
+                    <include name="testAllInstructorsAreRahulShetty"/>
+                    <include name="testSpecificCourseExists"/>
+                    <include name="testSeleniumCoursePrice"/>
+                    <include name="testMultipleCoursesPrices"/>
+                    <include name="testFreeCourse"/>
+                    <include name="testAllPricesAreNumeric"/>
+                    <include name="testCourseCountByInstructor"/>
+                    <include name="testAllCoursesByInstructor"/>
+                    <include name="testSpecificRowData"/>
+                    <include name="testCompleteTableData"/>
+                    <include name="testMultipleCoursesExist"/>
+                    <include name="testColumnDataExtraction"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
