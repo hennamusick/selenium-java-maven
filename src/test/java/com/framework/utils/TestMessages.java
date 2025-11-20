@@ -91,9 +91,27 @@ public class TestMessages {
     public static final String AUTOCOMPLETE_CASE_INSENSITIVE = "Autocomplete should be case insensitive";
     
     // ==================== ALERT MESSAGES ====================
-    public static final String ALERT_PRESENT = "Alert should be present";
+    public static final String ALERT_BUTTON_DISPLAYED = "Alert button should be displayed";
+    public static final String ALERT_BUTTON_ENABLED = "Alert button should be enabled";
+    public static final String CONFIRM_BUTTON_DISPLAYED = "Confirm button should be displayed";
+    public static final String CONFIRM_BUTTON_ENABLED = "Confirm button should be enabled";
+    public static final String NAME_INPUT_DISPLAYED = "Name input field should be displayed";
+    public static final String NAME_INPUT_ENABLED = "Name input field should be enabled";
+    public static final String ALERT_PRESENT = "Alert should be present after clicking Alert button";
+    public static final String ALERT_TEXT_CONTAINS_NAME = "Alert text should contain the entered name";
     public static final String ALERT_TEXT_MATCHES = "Alert text should match expected message";
-    public static final String CONFIRM_BOX_PRESENT = "Confirm box should be present";
+    public static final String ALERT_TEXT_NOT_EMPTY = "Alert text should not be empty";
+    public static final String CONFIRM_BOX_PRESENT = "Confirm box should be present after clicking Confirm button";
+    public static final String CONFIRM_TEXT_CONTAINS_NAME = "Confirm box text should contain the entered name";
+    public static final String CONFIRM_TEXT_NOT_EMPTY = "Confirm box text should not be empty";
+    public static final String ALERT_ACCEPTED = "Alert should be accepted successfully";
+    public static final String CONFIRM_ACCEPTED = "Confirm box should be accepted successfully";
+    public static final String CONFIRM_DISMISSED = "Confirm box should be dismissed successfully";
+    public static final String PAGE_INTERACTIVE_AFTER_ALERT = "Page should remain interactive after accepting alert";
+    public static final String PAGE_INTERACTIVE_AFTER_CONFIRM = "Page should remain interactive after handling confirm box";
+    public static final String NAME_INPUT_ACCEPTS_TEXT = "Name input should accept text";
+    public static final String ALERT_WITH_EMPTY_NAME = "Alert should display even with empty name field";
+    public static final String CONFIRM_WITH_EMPTY_NAME = "Confirm box should display even with empty name field";
     
     // Private constructor to prevent instantiation
     private TestMessages() {

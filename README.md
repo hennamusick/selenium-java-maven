@@ -506,6 +506,127 @@ driver.switchTo().window(parentHandle);
 
 ---
 
+### AlertTest - Alert and Confirm Box Tests (20 Tests) ⭐ NEW
+
+Comprehensive test suite for JavaScript alert and confirm box functionality with detailed message verification:
+
+#### Alert Button Tests (8 Tests)
+1. **testAlertButtonVisibilityAndState** - Verifies alert button is displayed and enabled
+2. **testAlertWithEnteredName** - Tests alert popup with user-entered name
+3. **testAlertMessageFormat** - Validates alert message format (starts with "Hello")
+4. **testAlertWithEmptyName** - Tests alert displays even with empty name field
+5. **testPageInteractiveAfterAlert** - Verifies page remains interactive after accepting alert
+6. **testMultipleAlertTriggers** - Tests triggering alerts multiple times with different names
+7. **testAlertWithSpecialCharacters** - Validates alert handles special characters (@, #, !)
+8. **testAlertWithLongName** - Tests alert with very long name input
+
+#### Confirm Box Tests (9 Tests)
+9. **testConfirmButtonVisibilityAndState** - Verifies confirm button is displayed and enabled
+10. **testConfirmBoxWithEnteredName** - Tests confirm box with user-entered name
+11. **testConfirmBoxMessageFormat** - Validates confirm message format (starts with "Hello")
+12. **testAcceptConfirmBox** - Tests accepting confirm box (OK button)
+13. **testDismissConfirmBox** - Tests dismissing confirm box (Cancel button)
+14. **testConfirmBoxWithEmptyName** - Tests confirm box displays even with empty name
+15. **testPageInteractiveAfterConfirmBox** - Verifies page remains interactive after handling confirm
+16. **testMultipleConfirmBoxTriggers** - Tests multiple confirm boxes with accept/dismiss actions
+17. **testConfirmBoxWithSpecialCharacters** - Validates confirm box handles special characters
+
+#### Name Input Field Tests (3 Tests)
+18. **testNameInputFieldVisibilityAndState** - Verifies name input is displayed and enabled
+19. **testNameInputAcceptsText** - Tests name input field accepts text input
+20. **testNameInputCanBeCleared** - Tests clearing the name input field
+
+```java
+// Enter name and trigger alert
+homePage.enterName("Test User");
+homePage.clickAlert();
+
+// Switch to alert and verify message
+Alert alert = driver.switchTo().alert();
+String alertText = alert.getText();
+softAssert.assertTrue(alertText.contains("Test User"));
+softAssert.assertTrue(alertText.startsWith("Hello"));
+
+// Accept alert
+alert.accept();
+
+// Trigger confirm box
+homePage.enterName("Confirm Test");
+homePage.clickConfirmBox();
+
+// Handle confirm box - Accept or Dismiss
+Alert confirm = driver.switchTo().alert();
+String confirmText = confirm.getText();
+softAssert.assertTrue(confirmText.contains("Confirm Test"));
+
+// Option 1: Accept (OK button)
+confirm.accept();
+
+// Option 2: Dismiss (Cancel button)
+confirm.dismiss();
+
+// Verify page is still interactive
+softAssert.assertTrue(homePage.isAlertButtonDisplayed());
+
+// Helper method to check alert presence
+private boolean isAlertPresent() {
+    try {
+        driver.switchTo().alert();
+        return true;
+    } catch (NoAlertPresentException e) {
+        return false;
+    }
+}
+```
+
+**Key Features:**
+- ✅ Tests alert and confirm box popup messages
+- ✅ Verifies message contains entered name
+- ✅ Validates message format (starts with "Hello")
+- ✅ Tests both accept and dismiss actions on confirm boxes
+- ✅ Verifies page remains interactive after handling popups
+- ✅ Tests edge cases: empty name, special characters, long text
+- ✅ Uses TestConstants for consistent test data
+- ✅ Uses TestMessages for standardized assertions
+- ✅ Includes helper method for alert presence detection
+
+---
+
+### TabSwitchTest - Tab Switching Tests (12 Tests)
+
+Tests tab opening and navigation functionality:
+
+1. **testOpenTabButtonVisibilityAndState** - Verifies tab button is displayed and enabled
+2. **testOpenTabButtonOpensNewTab** - Tests clicking button opens exactly one new tab
+3. **testNewTabOpensCorrectUrl** - Verifies new tab opens QA Click Academy URL
+4. **testNewTabTitle** - Validates new tab has expected title
+5. **testSwitchBackToParentTab** - Tests switching back to original tab
+6. **testParentTabInteractiveAfterOpeningChild** - Verifies parent tab remains interactive
+7. **testClosingChildTabDoesNotAffectParent** - Tests parent unaffected when child closes
+8. **testMultipleTabOpening** - Tests opening multiple tabs sequentially
+9. **testTabHandlesAreUnique** - Verifies tab handles are unique identifiers
+10. **testNewTabHasExpectedContent** - Validates new tab has substantial page content
+11. **testSwitchingBetweenMultipleTabs** - Tests switching between 3+ tabs
+12. **testTabCountAfterClosingOneTab** - Verifies tab count after closing child tab
+
+```java
+// Get parent tab handle
+String originalTab = getParentWindowHandle();
+
+// Click button to open new tab
+homePage.clickOpenTabButton();
+waitForNumberOfWindows(2);
+
+// Switch to new tab
+switchToChildWindow(originalTab);
+String newTabUrl = driver.getCurrentUrl();
+
+// Cleanup - close child tabs and switch back to parent
+closeAllChildWindowsAndSwitchToParent(originalTab);
+```
+
+---
+
 ## 📊 Test Results
 
 All tests use SoftAssert and include detailed reporting with organized test suites:
@@ -519,21 +640,25 @@ BUILD SUCCESS
 
 | Test Class | Test Count | Focus Area |
 |------------|-----------|------------|
-| **HomePageTest** | 3 | Alert, Confirm Box, Name Input |
-| **RadioButtonTest** | 6 | Radio button selection and state |
-| **SearchBarTest** | 7 | Autocomplete/suggestion functionality |
-| **DropdownTest** | 8 | Dropdown selection methods |
-| **CheckboxTest** | 12 | Checkbox interactions and state |
+| **AlertTest** | 20 | Alert popups, Confirm boxes, and message verification |
+| **TabSwitchTest** | 12 | Tab switching and navigation |
 | **WindowSwitchTest** | 10 | Window/popup handling |
-| **Total Active Tests** | **46** | Rahul Shetty Academy Practice |
+| **CheckboxTest** | 12 | Checkbox interactions and state |
+| **DropdownTest** | 8 | Dropdown selection methods |
+| **SearchBarTest** | 7 | Autocomplete/suggestion functionality |
+| **RadioButtonTest** | 6 | Radio button selection and state |
+| **HomePageTest** | 3 | Basic page interactions |
+| **SauceDemoTest** | 3 | SauceDemo login page tests |
+| **Total Tests** | **81** | Comprehensive UI Test Coverage |
 
 ### Test Suite Organization
 
 | Suite | Test Count | Purpose | Execution Time |
 |-------|-----------|---------|----------------|
-| **smoke-suite.xml** | 11 | Critical path tests | ~2-3 min |
-| **functional-suite.xml** | 35 | Detailed feature tests | ~8-10 min |
-| **regression-suite.xml** | 43 | Comprehensive coverage | ~10-12 min |
+| **alert-suite.xml** ⭐ NEW | 20 | Alert & confirm box tests | ~3-4 min |
+| **smoke-suite.xml** | 14+ | Critical path tests | ~2-3 min |
+| **functional-suite.xml** | 50+ | Detailed feature tests | ~10-12 min |
+| **regression-suite.xml** | 60+ | Comprehensive coverage | ~12-15 min |
 | **saucedemo-suite.xml** | 3 (disabled) | SauceDemo tests | N/A |
 
 ### Test Groups

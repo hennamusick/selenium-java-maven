@@ -72,6 +72,38 @@ public class HomePage extends BasePage {
         sendKeysToElement(nameInput, name);
     }
     
+    public void clearName() {
+        nameInput.clear();
+    }
+    
+    public String getNameValue() {
+        return getElementAttribute(nameInput, "value");
+    }
+    
+    public boolean isAlertButtonDisplayed() {
+        return isElementDisplayed(alertButton);
+    }
+    
+    public boolean isAlertButtonEnabled() {
+        return isElementEnabled(alertButton);
+    }
+    
+    public boolean isConfirmBoxButtonDisplayed() {
+        return isElementDisplayed(confirmBoxButton);
+    }
+    
+    public boolean isConfirmBoxButtonEnabled() {
+        return isElementEnabled(confirmBoxButton);
+    }
+    
+    public boolean isNameInputDisplayed() {
+        return isElementDisplayed(nameInput);
+    }
+    
+    public boolean isNameInputEnabled() {
+        return isElementEnabled(nameInput);
+    }
+    
     // Radio Button Methods
     public void clickRadio1() {
         clickElement(radio1Button);
