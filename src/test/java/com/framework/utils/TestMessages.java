@@ -208,6 +208,52 @@ public class TestMessages {
     public static final String NAME_SHOULD_BE_ENTERED = "Name should be entered";
     public static final String NAME_INPUT_EMPTY_AFTER_CLEAR = "Name input should be empty after clearing";
     
+    // ==================== WEB TABLE MESSAGES ====================
+    public static final String WEB_TABLE_DISPLAYED = "Web table should be displayed on the page";
+    public static final String TABLE_SHOULD_HAVE_3_COLUMNS = "Table should have 3 columns";
+    public static final String TABLE_HEADERS_MATCH = "Table headers should match expected headers";
+    public static final String TABLE_HAS_AT_LEAST_10_ROWS = "Table should have at least 10 rows (courses)";
+    public static final String ALL_INSTRUCTORS_RAHUL_SHETTY = "All instructors should be Rahul Shetty";
+    public static final String COURSE_EXISTS = "Course '%s' should exist in the table";
+    public static final String SELENIUM_COURSE_PRICE = "Selenium Webdriver course price should be 30";
+    public static final String SQL_COURSE_PRICE = "SQL course price should be 25";
+    public static final String APPIUM_COURSE_PRICE = "Appium course price should be 30";
+    public static final String WEBSECURITY_COURSE_PRICE = "WebSecurity course price should be 20";
+    public static final String JMETER_COURSE_PRICE = "JMETER course price should be 25";
+    public static final String REST_API_COURSE_PRICE = "REST API course price should be 35";
+    public static final String QA_RESUME_COURSE_FREE = "QA Resume course should be free (price = 0)";
+    public static final String PRICE_IS_NUMERIC = "Price '%s' is numeric";
+    public static final String PRICE_NOT_VALID_NUMBER = "Price '%s' is not a valid number";
+    public static final String RAHUL_SHETTY_AT_LEAST_10_COURSES = "Rahul Shetty should have at least 10 courses";
+    public static final String SHOULD_HAVE_AT_LEAST_10_COURSES = "Should have at least 10 courses";
+    public static final String SHOULD_INCLUDE_SELENIUM_COURSE = "Should include Selenium Webdriver course";
+    public static final String SHOULD_INCLUDE_SQL_COURSE = "Should include SQL course";
+    public static final String FIRST_ROW_INSTRUCTOR = "First row instructor should be Rahul Shetty";
+    public static final String FIRST_ROW_COURSE = "First row should contain Selenium course";
+    public static final String FIRST_ROW_PRICE = "First row price should be 30";
+    public static final String TABLE_HAS_AT_LEAST_10_DATA_ROWS = "Table should have at least 10 rows of data";
+    public static final String ROW_HAS_INSTRUCTOR_COLUMN = "Row should have Instructor column";
+    public static final String ROW_HAS_COURSE_COLUMN = "Row should have Course column";
+    public static final String ROW_HAS_PRICE_COLUMN = "Row should have Price column";
+    public static final String INSTRUCTOR_NOT_NULL = "Instructor should not be null";
+    public static final String COURSE_NOT_NULL = "Course should not be null";
+    public static final String PRICE_NOT_NULL = "Price should not be null";
+    public static final String INSTRUCTORS_MATCH_COURSES_COUNT = "Number of instructors should match number of courses";
+    public static final String COURSES_MATCH_PRICES_COUNT = "Number of courses should match number of prices";
+    public static final String SHOULD_HAVE_AT_LEAST_10_DATA_ROWS = "Should have at least 10 rows of data";
+    
+    // ==================== COURSE NAME CONSTANTS ====================
+    public static final String COURSE_SELENIUM_JAVA = "Selenium Webdriver with Java Basics + Advanced + Interview Guide";
+    public static final String COURSE_SQL_PRACTICAL = "Learn SQL in Practical + Database Testing from Scratch";
+    public static final String COURSE_APPIUM_MOBILE = "Appium (Selenium) - Mobile Automation Testing from Scratch";
+    public static final String COURSE_WEB_SECURITY = "WebSecurity Testing for Beginners-QA knowledge to next level";
+    public static final String COURSE_JMETER = "Learn JMETER from Scratch - (Performance + Load) Testing Tool";
+    public static final String COURSE_REST_API = "WebServices / REST API Testing with SoapUI";
+    public static final String COURSE_QA_EXPERT = "QA Expert Course :Software Testing + Bugzilla + SQL + Agile";
+    public static final String COURSE_SELENIUM_PYTHON = "Master Selenium Automation in simple Python Language";
+    public static final String COURSE_ADVANCED_SELENIUM = "Advanced Selenium Framework Pageobject, TestNG, Maven, Jenkins,C";
+    public static final String COURSE_QA_RESUME = "Write effective QA Resume that will turn to interview call";
+    
     // Private constructor to prevent instantiation
     private TestMessages() {
         throw new AssertionError("TestMessages class should not be instantiated");

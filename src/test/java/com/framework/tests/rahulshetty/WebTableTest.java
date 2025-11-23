@@ -2,6 +2,7 @@ package com.framework.tests.rahulshetty;
 
 import com.framework.pages.WebTablePage;
 import com.framework.utils.BaseTest;
+import com.framework.utils.TestMessages;
 import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -35,7 +36,7 @@ public class WebTableTest extends BaseTest {
     @Story("Table Display")
     public void testTableIsDisplayed() {
         softAssert.assertTrue(webTablePage.isTableDisplayed(), 
-            "Web table should be displayed on the page");
+            TestMessages.WEB_TABLE_DISPLAYED);
         softAssert.assertAll();
     }
 
@@ -48,9 +49,9 @@ public class WebTableTest extends BaseTest {
         List<String> actualHeaders = webTablePage.getTableHeaders();
         
         softAssert.assertEquals(actualHeaders.size(), 3, 
-            "Table should have 3 columns");
+            TestMessages.TABLE_SHOULD_HAVE_3_COLUMNS);
         softAssert.assertEquals(actualHeaders, expectedHeaders, 
-            "Table headers should match expected headers");
+            TestMessages.TABLE_HEADERS_MATCH);
         softAssert.assertAll();
     }
 
@@ -63,9 +64,9 @@ public class WebTableTest extends BaseTest {
         int columnCount = webTablePage.getColumnCount();
         
         softAssert.assertEquals(columnCount, 3, 
-            "Table should have 3 columns");
+            TestMessages.TABLE_SHOULD_HAVE_3_COLUMNS);
         softAssert.assertTrue(rowCount >= 10, 
-            "Table should have at least 10 rows (courses)");
+            TestMessages.TABLE_HAS_AT_LEAST_10_ROWS);
         softAssert.assertAll();
     }
 
@@ -78,7 +79,7 @@ public class WebTableTest extends BaseTest {
         
         for (String instructor : instructors) {
             softAssert.assertEquals(instructor.trim(), "Rahul Shetty", 
-                "All instructors should be Rahul Shetty");
+                TestMessages.ALL_INSTRUCTORS_RAHUL_SHETTY);
         }
         softAssert.assertAll();
     }
@@ -88,11 +89,11 @@ public class WebTableTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Course Search")
     public void testSpecificCourseExists() {
-        String courseName = "Selenium Webdriver with Java Basics + Advanced + Interview Guide";
+        String courseName = TestMessages.COURSE_SELENIUM_JAVA;
         boolean courseExists = webTablePage.isCoursePresent(courseName);
         
         softAssert.assertTrue(courseExists, 
-            "Course '" + courseName + "' should exist in the table");
+            TestMessages.format(TestMessages.COURSE_EXISTS, courseName));
         softAssert.assertAll();
     }
 
@@ -101,11 +102,11 @@ public class WebTableTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Price Validation")
     public void testSeleniumCoursePrice() {
-        String courseName = "Selenium Webdriver with Java Basics + Advanced + Interview Guide";
+        String courseName = TestMessages.COURSE_SELENIUM_JAVA;
         String actualPrice = webTablePage.getPriceByCourse(courseName);
         
         softAssert.assertEquals(actualPrice, "30", 
-            "Selenium Webdriver course price should be 30");
+            TestMessages.SELENIUM_COURSE_PRICE);
         softAssert.assertAll();
     }
 
@@ -116,33 +117,33 @@ public class WebTableTest extends BaseTest {
     public void testMultipleCoursesPrices() {
         // Verify Selenium course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse("Selenium Webdriver with Java Basics + Advanced + Interview Guide"), 
-            "30", "Selenium course price should be 30");
+            webTablePage.getPriceByCourse(TestMessages.COURSE_SELENIUM_JAVA), 
+            "30", TestMessages.SELENIUM_COURSE_PRICE);
         
         // Verify SQL course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse("Learn SQL in Practical + Database Testing from Scratch"), 
-            "25", "SQL course price should be 25");
+            webTablePage.getPriceByCourse(TestMessages.COURSE_SQL_PRACTICAL), 
+            "25", TestMessages.SQL_COURSE_PRICE);
         
         // Verify Appium course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse("Appium (Selenium) - Mobile Automation Testing from Scratch"), 
-            "30", "Appium course price should be 30");
+            webTablePage.getPriceByCourse(TestMessages.COURSE_APPIUM_MOBILE), 
+            "30", TestMessages.APPIUM_COURSE_PRICE);
         
         // Verify WebSecurity course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse("WebSecurity Testing for Beginners-QA knowledge to next level"), 
-            "20", "WebSecurity course price should be 20");
+            webTablePage.getPriceByCourse(TestMessages.COURSE_WEB_SECURITY), 
+            "20", TestMessages.WEBSECURITY_COURSE_PRICE);
         
         // Verify JMETER course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse("Learn JMETER from Scratch - (Performance + Load) Testing Tool"), 
-            "25", "JMETER course price should be 25");
+            webTablePage.getPriceByCourse(TestMessages.COURSE_JMETER), 
+            "25", TestMessages.JMETER_COURSE_PRICE);
         
         // Verify REST API course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse("WebServices / REST API Testing with SoapUI"), 
-            "35", "REST API course price should be 35");
+            webTablePage.getPriceByCourse(TestMessages.COURSE_REST_API), 
+            "35", TestMessages.REST_API_COURSE_PRICE);
         
         softAssert.assertAll();
     }
@@ -152,11 +153,11 @@ public class WebTableTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Price Validation")
     public void testFreeCourse() {
-        String courseName = "Write effective QA Resume that will turn to interview call";
+        String courseName = TestMessages.COURSE_QA_RESUME;
         String price = webTablePage.getPriceByCourse(courseName);
         
         softAssert.assertEquals(price, "0", 
-            "QA Resume course should be free (price = 0)");
+            TestMessages.QA_RESUME_COURSE_FREE);
         softAssert.assertAll();
     }
 
@@ -170,9 +171,9 @@ public class WebTableTest extends BaseTest {
         for (String price : prices) {
             try {
                 Integer.parseInt(price.trim());
-                softAssert.assertTrue(true, "Price '" + price + "' is numeric");
+                softAssert.assertTrue(true, TestMessages.format(TestMessages.PRICE_IS_NUMERIC, price));
             } catch (NumberFormatException e) {
-                softAssert.fail("Price '" + price + "' is not a valid number");
+                softAssert.fail(TestMessages.format(TestMessages.PRICE_NOT_VALID_NUMBER, price));
             }
         }
         softAssert.assertAll();
@@ -186,7 +187,7 @@ public class WebTableTest extends BaseTest {
         int courseCount = webTablePage.getCourseCountByInstructor("Rahul Shetty");
         
         softAssert.assertTrue(courseCount >= 10, 
-            "Rahul Shetty should have at least 10 courses");
+            TestMessages.RAHUL_SHETTY_AT_LEAST_10_COURSES);
         softAssert.assertAll();
     }
 
@@ -198,13 +199,13 @@ public class WebTableTest extends BaseTest {
         List<String> courses = webTablePage.getCoursesByInstructor("Rahul Shetty");
         
         softAssert.assertTrue(courses.size() >= 10, 
-            "Should have at least 10 courses");
+            TestMessages.SHOULD_HAVE_AT_LEAST_10_COURSES);
         softAssert.assertTrue(
-            courses.contains("Selenium Webdriver with Java Basics + Advanced + Interview Guide"),
-            "Should include Selenium Webdriver course");
+            courses.contains(TestMessages.COURSE_SELENIUM_JAVA),
+            TestMessages.SHOULD_INCLUDE_SELENIUM_COURSE);
         softAssert.assertTrue(
-            courses.contains("Learn SQL in Practical + Database Testing from Scratch"),
-            "Should include SQL course");
+            courses.contains(TestMessages.COURSE_SQL_PRACTICAL),
+            TestMessages.SHOULD_INCLUDE_SQL_COURSE);
         softAssert.assertAll();
     }
 
@@ -216,12 +217,12 @@ public class WebTableTest extends BaseTest {
         Map<String, String> rowData = webTablePage.getRowData(1);
         
         softAssert.assertEquals(rowData.get("Instructor"), "Rahul Shetty", 
-            "First row instructor should be Rahul Shetty");
+            TestMessages.FIRST_ROW_INSTRUCTOR);
         softAssert.assertEquals(rowData.get("Course"), 
-            "Selenium Webdriver with Java Basics + Advanced + Interview Guide",
-            "First row should contain Selenium course");
+            TestMessages.COURSE_SELENIUM_JAVA,
+            TestMessages.FIRST_ROW_COURSE);
         softAssert.assertEquals(rowData.get("Price"), "30", 
-            "First row price should be 30");
+            TestMessages.FIRST_ROW_PRICE);
         softAssert.assertAll();
     }
 
@@ -234,24 +235,24 @@ public class WebTableTest extends BaseTest {
         
         // Verify we have data
         softAssert.assertTrue(allData.size() >= 10, 
-            "Table should have at least 10 rows of data");
+            TestMessages.TABLE_HAS_AT_LEAST_10_DATA_ROWS);
         
         // Verify each row has all required columns
         for (Map<String, String> row : allData) {
             softAssert.assertTrue(row.containsKey("Instructor"), 
-                "Row should have Instructor column");
+                TestMessages.ROW_HAS_INSTRUCTOR_COLUMN);
             softAssert.assertTrue(row.containsKey("Course"), 
-                "Row should have Course column");
+                TestMessages.ROW_HAS_COURSE_COLUMN);
             softAssert.assertTrue(row.containsKey("Price"), 
-                "Row should have Price column");
+                TestMessages.ROW_HAS_PRICE_COLUMN);
             
             // Verify no null or empty values
             softAssert.assertNotNull(row.get("Instructor"), 
-                "Instructor should not be null");
+                TestMessages.INSTRUCTOR_NOT_NULL);
             softAssert.assertNotNull(row.get("Course"), 
-                "Course should not be null");
+                TestMessages.COURSE_NOT_NULL);
             softAssert.assertNotNull(row.get("Price"), 
-                "Price should not be null");
+                TestMessages.PRICE_NOT_NULL);
         }
         softAssert.assertAll();
     }
@@ -262,21 +263,21 @@ public class WebTableTest extends BaseTest {
     @Story("Course Search")
     public void testMultipleCoursesExist() {
         List<String> expectedCourses = Arrays.asList(
-            "Selenium Webdriver with Java Basics + Advanced + Interview Guide",
-            "Learn SQL in Practical + Database Testing from Scratch",
-            "Appium (Selenium) - Mobile Automation Testing from Scratch",
-            "WebSecurity Testing for Beginners-QA knowledge to next level",
-            "Learn JMETER from Scratch - (Performance + Load) Testing Tool",
-            "WebServices / REST API Testing with SoapUI",
-            "QA Expert Course :Software Testing + Bugzilla + SQL + Agile",
-            "Master Selenium Automation in simple Python Language",
-            "Advanced Selenium Framework Pageobject, TestNG, Maven, Jenkins,C",
-            "Write effective QA Resume that will turn to interview call"
+            TestMessages.COURSE_SELENIUM_JAVA,
+            TestMessages.COURSE_SQL_PRACTICAL,
+            TestMessages.COURSE_APPIUM_MOBILE,
+            TestMessages.COURSE_WEB_SECURITY,
+            TestMessages.COURSE_JMETER,
+            TestMessages.COURSE_REST_API,
+            TestMessages.COURSE_QA_EXPERT,
+            TestMessages.COURSE_SELENIUM_PYTHON,
+            TestMessages.COURSE_ADVANCED_SELENIUM,
+            TestMessages.COURSE_QA_RESUME
         );
         
         for (String course : expectedCourses) {
             softAssert.assertTrue(webTablePage.isCoursePresent(course), 
-                "Course '" + course + "' should exist in the table");
+                TestMessages.format(TestMessages.COURSE_EXISTS, course));
         }
         softAssert.assertAll();
     }
@@ -291,11 +292,11 @@ public class WebTableTest extends BaseTest {
         List<String> prices = webTablePage.getAllPrices();
         
         softAssert.assertEquals(instructors.size(), courses.size(), 
-            "Number of instructors should match number of courses");
+            TestMessages.INSTRUCTORS_MATCH_COURSES_COUNT);
         softAssert.assertEquals(courses.size(), prices.size(), 
-            "Number of courses should match number of prices");
+            TestMessages.COURSES_MATCH_PRICES_COUNT);
         softAssert.assertTrue(instructors.size() >= 10, 
-            "Should have at least 10 rows of data");
+            TestMessages.SHOULD_HAVE_AT_LEAST_10_DATA_ROWS);
         softAssert.assertAll();
     }
 
