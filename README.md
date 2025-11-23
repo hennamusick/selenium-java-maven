@@ -243,7 +243,8 @@ selenium-e2e/
 │   │   ├── java/com/framework/
 │   │   │   ├── pages/
 │   │   │   │   ├── BasePage.java          # Abstract base for all pages
-│   │   │   │   └── HomePage.java          # HomePage implementation
+│   │   │   │   ├── HomePage.java          # HomePage implementation
+│   │   │   │   └── WebTablePage.java      # Web table page object ⭐ NEW
 │   │   │   └── utils/
 │   │   │       ├── ConfigReader.java      # Configuration management
 │   │   │       ├── DriverManager.java     # WebDriver lifecycle
@@ -257,20 +258,28 @@ selenium-e2e/
 │       ├── java/com/framework/
 │       │   ├── tests/
 │       │   │   └── rahulshetty/
-│       │   │       ├── HomePageTest.java       # HomePage tests (alerts, inputs)
-│       │   │       ├── RadioButtonTest.java    # Radio button tests (6 tests)
-│       │   │       ├── SearchBarTest.java      # Autocomplete/search tests (7 tests)
-│       │   │       ├── DropdownTest.java       # Dropdown tests (8 tests)
+│       │   │       ├── WebTableTest.java       # Web table validation (20 tests) ⭐ NEW
+│       │   │       ├── AlertTest.java          # Alert/confirm box tests (20 tests)
+│       │   │       ├── TabSwitchTest.java      # Tab switching tests (12 tests)
+│       │   │       ├── WindowSwitchTest.java   # Window switching tests (10 tests)
 │       │   │       ├── CheckboxTest.java       # Checkbox tests (12 tests)
-│       │   │       └── WindowSwitchTest.java   # Window switching tests (10 tests)
+│       │   │       ├── DropdownTest.java       # Dropdown tests (8 tests)
+│       │   │       ├── SearchBarTest.java      # Autocomplete tests (7 tests)
+│       │   │       ├── RadioButtonTest.java    # Radio button tests (6 tests)
+│       │   │       └── HomePageTest.java       # Basic page tests (3 tests)
 │       │   └── utils/
 │       │       ├── BaseTest.java          # Test base class with SoftAssert
+│       │       ├── TestMessages.java      # Centralized test messages ⭐ UPDATED
 │       │       └── TestListener.java      # TestNG listeners
 │       └── resources/testng/
-│           ├── smoke-suite.xml            # Smoke tests (11 tests)
-│           ├── functional-suite.xml       # Functional tests (35 tests)
-│           ├── regression-suite.xml       # Regression tests (43 tests)
+│           ├── testng.xml                 # Master suite (all tests) ⭐ NEW
+│           ├── webtable-suite.xml         # Web table tests (20 tests) ⭐ NEW
+│           ├── alert-suite.xml            # Alert tests (20 tests)
+│           ├── smoke-suite.xml            # Smoke tests (14+ tests)
+│           ├── functional-suite.xml       # Functional tests (50+ tests)
+│           ├── regression-suite.xml       # Regression tests (60+ tests)
 │           └── saucedemo-suite.xml        # SauceDemo tests (disabled)
+├── WEB_TABLE_VALIDATION_SUMMARY.md        # Web table test documentation ⭐ NEW
 └── pom.xml
 ```
 
@@ -285,13 +294,22 @@ mvn clean test
 
 ### Run Specific Test Suite
 ```bash
-# Smoke Tests (11 critical tests)
+# Master Suite (runs all tests)
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/testng.xml
+
+# Web Table Tests (20 comprehensive table tests) ⭐ NEW
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/webtable-suite.xml
+
+# Alert Tests (20 alert and confirm box tests)
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/alert-suite.xml
+
+# Smoke Tests (14+ critical tests)
 mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/smoke-suite.xml
 
-# Functional Tests (35 detailed tests)
+# Functional Tests (50+ detailed tests)
 mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/functional-suite.xml
 
-# Regression Tests (43 comprehensive tests)
+# Regression Tests (60+ comprehensive tests)
 mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/regression-suite.xml
 
 # SauceDemo Tests (currently disabled)
@@ -300,12 +318,15 @@ mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/saucedemo-suite.xml
 
 ### Run Specific Test Class
 ```bash
-mvn test -Dtest=HomePageTest
-mvn test -Dtest=RadioButtonTest
-mvn test -Dtest=SearchBarTest
-mvn test -Dtest=DropdownTest
-mvn test -Dtest=CheckboxTest
-mvn test -Dtest=WindowSwitchTest
+mvn test -Dtest=WebTableTest      # 20 web table validation tests ⭐ NEW
+mvn test -Dtest=AlertTest         # 20 alert and confirm box tests
+mvn test -Dtest=TabSwitchTest     # 12 tab switching tests
+mvn test -Dtest=WindowSwitchTest  # 10 window handling tests
+mvn test -Dtest=CheckboxTest      # 12 checkbox tests
+mvn test -Dtest=DropdownTest      # 8 dropdown tests
+mvn test -Dtest=SearchBarTest     # 7 autocomplete tests
+mvn test -Dtest=RadioButtonTest   # 6 radio button tests
+mvn test -Dtest=HomePageTest      # 3 basic page tests
 ```
 
 ---
@@ -366,6 +387,95 @@ The framework includes comprehensive radio button tests demonstrating:
    softAssert.assertFalse(homePage.isRadio1Selected(), "Radio1 deselected");
    softAssert.assertTrue(homePage.isRadio2Selected(), "Radio2 selected");
    ```
+
+---
+
+### WebTableTest - Web Table Validation Tests (20 Tests) ⭐ NEW
+
+Comprehensive test suite for validating web table structure, data extraction, and search functionality on Rahul Shetty Academy practice page:
+
+#### Table Structure Tests (3 Tests)
+1. **testTableIsDisplayed** - Verifies web table is visible on the page
+2. **testTableHeaders** - Validates correct headers (Instructor, Course, Price)
+3. **testTableDimensions** - Tests row and column count (3 columns, 10+ rows)
+
+#### Data Validation Tests (3 Tests)
+4. **testAllInstructorsAreRahulShetty** - Verifies all courses taught by Rahul Shetty
+5. **testAllPricesAreNumeric** - Validates all price values are valid numbers
+6. **testCompleteTableData** - Comprehensive validation of all table data
+
+#### Course Search Tests (3 Tests)
+7. **testSpecificCourseExists** - Tests searching for specific course (Selenium Java)
+8. **testMultipleCoursesExist** - Validates presence of 10 expected courses
+9. **testAllCoursesByInstructor** - Gets and validates all courses by instructor
+
+#### Price Validation Tests (4 Tests)
+10. **testSeleniumCoursePrice** - Verifies Selenium course price ($30)
+11. **testMultipleCoursesPrices** - Tests 6 different course prices
+12. **testFreeCourse** - Validates QA Resume course is free (price = 0)
+13. **testCourseCountByInstructor** - Verifies Rahul Shetty has 10+ courses
+
+#### Row Data Tests (2 Tests)
+14. **testSpecificRowData** - Validates all data in first table row
+15. **testColumnDataExtraction** - Tests extracting complete column data
+
+#### Debug Tests (2 Tests)
+16. **testDebugTableStructure** - Inspects HTML structure for troubleshooting
+17. **testPrintAllCourses** - Prints all courses and prices to console
+
+```java
+// Verify table is displayed
+boolean isDisplayed = webTablePage.isTableDisplayed();
+
+// Get table headers
+List<String> headers = webTablePage.getTableHeaders();
+// Returns: ["Instructor", "Course", "Price"]
+
+// Get row and column count
+int rowCount = webTablePage.getRowCount();      // 10+
+int columnCount = webTablePage.getColumnCount(); // 3
+
+// Get all instructors
+List<String> instructors = webTablePage.getAllInstructors();
+
+// Check if course exists
+boolean exists = webTablePage.isCoursePresent("Selenium Webdriver with Java...");
+
+// Get price by course name
+String price = webTablePage.getPriceByCourse("Learn SQL in Practical...");
+// Returns: "25"
+
+// Get all prices
+List<String> prices = webTablePage.getAllPrices();
+
+// Get courses by instructor
+List<String> courses = webTablePage.getCoursesByInstructor("Rahul Shetty");
+
+// Get specific row data
+Map<String, String> rowData = webTablePage.getRowData(1);
+// Returns: {"Instructor": "Rahul Shetty", "Course": "Selenium...", "Price": "30"}
+
+// Get all table data
+List<Map<String, String>> allData = webTablePage.getAllTableData();
+```
+
+**Key Features:**
+- ✅ Page Object implementation (WebTablePage.java) with 215 lines of reusable logic
+- ✅ Centralized test messages and course names in TestMessages class
+- ✅ 31 assertion message constants for consistency
+- ✅ 10 course name constants for reusability
+- ✅ Tests all table operations: search, filter, extraction, validation
+- ✅ Comprehensive data integrity checks
+- ✅ Debug utilities for troubleshooting table issues
+- ✅ Integration with Allure reporting (@Epic, @Feature, @Story)
+- ✅ Detailed documentation in WEB_TABLE_VALIDATION_SUMMARY.md
+
+**Benefits:**
+- 🎯 Single source of truth for test data (messages and course names)
+- 🔧 Easy maintenance when table structure changes
+- 📊 Comprehensive test coverage for table operations
+- 🧪 Reusable page object for future table tests
+- 📝 Clear, descriptive test names and assertions
 
 ---
 
@@ -632,7 +742,7 @@ closeAllChildWindowsAndSwitchToParent(originalTab);
 All tests use SoftAssert and include detailed reporting with organized test suites:
 
 ```
-Tests run: 46, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 101, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
@@ -641,6 +751,7 @@ BUILD SUCCESS
 | Test Class | Test Count | Focus Area |
 |------------|-----------|------------|
 | **AlertTest** | 20 | Alert popups, Confirm boxes, and message verification |
+| **WebTableTest** ⭐ NEW | 20 | Web table validation, data extraction, and search |
 | **TabSwitchTest** | 12 | Tab switching and navigation |
 | **WindowSwitchTest** | 10 | Window/popup handling |
 | **CheckboxTest** | 12 | Checkbox interactions and state |
@@ -649,16 +760,18 @@ BUILD SUCCESS
 | **RadioButtonTest** | 6 | Radio button selection and state |
 | **HomePageTest** | 3 | Basic page interactions |
 | **SauceDemoTest** | 3 | SauceDemo login page tests |
-| **Total Tests** | **81** | Comprehensive UI Test Coverage |
+| **Total Tests** | **101** | Comprehensive UI Test Coverage |
 
 ### Test Suite Organization
 
 | Suite | Test Count | Purpose | Execution Time |
 |-------|-----------|---------|----------------|
-| **alert-suite.xml** ⭐ NEW | 20 | Alert & confirm box tests | ~3-4 min |
+| **webtable-suite.xml** ⭐ NEW | 20 | Web table validation tests | ~3-4 min |
+| **alert-suite.xml** | 20 | Alert & confirm box tests | ~3-4 min |
 | **smoke-suite.xml** | 14+ | Critical path tests | ~2-3 min |
 | **functional-suite.xml** | 50+ | Detailed feature tests | ~10-12 min |
 | **regression-suite.xml** | 60+ | Comprehensive coverage | ~12-15 min |
+| **testng.xml** ⭐ NEW | All | Master suite (runs all tests) | ~15-20 min |
 | **saucedemo-suite.xml** | 3 (disabled) | SauceDemo tests | N/A |
 
 ### Test Groups
@@ -724,6 +837,7 @@ For detailed Allure setup and features, see [ALLURE_REPORTS.md](ALLURE_REPORTS.m
 
 ## 📚 Additional Resources
 
+- [WEB_TABLE_VALIDATION_SUMMARY.md](WEB_TABLE_VALIDATION_SUMMARY.md) - Web table test documentation ⭐ NEW
 - [ALLURE_REPORTS.md](ALLURE_REPORTS.md) - Complete Allure Reports guide
 - [USAGE_EXAMPLES.md](USAGE_EXAMPLES.md) - Detailed usage examples
 - [Page Object Model Pattern](https://www.selenium.dev/documentation/test_practices/encouraged/page_object_models/)
