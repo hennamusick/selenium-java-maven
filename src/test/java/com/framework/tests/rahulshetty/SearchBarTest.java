@@ -1,8 +1,8 @@
 package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
-import com.framework.utils.TestConstants;
-import com.framework.utils.TestMessages;
+import com.framework.utils.rahulshetty.RahulShettyConstants;
+import com.framework.utils.rahulshetty.RahulShettyMessages;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,60 +17,60 @@ public class SearchBarTest extends BaseTest {
     
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify autocomplete suggestions appear when typing")
     public void testAutocompleteSuggestionsAppear() {
-        homePage.enterCountryInAutocomplete(TestConstants.COUNTRY_INDIA_PREFIX);
+        homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_INDIA_PREFIX);
         
         boolean suggestionsDisplayed = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(suggestionsDisplayed, 
-            TestMessages.SUGGESTIONS_DISPLAYED_IND);
+            RahulShettyMessages.SUGGESTIONS_DISPLAYED_IND);
         
         int suggestionCount = homePage.getSuggestionCount();
         softAssert.assertTrue(suggestionCount > 0, 
-            TestMessages.SUGGESTION_COUNT_GT_ZERO_IND);
+            RahulShettyMessages.SUGGESTION_COUNT_GT_ZERO_IND);
         
         softAssert.assertAll();
     }
     
     @Test(priority = 2, groups = {"functional", "regression"}, description = "Verify selecting a suggestion from the list")
     public void testSelectSuggestionByText() {
-        homePage.enterCountryInAutocomplete(TestConstants.COUNTRY_INDIA_PREFIX);
-        homePage.selectSuggestionByText(TestConstants.COUNTRY_INDIA);
+        homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_INDIA_PREFIX);
+        homePage.selectSuggestionByText(RahulShettyConstants.COUNTRY_INDIA);
         
         String selectedValue = homePage.getAutocompleteValue();
-        softAssert.assertEquals(selectedValue, TestConstants.COUNTRY_INDIA, 
-            TestMessages.SELECTED_VALUE_INDIA);
+        softAssert.assertEquals(selectedValue, RahulShettyConstants.COUNTRY_INDIA, 
+            RahulShettyMessages.SELECTED_VALUE_INDIA);
         
         softAssert.assertAll();
     }
     
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify selecting suggestion by index")
     public void testSelectSuggestionByIndex() {
-        homePage.enterCountryInAutocomplete(TestConstants.COUNTRY_CO_PREFIX_LOWER);
+        homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_CO_PREFIX_LOWER);
         
         int suggestionCount = homePage.getSuggestionCount();
         softAssert.assertTrue(suggestionCount > 0, 
-            TestMessages.SUGGESTIONS_FOR_CO);
+            RahulShettyMessages.SUGGESTIONS_FOR_CO);
         
         homePage.selectSuggestionByIndex(0); // Select first suggestion
         
         String selectedValue = homePage.getAutocompleteValue();
         softAssert.assertFalse(selectedValue.isEmpty(), 
-            TestMessages.VALUE_SELECTED_FROM_SUGGESTIONS);
+            RahulShettyMessages.VALUE_SELECTED_FROM_SUGGESTIONS);
         
         softAssert.assertAll();
     }
     
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify autocomplete with full country name")
     public void testAutocompleteWithFullCountryName() {
-        homePage.enterCountryInAutocomplete(TestConstants.COUNTRY_COLOMBIA);
+        homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_COLOMBIA);
         
         java.util.List<String> suggestions = homePage.getAllSuggestions();
         softAssert.assertTrue(suggestions.size() > 0, 
-            TestMessages.SUGGESTIONS_FOR_COLOMBIA);
+            RahulShettyMessages.SUGGESTIONS_FOR_COLOMBIA);
         
         boolean containsColombia = suggestions.stream()
-            .anyMatch(s -> s.equalsIgnoreCase(TestConstants.COUNTRY_COLOMBIA));
+            .anyMatch(s -> s.equalsIgnoreCase(RahulShettyConstants.COUNTRY_COLOMBIA));
         softAssert.assertTrue(containsColombia, 
-            TestMessages.SUGGESTIONS_CONTAIN_COLOMBIA);
+            RahulShettyMessages.SUGGESTIONS_CONTAIN_COLOMBIA);
         
         softAssert.assertAll();
     }
@@ -78,36 +78,36 @@ public class SearchBarTest extends BaseTest {
     @Test(priority = 5, groups = {"smoke", "functional", "regression"}, description = "Verify autocomplete clear and re-enter")
     public void testAutocompleteClearAndReenter() throws InterruptedException {
         // First search
-        homePage.enterCountryInAutocomplete(TestConstants.COUNTRY_INDIA_PREFIX);
+        homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_INDIA_PREFIX);
         
         boolean firstSuggestions = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(firstSuggestions, 
-            TestMessages.SUGGESTIONS_APPEAR_FIRST_SEARCH);
+            RahulShettyMessages.SUGGESTIONS_APPEAR_FIRST_SEARCH);
         
         // Clear and search again
         homePage.clearAutocomplete();
-        homePage.enterCountryInAutocomplete(TestConstants.COUNTRY_UNITED_STATES_PREFIX);
+        homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_UNITED_STATES_PREFIX);
         
         boolean secondSuggestions = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(secondSuggestions, 
-            TestMessages.SUGGESTIONS_APPEAR_SECOND_SEARCH);
+            RahulShettyMessages.SUGGESTIONS_APPEAR_SECOND_SEARCH);
         
         softAssert.assertAll();
     }
     
     @Test(priority = 6, groups = {"functional", "regression"}, description = "Verify autocomplete with partial text matching multiple countries")
     public void testAutocompletePartialMatch() {
-        homePage.enterCountryInAutocomplete(TestConstants.COUNTRY_CO_PREFIX);
+        homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_CO_PREFIX);
         
         java.util.List<String> suggestions = homePage.getAllSuggestions();
         softAssert.assertTrue(suggestions.size() > 1, 
-            TestMessages.MULTIPLE_SUGGESTIONS_FOR_CO);
+            RahulShettyMessages.MULTIPLE_SUGGESTIONS_FOR_CO);
         
         // Verify suggestions contain expected countries
         boolean hasMultipleMatches = suggestions.stream()
-            .anyMatch(s -> s.toLowerCase().contains(TestConstants.COUNTRY_CO_PREFIX_LOWER));
+            .anyMatch(s -> s.toLowerCase().contains(RahulShettyConstants.COUNTRY_CO_PREFIX_LOWER));
         softAssert.assertTrue(hasMultipleMatches, 
-            TestMessages.SUGGESTIONS_CONTAIN_CO);
+            RahulShettyMessages.SUGGESTIONS_CONTAIN_CO);
         
         softAssert.assertAll();
     }
@@ -115,20 +115,20 @@ public class SearchBarTest extends BaseTest {
     @Test(priority = 7, groups = {"regression"}, description = "Verify autocomplete case insensitivity")
     public void testAutocompleteCaseInsensitivity() throws InterruptedException {
         // Test with lowercase
-        homePage.enterCountryInAutocomplete(TestConstants.COUNTRY_INDIA.toLowerCase());
+        homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_INDIA.toLowerCase());
         
         boolean suggestionsLowercase = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(suggestionsLowercase, 
-            TestMessages.SUGGESTIONS_LOWERCASE);
+            RahulShettyMessages.SUGGESTIONS_LOWERCASE);
         
         homePage.clearAutocomplete();
         
         // Test with uppercase
-        homePage.enterCountryInAutocomplete(TestConstants.COUNTRY_INDIA.toUpperCase());
+        homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_INDIA.toUpperCase());
         
         boolean suggestionsUppercase = homePage.isSuggestionListDisplayed();
         softAssert.assertTrue(suggestionsUppercase, 
-            TestMessages.SUGGESTIONS_UPPERCASE);
+            RahulShettyMessages.SUGGESTIONS_UPPERCASE);
         
         softAssert.assertAll();
     }

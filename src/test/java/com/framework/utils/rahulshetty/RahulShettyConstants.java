@@ -1,4 +1,4 @@
-package com.framework.utils;
+package com.framework.utils.rahulshetty;
 
 /**
  * Test Constants - Centralized repository for all test data constants
@@ -6,11 +6,11 @@ package com.framework.utils;
  * 
  * Best Practice: Keep all hard-coded test values in one place for easy maintenance
  */
-public final class TestConstants {
+public final class RahulShettyConstants {
     
     // Private constructor prevents instantiation
-    private TestConstants() {
-        throw new UnsupportedOperationException("TestConstants is a utility class and cannot be instantiated");
+    private RahulShettyConstants() {
+        throw new UnsupportedOperationException("RahulShettyConstants is a utility class and cannot be instantiated");
     }
     
     // ==================== URLs ====================
@@ -31,11 +31,6 @@ public final class TestConstants {
      * Rahul Shetty Academy Automation Practice page
      */
     public static final String AUTOMATION_PRACTICE_PAGE = "AutomationPractice";
-    
-    /**
-     * SauceDemo website domain
-     */
-    public static final String SAUCEDEMO_DOMAIN = "saucedemo.com";
     
     // ==================== Test Data ====================
     

@@ -1,10 +1,10 @@
-package com.framework.utils;
+package com.framework.utils.rahulshetty;
 
 /**
  * Centralized test assertion messages for all test classes.
  * Provides consistent, reusable messages across the test suite.
  */
-public class TestMessages {
+public class RahulShettyMessages {
     
     // ==================== COMMON MESSAGES ====================
     public static final String ELEMENT_SHOULD_BE_DISPLAYED = "%s should be displayed on the page";
@@ -367,8 +367,8 @@ public class TestMessages {
     public static final String IFRAME_CONTEXT_MAINTAINED = "iFrame context should be maintained until explicitly switched";
     
     // Private constructor to prevent instantiation
-    private TestMessages() {
-        throw new AssertionError("TestMessages class should not be instantiated");
+    private RahulShettyMessages() {
+        throw new AssertionError("RahulShettyMessages class should not be instantiated");
     }
     
     // ==================== UTILITY METHODS ====================

@@ -1,8 +1,8 @@
 package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
-import com.framework.utils.TestConstants;
-import com.framework.utils.TestMessages;
+import com.framework.utils.rahulshetty.RahulShettyConstants;
+import com.framework.utils.rahulshetty.RahulShettyMessages;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
@@ -28,7 +28,7 @@ public class IFrameTest extends BaseTest {
     @Description("Verify that iFrame is displayed on the page")
     public void testIFrameDisplayed() {
         softAssert.assertTrue(homePage.isIFrameDisplayed(), 
-                TestMessages.IFRAME_DISPLAYED);
+                RahulShettyMessages.IFRAME_DISPLAYED);
         softAssert.assertAll();
     }
     
@@ -37,7 +37,7 @@ public class IFrameTest extends BaseTest {
     @Description("Verify that iFrame is enabled")
     public void testIFrameEnabled() {
         softAssert.assertTrue(homePage.isIFrameEnabled(), 
-                TestMessages.IFRAME_ENABLED);
+                RahulShettyMessages.IFRAME_ENABLED);
         softAssert.assertAll();
     }
     
@@ -46,8 +46,8 @@ public class IFrameTest extends BaseTest {
     @Description("Verify iFrame has correct ID attribute")
     public void testIFrameHasCorrectId() {
         String iframeId = homePage.getIFrameId();
-        softAssert.assertEquals(iframeId, TestConstants.IFRAME_ID, 
-                TestMessages.IFRAME_HAS_CORRECT_ID);
+        softAssert.assertEquals(iframeId, RahulShettyConstants.IFRAME_ID, 
+                RahulShettyMessages.IFRAME_HAS_CORRECT_ID);
         softAssert.assertAll();
     }
     
@@ -56,8 +56,8 @@ public class IFrameTest extends BaseTest {
     @Description("Verify iFrame has src attribute")
     public void testIFrameHasSrc() {
         String src = homePage.getIFrameSrc();
-        softAssert.assertNotNull(src, TestMessages.IFRAME_HAS_SRC);
-        softAssert.assertFalse(src.isEmpty(), TestMessages.IFRAME_HAS_SRC);
+        softAssert.assertNotNull(src, RahulShettyMessages.IFRAME_HAS_SRC);
+        softAssert.assertFalse(src.isEmpty(), RahulShettyMessages.IFRAME_HAS_SRC);
         softAssert.assertAll();
     }
     
@@ -66,8 +66,8 @@ public class IFrameTest extends BaseTest {
     @Description("Verify iFrame src contains expected domain")
     public void testIFrameSrcContainsDomain() {
         String src = homePage.getIFrameSrc();
-        softAssert.assertTrue(src.contains(TestConstants.IFRAME_SRC_DOMAIN), 
-                TestMessages.IFRAME_SRC_CONTAINS_DOMAIN);
+        softAssert.assertTrue(src.contains(RahulShettyConstants.IFRAME_SRC_DOMAIN), 
+                RahulShettyMessages.IFRAME_SRC_CONTAINS_DOMAIN);
         softAssert.assertAll();
     }
     
@@ -78,9 +78,9 @@ public class IFrameTest extends BaseTest {
         try {
             homePage.switchToIFrame();
             // If no exception thrown, switch was successful
-            softAssert.assertTrue(true, TestMessages.IFRAME_SWITCH_SUCCESSFUL);
+            softAssert.assertTrue(true, RahulShettyMessages.IFRAME_SWITCH_SUCCESSFUL);
         } catch (Exception e) {
-            softAssert.fail(TestMessages.IFRAME_SWITCH_SUCCESSFUL + " - Exception: " + e.getMessage());
+            softAssert.fail(RahulShettyMessages.IFRAME_SWITCH_SUCCESSFUL + " - Exception: " + e.getMessage());
         } finally {
             homePage.switchToDefaultContent();
             softAssert.assertAll();
@@ -97,7 +97,7 @@ public class IFrameTest extends BaseTest {
             // Look for header or content inside iframe
             WebElement iframeBody = driver.findElement(By.tagName("body"));
             softAssert.assertTrue(iframeBody.isDisplayed(), 
-                    TestMessages.IFRAME_CONTENT_VISIBLE);
+                    RahulShettyMessages.IFRAME_CONTENT_VISIBLE);
         } finally {
             homePage.switchToDefaultContent();
             softAssert.assertAll();
@@ -118,7 +118,7 @@ public class IFrameTest extends BaseTest {
                                 pageSource.contains("SHETTY") ||
                                 pageSource.length() > 1000; // Has substantial content
             softAssert.assertTrue(hasContent, 
-                    TestMessages.IFRAME_HAS_EXPECTED_CONTENT);
+                    RahulShettyMessages.IFRAME_HAS_EXPECTED_CONTENT);
         } finally {
             homePage.switchToDefaultContent();
             softAssert.assertAll();
@@ -139,7 +139,7 @@ public class IFrameTest extends BaseTest {
             }
             
             softAssert.assertFalse(headers.isEmpty(), 
-                    TestMessages.IFRAME_HEADER_VISIBLE);
+                    RahulShettyMessages.IFRAME_HEADER_VISIBLE);
         } finally {
             homePage.switchToDefaultContent();
             softAssert.assertAll();
@@ -155,7 +155,7 @@ public class IFrameTest extends BaseTest {
         
         // Verify we're back on main page by checking a main page element
         softAssert.assertTrue(homePage.isMouseHoverButtonDisplayed(), 
-                TestMessages.SWITCHED_BACK_TO_MAIN);
+                RahulShettyMessages.SWITCHED_BACK_TO_MAIN);
         softAssert.assertAll();
     }
     
@@ -168,9 +168,9 @@ public class IFrameTest extends BaseTest {
         
         // Test main page elements are still interactive
         softAssert.assertTrue(homePage.isMouseHoverButtonEnabled(), 
-                TestMessages.MAIN_PAGE_INTERACTIVE);
+                RahulShettyMessages.MAIN_PAGE_INTERACTIVE);
         softAssert.assertTrue(homePage.isAlertButtonDisplayed(), 
-                TestMessages.MAIN_PAGE_INTERACTIVE);
+                RahulShettyMessages.MAIN_PAGE_INTERACTIVE);
         softAssert.assertAll();
     }
     
@@ -191,7 +191,7 @@ public class IFrameTest extends BaseTest {
         homePage.switchToIFrame();
         WebElement secondBody = driver.findElement(By.tagName("body"));
         softAssert.assertTrue(secondBody.isDisplayed(), 
-                TestMessages.MULTIPLE_IFRAME_SWITCHES_WORK);
+                RahulShettyMessages.MULTIPLE_IFRAME_SWITCHES_WORK);
         
         // Switch back to main again
         homePage.switchToDefaultContent();
@@ -210,12 +210,12 @@ public class IFrameTest extends BaseTest {
             
             if (!links.isEmpty()) {
                 softAssert.assertTrue(links.get(0).isEnabled(), 
-                        TestMessages.IFRAME_ELEMENTS_CLICKABLE);
+                        RahulShettyMessages.IFRAME_ELEMENTS_CLICKABLE);
             } else {
                 // If no links, just verify body is present
                 WebElement body = driver.findElement(By.tagName("body"));
                 softAssert.assertTrue(body.isDisplayed(), 
-                        TestMessages.IFRAME_ELEMENTS_CLICKABLE);
+                        RahulShettyMessages.IFRAME_ELEMENTS_CLICKABLE);
             }
         } finally {
             homePage.switchToDefaultContent();
@@ -234,9 +234,9 @@ public class IFrameTest extends BaseTest {
             String bodyText = body.getText();
             
             softAssert.assertNotNull(bodyText, 
-                    TestMessages.IFRAME_TEXT_EXTRACTABLE);
+                    RahulShettyMessages.IFRAME_TEXT_EXTRACTABLE);
             softAssert.assertFalse(bodyText.trim().isEmpty(), 
-                    TestMessages.IFRAME_TEXT_EXTRACTABLE);
+                    RahulShettyMessages.IFRAME_TEXT_EXTRACTABLE);
         } finally {
             homePage.switchToDefaultContent();
             softAssert.assertAll();
@@ -253,7 +253,7 @@ public class IFrameTest extends BaseTest {
             // Try to find a main page element - should not be found
             java.util.List<WebElement> alertButtons = driver.findElements(By.id("alertbtn"));
             softAssert.assertTrue(alertButtons.isEmpty(), 
-                    TestMessages.MAIN_PAGE_ELEMENTS_NOT_ACCESSIBLE_IN_IFRAME);
+                    RahulShettyMessages.MAIN_PAGE_ELEMENTS_NOT_ACCESSIBLE_IN_IFRAME);
         } finally {
             homePage.switchToDefaultContent();
             softAssert.assertAll();
@@ -270,7 +270,7 @@ public class IFrameTest extends BaseTest {
         // (we can only access iframe through switching)
         String currentUrl = driver.getCurrentUrl();
         softAssert.assertTrue(currentUrl.contains("AutomationPractice"), 
-                TestMessages.IFRAME_ELEMENTS_NOT_ACCESSIBLE_IN_MAIN);
+                RahulShettyMessages.IFRAME_ELEMENTS_NOT_ACCESSIBLE_IN_MAIN);
         softAssert.assertAll();
     }
     
@@ -295,7 +295,7 @@ public class IFrameTest extends BaseTest {
             // Perform second action - should still be in iframe context
             WebElement body2 = driver.findElement(By.tagName("body"));
             softAssert.assertTrue(body2.isDisplayed(), 
-                    TestMessages.IFRAME_CONTEXT_MAINTAINED);
+                    RahulShettyMessages.IFRAME_CONTEXT_MAINTAINED);
         } finally {
             homePage.switchToDefaultContent();
             softAssert.assertAll();
@@ -310,8 +310,8 @@ public class IFrameTest extends BaseTest {
         String iframeId = homePage.getIFrameId();
         String iframeSrc = homePage.getIFrameSrc();
         
-        softAssert.assertEquals(iframeId, TestConstants.IFRAME_ID);
-        softAssert.assertTrue(iframeSrc.contains(TestConstants.IFRAME_SRC_DOMAIN));
+        softAssert.assertEquals(iframeId, RahulShettyConstants.IFRAME_ID);
+        softAssert.assertTrue(iframeSrc.contains(RahulShettyConstants.IFRAME_SRC_DOMAIN));
         softAssert.assertAll();
     }
     
@@ -327,7 +327,7 @@ public class IFrameTest extends BaseTest {
         
         // Verify iframe still displayed
         softAssert.assertTrue(homePage.isIFrameDisplayed(), 
-                TestMessages.IFRAME_DISPLAYED);
+                RahulShettyMessages.IFRAME_DISPLAYED);
         softAssert.assertAll();
     }
     
@@ -348,7 +348,7 @@ public class IFrameTest extends BaseTest {
         softAssert.assertTrue(homePage.isAlertButtonDisplayed());
         softAssert.assertTrue(homePage.isRadio1Displayed());
         softAssert.assertTrue(homePage.isCheckbox1Displayed(), 
-                TestMessages.MAIN_PAGE_INTERACTIVE);
+                RahulShettyMessages.MAIN_PAGE_INTERACTIVE);
         softAssert.assertAll();
     }
 }

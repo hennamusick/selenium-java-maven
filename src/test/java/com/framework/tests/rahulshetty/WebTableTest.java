@@ -2,7 +2,7 @@ package com.framework.tests.rahulshetty;
 
 import com.framework.pages.rahulshetty.WebTablePage;
 import com.framework.utils.BaseTest;
-import com.framework.utils.TestMessages;
+import com.framework.utils.rahulshetty.RahulShettyMessages;
 import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -36,7 +36,7 @@ public class WebTableTest extends BaseTest {
     @Story("Table Display")
     public void testTableIsDisplayed() {
         softAssert.assertTrue(webTablePage.isTableDisplayed(), 
-            TestMessages.WEB_TABLE_DISPLAYED);
+            RahulShettyMessages.WEB_TABLE_DISPLAYED);
         softAssert.assertAll();
     }
 
@@ -49,9 +49,9 @@ public class WebTableTest extends BaseTest {
         List<String> actualHeaders = webTablePage.getTableHeaders();
         
         softAssert.assertEquals(actualHeaders.size(), 3, 
-            TestMessages.TABLE_SHOULD_HAVE_3_COLUMNS);
+            RahulShettyMessages.TABLE_SHOULD_HAVE_3_COLUMNS);
         softAssert.assertEquals(actualHeaders, expectedHeaders, 
-            TestMessages.TABLE_HEADERS_MATCH);
+            RahulShettyMessages.TABLE_HEADERS_MATCH);
         softAssert.assertAll();
     }
 
@@ -64,9 +64,9 @@ public class WebTableTest extends BaseTest {
         int columnCount = webTablePage.getColumnCount();
         
         softAssert.assertEquals(columnCount, 3, 
-            TestMessages.TABLE_SHOULD_HAVE_3_COLUMNS);
+            RahulShettyMessages.TABLE_SHOULD_HAVE_3_COLUMNS);
         softAssert.assertTrue(rowCount >= 10, 
-            TestMessages.TABLE_HAS_AT_LEAST_10_ROWS);
+            RahulShettyMessages.TABLE_HAS_AT_LEAST_10_ROWS);
         softAssert.assertAll();
     }
 
@@ -79,7 +79,7 @@ public class WebTableTest extends BaseTest {
         
         for (String instructor : instructors) {
             softAssert.assertEquals(instructor.trim(), "Rahul Shetty", 
-                TestMessages.ALL_INSTRUCTORS_RAHUL_SHETTY);
+                RahulShettyMessages.ALL_INSTRUCTORS_RAHUL_SHETTY);
         }
         softAssert.assertAll();
     }
@@ -89,11 +89,11 @@ public class WebTableTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Course Search")
     public void testSpecificCourseExists() {
-        String courseName = TestMessages.COURSE_SELENIUM_JAVA;
+        String courseName = RahulShettyMessages.COURSE_SELENIUM_JAVA;
         boolean courseExists = webTablePage.isCoursePresent(courseName);
         
         softAssert.assertTrue(courseExists, 
-            TestMessages.format(TestMessages.COURSE_EXISTS, courseName));
+            RahulShettyMessages.format(RahulShettyMessages.COURSE_EXISTS, courseName));
         softAssert.assertAll();
     }
 
@@ -102,11 +102,11 @@ public class WebTableTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Price Validation")
     public void testSeleniumCoursePrice() {
-        String courseName = TestMessages.COURSE_SELENIUM_JAVA;
+        String courseName = RahulShettyMessages.COURSE_SELENIUM_JAVA;
         String actualPrice = webTablePage.getPriceByCourse(courseName);
         
         softAssert.assertEquals(actualPrice, "30", 
-            TestMessages.SELENIUM_COURSE_PRICE);
+            RahulShettyMessages.SELENIUM_COURSE_PRICE);
         softAssert.assertAll();
     }
 
@@ -117,33 +117,33 @@ public class WebTableTest extends BaseTest {
     public void testMultipleCoursesPrices() {
         // Verify Selenium course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse(TestMessages.COURSE_SELENIUM_JAVA), 
-            "30", TestMessages.SELENIUM_COURSE_PRICE);
+            webTablePage.getPriceByCourse(RahulShettyMessages.COURSE_SELENIUM_JAVA), 
+            "30", RahulShettyMessages.SELENIUM_COURSE_PRICE);
         
         // Verify SQL course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse(TestMessages.COURSE_SQL_PRACTICAL), 
-            "25", TestMessages.SQL_COURSE_PRICE);
+            webTablePage.getPriceByCourse(RahulShettyMessages.COURSE_SQL_PRACTICAL), 
+            "25", RahulShettyMessages.SQL_COURSE_PRICE);
         
         // Verify Appium course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse(TestMessages.COURSE_APPIUM_MOBILE), 
-            "30", TestMessages.APPIUM_COURSE_PRICE);
+            webTablePage.getPriceByCourse(RahulShettyMessages.COURSE_APPIUM_MOBILE), 
+            "30", RahulShettyMessages.APPIUM_COURSE_PRICE);
         
         // Verify WebSecurity course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse(TestMessages.COURSE_WEB_SECURITY), 
-            "20", TestMessages.WEBSECURITY_COURSE_PRICE);
+            webTablePage.getPriceByCourse(RahulShettyMessages.COURSE_WEB_SECURITY), 
+            "20", RahulShettyMessages.WEBSECURITY_COURSE_PRICE);
         
         // Verify JMETER course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse(TestMessages.COURSE_JMETER), 
-            "25", TestMessages.JMETER_COURSE_PRICE);
+            webTablePage.getPriceByCourse(RahulShettyMessages.COURSE_JMETER), 
+            "25", RahulShettyMessages.JMETER_COURSE_PRICE);
         
         // Verify REST API course
         softAssert.assertEquals(
-            webTablePage.getPriceByCourse(TestMessages.COURSE_REST_API), 
-            "35", TestMessages.REST_API_COURSE_PRICE);
+            webTablePage.getPriceByCourse(RahulShettyMessages.COURSE_REST_API), 
+            "35", RahulShettyMessages.REST_API_COURSE_PRICE);
         
         softAssert.assertAll();
     }
@@ -153,11 +153,11 @@ public class WebTableTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Price Validation")
     public void testFreeCourse() {
-        String courseName = TestMessages.COURSE_QA_RESUME;
+        String courseName = RahulShettyMessages.COURSE_QA_RESUME;
         String price = webTablePage.getPriceByCourse(courseName);
         
         softAssert.assertEquals(price, "0", 
-            TestMessages.QA_RESUME_COURSE_FREE);
+            RahulShettyMessages.QA_RESUME_COURSE_FREE);
         softAssert.assertAll();
     }
 
@@ -171,9 +171,9 @@ public class WebTableTest extends BaseTest {
         for (String price : prices) {
             try {
                 Integer.parseInt(price.trim());
-                softAssert.assertTrue(true, TestMessages.format(TestMessages.PRICE_IS_NUMERIC, price));
+                softAssert.assertTrue(true, RahulShettyMessages.format(RahulShettyMessages.PRICE_IS_NUMERIC, price));
             } catch (NumberFormatException e) {
-                softAssert.fail(TestMessages.format(TestMessages.PRICE_NOT_VALID_NUMBER, price));
+                softAssert.fail(RahulShettyMessages.format(RahulShettyMessages.PRICE_NOT_VALID_NUMBER, price));
             }
         }
         softAssert.assertAll();
@@ -187,7 +187,7 @@ public class WebTableTest extends BaseTest {
         int courseCount = webTablePage.getCourseCountByInstructor("Rahul Shetty");
         
         softAssert.assertTrue(courseCount >= 10, 
-            TestMessages.RAHUL_SHETTY_AT_LEAST_10_COURSES);
+            RahulShettyMessages.RAHUL_SHETTY_AT_LEAST_10_COURSES);
         softAssert.assertAll();
     }
 
@@ -199,13 +199,13 @@ public class WebTableTest extends BaseTest {
         List<String> courses = webTablePage.getCoursesByInstructor("Rahul Shetty");
         
         softAssert.assertTrue(courses.size() >= 10, 
-            TestMessages.SHOULD_HAVE_AT_LEAST_10_COURSES);
+            RahulShettyMessages.SHOULD_HAVE_AT_LEAST_10_COURSES);
         softAssert.assertTrue(
-            courses.contains(TestMessages.COURSE_SELENIUM_JAVA),
-            TestMessages.SHOULD_INCLUDE_SELENIUM_COURSE);
+            courses.contains(RahulShettyMessages.COURSE_SELENIUM_JAVA),
+            RahulShettyMessages.SHOULD_INCLUDE_SELENIUM_COURSE);
         softAssert.assertTrue(
-            courses.contains(TestMessages.COURSE_SQL_PRACTICAL),
-            TestMessages.SHOULD_INCLUDE_SQL_COURSE);
+            courses.contains(RahulShettyMessages.COURSE_SQL_PRACTICAL),
+            RahulShettyMessages.SHOULD_INCLUDE_SQL_COURSE);
         softAssert.assertAll();
     }
 
@@ -217,12 +217,12 @@ public class WebTableTest extends BaseTest {
         Map<String, String> rowData = webTablePage.getRowData(1);
         
         softAssert.assertEquals(rowData.get("Instructor"), "Rahul Shetty", 
-            TestMessages.FIRST_ROW_INSTRUCTOR);
+            RahulShettyMessages.FIRST_ROW_INSTRUCTOR);
         softAssert.assertEquals(rowData.get("Course"), 
-            TestMessages.COURSE_SELENIUM_JAVA,
-            TestMessages.FIRST_ROW_COURSE);
+            RahulShettyMessages.COURSE_SELENIUM_JAVA,
+            RahulShettyMessages.FIRST_ROW_COURSE);
         softAssert.assertEquals(rowData.get("Price"), "30", 
-            TestMessages.FIRST_ROW_PRICE);
+            RahulShettyMessages.FIRST_ROW_PRICE);
         softAssert.assertAll();
     }
 
@@ -235,24 +235,24 @@ public class WebTableTest extends BaseTest {
         
         // Verify we have data
         softAssert.assertTrue(allData.size() >= 10, 
-            TestMessages.TABLE_HAS_AT_LEAST_10_DATA_ROWS);
+            RahulShettyMessages.TABLE_HAS_AT_LEAST_10_DATA_ROWS);
         
         // Verify each row has all required columns
         for (Map<String, String> row : allData) {
             softAssert.assertTrue(row.containsKey("Instructor"), 
-                TestMessages.ROW_HAS_INSTRUCTOR_COLUMN);
+                RahulShettyMessages.ROW_HAS_INSTRUCTOR_COLUMN);
             softAssert.assertTrue(row.containsKey("Course"), 
-                TestMessages.ROW_HAS_COURSE_COLUMN);
+                RahulShettyMessages.ROW_HAS_COURSE_COLUMN);
             softAssert.assertTrue(row.containsKey("Price"), 
-                TestMessages.ROW_HAS_PRICE_COLUMN);
+                RahulShettyMessages.ROW_HAS_PRICE_COLUMN);
             
             // Verify no null or empty values
             softAssert.assertNotNull(row.get("Instructor"), 
-                TestMessages.INSTRUCTOR_NOT_NULL);
+                RahulShettyMessages.INSTRUCTOR_NOT_NULL);
             softAssert.assertNotNull(row.get("Course"), 
-                TestMessages.COURSE_NOT_NULL);
+                RahulShettyMessages.COURSE_NOT_NULL);
             softAssert.assertNotNull(row.get("Price"), 
-                TestMessages.PRICE_NOT_NULL);
+                RahulShettyMessages.PRICE_NOT_NULL);
         }
         softAssert.assertAll();
     }
@@ -263,21 +263,21 @@ public class WebTableTest extends BaseTest {
     @Story("Course Search")
     public void testMultipleCoursesExist() {
         List<String> expectedCourses = Arrays.asList(
-            TestMessages.COURSE_SELENIUM_JAVA,
-            TestMessages.COURSE_SQL_PRACTICAL,
-            TestMessages.COURSE_APPIUM_MOBILE,
-            TestMessages.COURSE_WEB_SECURITY,
-            TestMessages.COURSE_JMETER,
-            TestMessages.COURSE_REST_API,
-            TestMessages.COURSE_QA_EXPERT,
-            TestMessages.COURSE_SELENIUM_PYTHON,
-            TestMessages.COURSE_ADVANCED_SELENIUM,
-            TestMessages.COURSE_QA_RESUME
+            RahulShettyMessages.COURSE_SELENIUM_JAVA,
+            RahulShettyMessages.COURSE_SQL_PRACTICAL,
+            RahulShettyMessages.COURSE_APPIUM_MOBILE,
+            RahulShettyMessages.COURSE_WEB_SECURITY,
+            RahulShettyMessages.COURSE_JMETER,
+            RahulShettyMessages.COURSE_REST_API,
+            RahulShettyMessages.COURSE_QA_EXPERT,
+            RahulShettyMessages.COURSE_SELENIUM_PYTHON,
+            RahulShettyMessages.COURSE_ADVANCED_SELENIUM,
+            RahulShettyMessages.COURSE_QA_RESUME
         );
         
         for (String course : expectedCourses) {
             softAssert.assertTrue(webTablePage.isCoursePresent(course), 
-                TestMessages.format(TestMessages.COURSE_EXISTS, course));
+                RahulShettyMessages.format(RahulShettyMessages.COURSE_EXISTS, course));
         }
         softAssert.assertAll();
     }
@@ -292,11 +292,11 @@ public class WebTableTest extends BaseTest {
         List<String> prices = webTablePage.getAllPrices();
         
         softAssert.assertEquals(instructors.size(), courses.size(), 
-            TestMessages.INSTRUCTORS_MATCH_COURSES_COUNT);
+            RahulShettyMessages.INSTRUCTORS_MATCH_COURSES_COUNT);
         softAssert.assertEquals(courses.size(), prices.size(), 
-            TestMessages.COURSES_MATCH_PRICES_COUNT);
+            RahulShettyMessages.COURSES_MATCH_PRICES_COUNT);
         softAssert.assertTrue(instructors.size() >= 10, 
-            TestMessages.SHOULD_HAVE_AT_LEAST_10_DATA_ROWS);
+            RahulShettyMessages.SHOULD_HAVE_AT_LEAST_10_DATA_ROWS);
         softAssert.assertAll();
     }
 

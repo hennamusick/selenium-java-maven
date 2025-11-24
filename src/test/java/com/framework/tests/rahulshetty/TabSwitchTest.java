@@ -1,8 +1,8 @@
 package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
-import com.framework.utils.TestConstants;
-import com.framework.utils.TestMessages;
+import com.framework.utils.rahulshetty.RahulShettyConstants;
+import com.framework.utils.rahulshetty.RahulShettyMessages;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,9 +19,9 @@ public class TabSwitchTest extends BaseTest {
     @Test(priority = 1, groups = {"smoke", "regression"}, description = "Verify Open Tab button is visible and enabled")
     public void testOpenTabButtonVisibilityAndState() {
         softAssert.assertTrue(homePage.isOpenTabButtonDisplayed(), 
-            TestMessages.OPEN_TAB_BUTTON_DISPLAYED);
+            RahulShettyMessages.OPEN_TAB_BUTTON_DISPLAYED);
         softAssert.assertTrue(homePage.isOpenTabButtonEnabled(), 
-            TestMessages.OPEN_TAB_BUTTON_ENABLED);
+            RahulShettyMessages.OPEN_TAB_BUTTON_ENABLED);
     }
     
     @Test(priority = 2, groups = {"smoke", "functional", "regression"}, description = "Verify clicking Open Tab button opens new tab")
@@ -34,7 +34,7 @@ public class TabSwitchTest extends BaseTest {
         
         int finalTabCount = driver.getWindowHandles().size();
         softAssert.assertEquals(finalTabCount, initialTabCount + 1, 
-            TestMessages.OPEN_TAB_OPENS_ONE_NEW_TAB);
+            RahulShettyMessages.OPEN_TAB_OPENS_ONE_NEW_TAB);
         
         // Cleanup - close new tab and switch back
         closeAllChildWindowsAndSwitchToParent(originalTab);
@@ -52,8 +52,8 @@ public class TabSwitchTest extends BaseTest {
         waitForPageToLoad();
         
         String newTabUrl = driver.getCurrentUrl();
-        softAssert.assertEquals(newTabUrl, TestConstants.QA_CLICK_ACADEMY_URL, 
-            TestMessages.NEW_TAB_OPENS_CORRECT_URL);
+        softAssert.assertEquals(newTabUrl, RahulShettyConstants.QA_CLICK_ACADEMY_URL, 
+            RahulShettyMessages.NEW_TAB_OPENS_CORRECT_URL);
         
         // Cleanup
         closeCurrentWindowAndSwitchTo(originalTab);
@@ -72,9 +72,9 @@ public class TabSwitchTest extends BaseTest {
         waitForPageToLoad();
         String newTabTitle = driver.getTitle();
         softAssert.assertFalse(newTabTitle.isEmpty(), 
-            TestMessages.NEW_TAB_HAS_TITLE);
+            RahulShettyMessages.NEW_TAB_HAS_TITLE);
         softAssert.assertTrue(newTabTitle.length() > 0, 
-            TestMessages.TAB_TITLE_NOT_EMPTY);
+            RahulShettyMessages.TAB_TITLE_NOT_EMPTY);
         
         // Cleanup
         closeCurrentWindowAndSwitchTo(originalTab);
@@ -104,9 +104,9 @@ public class TabSwitchTest extends BaseTest {
         
         String currentUrl = driver.getCurrentUrl();
         softAssert.assertEquals(currentUrl, originalUrl, 
-            TestMessages.BACK_ON_ORIGINAL_TAB);
-        softAssert.assertTrue(currentUrl.contains(TestConstants.AUTOMATION_PRACTICE_PAGE), 
-            TestMessages.ORIGINAL_TAB_ON_PRACTICE_PAGE);
+            RahulShettyMessages.BACK_ON_ORIGINAL_TAB);
+        softAssert.assertTrue(currentUrl.contains(RahulShettyConstants.AUTOMATION_PRACTICE_PAGE), 
+            RahulShettyMessages.ORIGINAL_TAB_ON_PRACTICE_PAGE);
         
         // Cleanup - close new tab
         for (String handle : driver.getWindowHandles()) {
@@ -132,9 +132,9 @@ public class TabSwitchTest extends BaseTest {
         
         // Verify parent tab is still interactive
         softAssert.assertTrue(homePage.isOpenTabButtonDisplayed(), 
-            TestMessages.OPEN_TAB_BUTTON_VISIBLE_ON_PARENT);
+            RahulShettyMessages.OPEN_TAB_BUTTON_VISIBLE_ON_PARENT);
         softAssert.assertTrue(homePage.isRadio1Displayed(), 
-            TestMessages.PARENT_TAB_ELEMENTS_INTERACTIVE);
+            RahulShettyMessages.PARENT_TAB_ELEMENTS_INTERACTIVE);
         
         // Cleanup
         closeAllChildWindowsAndSwitchToParent(originalTab);
@@ -154,10 +154,10 @@ public class TabSwitchTest extends BaseTest {
         
         // Verify parent tab is still functional
         softAssert.assertTrue(homePage.isOpenTabButtonDisplayed(), 
-            TestMessages.PARENT_TAB_FUNCTIONAL_AFTER_CLOSE);
+            RahulShettyMessages.PARENT_TAB_FUNCTIONAL_AFTER_CLOSE);
         int tabCount = driver.getWindowHandles().size();
-        softAssert.assertEquals(tabCount, TestConstants.SINGLE_WINDOW, 
-            TestMessages.ONLY_PARENT_TAB_REMAINS);
+        softAssert.assertEquals(tabCount, RahulShettyConstants.SINGLE_WINDOW, 
+            RahulShettyMessages.ONLY_PARENT_TAB_REMAINS);
     }
     
     @Test(priority = 8, groups = {"functional", "regression"}, description = "Verify opening multiple tabs sequentially")
@@ -170,7 +170,7 @@ public class TabSwitchTest extends BaseTest {
         
         int tabCountAfterFirst = driver.getWindowHandles().size();
         softAssert.assertEquals(tabCountAfterFirst, 2, 
-            TestMessages.SHOULD_HAVE_N_TABS_AFTER_FIRST);
+            RahulShettyMessages.SHOULD_HAVE_N_TABS_AFTER_FIRST);
         
         // Switch back to parent and open another tab
         driver.switchTo().window(originalTab);
@@ -181,7 +181,7 @@ public class TabSwitchTest extends BaseTest {
         
         int tabCountAfterSecond = driver.getWindowHandles().size();
         softAssert.assertEquals(tabCountAfterSecond, 3, 
-            TestMessages.SHOULD_HAVE_N_TABS_AFTER_SECOND);
+            RahulShettyMessages.SHOULD_HAVE_N_TABS_AFTER_SECOND);
         
         // Cleanup - close all child tabs
         closeAllChildWindowsAndSwitchToParent(originalTab);
@@ -196,12 +196,12 @@ public class TabSwitchTest extends BaseTest {
         
         Set<String> allHandles = driver.getWindowHandles();
         softAssert.assertEquals(allHandles.size(), 2, 
-            TestMessages.SHOULD_HAVE_UNIQUE_TAB_HANDLES);
+            RahulShettyMessages.SHOULD_HAVE_UNIQUE_TAB_HANDLES);
         
         // Verify handles are different
         ArrayList<String> handleList = new ArrayList<>(allHandles);
         softAssert.assertNotEquals(handleList.get(0), handleList.get(1), 
-            TestMessages.TAB_HANDLES_SHOULD_BE_UNIQUE);
+            RahulShettyMessages.TAB_HANDLES_SHOULD_BE_UNIQUE);
         
         // Cleanup
         closeAllChildWindowsAndSwitchToParent(originalTab);
@@ -220,9 +220,9 @@ public class TabSwitchTest extends BaseTest {
         
         String pageSource = driver.getPageSource();
         softAssert.assertFalse(pageSource.isEmpty(), 
-            TestMessages.NEW_TAB_HAS_PAGE_CONTENT);
-        softAssert.assertTrue(pageSource.length() > TestConstants.MIN_PAGE_CONTENT_LENGTH, 
-            TestMessages.NEW_TAB_HAS_SUBSTANTIAL_CONTENT);
+            RahulShettyMessages.NEW_TAB_HAS_PAGE_CONTENT);
+        softAssert.assertTrue(pageSource.length() > RahulShettyConstants.MIN_PAGE_CONTENT_LENGTH, 
+            RahulShettyMessages.NEW_TAB_HAS_SUBSTANTIAL_CONTENT);
         
         // Cleanup
         closeCurrentWindowAndSwitchTo(originalTab);
@@ -265,22 +265,22 @@ public class TabSwitchTest extends BaseTest {
         driver.switchTo().window(firstChildTab);
         waitForPageToLoad();
         String firstTabUrl = driver.getCurrentUrl();
-        softAssert.assertEquals(firstTabUrl, TestConstants.QA_CLICK_ACADEMY_URL, 
-            TestMessages.FIRST_CHILD_TAB_IS_QA_ACADEMY);
+        softAssert.assertEquals(firstTabUrl, RahulShettyConstants.QA_CLICK_ACADEMY_URL, 
+            RahulShettyMessages.FIRST_CHILD_TAB_IS_QA_ACADEMY);
         
         // Switch to second child tab
         driver.switchTo().window(secondChildTab);
         waitForPageToLoad();
         String secondTabUrl = driver.getCurrentUrl();
-        softAssert.assertEquals(secondTabUrl, TestConstants.QA_CLICK_ACADEMY_URL, 
-            TestMessages.SECOND_CHILD_TAB_IS_QA_ACADEMY);
+        softAssert.assertEquals(secondTabUrl, RahulShettyConstants.QA_CLICK_ACADEMY_URL, 
+            RahulShettyMessages.SECOND_CHILD_TAB_IS_QA_ACADEMY);
         
         // Switch back to parent tab
         driver.switchTo().window(originalTab);
         waitForPageToLoad();
         String currentUrl = driver.getCurrentUrl();
         softAssert.assertEquals(currentUrl, originalUrl, 
-            TestMessages.ABLE_TO_SWITCH_BACK_TO_PARENT);
+            RahulShettyMessages.ABLE_TO_SWITCH_BACK_TO_PARENT);
         
         // Cleanup
         closeAllChildWindowsAndSwitchToParent(originalTab);
@@ -301,7 +301,7 @@ public class TabSwitchTest extends BaseTest {
         waitForNumberOfWindows(3);
         
         softAssert.assertEquals(driver.getWindowHandles().size(), 3, 
-            TestMessages.SHOULD_HAVE_THREE_TABS_OPEN);
+            RahulShettyMessages.SHOULD_HAVE_THREE_TABS_OPEN);
         
         // Close one child tab
         switchToChildWindow(originalTab);
@@ -309,7 +309,7 @@ public class TabSwitchTest extends BaseTest {
         
         int remainingTabs = driver.getWindowHandles().size();
         softAssert.assertEquals(remainingTabs, 2, 
-            TestMessages.SHOULD_HAVE_TWO_TABS_AFTER_CLOSING);
+            RahulShettyMessages.SHOULD_HAVE_TWO_TABS_AFTER_CLOSING);
         
         // Cleanup
         closeAllChildWindowsAndSwitchToParent(originalTab);

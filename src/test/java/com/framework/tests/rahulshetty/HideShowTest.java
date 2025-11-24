@@ -1,8 +1,8 @@
 package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
-import com.framework.utils.TestConstants;
-import com.framework.utils.TestMessages;
+import com.framework.utils.rahulshetty.RahulShettyConstants;
+import com.framework.utils.rahulshetty.RahulShettyMessages;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -17,13 +17,13 @@ public class HideShowTest extends BaseTest {
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify Hide and Show buttons are displayed and enabled")
     public void testHideShowButtonsVisibilityAndState() {
         softAssert.assertTrue(homePage.isHideButtonDisplayed(), 
-            TestMessages.HIDE_BUTTON_DISPLAYED);
+            RahulShettyMessages.HIDE_BUTTON_DISPLAYED);
         softAssert.assertTrue(homePage.isShowButtonDisplayed(), 
-            TestMessages.SHOW_BUTTON_DISPLAYED);
+            RahulShettyMessages.SHOW_BUTTON_DISPLAYED);
         softAssert.assertTrue(homePage.isHideButtonEnabled(), 
-            TestMessages.HIDE_BUTTON_ENABLED);
+            RahulShettyMessages.HIDE_BUTTON_ENABLED);
         softAssert.assertTrue(homePage.isShowButtonEnabled(), 
-            TestMessages.SHOW_BUTTON_ENABLED);
+            RahulShettyMessages.SHOW_BUTTON_ENABLED);
         
         softAssert.assertAll();
     }
@@ -31,7 +31,7 @@ public class HideShowTest extends BaseTest {
     @Test(priority = 2, groups = {"smoke", "functional", "regression"}, description = "Verify text box is displayed by default")
     public void testTextBoxDisplayedByDefault() {
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE_BY_DEFAULT);
+            RahulShettyMessages.TEXTBOX_VISIBLE_BY_DEFAULT);
         
         softAssert.assertAll();
     }
@@ -40,7 +40,7 @@ public class HideShowTest extends BaseTest {
     public void testHideButtonHidesTextBox() {
         // Verify text box is visible initially
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_DISPLAYED_INITIALLY);
+            RahulShettyMessages.TEXTBOX_DISPLAYED_INITIALLY);
         
         // Click Hide button
         homePage.clickHideButton();
@@ -48,7 +48,7 @@ public class HideShowTest extends BaseTest {
         
         // Verify text box is now hidden
         softAssert.assertFalse(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_HIDDEN_AFTER_HIDE);
+            RahulShettyMessages.TEXTBOX_HIDDEN_AFTER_HIDE);
         
         softAssert.assertAll();
     }
@@ -61,7 +61,7 @@ public class HideShowTest extends BaseTest {
         
         // Verify it's hidden
         softAssert.assertFalse(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_HIDDEN);
+            RahulShettyMessages.TEXTBOX_HIDDEN);
         
         // Click Show button
         homePage.clickShowButton();
@@ -69,7 +69,7 @@ public class HideShowTest extends BaseTest {
         
         // Verify text box is now visible
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE_AFTER_SHOW);
+            RahulShettyMessages.TEXTBOX_VISIBLE_AFTER_SHOW);
         
         softAssert.assertAll();
     }
@@ -78,31 +78,31 @@ public class HideShowTest extends BaseTest {
     public void testHideShowCycle() {
         // Initially visible
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE);
+            RahulShettyMessages.TEXTBOX_VISIBLE);
         
         // Hide it
         homePage.clickHideButton();
         waitForPageToLoad();
         softAssert.assertFalse(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_HIDDEN);
+            RahulShettyMessages.TEXTBOX_HIDDEN);
         
         // Show it
         homePage.clickShowButton();
         waitForPageToLoad();
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE);
+            RahulShettyMessages.TEXTBOX_VISIBLE);
         
         // Hide again
         homePage.clickHideButton();
         waitForPageToLoad();
         softAssert.assertFalse(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_HIDDEN);
+            RahulShettyMessages.TEXTBOX_HIDDEN);
         
         // Show again
         homePage.clickShowButton();
         waitForPageToLoad();
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE);
+            RahulShettyMessages.TEXTBOX_VISIBLE);
         
         softAssert.assertAll();
     }
@@ -116,12 +116,12 @@ public class HideShowTest extends BaseTest {
         }
         
         // Enter text
-        homePage.enterTextInDisplayedTextBox(TestConstants.HIDE_SHOW_TEST_TEXT);
+        homePage.enterTextInDisplayedTextBox(RahulShettyConstants.HIDE_SHOW_TEST_TEXT);
         
         // Verify text was entered
         String actualValue = homePage.getDisplayedTextBoxValue();
-        softAssert.assertEquals(actualValue, TestConstants.HIDE_SHOW_TEST_TEXT, 
-            TestMessages.TEXTBOX_ACCEPTS_INPUT);
+        softAssert.assertEquals(actualValue, RahulShettyConstants.HIDE_SHOW_TEST_TEXT, 
+            RahulShettyMessages.TEXTBOX_ACCEPTS_INPUT);
         
         softAssert.assertAll();
     }
@@ -134,25 +134,25 @@ public class HideShowTest extends BaseTest {
             waitForPageToLoad();
         }
         
-        homePage.enterTextInDisplayedTextBox(TestConstants.HIDE_SHOW_SAMPLE_TEXT);
+        homePage.enterTextInDisplayedTextBox(RahulShettyConstants.HIDE_SHOW_SAMPLE_TEXT);
         String valueBeforeHide = homePage.getDisplayedTextBoxValue();
         
         // Hide the text box
         homePage.clickHideButton();
         waitForPageToLoad();
         softAssert.assertFalse(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_HIDDEN);
+            RahulShettyMessages.TEXTBOX_HIDDEN);
         
         // Show the text box
         homePage.clickShowButton();
         waitForPageToLoad();
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE);
+            RahulShettyMessages.TEXTBOX_VISIBLE);
         
         // Verify value persists
         String valueAfterShow = homePage.getDisplayedTextBoxValue();
         softAssert.assertEquals(valueAfterShow, valueBeforeHide, 
-            TestMessages.TEXTBOX_VALUE_PERSISTS);
+            RahulShettyMessages.TEXTBOX_VALUE_PERSISTS);
         
         softAssert.assertAll();
     }
@@ -161,25 +161,25 @@ public class HideShowTest extends BaseTest {
     public void testHideShowButtonsAlwaysVisible() {
         // Initially visible
         softAssert.assertTrue(homePage.isHideButtonDisplayed(), 
-            TestMessages.HIDE_BUTTON_REMAINS_VISIBLE);
+            RahulShettyMessages.HIDE_BUTTON_REMAINS_VISIBLE);
         softAssert.assertTrue(homePage.isShowButtonDisplayed(), 
-            TestMessages.SHOW_BUTTON_REMAINS_VISIBLE);
+            RahulShettyMessages.SHOW_BUTTON_REMAINS_VISIBLE);
         
         // After hiding text box
         homePage.clickHideButton();
         waitForPageToLoad();
         softAssert.assertTrue(homePage.isHideButtonDisplayed(), 
-            TestMessages.HIDE_BUTTON_REMAINS_VISIBLE);
+            RahulShettyMessages.HIDE_BUTTON_REMAINS_VISIBLE);
         softAssert.assertTrue(homePage.isShowButtonDisplayed(), 
-            TestMessages.SHOW_BUTTON_REMAINS_VISIBLE);
+            RahulShettyMessages.SHOW_BUTTON_REMAINS_VISIBLE);
         
         // After showing text box
         homePage.clickShowButton();
         waitForPageToLoad();
         softAssert.assertTrue(homePage.isHideButtonDisplayed(), 
-            TestMessages.HIDE_BUTTON_REMAINS_VISIBLE);
+            RahulShettyMessages.HIDE_BUTTON_REMAINS_VISIBLE);
         softAssert.assertTrue(homePage.isShowButtonDisplayed(), 
-            TestMessages.SHOW_BUTTON_REMAINS_VISIBLE);
+            RahulShettyMessages.SHOW_BUTTON_REMAINS_VISIBLE);
         
         softAssert.assertAll();
     }
@@ -196,19 +196,19 @@ public class HideShowTest extends BaseTest {
         homePage.clickHideButton();
         waitForPageToLoad();
         softAssert.assertFalse(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_HIDDEN);
+            RahulShettyMessages.TEXTBOX_HIDDEN);
         
         // Click Hide again (should remain hidden)
         homePage.clickHideButton();
         waitForPageToLoad();
         softAssert.assertFalse(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_STILL_HIDDEN);
+            RahulShettyMessages.TEXTBOX_STILL_HIDDEN);
         
         // Click Hide third time
         homePage.clickHideButton();
         waitForPageToLoad();
         softAssert.assertFalse(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_STILL_HIDDEN);
+            RahulShettyMessages.TEXTBOX_STILL_HIDDEN);
         
         softAssert.assertAll();
     }
@@ -223,19 +223,19 @@ public class HideShowTest extends BaseTest {
         homePage.clickShowButton();
         waitForPageToLoad();
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE);
+            RahulShettyMessages.TEXTBOX_VISIBLE);
         
         // Click Show again (should remain visible)
         homePage.clickShowButton();
         waitForPageToLoad();
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_STILL_VISIBLE);
+            RahulShettyMessages.TEXTBOX_STILL_VISIBLE);
         
         // Click Show third time
         homePage.clickShowButton();
         waitForPageToLoad();
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_STILL_VISIBLE);
+            RahulShettyMessages.TEXTBOX_STILL_VISIBLE);
         
         softAssert.assertAll();
     }
@@ -250,9 +250,9 @@ public class HideShowTest extends BaseTest {
         
         // Verify it's enabled
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE);
+            RahulShettyMessages.TEXTBOX_VISIBLE);
         softAssert.assertTrue(homePage.isDisplayedTextBoxEnabled(), 
-            TestMessages.TEXTBOX_ENABLED_WHEN_VISIBLE);
+            RahulShettyMessages.TEXTBOX_ENABLED_WHEN_VISIBLE);
         
         softAssert.assertAll();
     }
@@ -266,13 +266,13 @@ public class HideShowTest extends BaseTest {
         }
         
         // Enter text
-        homePage.enterTextInDisplayedTextBox(TestConstants.HIDE_SHOW_TEST_TEXT);
+        homePage.enterTextInDisplayedTextBox(RahulShettyConstants.HIDE_SHOW_TEST_TEXT);
         
         // Clear text
         homePage.clearDisplayedTextBox();
         String clearedValue = homePage.getDisplayedTextBoxValue();
         softAssert.assertEquals(clearedValue, "", 
-            TestMessages.TEXTBOX_CLEARED_SUCCESSFULLY);
+            RahulShettyMessages.TEXTBOX_CLEARED_SUCCESSFULLY);
         
         // Hide and show
         homePage.clickHideButton();
@@ -283,7 +283,7 @@ public class HideShowTest extends BaseTest {
         // Verify text box is still empty
         String valueAfterShow = homePage.getDisplayedTextBoxValue();
         softAssert.assertEquals(valueAfterShow, "", 
-            TestMessages.TEXTBOX_VALUE_PERSISTS);
+            RahulShettyMessages.TEXTBOX_VALUE_PERSISTS);
         
         softAssert.assertAll();
     }
@@ -298,12 +298,12 @@ public class HideShowTest extends BaseTest {
         
         // Enter new text
         homePage.clearDisplayedTextBox();
-        homePage.enterTextInDisplayedTextBox(TestConstants.HIDE_SHOW_NEW_TEXT);
+        homePage.enterTextInDisplayedTextBox(RahulShettyConstants.HIDE_SHOW_NEW_TEXT);
         
         // Verify new text is entered
         String actualValue = homePage.getDisplayedTextBoxValue();
-        softAssert.assertEquals(actualValue, TestConstants.HIDE_SHOW_NEW_TEXT, 
-            TestMessages.TEXTBOX_ACCEPTS_INPUT);
+        softAssert.assertEquals(actualValue, RahulShettyConstants.HIDE_SHOW_NEW_TEXT, 
+            RahulShettyMessages.TEXTBOX_ACCEPTS_INPUT);
         
         softAssert.assertAll();
     }
@@ -320,7 +320,7 @@ public class HideShowTest extends BaseTest {
         
         // Should be visible after last show
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE);
+            RahulShettyMessages.TEXTBOX_VISIBLE);
         
         softAssert.assertAll();
     }
@@ -333,7 +333,7 @@ public class HideShowTest extends BaseTest {
         
         // Verify hidden
         softAssert.assertFalse(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_HIDDEN);
+            RahulShettyMessages.TEXTBOX_HIDDEN);
         
         // Click Show
         homePage.clickShowButton();
@@ -341,7 +341,7 @@ public class HideShowTest extends BaseTest {
         
         // Verify visible
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
-            TestMessages.TEXTBOX_VISIBLE);
+            RahulShettyMessages.TEXTBOX_VISIBLE);
         
         softAssert.assertAll();
     }
