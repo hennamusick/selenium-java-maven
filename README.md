@@ -258,7 +258,8 @@ selenium-e2e/
 │       ├── java/com/framework/
 │       │   ├── tests/
 │       │   │   └── rahulshetty/
-│       │   │       ├── WebTableTest.java       # Web table validation (20 tests) ⭐ NEW
+│       │   │       ├── MouseHoverTest.java     # Mouse hover tests (20 tests) ⭐ NEW
+│       │   │       ├── WebTableTest.java       # Web table validation (20 tests)
 │       │   │       ├── AlertTest.java          # Alert/confirm box tests (20 tests)
 │       │   │       ├── TabSwitchTest.java      # Tab switching tests (12 tests)
 │       │   │       ├── WindowSwitchTest.java   # Window switching tests (10 tests)
@@ -297,7 +298,10 @@ mvn clean test
 # Master Suite (runs all tests)
 mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/testng.xml
 
-# Web Table Tests (20 comprehensive table tests) ⭐ NEW
+# Mouse Hover Tests (20 mouse hover interaction tests) ⭐ NEW
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/mousehover-suite.xml
+
+# Web Table Tests (20 comprehensive table tests)
 mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/webtable-suite.xml
 
 # Alert Tests (20 alert and confirm box tests)
@@ -318,7 +322,8 @@ mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/saucedemo-suite.xml
 
 ### Run Specific Test Class
 ```bash
-mvn test -Dtest=WebTableTest      # 20 web table validation tests ⭐ NEW
+mvn test -Dtest=MouseHoverTest    # 20 mouse hover tests ⭐ NEW
+mvn test -Dtest=WebTableTest      # 20 web table validation tests
 mvn test -Dtest=AlertTest         # 20 alert and confirm box tests
 mvn test -Dtest=TabSwitchTest     # 12 tab switching tests
 mvn test -Dtest=WindowSwitchTest  # 10 window handling tests
@@ -476,6 +481,98 @@ List<Map<String, String>> allData = webTablePage.getAllTableData();
 - 📊 Comprehensive test coverage for table operations
 - 🧪 Reusable page object for future table tests
 - 📝 Clear, descriptive test names and assertions
+
+---
+
+### MouseHoverTest - Mouse Hover Interaction Tests (20 Tests) ⭐ NEW
+
+Comprehensive test suite for validating mouse hover functionality with dropdown menu interactions on Rahul Shetty Academy practice page:
+
+#### Button State Tests (2 Tests - Smoke)
+1. **testMouseHoverButtonDisplayed** - Verifies mouse hover button is visible on page
+2. **testMouseHoverButtonEnabled** - Validates button is enabled and interactive
+
+#### Link Visibility Tests (3 Tests)
+3. **testTopLinkVisibleOnHover** - Tests "Top" link appears when hovering
+4. **testReloadLinkVisibleOnHover** - Tests "Reload" link appears when hovering
+5. **testBothLinksVisibleOnHover** - Validates both links visible simultaneously on hover
+
+#### Link Text Validation Tests (2 Tests)
+6. **testTopLinkText** - Verifies "Top" link has correct text
+7. **testReloadLinkText** - Verifies "Reload" link has correct text
+
+#### Link Attributes Tests (2 Tests)
+8. **testTopLinkHasHref** - Validates Top link has href="#top"
+9. **testReloadLinkHasHref** - Validates Reload link has href="#reload"
+
+#### Clickability Tests (2 Tests)
+10. **testTopLinkClickable** - Tests Top link is clickable when hovering
+11. **testReloadLinkClickable** - Tests Reload link is clickable when hovering
+
+#### Click Action Tests (2 Tests)
+12. **testClickTopLink** - Verifies clicking Top link scrolls page to top
+13. **testClickReloadLink** - Tests clicking Reload link refreshes page functionality
+
+#### State Consistency Tests (4 Tests)
+14. **testMultipleHovers** - Tests multiple consecutive hovers work correctly
+15. **testHoverStateConsistent** - Validates hover state consistency across multiple hovers
+16. **testLinksAppearInCorrectOrder** - Verifies links appear in expected order
+17. **testClickTopAndHoverAgain** - Tests clicking Top and hovering again works
+
+#### Additional Tests (3 Tests)
+18. **testMouseHoverButtonText** - Validates button has correct text "Mouse Hover"
+19. **testTopLinkDisplayedAfterHover** - Verifies Top link visibility after hover
+20. **testReloadLinkDisplayedAfterHover** - Verifies Reload link visibility after hover
+
+```java
+// Scroll to Mouse Hover section
+homePage.scrollToMouseHover();
+
+// Check button state
+boolean isDisplayed = homePage.isMouseHoverButtonDisplayed();
+boolean isEnabled = homePage.isMouseHoverButtonEnabled();
+String buttonText = homePage.getMouseHoverButtonText(); // "Mouse Hover"
+
+// Hover over button to reveal links
+homePage.hoverOverMouseHoverButton();
+
+// Check link visibility
+boolean topVisible = homePage.isTopLinkDisplayed();
+boolean reloadVisible = homePage.isReloadLinkDisplayed();
+
+// Get link text
+String topText = homePage.getTopLinkText();       // "Top"
+String reloadText = homePage.getReloadLinkText(); // "Reload"
+
+// Get link attributes
+String topHref = homePage.getTopLinkHref();       // "#top"
+String reloadHref = homePage.getReloadLinkHref(); // "#reload"
+
+// Check if links are clickable
+boolean topClickable = homePage.isTopLinkClickable();
+boolean reloadClickable = homePage.isReloadLinkClickable();
+
+// Click links
+homePage.clickTopLink();    // Scrolls to top of page
+homePage.clickReloadLink(); // Reloads page
+```
+
+**Key Features:**
+- ✅ Actions API integration for mouse hover interactions
+- ✅ Centralized scroll logic in @BeforeMethod (eliminates 20 duplicate calls)
+- ✅ 26 assertion message constants in TestMessages
+- ✅ 3 test data constants in TestConstants (TOP_LINK_TEXT, RELOAD_LINK_TEXT, MOUSE_HOVER_BUTTON_TEXT)
+- ✅ Comprehensive validation: visibility, text, href, clickability, and functionality
+- ✅ State consistency tests for multiple hover interactions
+- ✅ Integration with smoke and regression test suites
+- ✅ Uses explicit waits for reliable hover interactions
+
+**Benefits:**
+- 🎯 Validates complex mouse hover interactions with dropdown menus
+- 🔧 Reusable page object methods for hover functionality
+- 📊 Comprehensive test coverage for hover states and link interactions
+- 🧪 Tests both link visibility and actual click functionality
+- 📝 Clear separation of smoke (2) and regression (18) tests
 
 ---
 
@@ -742,7 +839,7 @@ closeAllChildWindowsAndSwitchToParent(originalTab);
 All tests use SoftAssert and include detailed reporting with organized test suites:
 
 ```
-Tests run: 101, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 121, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
@@ -750,8 +847,9 @@ BUILD SUCCESS
 
 | Test Class | Test Count | Focus Area |
 |------------|-----------|------------|
+| **MouseHoverTest** ⭐ NEW | 20 | Mouse hover interactions, Top/Reload link validation |
 | **AlertTest** | 20 | Alert popups, Confirm boxes, and message verification |
-| **WebTableTest** ⭐ NEW | 20 | Web table validation, data extraction, and search |
+| **WebTableTest** | 20 | Web table validation, data extraction, and search |
 | **TabSwitchTest** | 12 | Tab switching and navigation |
 | **WindowSwitchTest** | 10 | Window/popup handling |
 | **CheckboxTest** | 12 | Checkbox interactions and state |
@@ -760,26 +858,27 @@ BUILD SUCCESS
 | **RadioButtonTest** | 6 | Radio button selection and state |
 | **HomePageTest** | 3 | Basic page interactions |
 | **SauceDemoTest** | 3 | SauceDemo login page tests |
-| **Total Tests** | **101** | Comprehensive UI Test Coverage |
+| **Total Tests** | **121** | Comprehensive UI Test Coverage |
 
 ### Test Suite Organization
 
 | Suite | Test Count | Purpose | Execution Time |
 |-------|-----------|---------|----------------|
-| **webtable-suite.xml** ⭐ NEW | 20 | Web table validation tests | ~3-4 min |
+| **mousehover-suite.xml** ⭐ NEW | 20 | Mouse hover interaction tests | ~3-4 min |
+| **webtable-suite.xml** | 20 | Web table validation tests | ~3-4 min |
 | **alert-suite.xml** | 20 | Alert & confirm box tests | ~3-4 min |
-| **smoke-suite.xml** | 14+ | Critical path tests | ~2-3 min |
+| **smoke-suite.xml** | 16+ | Critical path tests | ~2-3 min |
 | **functional-suite.xml** | 50+ | Detailed feature tests | ~10-12 min |
-| **regression-suite.xml** | 60+ | Comprehensive coverage | ~12-15 min |
-| **testng.xml** ⭐ NEW | All | Master suite (runs all tests) | ~15-20 min |
+| **regression-suite.xml** | 80+ | Comprehensive coverage | ~15-18 min |
+| **testng.xml** | All | Master suite (runs all tests) | ~18-22 min |
 | **saucedemo-suite.xml** | 3 (disabled) | SauceDemo tests | N/A |
 
 ### Test Groups
 
 All tests are tagged with priority-based groups:
-- **smoke**: Critical, high-priority tests (11 tests)
+- **smoke**: Critical, high-priority tests (13 tests)
 - **functional**: Detailed feature validation (35 tests)  
-- **regression**: Comprehensive test coverage (43 tests)
+- **regression**: Comprehensive test coverage (63 tests)
 
 ---
 
