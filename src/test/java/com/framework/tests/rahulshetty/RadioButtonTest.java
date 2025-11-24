@@ -2,9 +2,16 @@ package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
 import com.framework.utils.rahulshetty.RahulShettyMessages;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * Radio Button Test Class
+ * Tests radio button selection, mutual exclusivity, and switching behavior
+ */
+@Epic("Rahul Shetty Academy")
+@Feature("Radio Button Controls")
 public class RadioButtonTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
@@ -13,6 +20,9 @@ public class RadioButtonTest extends BaseTest {
     }
 
     @Test(priority = 1, groups = {"smoke", "regression"}, description = "Verify radio buttons are displayed and enabled")
+    @Description("Validate that all three radio buttons are displayed and enabled")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Radio Button Display")
     public void testRadioButtonsVisibilityAndState() {
         // Best Practice 1: Verify all radio buttons are displayed
         softAssert.assertTrue(homePage.isRadio1Displayed(), RahulShettyMessages.RADIO1_DISPLAYED);
@@ -28,6 +38,9 @@ public class RadioButtonTest extends BaseTest {
     }
 
     @Test(priority = 2, groups = {"functional", "regression"}, description = "Verify Radio1 selection and mutual exclusivity")
+    @Description("Validate that Radio1 can be selected and deselects other radio buttons (mutual exclusivity)")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Radio Button Selection")
     public void testRadio1Selection() {
         // Best Practice 3: Click and verify selection
         homePage.clickRadio1();
@@ -45,6 +58,9 @@ public class RadioButtonTest extends BaseTest {
     }
 
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify Radio2 selection and mutual exclusivity")
+    @Description("Validate that Radio2 can be selected and deselects other radio buttons (mutual exclusivity)")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Radio Button Selection")
     public void testRadio2Selection() {
         homePage.clickRadio2();
         
@@ -61,6 +77,9 @@ public class RadioButtonTest extends BaseTest {
     }
 
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify Radio3 selection and mutual exclusivity")
+    @Description("Validate that Radio3 can be selected and deselects other radio buttons (mutual exclusivity)")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Radio Button Selection")
     public void testRadio3Selection() {
         homePage.clickRadio3();
         
@@ -77,6 +96,9 @@ public class RadioButtonTest extends BaseTest {
     }
 
     @Test(priority = 5, groups = {"functional", "regression"}, description = "Verify switching between radio buttons")
+    @Description("Validate that switching between radio buttons works correctly with proper deselection")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Radio Button Switching")
     public void testRadioButtonSwitching() {
         // Best Practice 5: Test switching behavior
         
@@ -109,6 +131,9 @@ public class RadioButtonTest extends BaseTest {
     }
 
     @Test(priority = 6, groups = {"smoke", "functional", "regression"}, description = "Verify default radio button state (if any)")
+    @Description("Validate the default state of radio buttons and ensure maximum one is selected")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Radio Button Display")
     public void testDefaultRadioButtonState() {
         // Best Practice 6: Verify initial/default state
         // Check if any radio button is selected by default
