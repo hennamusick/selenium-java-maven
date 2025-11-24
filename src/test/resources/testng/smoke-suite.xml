@@ -68,6 +68,12 @@
                     <include name="testMouseHoverButtonEnabled"/>
                 </methods>
             </class>
+            <class name="com.framework.tests.rahulshetty.IFrameTest">
+                <methods>
+                    <include name="testIFrameDisplayed"/>
+                    <include name="testIFrameEnabled"/>
+                </methods>
+            </class>
             <class name="com.framework.tests.rahulshetty.AlertTest">
                 <methods>
                     <include name="testAlertButtonVisibilityAndState"/>

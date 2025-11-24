@@ -1,0 +1,31 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="iFrame Test Suite" verbose="1">
+    <test name="iFrame Tests">
+        <classes>
+            <class name="com.framework.tests.rahulshetty.IFrameTest">
+                <methods>
+                    <include name="testIFrameDisplayed"/>
+                    <include name="testIFrameEnabled"/>
+                    <include name="testIFrameHasCorrectId"/>
+                    <include name="testIFrameHasSrc"/>
+                    <include name="testIFrameSrcContainsDomain"/>
+                    <include name="testSwitchToIFrame"/>
+                    <include name="testIFrameContentVisible"/>
+                    <include name="testIFrameHasExpectedContent"/>
+                    <include name="testIFrameHeaderVisible"/>
+                    <include name="testSwitchBackToMainContent"/>
+                    <include name="testMainPageInteractiveAfterIFrame"/>
+                    <include name="testMultipleIFrameSwitches"/>
+                    <include name="testIFrameElementsClickable"/>
+                    <include name="testExtractTextFromIFrame"/>
+                    <include name="testMainPageElementsNotAccessibleInIFrame"/>
+                    <include name="testIFrameElementsNotAccessibleInMain"/>
+                    <include name="testIFrameContextMaintained"/>
+                    <include name="testIFrameAttributesAccessible"/>
+                    <include name="testIFrameDisplayedAfterRefresh"/>
+                    <include name="testMainPageInteractiveAfterMultipleIFrameOps"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

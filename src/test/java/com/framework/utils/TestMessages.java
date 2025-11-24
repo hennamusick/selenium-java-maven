@@ -343,6 +343,29 @@ public class TestMessages {
     public static final String TOP_LINK_VISIBLE_AFTER_CLICK_AND_HOVER = "Top link should be visible after clicking and hovering again";
     public static final String RELOAD_LINK_VISIBLE_AFTER_TOP_CLICK = "Reload link should be visible after clicking Top and hovering again";
     
+    // ==================== IFRAME MESSAGES ====================
+    
+    public static final String IFRAME_DISPLAYED = "iFrame should be displayed on the page";
+    public static final String IFRAME_ENABLED = "iFrame should be enabled";
+    public static final String IFRAME_HAS_CORRECT_ID = "iFrame should have correct ID attribute";
+    public static final String IFRAME_HAS_SRC = "iFrame should have src attribute";
+    public static final String IFRAME_SRC_CONTAINS_DOMAIN = "iFrame src should contain expected domain";
+    public static final String IFRAME_SWITCH_SUCCESSFUL = "Should successfully switch to iFrame";
+    public static final String IFRAME_CONTENT_VISIBLE = "iFrame content should be visible after switching";
+    public static final String IFRAME_HAS_EXPECTED_CONTENT = "iFrame should contain expected content";
+    public static final String IFRAME_HEADER_VISIBLE = "Header inside iFrame should be visible";
+    public static final String IFRAME_NAVIGATION_WORKS = "Navigation inside iFrame should work";
+    public static final String SWITCHED_BACK_TO_MAIN = "Should successfully switch back to main content";
+    public static final String MAIN_PAGE_INTERACTIVE = "Main page should be interactive after switching back from iFrame";
+    public static final String IFRAME_INTERACTIVE_AFTER_SWITCH = "iFrame should be interactive after switching";
+    public static final String MULTIPLE_IFRAME_SWITCHES_WORK = "Multiple switches between main and iFrame should work";
+    public static final String IFRAME_ELEMENTS_CLICKABLE = "Elements inside iFrame should be clickable";
+    public static final String IFRAME_TEXT_EXTRACTABLE = "Text should be extractable from iFrame elements";
+    public static final String MAIN_PAGE_ELEMENTS_NOT_ACCESSIBLE_IN_IFRAME = "Main page elements should not be accessible while in iFrame context";
+    public static final String IFRAME_ELEMENTS_NOT_ACCESSIBLE_IN_MAIN = "iFrame elements should not be accessible while in main page context";
+    public static final String IFRAME_SCROLL_WORKS = "Scrolling should work inside iFrame";
+    public static final String IFRAME_CONTEXT_MAINTAINED = "iFrame context should be maintained until explicitly switched";
+    
     // Private constructor to prevent instantiation
     private TestMessages() {
         throw new AssertionError("TestMessages class should not be instantiated");

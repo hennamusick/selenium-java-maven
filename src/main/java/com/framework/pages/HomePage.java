@@ -92,6 +92,13 @@ public class HomePage extends BasePage {
     @FindBy(css = "div.mouse-hover-content a[href='#reload']")
     private WebElement reloadLink;
     
+    // iFrame Section
+    @FindBy(id = "courses-iframe")
+    private WebElement coursesIFrame;
+    
+    @FindBy(css = "iframe#courses-iframe")
+    private WebElement iFrameElement;
+    
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -667,5 +674,43 @@ public class HomePage extends BasePage {
     
     public String getMouseHoverButtonText() {
         return getElementText(mouseHoverButton);
+    }
+    
+    // =============== iFrame Methods ===============
+    
+    public void scrollToIFrame() {
+        scrollToElement(iFrameElement);
+    }
+    
+    public boolean isIFrameDisplayed() {
+        try {
+            return isElementDisplayed(iFrameElement);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public void switchToIFrame() {
+        switchToFrame("courses-iframe");
+    }
+    
+    public void switchToDefaultContent() {
+        driver.switchTo().defaultContent();
+    }
+    
+    public String getIFrameSrc() {
+        return getElementAttribute(iFrameElement, "src");
+    }
+    
+    public String getIFrameId() {
+        return getElementAttribute(iFrameElement, "id");
+    }
+    
+    public boolean isIFrameEnabled() {
+        try {
+            return isElementEnabled(iFrameElement);
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

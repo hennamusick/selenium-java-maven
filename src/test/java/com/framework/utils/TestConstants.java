@@ -203,4 +203,17 @@ public final class TestConstants {
     public static final String TOP_LINK_TEXT = "Top";
     public static final String RELOAD_LINK_TEXT = "Reload";
     public static final String MOUSE_HOVER_BUTTON_TEXT = "Mouse Hover";
+    
+    // ==================== iFrame Data ====================
+    
+    /**
+     * iFrame element ID
+     */
+    public static final String IFRAME_ID = "courses-iframe";
+    
+    /**
+     * Expected iFrame source URL patterns
+     */
+    public static final String IFRAME_SRC_DOMAIN = "rahulshettyacademy.com";
+    public static final String IFRAME_EXPECTED_TEXT = "RAHUL SHETTY";
 }
