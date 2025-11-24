@@ -44,6 +44,31 @@
                     <include name="testOpenWindowButtonOpensNewWindow"/>
                 </methods>
             </class>
+            <class name="com.framework.tests.rahulshetty.HideShowTest">
+                <methods>
+                    <include name="testHideShowButtonsVisibilityAndState"/>
+                    <include name="testTextBoxDisplayedByDefault"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.WebTableTest">
+                <methods>
+                    <include name="testTableIsDisplayed"/>
+                    <include name="testTableHeaders"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.FixedHeaderTableTest">
+                <methods>
+                    <include name="testFixedTableIsDisplayed"/>
+                    <include name="testTableHeaders"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.AlertTest">
+                <methods>
+                    <include name="testAlertButtonVisibilityAndState"/>
+                    <include name="testAlertWithEnteredName"/>
+                    <include name="testConfirmButtonVisibilityAndState"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

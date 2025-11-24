@@ -115,6 +115,13 @@ public final class TestConstants {
     public static final String CLEAR_TEST_NAME = "Clear Me";
     
     /**
+     * Hide/Show test text
+     */
+    public static final String HIDE_SHOW_TEST_TEXT = "Test Text";
+    public static final String HIDE_SHOW_SAMPLE_TEXT = "Sample Text";
+    public static final String HIDE_SHOW_NEW_TEXT = "New Text After Show";
+    
+    /**
      * Special characters test name
      */
     public static final String SPECIAL_CHARS_NAME = "Test@User#2025!";
@@ -158,4 +165,33 @@ public final class TestConstants {
     public static final int SINGLE_WINDOW = 1;
     public static final int TWO_WINDOWS = 2;
     public static final int THREE_WINDOWS = 3;
+    
+    // ==================== Fixed Header Table Data ====================
+    
+    /**
+     * Expected table data from the Web Table Fixed Header
+     */
+    public static final String PERSON_ALEX = "Alex";
+    public static final String PERSON_BEN = "Ben";
+    public static final String PERSON_DWAYNE = "Dwayne";
+    public static final String PERSON_IVORY = "Ivory";
+    public static final String PERSON_JACK = "Jack";
+    
+    public static final String POSITION_ENGINEER = "Engineer";
+    public static final String POSITION_MECHANIC = "Mechanic";
+    public static final String POSITION_MANAGER = "Manager";
+    public static final String POSITION_RECEPTIONIST = "Receptionist";
+    
+    public static final String CITY_CHENNAI = "Chennai";
+    public static final String CITY_BENGALURU = "Bengaluru";
+    public static final String CITY_KOLKATA = "Kolkata";
+    public static final String CITY_PUNE = "Pune";
+    
+    public static final int AMOUNT_ALEX = 28;
+    public static final int AMOUNT_BEN = 23;
+    public static final int AMOUNT_DWAYNE = 48;
+    public static final int AMOUNT_IVORY = 18;
+    public static final int AMOUNT_JACK = 32;
+    
+    public static final int EXPECTED_TOTAL_AMOUNT = 296;
 }

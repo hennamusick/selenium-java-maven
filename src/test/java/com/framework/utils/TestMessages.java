@@ -163,6 +163,30 @@ public class TestMessages {
     public static final String SUGGESTIONS_LOWERCASE = "Suggestions should appear with lowercase input";
     public static final String SUGGESTIONS_UPPERCASE = "Suggestions should appear with uppercase input";
     
+    // ==================== HIDE/SHOW MESSAGES ====================
+    public static final String HIDE_BUTTON_DISPLAYED = "Hide button should be displayed";
+    public static final String SHOW_BUTTON_DISPLAYED = "Show button should be displayed";
+    public static final String HIDE_BUTTON_ENABLED = "Hide button should be enabled";
+    public static final String SHOW_BUTTON_ENABLED = "Show button should be enabled";
+    public static final String TEXTBOX_DISPLAYED_INITIALLY = "Text box should be displayed initially";
+    public static final String TEXTBOX_HIDDEN_AFTER_HIDE = "Text box should be hidden after clicking Hide button";
+    public static final String TEXTBOX_VISIBLE_AFTER_SHOW = "Text box should be visible after clicking Show button";
+    public static final String TEXTBOX_HIDDEN = "Text box should be hidden";
+    public static final String TEXTBOX_VISIBLE = "Text box should be visible";
+    public static final String TEXTBOX_ACCEPTS_INPUT = "Text box should accept input when visible";
+    public static final String TEXTBOX_RETAINS_VALUE_AFTER_HIDE = "Text box should retain value after hide/show";
+    public static final String HIDE_BUTTON_REMAINS_VISIBLE = "Hide button should remain visible";
+    public static final String SHOW_BUTTON_REMAINS_VISIBLE = "Show button should remain visible";
+    public static final String MULTIPLE_HIDE_CLICKS_WORK = "Clicking Hide button multiple times should work";
+    public static final String MULTIPLE_SHOW_CLICKS_WORK = "Clicking Show button multiple times should work";
+    public static final String TEXTBOX_STILL_HIDDEN = "Text box should still be hidden";
+    public static final String TEXTBOX_STILL_VISIBLE = "Text box should still be visible";
+    public static final String TEXTBOX_HIDDEN_BY_DEFAULT = "Text box visibility state";
+    public static final String TEXTBOX_VISIBLE_BY_DEFAULT = "Text box should be visible by default";
+    public static final String TEXTBOX_ENABLED_WHEN_VISIBLE = "Text box should be enabled when visible";
+    public static final String TEXTBOX_VALUE_PERSISTS = "Text box value should persist after hide/show cycle";
+    public static final String TEXTBOX_CLEARED_SUCCESSFULLY = "Text box should be cleared successfully";
+    
     // ==================== ALERT MESSAGES ====================
     public static final String ALERT_BUTTON_DISPLAYED = "Alert button should be displayed";
     public static final String ALERT_BUTTON_ENABLED = "Alert button should be enabled";
@@ -253,6 +277,43 @@ public class TestMessages {
     public static final String COURSE_SELENIUM_PYTHON = "Master Selenium Automation in simple Python Language";
     public static final String COURSE_ADVANCED_SELENIUM = "Advanced Selenium Framework Pageobject, TestNG, Maven, Jenkins,C";
     public static final String COURSE_QA_RESUME = "Write effective QA Resume that will turn to interview call";
+    
+    // ==================== FIXED HEADER TABLE MESSAGES ====================
+    public static final String FIXED_TABLE_DISPLAYED = "Fixed header table should be displayed";
+    public static final String FIXED_TABLE_HAS_4_COLUMNS = "Fixed table should have 4 columns";
+    public static final String FIXED_TABLE_HEADERS_MATCH = "Fixed table headers should match expected values";
+    public static final String FIXED_TABLE_ROW_COUNT = "Fixed table should have at least 5 rows";
+    public static final String TOTAL_AMOUNT_DISPLAYED = "Total amount should be displayed";
+    public static final String TOTAL_AMOUNT_CORRECT = "Total amount should be correctly calculated";
+    public static final String CALCULATED_TOTAL_MATCHES = "Calculated total should match displayed total";
+    public static final String PERSON_EXISTS_IN_TABLE = "Person %s should exist in the table";
+    public static final String PERSON_POSITION_CORRECT = "Person %s should have position %s";
+    public static final String PERSON_CITY_CORRECT = "Person %s should be from city %s";
+    public static final String PERSON_AMOUNT_CORRECT = "Person %s should have amount %d";
+    public static final String ALL_NAMES_PRESENT = "All expected names should be present in the table";
+    public static final String ALL_POSITIONS_VALID = "All positions should be non-empty";
+    public static final String ALL_CITIES_VALID = "All cities should be non-empty";
+    public static final String ALL_AMOUNTS_POSITIVE = "All amounts should be positive numbers";
+    public static final String ROW_DATA_COMPLETE = "Row %d should have complete data";
+    public static final String NAME_NOT_NULL = "Name should not be null";
+    public static final String POSITION_NOT_NULL = "Position should not be null";
+    public static final String CITY_NOT_NULL = "City should not be null";
+    public static final String AMOUNT_NOT_NULL = "Amount should not be null";
+    public static final String AMOUNT_IS_NUMERIC = "Amount '%s' should be numeric";
+    public static final String FIXED_TABLE_HEADER_NAME = "First header should be 'Name'";
+    public static final String FIXED_TABLE_HEADER_POSITION = "Second header should be 'Position'";
+    public static final String FIXED_TABLE_HEADER_CITY = "Third header should be 'City'";
+    public static final String FIXED_TABLE_HEADER_AMOUNT = "Fourth header should be 'Amount'";
+    public static final String NAMES_COUNT_MATCH_POSITIONS = "Names count should match positions count";
+    public static final String POSITIONS_COUNT_MATCH_CITIES = "Positions count should match cities count";
+    public static final String CITIES_COUNT_MATCH_AMOUNTS = "Cities count should match amounts count";
+    public static final String SHOULD_HAVE_AT_LEAST_5_ROWS = "Should have at least 5 rows of data";
+    public static final String ROW1_COL1_SHOULD_BE_ALEX = "Row 1, Column 1 should be Alex";
+    public static final String ROW1_COL2_SHOULD_BE_ENGINEER = "Row 1, Column 2 should be Engineer";
+    public static final String ROW1_COL3_SHOULD_BE_CHENNAI = "Row 1, Column 3 should be Chennai";
+    public static final String ROW1_COL4_SHOULD_BE_28 = "Row 1, Column 4 should be 28";
+    public static final String AT_LEAST_2_ENGINEERS = "There should be at least 2 Engineers (Alex and Jack)";
+    public static final String CHENNAI_APPEARS_TWICE = "Chennai should appear at least twice (Alex and Ivory)";
     
     // Private constructor to prevent instantiation
     private TestMessages() {

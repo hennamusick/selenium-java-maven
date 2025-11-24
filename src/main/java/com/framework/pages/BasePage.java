@@ -81,4 +81,10 @@ public abstract class BasePage {
     protected void waitForElementToBeStable(WebElement element) {
         wait.waitForElementToBeStable(element);
     }
+    
+    // Scroll methods
+    protected void scrollToElement(WebElement element) {
+        ((org.openqa.selenium.JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+    }
 }

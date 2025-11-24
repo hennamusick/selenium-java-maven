@@ -56,6 +56,32 @@ public class HomePage extends BasePage {
     @FindBy(id = "opentab")
     private WebElement openTabButton;
     
+    // Hide/Show Section
+    @FindBy(id = "hide-textbox")
+    private WebElement hideButton;
+    
+    @FindBy(id = "show-textbox")
+    private WebElement showButton;
+    
+    @FindBy(id = "displayed-text")
+    private WebElement displayedTextBox;
+    
+    // Web Table Fixed Header Section
+    @FindBy(css = "div.tableFixHead")
+    private WebElement fixedHeaderTableContainer;
+    
+    @FindBy(css = "div.tableFixHead table")
+    private WebElement fixedHeaderTable;
+    
+    @FindBy(css = "div.tableFixHead table thead th")
+    private java.util.List<WebElement> fixedTableHeaders;
+    
+    @FindBy(css = "div.tableFixHead table tbody tr")
+    private java.util.List<WebElement> fixedTableRows;
+    
+    @FindBy(css = "div.totalAmount")
+    private WebElement totalAmountElement;
+    
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -362,5 +388,195 @@ public class HomePage extends BasePage {
     
     public boolean isOpenTabButtonEnabled() {
         return isElementEnabled(openTabButton);
+    }
+    
+    // Hide/Show Methods
+    public void scrollToHideShowSection() {
+        scrollToElement(hideButton);
+    }
+    
+    public void clickHideButton() {
+        clickElement(hideButton);
+    }
+    
+    public void clickShowButton() {
+        clickElement(showButton);
+    }
+    
+    public boolean isHideButtonDisplayed() {
+        return isElementDisplayed(hideButton);
+    }
+    
+    public boolean isShowButtonDisplayed() {
+        return isElementDisplayed(showButton);
+    }
+    
+    public boolean isHideButtonEnabled() {
+        return isElementEnabled(hideButton);
+    }
+    
+    public boolean isShowButtonEnabled() {
+        return isElementEnabled(showButton);
+    }
+    
+    public boolean isDisplayedTextBoxVisible() {
+        return isElementDisplayed(displayedTextBox);
+    }
+    
+    public boolean isDisplayedTextBoxEnabled() {
+        return isElementEnabled(displayedTextBox);
+    }
+    
+    public void enterTextInDisplayedTextBox(String text) {
+        sendKeysToElement(displayedTextBox, text);
+    }
+    
+    public String getDisplayedTextBoxValue() {
+        return getElementAttribute(displayedTextBox, "value");
+    }
+    
+    public void clearDisplayedTextBox() {
+        displayedTextBox.clear();
+    }
+    
+    // Fixed Header Table Methods
+    public void scrollToFixedHeaderTable() {
+        scrollToElement(fixedHeaderTableContainer);
+    }
+    
+    public boolean isFixedHeaderTableDisplayed() {
+        return isElementDisplayed(fixedHeaderTable);
+    }
+    
+    public java.util.List<String> getFixedTableHeaders() {
+        waitForElementToBeVisible(fixedHeaderTable);
+        java.util.List<String> headers = new java.util.ArrayList<>();
+        for (WebElement header : fixedTableHeaders) {
+            headers.add(getElementText(header));
+        }
+        return headers;
+    }
+    
+    public int getFixedTableRowCount() {
+        waitForElementToBeVisible(fixedHeaderTable);
+        return fixedTableRows.size();
+    }
+    
+    public String getFixedTableCellValue(int rowIndex, int columnIndex) {
+        waitForElementToBeVisible(fixedHeaderTable);
+        WebElement cell = driver.findElement(
+            org.openqa.selenium.By.cssSelector("div.tableFixHead table tbody tr:nth-child(" + rowIndex + ") td:nth-child(" + columnIndex + ")")
+        );
+        return getElementText(cell);
+    }
+    
+    public java.util.Map<String, String> getFixedTableRowData(int rowIndex) {
+        waitForElementToBeVisible(fixedHeaderTable);
+        java.util.Map<String, String> rowData = new java.util.HashMap<>();
+        java.util.List<String> headers = getFixedTableHeaders();
+        
+        for (int i = 0; i < headers.size(); i++) {
+            String cellValue = getFixedTableCellValue(rowIndex, i + 1);
+            rowData.put(headers.get(i), cellValue);
+        }
+        return rowData;
+    }
+    
+    public java.util.List<String> getFixedTableColumnData(String columnName) {
+        waitForElementToBeVisible(fixedHeaderTable);
+        java.util.List<String> headers = getFixedTableHeaders();
+        int headerIndex = headers.indexOf(columnName);
+        if (headerIndex == -1) {
+            return new java.util.ArrayList<>();
+        }
+        int columnIndex = headerIndex + 1;
+        
+        java.util.List<String> columnData = new java.util.ArrayList<>();
+        for (int i = 1; i <= getFixedTableRowCount(); i++) {
+            columnData.add(getFixedTableCellValue(i, columnIndex));
+        }
+        return columnData;
+    }
+    
+    public java.util.List<Integer> getAllAmounts() {
+        java.util.List<String> amountStrings = getFixedTableColumnData("Amount");
+        java.util.List<Integer> amounts = new java.util.ArrayList<>();
+        for (String amount : amountStrings) {
+            amounts.add(Integer.parseInt(amount.trim()));
+        }
+        return amounts;
+    }
+    
+    public int calculateTotalAmount() {
+        java.util.List<Integer> amounts = getAllAmounts();
+        return amounts.stream().mapToInt(Integer::intValue).sum();
+    }
+    
+    public String getDisplayedTotalAmount() {
+        waitForElementToBeVisible(totalAmountElement);
+        String fullText = getElementText(totalAmountElement);
+        // Extract number from "Total Amount Collected: 296"
+        return fullText.replaceAll("[^0-9]", "");
+    }
+    
+    public boolean isTotalAmountDisplayed() {
+        return isElementDisplayed(totalAmountElement);
+    }
+    
+    public java.util.List<String> getAllNames() {
+        return getFixedTableColumnData("Name");
+    }
+    
+    public java.util.List<String> getAllPositions() {
+        return getFixedTableColumnData("Position");
+    }
+    
+    public java.util.List<String> getAllCities() {
+        return getFixedTableColumnData("City");
+    }
+    
+    public boolean isPersonPresent(String name) {
+        return getAllNames().stream()
+                .anyMatch(n -> n.trim().equalsIgnoreCase(name.trim()));
+    }
+    
+    public String getPositionByName(String name) {
+        waitForElementToBeVisible(fixedHeaderTable);
+        int rowCount = getFixedTableRowCount();
+        
+        for (int i = 1; i <= rowCount; i++) {
+            String rowName = getFixedTableCellValue(i, 1);
+            if (rowName.trim().equalsIgnoreCase(name.trim())) {
+                return getFixedTableCellValue(i, 2);
+            }
+        }
+        return null;
+    }
+    
+    public String getCityByName(String name) {
+        waitForElementToBeVisible(fixedHeaderTable);
+        int rowCount = getFixedTableRowCount();
+        
+        for (int i = 1; i <= rowCount; i++) {
+            String rowName = getFixedTableCellValue(i, 1);
+            if (rowName.trim().equalsIgnoreCase(name.trim())) {
+                return getFixedTableCellValue(i, 3);
+            }
+        }
+        return null;
+    }
+    
+    public int getAmountByName(String name) {
+        waitForElementToBeVisible(fixedHeaderTable);
+        int rowCount = getFixedTableRowCount();
+        
+        for (int i = 1; i <= rowCount; i++) {
+            String rowName = getFixedTableCellValue(i, 1);
+            if (rowName.trim().equalsIgnoreCase(name.trim())) {
+                String amount = getFixedTableCellValue(i, 4);
+                return Integer.parseInt(amount.trim());
+            }
+        }
+        return -1;
     }
 }

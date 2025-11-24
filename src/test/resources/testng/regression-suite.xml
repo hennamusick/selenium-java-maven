@@ -74,6 +74,92 @@
                     <include name="testNewWindowHasExpectedContent"/>
                 </methods>
             </class>
+            <class name="com.framework.tests.rahulshetty.HideShowTest">
+                <methods>
+                    <include name="testHideShowButtonsVisibilityAndState"/>
+                    <include name="testTextBoxDisplayedByDefault"/>
+                    <include name="testHideButtonHidesTextBox"/>
+                    <include name="testShowButtonShowsTextBox"/>
+                    <include name="testHideShowCycle"/>
+                    <include name="testTextBoxAcceptsInputWhenVisible"/>
+                    <include name="testTextBoxValuePersistsAfterHideShow"/>
+                    <include name="testHideShowButtonsAlwaysVisible"/>
+                    <include name="testMultipleHideClicks"/>
+                    <include name="testMultipleShowClicks"/>
+                    <include name="testTextBoxEnabledWhenVisible"/>
+                    <include name="testClearTextBoxAndHideShow"/>
+                    <include name="testEnterNewTextAfterShow"/>
+                    <include name="testRapidHideShowClicks"/>
+                    <include name="testStartWithHide"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.WebTableTest">
+                <methods>
+                    <include name="testTableIsDisplayed"/>
+                    <include name="testTableHeaders"/>
+                    <include name="testTableDimensions"/>
+                    <include name="testAllInstructorsAreRahulShetty"/>
+                    <include name="testSpecificCourseExists"/>
+                    <include name="testSeleniumCoursePrice"/>
+                    <include name="testMultipleCoursesPrices"/>
+                    <include name="testFreeCourse"/>
+                    <include name="testAllPricesAreNumeric"/>
+                    <include name="testCourseCountByInstructor"/>
+                    <include name="testAllCoursesByInstructor"/>
+                    <include name="testSpecificRowData"/>
+                    <include name="testCompleteTableData"/>
+                    <include name="testMultipleCoursesExist"/>
+                    <include name="testColumnDataExtraction"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.FixedHeaderTableTest">
+                <methods>
+                    <include name="testFixedTableIsDisplayed"/>
+                    <include name="testTableHeaders"/>
+                    <include name="testTableRowCount"/>
+                    <include name="testTotalAmountDisplayed"/>
+                    <include name="testTotalAmountCalculation"/>
+                    <include name="testAlexData"/>
+                    <include name="testBenData"/>
+                    <include name="testDwayneData"/>
+                    <include name="testIvoryData"/>
+                    <include name="testJackData"/>
+                    <include name="testAllNamesPresent"/>
+                    <include name="testAllPositionsValid"/>
+                    <include name="testAllCitiesValid"/>
+                    <include name="testAllAmountsPositive"/>
+                    <include name="testAllAmountsNumeric"/>
+                    <include name="testCompleteRowData"/>
+                    <include name="testColumnDataExtraction"/>
+                    <include name="testSpecificCellValues"/>
+                    <include name="testTableContainsEngineers"/>
+                    <include name="testChennaiMultipleTimes"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.rahulshetty.AlertTest">
+                <methods>
+                    <include name="testAlertButtonVisibilityAndState"/>
+                    <include name="testAlertWithEnteredName"/>
+                    <include name="testAlertMessageFormat"/>
+                    <include name="testAlertWithEmptyName"/>
+                    <include name="testPageInteractiveAfterAlert"/>
+                    <include name="testMultipleAlertTriggers"/>
+                    <include name="testAlertWithSpecialCharacters"/>
+                    <include name="testAlertWithLongName"/>
+                    <include name="testConfirmButtonVisibilityAndState"/>
+                    <include name="testConfirmBoxWithEnteredName"/>
+                    <include name="testConfirmBoxMessageFormat"/>
+                    <include name="testAcceptConfirmBox"/>
+                    <include name="testDismissConfirmBox"/>
+                    <include name="testConfirmBoxWithEmptyName"/>
+                    <include name="testPageInteractiveAfterConfirmBox"/>
+                    <include name="testMultipleConfirmBoxTriggers"/>
+                    <include name="testConfirmBoxWithSpecialCharacters"/>
+                    <include name="testNameInputFieldVisibilityAndState"/>
+                    <include name="testNameInputAcceptsText"/>
+                    <include name="testNameInputCanBeCleared"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>
