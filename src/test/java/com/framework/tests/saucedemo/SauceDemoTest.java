@@ -163,4 +163,233 @@ public class SauceDemoTest extends BaseTest {
         
         softAssert.assertAll();
     }
+
+    // ==================== LOGIN SCENARIOS - ALL USER TYPES ====================
+
+    @Test(priority = 14, groups = {"smoke", "functional", "regression"}, description = "Verify successful login with standard user")
+    public void testLoginWithStandardUser() {
+        loginPage.login(SauceDemoConstants.STANDARD_USER, SauceDemoConstants.PASSWORD);
+        
+        String currentUrl = driver.getCurrentUrl();
+        softAssert.assertTrue(currentUrl.contains(SauceDemoConstants.INVENTORY_URL), 
+            SauceDemoMessages.LOGIN_SUCCESSFUL);
+        softAssert.assertTrue(inventoryPage.isPageTitleDisplayed(), 
+            SauceDemoMessages.INVENTORY_TITLE_DISPLAYED);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 15, groups = {"functional", "regression"}, description = "Verify login fails with locked out user")
+    public void testLoginWithLockedUser() {
+        loginPage.login(SauceDemoConstants.LOCKED_USER, SauceDemoConstants.PASSWORD);
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        softAssert.assertEquals(loginPage.getErrorMessageText(), SauceDemoConstants.ERROR_LOCKED_USER, 
+            SauceDemoMessages.ERROR_MESSAGE_FOR_LOCKED_USER);
+        
+        // Verify still on login page
+        String currentUrl = driver.getCurrentUrl();
+        softAssert.assertFalse(currentUrl.contains(SauceDemoConstants.INVENTORY_URL), 
+            "Should remain on login page after failed login");
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 16, groups = {"functional", "regression"}, description = "Verify successful login with problem user")
+    public void testLoginWithProblemUser() {
+        loginPage.login(SauceDemoConstants.PROBLEM_USER, SauceDemoConstants.PASSWORD);
+        
+        String currentUrl = driver.getCurrentUrl();
+        softAssert.assertTrue(currentUrl.contains(SauceDemoConstants.INVENTORY_URL), 
+            SauceDemoMessages.LOGIN_SUCCESSFUL);
+        softAssert.assertTrue(inventoryPage.isPageTitleDisplayed(), 
+            SauceDemoMessages.INVENTORY_TITLE_DISPLAYED);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 17, groups = {"functional", "regression"}, description = "Verify successful login with performance glitch user")
+    public void testLoginWithPerformanceUser() {
+        loginPage.login(SauceDemoConstants.PERFORMANCE_USER, SauceDemoConstants.PASSWORD);
+        
+        String currentUrl = driver.getCurrentUrl();
+        softAssert.assertTrue(currentUrl.contains(SauceDemoConstants.INVENTORY_URL), 
+            SauceDemoMessages.LOGIN_SUCCESSFUL);
+        softAssert.assertTrue(inventoryPage.isPageTitleDisplayed(), 
+            SauceDemoMessages.INVENTORY_TITLE_DISPLAYED);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 18, groups = {"functional", "regression"}, description = "Verify successful login with error user")
+    public void testLoginWithErrorUser() {
+        loginPage.login(SauceDemoConstants.ERROR_USER, SauceDemoConstants.PASSWORD);
+        
+        String currentUrl = driver.getCurrentUrl();
+        softAssert.assertTrue(currentUrl.contains(SauceDemoConstants.INVENTORY_URL), 
+            SauceDemoMessages.LOGIN_SUCCESSFUL);
+        softAssert.assertTrue(inventoryPage.isPageTitleDisplayed(), 
+            SauceDemoMessages.INVENTORY_TITLE_DISPLAYED);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 19, groups = {"functional", "regression"}, description = "Verify successful login with visual user")
+    public void testLoginWithVisualUser() {
+        loginPage.login(SauceDemoConstants.VISUAL_USER, SauceDemoConstants.PASSWORD);
+        
+        String currentUrl = driver.getCurrentUrl();
+        softAssert.assertTrue(currentUrl.contains(SauceDemoConstants.INVENTORY_URL), 
+            SauceDemoMessages.LOGIN_SUCCESSFUL);
+        softAssert.assertTrue(inventoryPage.isPageTitleDisplayed(), 
+            SauceDemoMessages.INVENTORY_TITLE_DISPLAYED);
+        
+        softAssert.assertAll();
+    }
+
+    // ==================== LOGIN ERROR SCENARIOS ====================
+
+    @Test(priority = 20, groups = {"functional", "regression"}, description = "Verify login fails with invalid username")
+    public void testLoginWithInvalidUsername() {
+        loginPage.login("invalid_user", SauceDemoConstants.PASSWORD);
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        softAssert.assertEquals(loginPage.getErrorMessageText(), SauceDemoConstants.ERROR_INVALID_CREDENTIALS, 
+            SauceDemoMessages.ERROR_MESSAGE_FOR_INVALID_CREDENTIALS);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 21, groups = {"functional", "regression"}, description = "Verify login fails with invalid password")
+    public void testLoginWithInvalidPassword() {
+        loginPage.login(SauceDemoConstants.STANDARD_USER, "wrong_password");
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        softAssert.assertEquals(loginPage.getErrorMessageText(), SauceDemoConstants.ERROR_INVALID_CREDENTIALS, 
+            SauceDemoMessages.ERROR_MESSAGE_FOR_INVALID_CREDENTIALS);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 22, groups = {"functional", "regression"}, description = "Verify login fails with empty username")
+    public void testLoginWithEmptyUsername() {
+        loginPage.login("", SauceDemoConstants.PASSWORD);
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        softAssert.assertEquals(loginPage.getErrorMessageText(), SauceDemoConstants.ERROR_USERNAME_REQUIRED, 
+            SauceDemoMessages.ERROR_MESSAGE_FOR_EMPTY_USERNAME);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 23, groups = {"functional", "regression"}, description = "Verify login fails with empty password")
+    public void testLoginWithEmptyPassword() {
+        loginPage.login(SauceDemoConstants.STANDARD_USER, "");
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        softAssert.assertEquals(loginPage.getErrorMessageText(), SauceDemoConstants.ERROR_PASSWORD_REQUIRED, 
+            SauceDemoMessages.ERROR_MESSAGE_FOR_EMPTY_PASSWORD);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 24, groups = {"functional", "regression"}, description = "Verify login fails with both fields empty")
+    public void testLoginWithEmptyCredentials() {
+        loginPage.login("", "");
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        softAssert.assertEquals(loginPage.getErrorMessageText(), SauceDemoConstants.ERROR_USERNAME_REQUIRED, 
+            SauceDemoMessages.ERROR_MESSAGE_FOR_EMPTY_USERNAME);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 25, groups = {"regression"}, description = "Verify login fails with special characters in username")
+    public void testLoginWithSpecialCharactersUsername() {
+        loginPage.login("user@#$%", SauceDemoConstants.PASSWORD);
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        softAssert.assertEquals(loginPage.getErrorMessageText(), SauceDemoConstants.ERROR_INVALID_CREDENTIALS, 
+            SauceDemoMessages.ERROR_MESSAGE_FOR_INVALID_CREDENTIALS);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 26, groups = {"regression"}, description = "Verify login fails with SQL injection attempt")
+    public void testLoginWithSQLInjection() {
+        loginPage.login("' OR '1'='1", "' OR '1'='1");
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 27, groups = {"regression"}, description = "Verify username is case sensitive")
+    public void testLoginWithWrongCase() {
+        loginPage.login("STANDARD_USER", SauceDemoConstants.PASSWORD);
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        softAssert.assertEquals(loginPage.getErrorMessageText(), SauceDemoConstants.ERROR_INVALID_CREDENTIALS, 
+            SauceDemoMessages.ERROR_MESSAGE_FOR_INVALID_CREDENTIALS);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 28, groups = {"regression"}, description = "Verify login with extra spaces in username")
+    public void testLoginWithSpacesInUsername() {
+        loginPage.login(" " + SauceDemoConstants.STANDARD_USER + " ", SauceDemoConstants.PASSWORD);
+        
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 29, groups = {"regression"}, description = "Verify multiple failed login attempts")
+    public void testMultipleFailedLoginAttempts() {
+        // First attempt
+        loginPage.login("invalid_user1", "wrong_pass1");
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            "Error message should display after first failed attempt");
+        
+        // Second attempt
+        loginPage.login("invalid_user2", "wrong_pass2");
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            "Error message should display after second failed attempt");
+        
+        // Third attempt
+        loginPage.login("invalid_user3", "wrong_pass3");
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            "Error message should display after third failed attempt");
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 30, groups = {"regression"}, description = "Verify login after clearing invalid credentials")
+    public void testLoginAfterClearingInvalidCredentials() {
+        // Try with invalid credentials
+        loginPage.login("invalid_user", "wrong_password");
+        softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
+            "Error message should be displayed for invalid credentials");
+        
+        // Clear and try with valid credentials
+        loginPage.clearUsername();
+        loginPage.clearPassword();
+        loginPage.login(SauceDemoConstants.STANDARD_USER, SauceDemoConstants.PASSWORD);
+        
+        String currentUrl = driver.getCurrentUrl();
+        softAssert.assertTrue(currentUrl.contains(SauceDemoConstants.INVENTORY_URL), 
+            SauceDemoMessages.LOGIN_SUCCESSFUL);
+        
+        softAssert.assertAll();
+    }
 }
