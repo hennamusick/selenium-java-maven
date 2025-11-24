@@ -100,16 +100,8 @@ public class WindowSwitchTest extends BaseTest {
         // Click Open Window button
         homePage.clickOpenWindowButton();
         
-        // Switch to new window
-        String childWindowHandle = null;
-        Set<String> windowHandles = driver.getWindowHandles();
-        for (String handle : windowHandles) {
-            if (!handle.equals(parentWindowHandle)) {
-                childWindowHandle = handle;
-                driver.switchTo().window(handle);
-                break;
-            }
-        }
+        // Switch to new window and get child window handle
+        String childWindowHandle = switchToChildWindow(parentWindowHandle);
         
         // Wait for new window
         waitForPageToLoad();
@@ -138,16 +130,8 @@ public class WindowSwitchTest extends BaseTest {
         // Click Open Window button
         homePage.clickOpenWindowButton();
         
-        // Switch to new window
-        String childWindowHandle = null;
-        Set<String> windowHandles = driver.getWindowHandles();
-        for (String handle : windowHandles) {
-            if (!handle.equals(parentWindowHandle)) {
-                childWindowHandle = handle;
-                driver.switchTo().window(handle);
-                break;
-            }
-        }
+        // Switch to new window and get child window handle
+        String childWindowHandle = switchToChildWindow(parentWindowHandle);
         
         // Switch back to parent
         driver.switchTo().window(parentWindowHandle);
@@ -176,15 +160,7 @@ public class WindowSwitchTest extends BaseTest {
         homePage.clickOpenWindowButton();
         
         // Switch to new window
-        String childWindowHandle = null;
-        Set<String> windowHandles = driver.getWindowHandles();
-        for (String handle : windowHandles) {
-            if (!handle.equals(parentWindowHandle)) {
-                childWindowHandle = handle;
-                driver.switchTo().window(handle);
-                break;
-            }
-        }
+        switchToChildWindow(parentWindowHandle);
         
         // Close child window
         driver.close();
@@ -307,15 +283,7 @@ public class WindowSwitchTest extends BaseTest {
         homePage.clickOpenWindowButton();
         
         // Switch to new window
-        String childWindowHandle = null;
-        Set<String> windowHandles = driver.getWindowHandles();
-        for (String handle : windowHandles) {
-            if (!handle.equals(parentWindowHandle)) {
-                childWindowHandle = handle;
-                driver.switchTo().window(handle);
-                break;
-            }
-        }
+        switchToChildWindow(parentWindowHandle);
         
         // Wait for page to load
         waitForPageToLoad();
@@ -328,8 +296,7 @@ public class WindowSwitchTest extends BaseTest {
             TestMessages.NEW_WINDOW_HAS_QA_ACADEMY_CONTENT);
         
         // Clean up
-        driver.close();
-        driver.switchTo().window(parentWindowHandle);
+        closeCurrentWindowAndSwitchTo(parentWindowHandle);
         
         softAssert.assertAll();
     }
