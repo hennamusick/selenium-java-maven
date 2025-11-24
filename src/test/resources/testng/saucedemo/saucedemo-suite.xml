@@ -5,7 +5,13 @@
     </listeners>
     
     <!-- Tests for https://www.saucedemo.com -->
-    <test name="SauceDemo Tests">
+    <test name="SauceDemo - Login Tests">
+        <classes>
+            <class name="com.framework.tests.saucedemo.LoginTest"/>
+        </classes>
+    </test>
+    
+    <test name="SauceDemo - Inventory Tests">
         <classes>
             <class name="com.framework.tests.saucedemo.SauceDemoTest"/>
         </classes>
