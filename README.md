@@ -1,6 +1,17 @@
 # Selenium Java Maven Framework
 
-A comprehensive Selenium WebDriver test automation framework using Java, Maven, TestNG, and the Page Object Model (POM) pattern with SoftAssert implementation.
+A comprehensive Selenium WebDriver test automation framework using Java, Maven, TestNG, and the Page Object Model (POM) pattern with SoftAssert implementation. The framework supports testing multiple websites with clear separation and organization.
+
+## ✨ Key Highlights
+
+- **179 comprehensive tests** across 2 websites (Rahul Shetty Academy & SauceDemo)
+- **Multi-website architecture** with separate page objects, tests, and utilities per website
+- **Page Object Model** with abstract BasePage and reusable Wait utility
+- **SoftAssert pattern** for comprehensive test failure reporting
+- **Explicit waits & FluentWait** for reliable, intelligent waiting
+- **TestNG integration** with smoke, functional, and regression test groups
+- **Allure Reports** for beautiful HTML test reporting with screenshots
+- **Website-specific organization** for easy maintenance and scalability
 
 ## 🏗️ Framework Architecture
 
@@ -242,45 +253,63 @@ selenium-e2e/
 │   ├── main/
 │   │   ├── java/com/framework/
 │   │   │   ├── pages/
-│   │   │   │   ├── BasePage.java          # Abstract base for all pages
-│   │   │   │   ├── HomePage.java          # HomePage implementation
-│   │   │   │   └── WebTablePage.java      # Web table page object ⭐ NEW
+│   │   │   │   ├── BasePage.java                    # Abstract base for all pages
+│   │   │   │   ├── rahulshetty/
+│   │   │   │   │   ├── HomePage.java               # Rahul Shetty practice page
+│   │   │   │   │   └── WebTablePage.java           # Web table page object
+│   │   │   │   └── saucedemo/
+│   │   │   │       ├── LoginPage.java              # SauceDemo login page
+│   │   │   │       └── InventoryPage.java          # SauceDemo inventory page
 │   │   │   └── utils/
-│   │   │       ├── ConfigReader.java      # Configuration management
-│   │   │       ├── DriverManager.java     # WebDriver lifecycle
-│   │   │       ├── LoggerUtil.java        # Logging utilities
-│   │   │       └── Wait.java              # Explicit wait utility class
+│   │   │       ├── AllureListener.java      # Allure report listener
+│   │   │       ├── ConfigReader.java        # Configuration management
+│   │   │       ├── DriverManager.java       # WebDriver lifecycle
+│   │   │       ├── LoggerUtil.java          # Logging utilities
+│   │   │       ├── TestListener.java        # TestNG listeners
+│   │   │       └── Wait.java                # Explicit wait utility class
 │   │   └── resources/
 │   │       ├── config/
-│   │       │   └── config.properties      # Test configurations
+│   │       │   └── config.properties        # Test configurations
 │   │       └── logback.xml
 │   └── test/
 │       ├── java/com/framework/
 │       │   ├── tests/
-│       │   │   └── rahulshetty/
-│       │   │       ├── MouseHoverTest.java     # Mouse hover tests (20 tests) ⭐ NEW
-│       │   │       ├── WebTableTest.java       # Web table validation (20 tests)
-│       │   │       ├── AlertTest.java          # Alert/confirm box tests (20 tests)
-│       │   │       ├── TabSwitchTest.java      # Tab switching tests (12 tests)
-│       │   │       ├── WindowSwitchTest.java   # Window switching tests (10 tests)
-│       │   │       ├── CheckboxTest.java       # Checkbox tests (12 tests)
-│       │   │       ├── DropdownTest.java       # Dropdown tests (8 tests)
-│       │   │       ├── SearchBarTest.java      # Autocomplete tests (7 tests)
-│       │   │       ├── RadioButtonTest.java    # Radio button tests (6 tests)
-│       │   │       └── HomePageTest.java       # Basic page tests (3 tests)
+│       │   │   ├── rahulshetty/
+│       │   │   │   ├── AlertTest.java              # Alert/confirm box tests (20 tests)
+│       │   │   │   ├── CheckboxTest.java           # Checkbox tests (12 tests)
+│       │   │   │   ├── DropdownTest.java           # Dropdown tests (8 tests)
+│       │   │   │   ├── HomePageTest.java           # Basic page tests (3 tests)
+│       │   │   │   ├── IFrameTest.java             # iFrame tests (20 tests)
+│       │   │   │   ├── MouseHoverTest.java         # Mouse hover tests (20 tests)
+│       │   │   │   ├── RadioButtonTest.java        # Radio button tests (6 tests)
+│       │   │   │   ├── SearchBarTest.java          # Autocomplete tests (7 tests)
+│       │   │   │   ├── TabSwitchTest.java          # Tab switching tests (12 tests)
+│       │   │   │   ├── WebTableTest.java           # Web table validation (20 tests)
+│       │   │   │   └── WindowSwitchTest.java       # Window switching tests (10 tests)
+│       │   │   └── saucedemo/
+│       │   │       ├── LoginTest.java              # Login scenarios (25 tests) ⭐ NEW
+│       │   │       └── SauceDemoTest.java          # Inventory tests (13 tests)
 │       │   └── utils/
-│       │       ├── BaseTest.java          # Test base class with SoftAssert
-│       │       ├── TestMessages.java      # Centralized test messages ⭐ UPDATED
-│       │       └── TestListener.java      # TestNG listeners
-│       └── resources/testng/
-│           ├── testng.xml                 # Master suite (all tests) ⭐ NEW
-│           ├── webtable-suite.xml         # Web table tests (20 tests) ⭐ NEW
-│           ├── alert-suite.xml            # Alert tests (20 tests)
-│           ├── smoke-suite.xml            # Smoke tests (14+ tests)
-│           ├── functional-suite.xml       # Functional tests (50+ tests)
-│           ├── regression-suite.xml       # Regression tests (60+ tests)
-│           └── saucedemo-suite.xml        # SauceDemo tests (disabled)
-├── WEB_TABLE_VALIDATION_SUMMARY.md        # Web table test documentation ⭐ NEW
+│       │       ├── BaseTest.java                   # Test base class with SoftAssert
+│       │       ├── TestListener.java               # TestNG listeners
+│       │       ├── rahulshetty/
+│       │       │   ├── RahulShettyConstants.java   # Rahul Shetty test constants
+│       │       │   └── RahulShettyMessages.java    # Rahul Shetty test messages
+│       │       └── saucedemo/
+│       │           ├── SauceDemoConstants.java     # SauceDemo test constants
+│       │           └── SauceDemoMessages.java      # SauceDemo test messages
+│       └── resources/
+│           ├── allure.properties
+│           └── testng/
+│               ├── testng.xml                      # Master suite (all tests)
+│               ├── rahulshetty/
+│               │   ├── smoke-suite.xml             # Smoke tests (14+ tests)
+│               │   ├── functional-suite.xml        # Functional tests (50+ tests)
+│               │   └── regression-suite.xml        # Regression tests (60+ tests)
+│               └── saucedemo/
+│                   └── saucedemo-suite.xml         # SauceDemo tests (38 tests)
+├── ALLURE_REPORTS.md                               # Allure reporting guide
+├── WEB_TABLE_VALIDATION_SUMMARY.md                 # Web table test documentation
 └── pom.xml
 ```
 
@@ -298,33 +327,22 @@ mvn clean test
 # Master Suite (runs all tests)
 mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/testng.xml
 
-# Mouse Hover Tests (20 mouse hover interaction tests) ⭐ NEW
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/mousehover-suite.xml
+# Rahul Shetty Academy Tests
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/rahulshetty/smoke-suite.xml        # 14+ critical tests
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/rahulshetty/functional-suite.xml   # 50+ detailed tests
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/rahulshetty/regression-suite.xml   # 60+ comprehensive tests
 
-# Web Table Tests (20 comprehensive table tests)
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/webtable-suite.xml
-
-# Alert Tests (20 alert and confirm box tests)
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/alert-suite.xml
-
-# Smoke Tests (14+ critical tests)
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/smoke-suite.xml
-
-# Functional Tests (50+ detailed tests)
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/functional-suite.xml
-
-# Regression Tests (60+ comprehensive tests)
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/regression-suite.xml
-
-# SauceDemo Tests (currently disabled)
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/saucedemo-suite.xml
+# SauceDemo Tests
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/saucedemo/saucedemo-suite.xml      # 38 tests (25 login + 13 inventory)
 ```
 
 ### Run Specific Test Class
 ```bash
-mvn test -Dtest=MouseHoverTest    # 20 mouse hover tests ⭐ NEW
+# Rahul Shetty Academy Tests
+mvn test -Dtest=MouseHoverTest    # 20 mouse hover tests
 mvn test -Dtest=WebTableTest      # 20 web table validation tests
 mvn test -Dtest=AlertTest         # 20 alert and confirm box tests
+mvn test -Dtest=IFrameTest        # 20 iframe tests
 mvn test -Dtest=TabSwitchTest     # 12 tab switching tests
 mvn test -Dtest=WindowSwitchTest  # 10 window handling tests
 mvn test -Dtest=CheckboxTest      # 12 checkbox tests
@@ -332,7 +350,54 @@ mvn test -Dtest=DropdownTest      # 8 dropdown tests
 mvn test -Dtest=SearchBarTest     # 7 autocomplete tests
 mvn test -Dtest=RadioButtonTest   # 6 radio button tests
 mvn test -Dtest=HomePageTest      # 3 basic page tests
+
+# SauceDemo Tests
+mvn test -Dtest=LoginTest         # 25 login scenario tests ⭐ NEW
+mvn test -Dtest=SauceDemoTest     # 13 inventory and product tests
 ```
+
+---
+
+## 🏢 Multi-Website Organization
+
+The framework is organized to support testing multiple websites with clear separation of concerns:
+
+### Website-Specific Structure
+
+#### Pages Organization
+- **`pages/rahulshetty/`** - Page objects for Rahul Shetty Academy (HomePage, WebTablePage)
+- **`pages/saucedemo/`** - Page objects for SauceDemo (LoginPage, InventoryPage)
+
+#### Test Organization
+- **`tests/rahulshetty/`** - 11 test classes with 141 tests for Rahul Shetty Academy
+- **`tests/saucedemo/`** - 2 test classes with 38 tests for SauceDemo (LoginTest, SauceDemoTest)
+
+#### Utility Classes
+- **`utils/rahulshetty/`** - RahulShettyConstants, RahulShettyMessages
+- **`utils/saucedemo/`** - SauceDemoConstants, SauceDemoMessages
+
+#### TestNG Suites
+- **`testng/rahulshetty/`** - smoke-suite, functional-suite, regression-suite
+- **`testng/saucedemo/`** - saucedemo-suite
+
+### Benefits of This Organization
+
+✅ **Clear Separation** - Each website has its own namespace
+✅ **Easy Maintenance** - Changes to one website don't affect others
+✅ **Scalability** - Easy to add new websites following the same pattern
+✅ **Reusability** - Shared utilities (Wait, DriverManager) used across all websites
+✅ **Independent Testing** - Run tests for specific websites independently
+
+### Adding a New Website
+
+To add tests for a new website, follow this structure:
+
+1. Create page objects in `pages/yourwebsite/`
+2. Create test classes in `tests/yourwebsite/`
+3. Create constants in `utils/yourwebsite/YourWebsiteConstants.java`
+4. Create messages in `utils/yourwebsite/YourWebsiteMessages.java`
+5. Create TestNG suite in `testng/yourwebsite/yourwebsite-suite.xml`
+6. Add base URL to `config.properties`
 
 ---
 
@@ -573,6 +638,121 @@ homePage.clickReloadLink(); // Reloads page
 - 📊 Comprehensive test coverage for hover states and link interactions
 - 🧪 Tests both link visibility and actual click functionality
 - 📝 Clear separation of smoke (2) and regression (18) tests
+
+---
+
+### LoginTest - SauceDemo Login Scenarios (25 Tests) ⭐ NEW
+
+Comprehensive test suite for SauceDemo authentication covering valid/invalid credentials, edge cases, and security scenarios:
+
+#### Login Page Element Tests (4 Tests - Smoke)
+1. **testLoginPageLoads** - Verifies login page loads successfully
+2. **testPageTitle** - Validates page title "Swag Labs"
+3. **testLoginElementsEnabled** - Tests username/password fields and login button are enabled
+4. **testLoginButtonText** - Verifies login button has correct text
+
+#### Input Field Tests (4 Tests)
+5. **testUsernameFieldAcceptsInput** - Tests username field accepts text input
+6. **testPasswordFieldAcceptsInput** - Tests password field accepts text input
+7. **testClearUsernameField** - Verifies username field can be cleared
+8. **testClearPasswordField** - Verifies password field can be cleared
+
+#### Valid Login Scenarios (6 Tests)
+9. **testLoginWithStandardUser** - Tests successful login with standard_user
+10. **testLoginWithLockedUser** - Validates locked_out_user shows error message
+11. **testLoginWithProblemUser** - Tests problem_user login behavior
+12. **testLoginWithPerformanceUser** - Tests performance_glitch_user login
+13. **testLoginWithErrorUser** - Tests error_user login functionality
+14. **testLoginWithVisualUser** - Tests visual_user login scenario
+
+#### Invalid Credentials Tests (5 Tests)
+15. **testLoginWithInvalidUsername** - Tests error message for invalid username
+16. **testLoginWithInvalidPassword** - Tests error message for invalid password
+17. **testLoginWithEmptyUsername** - Validates error when username is empty
+18. **testLoginWithEmptyPassword** - Validates error when password is empty
+19. **testLoginWithEmptyCredentials** - Tests error with both fields empty
+
+#### Edge Case and Security Tests (6 Tests)
+20. **testLoginWithSpecialCharactersUsername** - Tests special characters in username (@, #, !)
+21. **testLoginWithSQLInjection** - Validates SQL injection protection (admin' OR '1'='1)
+22. **testLoginWithWrongCase** - Tests case-sensitive password validation
+23. **testLoginWithSpacesInUsername** - Tests username with leading/trailing spaces
+24. **testMultipleFailedLoginAttempts** - Tests multiple consecutive failed logins
+25. **testLoginAfterClearingInvalidCredentials** - Tests recovery after failed login
+
+```java
+// Test valid login
+loginPage.enterUsername(SauceDemoConstants.STANDARD_USER);
+loginPage.enterPassword(SauceDemoConstants.PASSWORD);
+loginPage.clickLoginButton();
+softAssert.assertTrue(inventoryPage.isInventoryPageDisplayed());
+
+// Test invalid login
+loginPage.enterUsername("invalid_user");
+loginPage.enterPassword("wrong_password");
+loginPage.clickLoginButton();
+softAssert.assertTrue(loginPage.isErrorMessageDisplayed());
+String errorMsg = loginPage.getErrorMessageText();
+softAssert.assertEquals(errorMsg, "Epic sadface: Username and password do not match any user in this service");
+
+// Test locked user
+loginPage.login(SauceDemoConstants.LOCKED_OUT_USER, SauceDemoConstants.PASSWORD);
+softAssert.assertTrue(loginPage.isErrorMessageDisplayed());
+softAssert.assertTrue(loginPage.getErrorMessageText().contains("locked out"));
+
+// Test edge cases - SQL injection
+loginPage.enterUsername("admin' OR '1'='1");
+loginPage.enterPassword(SauceDemoConstants.PASSWORD);
+loginPage.clickLoginButton();
+softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), "SQL injection should be blocked");
+```
+
+**Key Features:**
+- ✅ Page Object Model (LoginPage, InventoryPage)
+- ✅ Tests all 6 user types (standard, locked, problem, performance, error, visual)
+- ✅ Comprehensive error message validation
+- ✅ Security testing (SQL injection, special characters)
+- ✅ Edge case handling (empty fields, case sensitivity, spaces)
+- ✅ Recovery testing after failed login attempts
+- ✅ Centralized constants (SauceDemoConstants) and messages (SauceDemoMessages)
+- ✅ Integration with TestNG groups (smoke, functional, regression)
+- ✅ All tests use SoftAssert for comprehensive failure reporting
+
+**Benefits:**
+- 🎯 Comprehensive authentication testing covering all scenarios
+- 🔒 Security validation against common attack vectors
+- 🧪 Reusable page objects for future SauceDemo tests
+- 📊 Clear test organization with 5 logical sections
+- ✅ Validates both successful and failed login paths
+
+---
+
+### SauceDemoTest - Inventory and Product Tests (13 Tests)
+
+Tests for SauceDemo inventory page functionality and product display:
+
+```java
+// Login and navigate to inventory
+loginPage.login(SauceDemoConstants.STANDARD_USER, SauceDemoConstants.PASSWORD);
+softAssert.assertTrue(inventoryPage.isInventoryPageDisplayed());
+
+// Verify inventory elements
+softAssert.assertTrue(inventoryPage.isAppLogoDisplayed());
+softAssert.assertTrue(inventoryPage.isShoppingCartLinkDisplayed());
+softAssert.assertTrue(inventoryPage.isMenuButtonDisplayed());
+
+// Verify product display
+int itemCount = inventoryPage.getInventoryItemsCount();
+softAssert.assertTrue(itemCount >= 6, "Should display at least 6 products");
+
+List<String> productNames = inventoryPage.getAllProductNames();
+softAssert.assertTrue(productNames.size() > 0, "Product names should be displayed");
+
+// Verify product details
+softAssert.assertTrue(inventoryPage.isProductDisplayed("Sauce Labs Backpack"));
+String price = inventoryPage.getProductPrice("Sauce Labs Backpack");
+softAssert.assertEquals(price, "$29.99");
+```
 
 ---
 
@@ -839,46 +1019,51 @@ closeAllChildWindowsAndSwitchToParent(originalTab);
 All tests use SoftAssert and include detailed reporting with organized test suites:
 
 ```
-Tests run: 121, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 179, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
-### Test Breakdown by Class
+### Test Breakdown by Website
 
+#### Rahul Shetty Academy Tests (141 tests)
 | Test Class | Test Count | Focus Area |
 |------------|-----------|------------|
-| **MouseHoverTest** ⭐ NEW | 20 | Mouse hover interactions, Top/Reload link validation |
+| **MouseHoverTest** | 20 | Mouse hover interactions, Top/Reload link validation |
 | **AlertTest** | 20 | Alert popups, Confirm boxes, and message verification |
 | **WebTableTest** | 20 | Web table validation, data extraction, and search |
+| **IFrameTest** | 20 | iFrame switching and interaction |
 | **TabSwitchTest** | 12 | Tab switching and navigation |
-| **WindowSwitchTest** | 10 | Window/popup handling |
 | **CheckboxTest** | 12 | Checkbox interactions and state |
+| **WindowSwitchTest** | 10 | Window/popup handling |
 | **DropdownTest** | 8 | Dropdown selection methods |
 | **SearchBarTest** | 7 | Autocomplete/suggestion functionality |
 | **RadioButtonTest** | 6 | Radio button selection and state |
-| **HomePageTest** | 3 | Basic page interactions |
-| **SauceDemoTest** | 3 | SauceDemo login page tests |
-| **Total Tests** | **121** | Comprehensive UI Test Coverage |
+| **HomePageTest** | 6 | Basic page interactions |
+
+#### SauceDemo Tests (38 tests)
+| Test Class | Test Count | Focus Area |
+|------------|-----------|------------|
+| **LoginTest** ⭐ NEW | 25 | Login scenarios (valid/invalid credentials, edge cases, security) |
+| **SauceDemoTest** | 13 | Inventory page, product display, cart functionality |
+
+**Total Tests: 179** (Comprehensive UI Test Coverage across 2 websites)
 
 ### Test Suite Organization
 
-| Suite | Test Count | Purpose | Execution Time |
-|-------|-----------|---------|----------------|
-| **mousehover-suite.xml** ⭐ NEW | 20 | Mouse hover interaction tests | ~3-4 min |
-| **webtable-suite.xml** | 20 | Web table validation tests | ~3-4 min |
-| **alert-suite.xml** | 20 | Alert & confirm box tests | ~3-4 min |
-| **smoke-suite.xml** | 16+ | Critical path tests | ~2-3 min |
-| **functional-suite.xml** | 50+ | Detailed feature tests | ~10-12 min |
-| **regression-suite.xml** | 80+ | Comprehensive coverage | ~15-18 min |
-| **testng.xml** | All | Master suite (runs all tests) | ~18-22 min |
-| **saucedemo-suite.xml** | 3 (disabled) | SauceDemo tests | N/A |
+| Suite | Website | Test Count | Purpose | Execution Time |
+|-------|---------|-----------|---------|----------------|
+| **testng.xml** | All | 179 | Master suite (runs all tests) | ~25-30 min |
+| **smoke-suite.xml** | Rahul Shetty | 16+ | Critical path tests | ~2-3 min |
+| **functional-suite.xml** | Rahul Shetty | 50+ | Detailed feature tests | ~10-12 min |
+| **regression-suite.xml** | Rahul Shetty | 80+ | Comprehensive coverage | ~15-18 min |
+| **saucedemo-suite.xml** | SauceDemo | 38 | Login (25) + Inventory (13) | ~5-6 min |
 
 ### Test Groups
 
 All tests are tagged with priority-based groups:
-- **smoke**: Critical, high-priority tests (13 tests)
-- **functional**: Detailed feature validation (35 tests)  
-- **regression**: Comprehensive test coverage (63 tests)
+- **smoke**: Critical, high-priority tests
+- **functional**: Detailed feature validation
+- **regression**: Comprehensive test coverage
 
 ---
 
