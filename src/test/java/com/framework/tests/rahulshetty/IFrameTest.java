@@ -8,7 +8,6 @@ import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -28,16 +27,18 @@ public class IFrameTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that iFrame is displayed on the page")
     public void testIFrameDisplayed() {
-        Assert.assertTrue(homePage.isIFrameDisplayed(), 
+        softAssert.assertTrue(homePage.isIFrameDisplayed(), 
                 TestMessages.IFRAME_DISPLAYED);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"smoke", "regression"}, priority = 2)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that iFrame is enabled")
     public void testIFrameEnabled() {
-        Assert.assertTrue(homePage.isIFrameEnabled(), 
+        softAssert.assertTrue(homePage.isIFrameEnabled(), 
                 TestMessages.IFRAME_ENABLED);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 3)
@@ -45,8 +46,9 @@ public class IFrameTest extends BaseTest {
     @Description("Verify iFrame has correct ID attribute")
     public void testIFrameHasCorrectId() {
         String iframeId = homePage.getIFrameId();
-        Assert.assertEquals(iframeId, TestConstants.IFRAME_ID, 
+        softAssert.assertEquals(iframeId, TestConstants.IFRAME_ID, 
                 TestMessages.IFRAME_HAS_CORRECT_ID);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 4)
@@ -54,8 +56,9 @@ public class IFrameTest extends BaseTest {
     @Description("Verify iFrame has src attribute")
     public void testIFrameHasSrc() {
         String src = homePage.getIFrameSrc();
-        Assert.assertNotNull(src, TestMessages.IFRAME_HAS_SRC);
-        Assert.assertFalse(src.isEmpty(), TestMessages.IFRAME_HAS_SRC);
+        softAssert.assertNotNull(src, TestMessages.IFRAME_HAS_SRC);
+        softAssert.assertFalse(src.isEmpty(), TestMessages.IFRAME_HAS_SRC);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 5)
@@ -63,8 +66,9 @@ public class IFrameTest extends BaseTest {
     @Description("Verify iFrame src contains expected domain")
     public void testIFrameSrcContainsDomain() {
         String src = homePage.getIFrameSrc();
-        Assert.assertTrue(src.contains(TestConstants.IFRAME_SRC_DOMAIN), 
+        softAssert.assertTrue(src.contains(TestConstants.IFRAME_SRC_DOMAIN), 
                 TestMessages.IFRAME_SRC_CONTAINS_DOMAIN);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 6)
@@ -74,11 +78,12 @@ public class IFrameTest extends BaseTest {
         try {
             homePage.switchToIFrame();
             // If no exception thrown, switch was successful
-            Assert.assertTrue(true, TestMessages.IFRAME_SWITCH_SUCCESSFUL);
+            softAssert.assertTrue(true, TestMessages.IFRAME_SWITCH_SUCCESSFUL);
         } catch (Exception e) {
-            Assert.fail(TestMessages.IFRAME_SWITCH_SUCCESSFUL + " - Exception: " + e.getMessage());
+            softAssert.fail(TestMessages.IFRAME_SWITCH_SUCCESSFUL + " - Exception: " + e.getMessage());
         } finally {
             homePage.switchToDefaultContent();
+            softAssert.assertAll();
         }
     }
     
@@ -91,10 +96,11 @@ public class IFrameTest extends BaseTest {
         try {
             // Look for header or content inside iframe
             WebElement iframeBody = driver.findElement(By.tagName("body"));
-            Assert.assertTrue(iframeBody.isDisplayed(), 
+            softAssert.assertTrue(iframeBody.isDisplayed(), 
                     TestMessages.IFRAME_CONTENT_VISIBLE);
         } finally {
             homePage.switchToDefaultContent();
+            softAssert.assertAll();
         }
     }
     
@@ -111,10 +117,11 @@ public class IFrameTest extends BaseTest {
                                 pageSource.contains("ACADEMY") || 
                                 pageSource.contains("SHETTY") ||
                                 pageSource.length() > 1000; // Has substantial content
-            Assert.assertTrue(hasContent, 
+            softAssert.assertTrue(hasContent, 
                     TestMessages.IFRAME_HAS_EXPECTED_CONTENT);
         } finally {
             homePage.switchToDefaultContent();
+            softAssert.assertAll();
         }
     }
     
@@ -131,10 +138,11 @@ public class IFrameTest extends BaseTest {
                 headers = driver.findElements(By.tagName("h2"));
             }
             
-            Assert.assertFalse(headers.isEmpty(), 
+            softAssert.assertFalse(headers.isEmpty(), 
                     TestMessages.IFRAME_HEADER_VISIBLE);
         } finally {
             homePage.switchToDefaultContent();
+            softAssert.assertAll();
         }
     }
     
@@ -146,8 +154,9 @@ public class IFrameTest extends BaseTest {
         homePage.switchToDefaultContent();
         
         // Verify we're back on main page by checking a main page element
-        Assert.assertTrue(homePage.isMouseHoverButtonDisplayed(), 
+        softAssert.assertTrue(homePage.isMouseHoverButtonDisplayed(), 
                 TestMessages.SWITCHED_BACK_TO_MAIN);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 11)
@@ -158,10 +167,11 @@ public class IFrameTest extends BaseTest {
         homePage.switchToDefaultContent();
         
         // Test main page elements are still interactive
-        Assert.assertTrue(homePage.isMouseHoverButtonEnabled(), 
+        softAssert.assertTrue(homePage.isMouseHoverButtonEnabled(), 
                 TestMessages.MAIN_PAGE_INTERACTIVE);
-        Assert.assertTrue(homePage.isAlertButtonDisplayed(), 
+        softAssert.assertTrue(homePage.isAlertButtonDisplayed(), 
                 TestMessages.MAIN_PAGE_INTERACTIVE);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 12)
@@ -171,20 +181,21 @@ public class IFrameTest extends BaseTest {
         // First switch to iframe
         homePage.switchToIFrame();
         WebElement firstBody = driver.findElement(By.tagName("body"));
-        Assert.assertTrue(firstBody.isDisplayed());
+        softAssert.assertTrue(firstBody.isDisplayed());
         
         // Switch back to main
         homePage.switchToDefaultContent();
-        Assert.assertTrue(homePage.isIFrameDisplayed());
+        softAssert.assertTrue(homePage.isIFrameDisplayed());
         
         // Switch to iframe again
         homePage.switchToIFrame();
         WebElement secondBody = driver.findElement(By.tagName("body"));
-        Assert.assertTrue(secondBody.isDisplayed(), 
+        softAssert.assertTrue(secondBody.isDisplayed(), 
                 TestMessages.MULTIPLE_IFRAME_SWITCHES_WORK);
         
         // Switch back to main again
         homePage.switchToDefaultContent();
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 13)
@@ -198,16 +209,17 @@ public class IFrameTest extends BaseTest {
             java.util.List<WebElement> links = driver.findElements(By.tagName("a"));
             
             if (!links.isEmpty()) {
-                Assert.assertTrue(links.get(0).isEnabled(), 
+                softAssert.assertTrue(links.get(0).isEnabled(), 
                         TestMessages.IFRAME_ELEMENTS_CLICKABLE);
             } else {
                 // If no links, just verify body is present
                 WebElement body = driver.findElement(By.tagName("body"));
-                Assert.assertTrue(body.isDisplayed(), 
+                softAssert.assertTrue(body.isDisplayed(), 
                         TestMessages.IFRAME_ELEMENTS_CLICKABLE);
             }
         } finally {
             homePage.switchToDefaultContent();
+            softAssert.assertAll();
         }
     }
     
@@ -221,12 +233,13 @@ public class IFrameTest extends BaseTest {
             WebElement body = driver.findElement(By.tagName("body"));
             String bodyText = body.getText();
             
-            Assert.assertNotNull(bodyText, 
+            softAssert.assertNotNull(bodyText, 
                     TestMessages.IFRAME_TEXT_EXTRACTABLE);
-            Assert.assertFalse(bodyText.trim().isEmpty(), 
+            softAssert.assertFalse(bodyText.trim().isEmpty(), 
                     TestMessages.IFRAME_TEXT_EXTRACTABLE);
         } finally {
             homePage.switchToDefaultContent();
+            softAssert.assertAll();
         }
     }
     
@@ -239,10 +252,11 @@ public class IFrameTest extends BaseTest {
         try {
             // Try to find a main page element - should not be found
             java.util.List<WebElement> alertButtons = driver.findElements(By.id("alertbtn"));
-            Assert.assertTrue(alertButtons.isEmpty(), 
+            softAssert.assertTrue(alertButtons.isEmpty(), 
                     TestMessages.MAIN_PAGE_ELEMENTS_NOT_ACCESSIBLE_IN_IFRAME);
         } finally {
             homePage.switchToDefaultContent();
+            softAssert.assertAll();
         }
     }
     
@@ -255,8 +269,9 @@ public class IFrameTest extends BaseTest {
         // Try to find elements that exist only inside iframe - should not be found directly
         // (we can only access iframe through switching)
         String currentUrl = driver.getCurrentUrl();
-        Assert.assertTrue(currentUrl.contains("AutomationPractice"), 
+        softAssert.assertTrue(currentUrl.contains("AutomationPractice"), 
                 TestMessages.IFRAME_ELEMENTS_NOT_ACCESSIBLE_IN_MAIN);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 17)
@@ -268,7 +283,7 @@ public class IFrameTest extends BaseTest {
         try {
             // Perform first action in iframe
             WebElement body1 = driver.findElement(By.tagName("body"));
-            Assert.assertTrue(body1.isDisplayed());
+            softAssert.assertTrue(body1.isDisplayed());
             
             // Wait a bit
             try {
@@ -279,10 +294,11 @@ public class IFrameTest extends BaseTest {
             
             // Perform second action - should still be in iframe context
             WebElement body2 = driver.findElement(By.tagName("body"));
-            Assert.assertTrue(body2.isDisplayed(), 
+            softAssert.assertTrue(body2.isDisplayed(), 
                     TestMessages.IFRAME_CONTEXT_MAINTAINED);
         } finally {
             homePage.switchToDefaultContent();
+            softAssert.assertAll();
         }
     }
     
@@ -294,23 +310,25 @@ public class IFrameTest extends BaseTest {
         String iframeId = homePage.getIFrameId();
         String iframeSrc = homePage.getIFrameSrc();
         
-        Assert.assertEquals(iframeId, TestConstants.IFRAME_ID);
-        Assert.assertTrue(iframeSrc.contains(TestConstants.IFRAME_SRC_DOMAIN));
+        softAssert.assertEquals(iframeId, TestConstants.IFRAME_ID);
+        softAssert.assertTrue(iframeSrc.contains(TestConstants.IFRAME_SRC_DOMAIN));
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 19)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify iFrame is still displayed after page refresh")
     public void testIFrameDisplayedAfterRefresh() {
-        Assert.assertTrue(homePage.isIFrameDisplayed());
+        softAssert.assertTrue(homePage.isIFrameDisplayed());
         
         // Refresh page
         driver.navigate().refresh();
         homePage.scrollToIFrame();
         
         // Verify iframe still displayed
-        Assert.assertTrue(homePage.isIFrameDisplayed(), 
+        softAssert.assertTrue(homePage.isIFrameDisplayed(), 
                 TestMessages.IFRAME_DISPLAYED);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 20)
@@ -326,10 +344,11 @@ public class IFrameTest extends BaseTest {
         homePage.switchToDefaultContent();
         
         // Verify main page is still fully functional
-        Assert.assertTrue(homePage.isMouseHoverButtonDisplayed());
-        Assert.assertTrue(homePage.isAlertButtonDisplayed());
-        Assert.assertTrue(homePage.isRadio1Displayed());
-        Assert.assertTrue(homePage.isCheckbox1Displayed(), 
+        softAssert.assertTrue(homePage.isMouseHoverButtonDisplayed());
+        softAssert.assertTrue(homePage.isAlertButtonDisplayed());
+        softAssert.assertTrue(homePage.isRadio1Displayed());
+        softAssert.assertTrue(homePage.isCheckbox1Displayed(), 
                 TestMessages.MAIN_PAGE_INTERACTIVE);
+        softAssert.assertAll();
     }
 }
