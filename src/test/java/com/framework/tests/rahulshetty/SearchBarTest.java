@@ -3,9 +3,15 @@ package com.framework.tests.rahulshetty;
 import com.framework.utils.BaseTest;
 import com.framework.utils.rahulshetty.RahulShettyConstants;
 import com.framework.utils.rahulshetty.RahulShettyMessages;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * Tests for autocomplete/suggestion search bar functionality on Rahul Shetty Academy practice page.
+ */
+@Epic("Rahul Shetty Academy")
+@Feature("Autocomplete Search Bar")
 public class SearchBarTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
@@ -15,6 +21,9 @@ public class SearchBarTest extends BaseTest {
 
     // Autocomplete/Suggestion Search Bar Tests
     
+    @Description("Validate that autocomplete suggestions appear when typing country name prefix")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Autocomplete Display")
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify autocomplete suggestions appear when typing")
     public void testAutocompleteSuggestionsAppear() {
         homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_INDIA_PREFIX);
@@ -30,6 +39,9 @@ public class SearchBarTest extends BaseTest {
         softAssert.assertAll();
     }
     
+    @Description("Validate that user can select a specific suggestion from the autocomplete list by text")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Autocomplete Selection")
     @Test(priority = 2, groups = {"functional", "regression"}, description = "Verify selecting a suggestion from the list")
     public void testSelectSuggestionByText() {
         homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_INDIA_PREFIX);
@@ -42,6 +54,9 @@ public class SearchBarTest extends BaseTest {
         softAssert.assertAll();
     }
     
+    @Description("Validate that user can select a suggestion from autocomplete list by index position")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Autocomplete Selection")
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify selecting suggestion by index")
     public void testSelectSuggestionByIndex() {
         homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_CO_PREFIX_LOWER);
@@ -59,6 +74,9 @@ public class SearchBarTest extends BaseTest {
         softAssert.assertAll();
     }
     
+    @Description("Validate that autocomplete works correctly when full country name is entered")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Autocomplete Search")
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify autocomplete with full country name")
     public void testAutocompleteWithFullCountryName() {
         homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_COLOMBIA);
@@ -75,6 +93,9 @@ public class SearchBarTest extends BaseTest {
         softAssert.assertAll();
     }
     
+    @Description("Validate that autocomplete field can be cleared and new search can be performed")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Autocomplete Field Management")
     @Test(priority = 5, groups = {"smoke", "functional", "regression"}, description = "Verify autocomplete clear and re-enter")
     public void testAutocompleteClearAndReenter() throws InterruptedException {
         // First search
@@ -95,6 +116,9 @@ public class SearchBarTest extends BaseTest {
         softAssert.assertAll();
     }
     
+    @Description("Validate that autocomplete returns multiple matching suggestions for partial text input")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Autocomplete Search")
     @Test(priority = 6, groups = {"functional", "regression"}, description = "Verify autocomplete with partial text matching multiple countries")
     public void testAutocompletePartialMatch() {
         homePage.enterCountryInAutocomplete(RahulShettyConstants.COUNTRY_CO_PREFIX);
@@ -112,6 +136,9 @@ public class SearchBarTest extends BaseTest {
         softAssert.assertAll();
     }
     
+    @Description("Validate that autocomplete search is case insensitive (works with both uppercase and lowercase input)")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Autocomplete Search")
     @Test(priority = 7, groups = {"regression"}, description = "Verify autocomplete case insensitivity")
     public void testAutocompleteCaseInsensitivity() throws InterruptedException {
         // Test with lowercase

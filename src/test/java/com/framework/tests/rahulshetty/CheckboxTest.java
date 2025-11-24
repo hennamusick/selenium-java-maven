@@ -2,9 +2,15 @@ package com.framework.tests.rahulshetty;
 
 import com.framework.utils.BaseTest;
 import com.framework.utils.rahulshetty.RahulShettyMessages;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * Tests for checkbox selection and interaction functionality on Rahul Shetty Academy practice page.
+ */
+@Epic("Rahul Shetty Academy")
+@Feature("Checkbox Controls")
 public class CheckboxTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
@@ -12,6 +18,9 @@ public class CheckboxTest extends BaseTest {
         initializeHomePage(); // Uses default baseUrl.1 - Rahul Shetty Academy
     }
 
+    @Description("Validate that all three checkboxes are displayed and enabled on the page")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Checkbox Display")
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify all checkboxes are displayed and enabled")
     public void testCheckboxesVisibilityAndState() {
         // Verify all checkboxes are displayed
@@ -33,6 +42,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that all checkboxes are unchecked by default when page loads")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Checkbox Display")
     @Test(priority = 2, groups = {"smoke", "functional", "regression"}, description = "Verify default unchecked state of all checkboxes")
     public void testDefaultUncheckedState() {
         // Verify all checkboxes are unchecked by default
@@ -46,6 +58,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that Checkbox1 can be checked and reflects the selected state")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Checkbox Selection")
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify checking Checkbox1")
     public void testCheckCheckbox1() {
         homePage.clickCheckbox1();
@@ -56,6 +71,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that Checkbox2 can be checked and reflects the selected state")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Checkbox Selection")
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify checking Checkbox2")
     public void testCheckCheckbox2() {
         homePage.clickCheckbox2();
@@ -66,6 +84,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that Checkbox3 can be checked and reflects the selected state")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Checkbox Selection")
     @Test(priority = 5, groups = {"functional", "regression"}, description = "Verify checking Checkbox3")
     public void testCheckCheckbox3() {
         homePage.clickCheckbox3();
@@ -76,6 +97,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that Checkbox1 can be unchecked after being checked")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Checkbox Toggle")
     @Test(priority = 6, groups = {"functional", "regression"}, description = "Verify unchecking Checkbox1")
     public void testUncheckCheckbox1() {
         // First check it
@@ -91,6 +115,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that multiple checkboxes can be checked simultaneously without affecting each other")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Checkbox Selection")
     @Test(priority = 7, groups = {"functional", "regression"}, description = "Verify multiple checkboxes can be selected simultaneously")
     public void testMultipleCheckboxSelection() {
         // Check all three checkboxes
@@ -109,6 +136,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that checkbox can be toggled multiple times between checked and unchecked states")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Checkbox Toggle")
     @Test(priority = 8, groups = {"regression"}, description = "Verify toggle behavior of checkboxes")
     public void testCheckboxToggleBehavior() {
         // Checkbox1: Check -> Uncheck -> Check
@@ -127,6 +157,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that each checkbox operates independently without affecting the state of other checkboxes")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Checkbox Independence")
     @Test(priority = 9, groups = {"functional", "regression"}, description = "Verify checking checkboxes independently")
     public void testIndependentCheckboxBehavior() {
         // Check Checkbox1
@@ -159,6 +192,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that specific checkboxes can be unchecked while others remain checked")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Checkbox Independence")
     @Test(priority = 10, groups = {"regression"}, description = "Verify selective unchecking of checkboxes")
     public void testSelectiveUnchecking() {
         // Check all checkboxes
@@ -179,6 +215,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that safe check method is idempotent and doesn't toggle when checkbox is already checked")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Idempotent Operations")
     @Test(priority = 11, groups = {"smoke", "functional"}, description = "Verify safe check methods (idempotent)")
     public void testSafeCheckMethods() {
         // Use safe check method - should check the checkbox
@@ -194,6 +233,9 @@ public class CheckboxTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that safe uncheck method is idempotent and doesn't toggle when checkbox is already unchecked")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Idempotent Operations")
     @Test(priority = 12, groups = {"functional"}, description = "Verify safe uncheck methods (idempotent)")
     public void testSafeUncheckMethods() {
         // First check the checkbox

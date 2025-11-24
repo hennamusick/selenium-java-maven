@@ -3,11 +3,17 @@ package com.framework.tests.rahulshetty;
 import com.framework.utils.BaseTest;
 import com.framework.utils.rahulshetty.RahulShettyConstants;
 import com.framework.utils.rahulshetty.RahulShettyMessages;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Set;
 
+/**
+ * Tests for window switching and multi-window handling functionality on Rahul Shetty Academy practice page.
+ */
+@Epic("Rahul Shetty Academy")
+@Feature("Window Management")
 public class WindowSwitchTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
@@ -15,6 +21,9 @@ public class WindowSwitchTest extends BaseTest {
         initializeHomePage(); // Uses default baseUrl.1 - Rahul Shetty Academy
     }
 
+    @Description("Validate that Open Window button is displayed and enabled on the page")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Window Button Display")
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify Open Window button is displayed and enabled")
     public void testOpenWindowButtonVisibilityAndState() {
         softAssert.assertTrue(homePage.isOpenWindowButtonDisplayed(), 
@@ -25,6 +34,9 @@ public class WindowSwitchTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that clicking Open Window button opens a new browser window")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Window Opening")
     @Test(priority = 2, groups = {"smoke", "functional", "regression"}, description = "Verify clicking Open Window button opens new window")
     public void testOpenWindowButtonOpensNewWindow() {
         // Get the current window handle
@@ -44,6 +56,9 @@ public class WindowSwitchTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that the new window opens with the correct target URL (QA Click Academy)")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Window Navigation")
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify new window opens with correct URL")
     public void testNewWindowOpensCorrectUrl() {
         // Get parent window handle
@@ -68,6 +83,9 @@ public class WindowSwitchTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that the new window has a title and is not empty")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Window Navigation")
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify new window title")
     public void testNewWindowTitle() {
         // Get parent window handle
@@ -91,6 +109,9 @@ public class WindowSwitchTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that driver can switch back to parent window after opening child window")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Window Switching")
     @Test(priority = 5, groups = {"functional", "regression"}, description = "Verify switching back to parent window")
     public void testSwitchBackToParentWindow() {
         // Get parent window handle and URL
@@ -122,6 +143,9 @@ public class WindowSwitchTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that parent window remains interactive and functional after opening a child window")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Window Switching")
     @Test(priority = 6, groups = {"functional", "regression"}, description = "Verify parent window remains interactive after opening child window")
     public void testParentWindowInteractiveAfterOpeningChild() {
         // Get parent window handle
@@ -150,6 +174,9 @@ public class WindowSwitchTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that closing the child window does not affect the parent window's state or functionality")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Window Lifecycle")
     @Test(priority = 7, groups = {"functional", "regression"}, description = "Verify closing child window doesn't affect parent window")
     public void testClosingChildWindowDoesNotAffectParent() {
         // Get parent window handle
@@ -183,6 +210,9 @@ public class WindowSwitchTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that clicking Open Window button multiple times reuses the same child window")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Window Lifecycle")
     @Test(priority = 8, groups = {"regression"}, description = "Verify clicking Open Window button multiple times reuses same window")
     public void testMultipleWindowOpening() {
         // Get parent window handle
@@ -236,6 +266,9 @@ public class WindowSwitchTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that each window has a unique handle identifier for proper window management")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Window Handles")
     @Test(priority = 9, groups = {"functional", "regression"}, description = "Verify window handles are unique")
     public void testWindowHandlesAreUnique() {
         // Get parent window handle
@@ -274,6 +307,9 @@ public class WindowSwitchTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that the new window contains expected QA Click Academy content")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Window Navigation")
     @Test(priority = 10, groups = {"functional", "regression"}, description = "Verify new window has expected content")
     public void testNewWindowHasExpectedContent() {
         // Get parent window handle
