@@ -3,12 +3,18 @@ package com.framework.tests.rahulshetty;
 import com.framework.utils.BaseTest;
 import com.framework.utils.rahulshetty.RahulShettyConstants;
 import com.framework.utils.rahulshetty.RahulShettyMessages;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Set;
 
+/**
+ * Tests for tab switching and multi-tab handling functionality on Rahul Shetty Academy practice page.
+ */
+@Epic("Rahul Shetty Academy")
+@Feature("Tab Management")
 public class TabSwitchTest extends BaseTest {
     
     @BeforeMethod(alwaysRun = true)
@@ -16,6 +22,9 @@ public class TabSwitchTest extends BaseTest {
         initializeHomePage(); // Uses default baseUrl.1 - Rahul Shetty Academy
     }
     
+    @Description("Validate that Open Tab button is displayed and enabled on the page")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Tab Button Display")
     @Test(priority = 1, groups = {"smoke", "regression"}, description = "Verify Open Tab button is visible and enabled")
     public void testOpenTabButtonVisibilityAndState() {
         softAssert.assertTrue(homePage.isOpenTabButtonDisplayed(), 
@@ -24,6 +33,9 @@ public class TabSwitchTest extends BaseTest {
             RahulShettyMessages.OPEN_TAB_BUTTON_ENABLED);
     }
     
+    @Description("Validate that clicking Open Tab button opens a new browser tab")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Tab Opening")
     @Test(priority = 2, groups = {"smoke", "functional", "regression"}, description = "Verify clicking Open Tab button opens new tab")
     public void testOpenTabButtonOpensNewTab() {
         String originalTab = getParentWindowHandle();
@@ -40,6 +52,9 @@ public class TabSwitchTest extends BaseTest {
         closeAllChildWindowsAndSwitchToParent(originalTab);
     }
     
+    @Description("Validate that the new tab opens with the correct target URL (QA Click Academy)")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Tab Navigation")
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify new tab opens with correct URL")
     public void testNewTabOpensCorrectUrl() {
         String originalTab = getParentWindowHandle();
@@ -59,6 +74,9 @@ public class TabSwitchTest extends BaseTest {
         closeCurrentWindowAndSwitchTo(originalTab);
     }
     
+    @Description("Validate that the new tab has a non-empty title")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Tab Navigation")
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify new tab has expected title")
     public void testNewTabTitle() {
         String originalTab = getParentWindowHandle();
@@ -80,6 +98,9 @@ public class TabSwitchTest extends BaseTest {
         closeCurrentWindowAndSwitchTo(originalTab);
     }
     
+    @Description("Validate that driver can successfully switch back to the parent tab after opening a child tab")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Tab Switching")
     @Test(priority = 5, groups = {"functional", "regression"}, description = "Verify switching back to parent tab")
     public void testSwitchBackToParentTab() {
         String originalTab = driver.getWindowHandle();
@@ -119,6 +140,9 @@ public class TabSwitchTest extends BaseTest {
         driver.switchTo().window(originalTab);
     }
     
+    @Description("Validate that parent tab remains interactive and functional after opening a child tab")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Tab Switching")
     @Test(priority = 6, groups = {"functional", "regression"}, description = "Verify parent tab remains interactive after opening new tab")
     public void testParentTabInteractiveAfterOpeningChild() {
         String originalTab = getParentWindowHandle();
@@ -140,6 +164,9 @@ public class TabSwitchTest extends BaseTest {
         closeAllChildWindowsAndSwitchToParent(originalTab);
     }
     
+    @Description("Validate that closing the child tab does not affect the parent tab's state or functionality")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Tab Lifecycle")
     @Test(priority = 7, groups = {"functional", "regression"}, description = "Verify closing child tab does not affect parent tab")
     public void testClosingChildTabDoesNotAffectParent() {
         String originalTab = getParentWindowHandle();
@@ -160,6 +187,9 @@ public class TabSwitchTest extends BaseTest {
             RahulShettyMessages.ONLY_PARENT_TAB_REMAINS);
     }
     
+    @Description("Validate that multiple tabs can be opened sequentially from the parent tab")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Tab Opening")
     @Test(priority = 8, groups = {"functional", "regression"}, description = "Verify opening multiple tabs sequentially")
     public void testMultipleTabOpening() {
         String originalTab = getParentWindowHandle();
@@ -187,6 +217,9 @@ public class TabSwitchTest extends BaseTest {
         closeAllChildWindowsAndSwitchToParent(originalTab);
     }
     
+    @Description("Validate that each tab has a unique handle identifier for proper tab management")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Tab Handles")
     @Test(priority = 9, groups = {"functional", "regression"}, description = "Verify tab handles are unique")
     public void testTabHandlesAreUnique() {
         String originalTab = getParentWindowHandle();
@@ -207,6 +240,9 @@ public class TabSwitchTest extends BaseTest {
         closeAllChildWindowsAndSwitchToParent(originalTab);
     }
     
+    @Description("Validate that the new tab contains expected page content and is not empty")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Tab Navigation")
     @Test(priority = 10, groups = {"functional", "regression"}, description = "Verify new tab has expected content")
     public void testNewTabHasExpectedContent() {
         String originalTab = getParentWindowHandle();
@@ -228,6 +264,9 @@ public class TabSwitchTest extends BaseTest {
         closeCurrentWindowAndSwitchTo(originalTab);
     }
     
+    @Description("Validate that driver can switch between multiple open tabs (parent and two child tabs)")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Tab Switching")
     @Test(priority = 11, groups = {"functional", "regression"}, description = "Verify switching between multiple tabs")
     public void testSwitchingBetweenMultipleTabs() {
         String originalTab = driver.getWindowHandle();
@@ -286,6 +325,9 @@ public class TabSwitchTest extends BaseTest {
         closeAllChildWindowsAndSwitchToParent(originalTab);
     }
     
+    @Description("Validate that closing one tab from multiple open tabs results in correct remaining tab count")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Tab Lifecycle")
     @Test(priority = 12, groups = {"functional", "regression"}, description = "Verify tab count after closing one of multiple tabs")
     public void testTabCountAfterClosingOneTab() {
         String originalTab = getParentWindowHandle();

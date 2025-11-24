@@ -3,6 +3,7 @@ package com.framework.tests.rahulshetty;
 import com.framework.utils.BaseTest;
 import com.framework.utils.rahulshetty.RahulShettyConstants;
 import com.framework.utils.rahulshetty.RahulShettyMessages;
+import io.qameta.allure.*;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.NoAlertPresentException;
 import org.testng.annotations.BeforeMethod;
@@ -12,6 +13,8 @@ import org.testng.annotations.Test;
  * Comprehensive test suite for Alert and Confirm box functionality
  * Tests verify popup messages, accept/dismiss behavior, and page interaction
  */
+@Epic("Rahul Shetty Academy")
+@Feature("Alert and Confirm Dialogs")
 public class AlertTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
@@ -21,6 +24,9 @@ public class AlertTest extends BaseTest {
 
     // ==================== ALERT BUTTON TESTS ====================
 
+    @Description("Validate that Alert button is displayed and enabled on the page")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Alert Button Display")
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify Alert button is displayed and enabled")
     public void testAlertButtonVisibilityAndState() {
         softAssert.assertTrue(homePage.isAlertButtonDisplayed(), 
@@ -31,6 +37,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that JavaScript alert popup appears and displays the entered name")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Alert Display")
     @Test(priority = 2, groups = {"smoke", "functional", "regression"}, description = "Verify alert popup appears with entered name")
     public void testAlertWithEnteredName() {
         // Enter name and trigger alert
@@ -53,6 +62,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that alert message has correct format and contains the entered name")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Alert Display")
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify alert message format and content")
     public void testAlertMessageFormat() {
         String testName = RahulShettyConstants.SAMPLE_NAME_SELENIUM;
@@ -75,6 +87,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that alert can be triggered even when name field is empty")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Alert Display")
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify alert with empty name field")
     public void testAlertWithEmptyName() {
         // Click alert without entering name
@@ -93,6 +108,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that page elements remain interactive and functional after accepting alert")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Alert Handling")
     @Test(priority = 5, groups = {"functional", "regression"}, description = "Verify page remains interactive after accepting alert")
     public void testPageInteractiveAfterAlert() {
         homePage.enterName(RahulShettyConstants.AUTOMATION_TEST_NAME);
@@ -117,6 +135,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that alert can be triggered multiple times with different names")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Alert Handling")
     @Test(priority = 6, groups = {"functional", "regression"}, description = "Verify alert can be triggered multiple times")
     public void testMultipleAlertTriggers() {
         // First alert
@@ -141,6 +162,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that alert correctly displays names containing special characters")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Alert Display")
     @Test(priority = 7, groups = {"regression"}, description = "Verify alert with special characters in name")
     public void testAlertWithSpecialCharacters() {
         String specialName = RahulShettyConstants.SPECIAL_CHARS_NAME;
@@ -157,6 +181,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that alert correctly displays very long names without truncation")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Alert Display")
     @Test(priority = 8, groups = {"regression"}, description = "Verify alert with very long name")
     public void testAlertWithLongName() {
         String longName = RahulShettyConstants.LONG_NAME;
@@ -175,6 +202,9 @@ public class AlertTest extends BaseTest {
 
     // ==================== CONFIRM BOX TESTS ====================
 
+    @Description("Validate that Confirm button is displayed and enabled on the page")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Confirm Button Display")
     @Test(priority = 9, groups = {"smoke", "functional", "regression"}, description = "Verify Confirm button is displayed and enabled")
     public void testConfirmButtonVisibilityAndState() {
         softAssert.assertTrue(homePage.isConfirmBoxButtonDisplayed(), 
@@ -185,6 +215,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that JavaScript confirm box appears and displays the entered name")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Confirm Box Display")
     @Test(priority = 10, groups = {"smoke", "functional", "regression"}, description = "Verify confirm box appears with entered name")
     public void testConfirmBoxWithEnteredName() {
         homePage.enterName(RahulShettyConstants.TEST_USER_NAME);
@@ -204,6 +237,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that confirm box message has correct format and contains the entered name")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Confirm Box Display")
     @Test(priority = 11, groups = {"functional", "regression"}, description = "Verify confirm box message format")
     public void testConfirmBoxMessageFormat() {
         String testName = RahulShettyConstants.SAMPLE_NAME_CONFIRM;
@@ -226,6 +262,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that confirm box can be accepted and closes properly")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Confirm Box Handling")
     @Test(priority = 12, groups = {"functional", "regression"}, description = "Verify accepting confirm box")
     public void testAcceptConfirmBox() {
         homePage.enterName(RahulShettyConstants.ACCEPT_TEST_NAME);
@@ -247,6 +286,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that confirm box can be dismissed (cancelled) and closes properly")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Confirm Box Handling")
     @Test(priority = 13, groups = {"functional", "regression"}, description = "Verify dismissing confirm box")
     public void testDismissConfirmBox() {
         homePage.enterName(RahulShettyConstants.DISMISS_TEST_NAME);
@@ -268,6 +310,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that confirm box can be triggered even when name field is empty")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Confirm Box Display")
     @Test(priority = 14, groups = {"functional", "regression"}, description = "Verify confirm box with empty name")
     public void testConfirmBoxWithEmptyName() {
         // Click confirm box without entering name
@@ -286,6 +331,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that page elements remain interactive and functional after handling confirm box")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Confirm Box Handling")
     @Test(priority = 15, groups = {"functional", "regression"}, description = "Verify page remains interactive after handling confirm box")
     public void testPageInteractiveAfterConfirmBox() {
         homePage.enterName(RahulShettyConstants.INTERACTIVE_TEST_NAME);
@@ -310,6 +358,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that confirm box can be triggered multiple times with accept and dismiss actions")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Confirm Box Handling")
     @Test(priority = 16, groups = {"functional", "regression"}, description = "Verify multiple confirm box triggers")
     public void testMultipleConfirmBoxTriggers() {
         // First confirm box - Accept
@@ -332,6 +383,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that confirm box correctly displays names containing special characters")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Confirm Box Display")
     @Test(priority = 17, groups = {"regression"}, description = "Verify confirm box with special characters")
     public void testConfirmBoxWithSpecialCharacters() {
         String specialName = RahulShettyConstants.CONFIRM_SPECIAL_CHARS_NAME;
@@ -350,6 +404,9 @@ public class AlertTest extends BaseTest {
 
     // ==================== NAME INPUT FIELD TESTS ====================
 
+    @Description("Validate that name input field is displayed and enabled on the page")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Input Field Display")
     @Test(priority = 18, groups = {"smoke", "functional", "regression"}, description = "Verify name input field is displayed and enabled")
     public void testNameInputFieldVisibilityAndState() {
         softAssert.assertTrue(homePage.isNameInputDisplayed(), 
@@ -360,6 +417,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that name input field accepts and retains entered text")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Input Field Interaction")
     @Test(priority = 19, groups = {"functional", "regression"}, description = "Verify name input field accepts text")
     public void testNameInputAcceptsText() {
         homePage.enterName(RahulShettyConstants.TEST_INPUT_NAME);
@@ -371,6 +431,9 @@ public class AlertTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that name input field can be cleared after entering text")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Input Field Interaction")
     @Test(priority = 20, groups = {"functional", "regression"}, description = "Verify name input can be cleared")
     public void testNameInputCanBeCleared() {
         homePage.enterName(RahulShettyConstants.CLEAR_TEST_NAME);
