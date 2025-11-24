@@ -243,8 +243,8 @@ public class MouseHoverTest extends BaseTest {
         
         // Verify both links are still functional
         Assert.assertTrue(homePage.isTopLinkDisplayed(), 
-                "Top link should be visible after clicking and hovering again");
+                TestMessages.TOP_LINK_VISIBLE_AFTER_CLICK_AND_HOVER);
         Assert.assertTrue(homePage.isReloadLinkDisplayed(), 
-                "Reload link should be visible after clicking Top and hovering again");
+                TestMessages.RELOAD_LINK_VISIBLE_AFTER_TOP_CLICK);
     }
 }

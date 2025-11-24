@@ -340,6 +340,8 @@ public class TestMessages {
     public static final String RELOAD_LINK_DISPLAYED_ON_HOVER = "Reload link should be displayed when hovering";
     public static final String LINKS_APPEAR_IN_CORRECT_ORDER = "Links should appear in correct order (Top, Reload)";
     public static final String MOUSE_HOVER_SECTION_FUNCTIONAL = "Mouse hover section should be functional";
+    public static final String TOP_LINK_VISIBLE_AFTER_CLICK_AND_HOVER = "Top link should be visible after clicking and hovering again";
+    public static final String RELOAD_LINK_VISIBLE_AFTER_TOP_CLICK = "Reload link should be visible after clicking Top and hovering again";
     
     // Private constructor to prevent instantiation
     private TestMessages() {
