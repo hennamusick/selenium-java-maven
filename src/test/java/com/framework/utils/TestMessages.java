@@ -374,7 +374,7 @@ public class TestMessages {
     // ==================== UTILITY METHODS ====================
     
     /**
-     * Formats a message with the provided arguments.
+     * Helper method to format messages with arguments.
      * Useful for parameterized messages.
      * 
      * @param message The message template with placeholders
@@ -384,4 +384,41 @@ public class TestMessages {
     public static String format(String message, Object... args) {
         return String.format(message, args);
     }
+    
+    // ==================== SAUCEDEMO MESSAGES ====================
+    
+    // Login Page Messages
+    public static final String SAUCEDEMO_USERNAME_FIELD_DISPLAYED = "Username field should be displayed";
+    public static final String SAUCEDEMO_PASSWORD_FIELD_DISPLAYED = "Password field should be displayed";
+    public static final String SAUCEDEMO_LOGIN_BUTTON_DISPLAYED = "Login button should be displayed";
+    public static final String SAUCEDEMO_USERNAME_FIELD_ENABLED = "Username field should be enabled";
+    public static final String SAUCEDEMO_PASSWORD_FIELD_ENABLED = "Password field should be enabled";
+    public static final String SAUCEDEMO_LOGIN_BUTTON_ENABLED = "Login button should be enabled";
+    public static final String SAUCEDEMO_LOGIN_SUCCESSFUL = "Login should be successful and redirect to inventory page";
+    public static final String SAUCEDEMO_USERNAME_ACCEPTED = "Username field should accept input";
+    public static final String SAUCEDEMO_PASSWORD_ACCEPTED = "Password field should accept input";
+    public static final String SAUCEDEMO_USERNAME_CLEARED = "Username field should be empty after clear";
+    public static final String SAUCEDEMO_PASSWORD_CLEARED = "Password field should be empty after clear";
+    public static final String SAUCEDEMO_ERROR_MESSAGE_DISPLAYED = "Error message should be displayed for invalid login";
+    public static final String SAUCEDEMO_LOGIN_BUTTON_TEXT_CORRECT = "Login button should have correct text";
+    public static final String SAUCEDEMO_PAGE_TITLE_CORRECT = "Page title should be correct";
+    
+    // Inventory Page Messages
+    public static final String SAUCEDEMO_INVENTORY_TITLE_DISPLAYED = "Inventory page title should be displayed";
+    public static final String SAUCEDEMO_INVENTORY_TITLE_CORRECT = "Inventory page title should be 'Products'";
+    public static final String SAUCEDEMO_APP_LOGO_DISPLAYED = "App logo should be displayed";
+    public static final String SAUCEDEMO_MENU_BUTTON_DISPLAYED = "Menu button should be displayed";
+    public static final String SAUCEDEMO_SHOPPING_CART_DISPLAYED = "Shopping cart should be displayed";
+    public static final String SAUCEDEMO_SORT_DROPDOWN_DISPLAYED = "Sort dropdown should be displayed";
+    public static final String SAUCEDEMO_INVENTORY_ITEMS_DISPLAYED = "Inventory items should be displayed";
+    public static final String SAUCEDEMO_INVENTORY_COUNT_CORRECT = "Should have correct number of inventory items";
+    public static final String SAUCEDEMO_PRODUCT_NAMES_DISPLAYED = "Product names should be displayed";
+    public static final String SAUCEDEMO_PRODUCT_PRICES_DISPLAYED = "Product prices should be displayed";
+    public static final String SAUCEDEMO_CART_BADGE_UPDATED = "Cart badge should be updated after adding item";
+    public static final String SAUCEDEMO_ITEM_ADDED_TO_CART = "Item should be added to cart";
+    public static final String SAUCEDEMO_ITEM_REMOVED_FROM_CART = "Item should be removed from cart";
+    public static final String SAUCEDEMO_MENU_BUTTON_ENABLED = "Menu button should be enabled";
+    public static final String SAUCEDEMO_SHOPPING_CART_ENABLED = "Shopping cart should be enabled";
+    public static final String SAUCEDEMO_ADD_TO_CART_BUTTONS_DISPLAYED = "Add to cart buttons should be displayed";
+    public static final String SAUCEDEMO_REMOVE_BUTTONS_DISPLAYED = "Remove buttons should be displayed after adding items";
 }

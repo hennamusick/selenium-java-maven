@@ -5,6 +5,7 @@ import com.framework.pages.saucedemo.LoginPage;
 import com.framework.utils.BaseTest;
 import com.framework.utils.ConfigReader;
 import com.framework.utils.TestConstants;
+import com.framework.utils.TestMessages;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -29,9 +30,9 @@ public class SauceDemoTest extends BaseTest {
             "Expected URL to contain '" + TestConstants.SAUCEDEMO_DOMAIN + "' but got: " + currentUrl);
         
         // Verify login elements are present using page object
-        softAssert.assertTrue(loginPage.isUsernameFieldDisplayed(), "Username field should be visible");
-        softAssert.assertTrue(loginPage.isPasswordFieldDisplayed(), "Password field should be visible");
-        softAssert.assertTrue(loginPage.isLoginButtonDisplayed(), "Login button should be visible");
+        softAssert.assertTrue(loginPage.isUsernameFieldDisplayed(), TestMessages.SAUCEDEMO_USERNAME_FIELD_DISPLAYED);
+        softAssert.assertTrue(loginPage.isPasswordFieldDisplayed(), TestMessages.SAUCEDEMO_PASSWORD_FIELD_DISPLAYED);
+        softAssert.assertTrue(loginPage.isLoginButtonDisplayed(), TestMessages.SAUCEDEMO_LOGIN_BUTTON_DISPLAYED);
         
         softAssert.assertAll();
     }
@@ -39,8 +40,8 @@ public class SauceDemoTest extends BaseTest {
     @Test(priority = 2, groups = {"smoke", "regression"}, description = "Verify page title")
     public void testPageTitle() {
         String pageTitle = driver.getTitle();
-        softAssert.assertEquals(pageTitle, "Swag Labs", 
-            "Expected page title to be 'Swag Labs'");
+        softAssert.assertEquals(pageTitle, TestConstants.SAUCEDEMO_PAGE_TITLE, 
+            TestMessages.SAUCEDEMO_PAGE_TITLE_CORRECT);
         
         softAssert.assertAll();
     }
@@ -48,21 +49,21 @@ public class SauceDemoTest extends BaseTest {
     @Test(priority = 3, groups = {"smoke", "functional", "regression"}, description = "Verify successful login with valid credentials")
     public void testSuccessfulLogin() {
         // Login using page object
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(TestConstants.SAUCEDEMO_STANDARD_USER, TestConstants.SAUCEDEMO_PASSWORD);
         
         // Verify we're on the inventory page after login
         String currentUrl = driver.getCurrentUrl();
-        softAssert.assertTrue(currentUrl.contains("inventory.html"), 
-            "Expected to be redirected to inventory page after successful login");
+        softAssert.assertTrue(currentUrl.contains(TestConstants.SAUCEDEMO_INVENTORY_URL), 
+            TestMessages.SAUCEDEMO_LOGIN_SUCCESSFUL);
         
         softAssert.assertAll();
     }
 
     @Test(priority = 4, groups = {"smoke", "regression"}, description = "Verify login elements are enabled")
     public void testLoginElementsEnabled() {
-        softAssert.assertTrue(loginPage.isUsernameFieldEnabled(), "Username field should be enabled");
-        softAssert.assertTrue(loginPage.isPasswordFieldEnabled(), "Password field should be enabled");
-        softAssert.assertTrue(loginPage.isLoginButtonEnabled(), "Login button should be enabled");
+        softAssert.assertTrue(loginPage.isUsernameFieldEnabled(), TestMessages.SAUCEDEMO_USERNAME_FIELD_ENABLED);
+        softAssert.assertTrue(loginPage.isPasswordFieldEnabled(), TestMessages.SAUCEDEMO_PASSWORD_FIELD_ENABLED);
+        softAssert.assertTrue(loginPage.isLoginButtonEnabled(), TestMessages.SAUCEDEMO_LOGIN_BUTTON_ENABLED);
         
         softAssert.assertAll();
     }
@@ -72,7 +73,7 @@ public class SauceDemoTest extends BaseTest {
         loginPage.enterUsername("test_user");
         String enteredValue = loginPage.getUsernameFieldValue();
         
-        softAssert.assertEquals(enteredValue, "test_user", "Username field should contain entered value");
+        softAssert.assertEquals(enteredValue, "test_user", TestMessages.SAUCEDEMO_USERNAME_ACCEPTED);
         softAssert.assertAll();
     }
 
@@ -81,50 +82,53 @@ public class SauceDemoTest extends BaseTest {
         loginPage.enterPassword("test_password");
         String enteredValue = loginPage.getPasswordFieldValue();
         
-        softAssert.assertEquals(enteredValue, "test_password", "Password field should contain entered value");
+        softAssert.assertEquals(enteredValue, "test_password", TestMessages.SAUCEDEMO_PASSWORD_ACCEPTED);
         softAssert.assertAll();
     }
 
     @Test(priority = 7, groups = {"functional", "regression"}, description = "Verify inventory page after successful login")
     public void testInventoryPageAfterLogin() {
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(TestConstants.SAUCEDEMO_STANDARD_USER, TestConstants.SAUCEDEMO_PASSWORD);
         
-        softAssert.assertTrue(inventoryPage.isPageTitleDisplayed(), "Page title should be displayed");
-        softAssert.assertEquals(inventoryPage.getPageTitle(), "Products", "Page title should be 'Products'");
-        softAssert.assertTrue(inventoryPage.isAppLogoDisplayed(), "App logo should be displayed");
+        softAssert.assertTrue(inventoryPage.isPageTitleDisplayed(), TestMessages.SAUCEDEMO_INVENTORY_TITLE_DISPLAYED);
+        softAssert.assertEquals(inventoryPage.getPageTitle(), TestConstants.SAUCEDEMO_PRODUCTS_TITLE, 
+            TestMessages.SAUCEDEMO_INVENTORY_TITLE_CORRECT);
+        softAssert.assertTrue(inventoryPage.isAppLogoDisplayed(), TestMessages.SAUCEDEMO_APP_LOGO_DISPLAYED);
         
         softAssert.assertAll();
     }
 
     @Test(priority = 8, groups = {"functional", "regression"}, description = "Verify inventory page elements")
     public void testInventoryPageElements() {
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(TestConstants.SAUCEDEMO_STANDARD_USER, TestConstants.SAUCEDEMO_PASSWORD);
         
-        softAssert.assertTrue(inventoryPage.isMenuButtonDisplayed(), "Menu button should be displayed");
-        softAssert.assertTrue(inventoryPage.isShoppingCartDisplayed(), "Shopping cart should be displayed");
-        softAssert.assertTrue(inventoryPage.isSortDropdownDisplayed(), "Sort dropdown should be displayed");
+        softAssert.assertTrue(inventoryPage.isMenuButtonDisplayed(), TestMessages.SAUCEDEMO_MENU_BUTTON_DISPLAYED);
+        softAssert.assertTrue(inventoryPage.isShoppingCartDisplayed(), TestMessages.SAUCEDEMO_SHOPPING_CART_DISPLAYED);
+        softAssert.assertTrue(inventoryPage.isSortDropdownDisplayed(), TestMessages.SAUCEDEMO_SORT_DROPDOWN_DISPLAYED);
         
         softAssert.assertAll();
     }
 
     @Test(priority = 9, groups = {"regression"}, description = "Verify inventory items are displayed")
     public void testInventoryItemsDisplayed() {
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(TestConstants.SAUCEDEMO_STANDARD_USER, TestConstants.SAUCEDEMO_PASSWORD);
         
         int itemCount = inventoryPage.getInventoryItemCount();
-        softAssert.assertTrue(itemCount > 0, "Should have at least one inventory item");
-        softAssert.assertEquals(itemCount, 6, "Should have 6 inventory items");
+        softAssert.assertTrue(itemCount > 0, TestMessages.SAUCEDEMO_INVENTORY_ITEMS_DISPLAYED);
+        softAssert.assertEquals(itemCount, TestConstants.SAUCEDEMO_PRODUCT_COUNT, 
+            TestMessages.SAUCEDEMO_INVENTORY_COUNT_CORRECT);
         
         softAssert.assertAll();
     }
 
     @Test(priority = 10, groups = {"regression"}, description = "Verify product names are displayed")
     public void testProductNamesDisplayed() {
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(TestConstants.SAUCEDEMO_STANDARD_USER, TestConstants.SAUCEDEMO_PASSWORD);
         
         var productNames = inventoryPage.getAllProductNames();
-        softAssert.assertFalse(productNames.isEmpty(), "Should have product names");
-        softAssert.assertEquals(productNames.size(), 6, "Should have 6 product names");
+        softAssert.assertFalse(productNames.isEmpty(), TestMessages.SAUCEDEMO_PRODUCT_NAMES_DISPLAYED);
+        softAssert.assertEquals(productNames.size(), TestConstants.SAUCEDEMO_PRODUCT_COUNT, 
+            TestMessages.SAUCEDEMO_PRODUCT_NAMES_DISPLAYED);
         
         softAssert.assertAll();
     }
@@ -132,7 +136,8 @@ public class SauceDemoTest extends BaseTest {
     @Test(priority = 11, groups = {"regression"}, description = "Verify login button text")
     public void testLoginButtonText() {
         String buttonText = loginPage.getLoginButtonText();
-        softAssert.assertEquals(buttonText, "Login", "Login button should have text 'Login'");
+        softAssert.assertEquals(buttonText, TestConstants.SAUCEDEMO_LOGIN_BUTTON_TEXT, 
+            TestMessages.SAUCEDEMO_LOGIN_BUTTON_TEXT_CORRECT);
         
         softAssert.assertAll();
     }
@@ -143,7 +148,7 @@ public class SauceDemoTest extends BaseTest {
         loginPage.clearUsername();
         
         String value = loginPage.getUsernameFieldValue();
-        softAssert.assertTrue(value.isEmpty(), "Username field should be empty after clear");
+        softAssert.assertTrue(value.isEmpty(), TestMessages.SAUCEDEMO_USERNAME_CLEARED);
         
         softAssert.assertAll();
     }
@@ -154,7 +159,7 @@ public class SauceDemoTest extends BaseTest {
         loginPage.clearPassword();
         
         String value = loginPage.getPasswordFieldValue();
-        softAssert.assertTrue(value.isEmpty(), "Password field should be empty after clear");
+        softAssert.assertTrue(value.isEmpty(), TestMessages.SAUCEDEMO_PASSWORD_CLEARED);
         
         softAssert.assertAll();
     }

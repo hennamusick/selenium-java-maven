@@ -216,4 +216,42 @@ public final class TestConstants {
      */
     public static final String IFRAME_SRC_DOMAIN = "rahulshettyacademy.com";
     public static final String IFRAME_EXPECTED_TEXT = "RAHUL SHETTY";
+    
+    // ==================== SAUCEDEMO CONSTANTS ====================
+    
+    /**
+     * SauceDemo Login Credentials
+     */
+    public static final String SAUCEDEMO_STANDARD_USER = "standard_user";
+    public static final String SAUCEDEMO_LOCKED_USER = "locked_out_user";
+    public static final String SAUCEDEMO_PROBLEM_USER = "problem_user";
+    public static final String SAUCEDEMO_PERFORMANCE_USER = "performance_glitch_user";
+    public static final String SAUCEDEMO_PASSWORD = "secret_sauce";
+    
+    /**
+     * SauceDemo Page Titles and Text
+     */
+    public static final String SAUCEDEMO_PAGE_TITLE = "Swag Labs";
+    public static final String SAUCEDEMO_PRODUCTS_TITLE = "Products";
+    public static final String SAUCEDEMO_LOGIN_BUTTON_TEXT = "Login";
+    public static final String SAUCEDEMO_APP_LOGO_TEXT = "Swag Labs";
+    
+    /**
+     * SauceDemo URLs
+     */
+    public static final String SAUCEDEMO_INVENTORY_URL = "inventory.html";
+    public static final String SAUCEDEMO_CART_URL = "cart.html";
+    
+    /**
+     * SauceDemo Product Count
+     */
+    public static final int SAUCEDEMO_PRODUCT_COUNT = 6;
+    
+    /**
+     * SauceDemo Error Messages
+     */
+    public static final String SAUCEDEMO_LOCKED_USER_ERROR = "Epic sadface: Sorry, this user has been locked out.";
+    public static final String SAUCEDEMO_INVALID_CREDENTIALS_ERROR = "Epic sadface: Username and password do not match any user in this service";
+    public static final String SAUCEDEMO_USERNAME_REQUIRED_ERROR = "Epic sadface: Username is required";
+    public static final String SAUCEDEMO_PASSWORD_REQUIRED_ERROR = "Epic sadface: Password is required";
 }
