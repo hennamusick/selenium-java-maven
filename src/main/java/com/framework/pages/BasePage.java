@@ -87,4 +87,13 @@ public abstract class BasePage {
         ((org.openqa.selenium.JavascriptExecutor) driver)
                 .executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
+
+    // Mouse hover methods
+    protected void hoverOverElement(WebElement element) {
+        wait.hoverOverElement(element);
+    }
+
+    protected void moveToElement(WebElement element) {
+        wait.moveToElement(element);
+    }
 }

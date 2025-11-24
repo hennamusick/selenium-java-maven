@@ -136,6 +136,30 @@
                     <include name="testChennaiMultipleTimes"/>
                 </methods>
             </class>
+            <class name="com.framework.tests.rahulshetty.MouseHoverTest">
+                <methods>
+                    <include name="testMouseHoverButtonDisplayed"/>
+                    <include name="testMouseHoverButtonEnabled"/>
+                    <include name="testTopLinkVisibleOnHover"/>
+                    <include name="testReloadLinkVisibleOnHover"/>
+                    <include name="testBothLinksVisibleOnHover"/>
+                    <include name="testTopLinkText"/>
+                    <include name="testReloadLinkText"/>
+                    <include name="testTopLinkHasHref"/>
+                    <include name="testReloadLinkHasHref"/>
+                    <include name="testTopLinkClickable"/>
+                    <include name="testReloadLinkClickable"/>
+                    <include name="testClickTopLink"/>
+                    <include name="testClickReloadLink"/>
+                    <include name="testMultipleHovers"/>
+                    <include name="testHoverStateConsistent"/>
+                    <include name="testLinksAppearInCorrectOrder"/>
+                    <include name="testMouseHoverButtonText"/>
+                    <include name="testTopLinkDisplayedAfterHover"/>
+                    <include name="testReloadLinkDisplayedAfterHover"/>
+                    <include name="testClickTopAndHoverAgain"/>
+                </methods>
+            </class>
             <class name="com.framework.tests.rahulshetty.AlertTest">
                 <methods>
                     <include name="testAlertButtonVisibilityAndState"/>

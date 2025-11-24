@@ -62,6 +62,12 @@
                     <include name="testTableHeaders"/>
                 </methods>
             </class>
+            <class name="com.framework.tests.rahulshetty.MouseHoverTest">
+                <methods>
+                    <include name="testMouseHoverButtonDisplayed"/>
+                    <include name="testMouseHoverButtonEnabled"/>
+                </methods>
+            </class>
             <class name="com.framework.tests.rahulshetty.AlertTest">
                 <methods>
                     <include name="testAlertButtonVisibilityAndState"/>

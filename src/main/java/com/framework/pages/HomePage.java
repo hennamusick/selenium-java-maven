@@ -82,6 +82,16 @@ public class HomePage extends BasePage {
     @FindBy(css = "div.totalAmount")
     private WebElement totalAmountElement;
     
+    // Mouse Hover Section
+    @FindBy(id = "mousehover")
+    private WebElement mouseHoverButton;
+    
+    @FindBy(css = "div.mouse-hover-content a[href='#top']")
+    private WebElement topLink;
+    
+    @FindBy(css = "div.mouse-hover-content a[href='#reload']")
+    private WebElement reloadLink;
+    
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -578,5 +588,84 @@ public class HomePage extends BasePage {
             }
         }
         return -1;
+    }
+    
+    // Mouse Hover Methods
+    public void scrollToMouseHover() {
+        scrollToElement(mouseHoverButton);
+    }
+    
+    public boolean isMouseHoverButtonDisplayed() {
+        return isElementDisplayed(mouseHoverButton);
+    }
+    
+    public boolean isMouseHoverButtonEnabled() {
+        return isElementEnabled(mouseHoverButton);
+    }
+    
+    public void hoverOverMouseHoverButton() {
+        hoverOverElement(mouseHoverButton);
+    }
+    
+    public boolean isTopLinkDisplayed() {
+        try {
+            return isElementDisplayed(topLink);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean isReloadLinkDisplayed() {
+        try {
+            return isElementDisplayed(reloadLink);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public void clickTopLink() {
+        clickElement(topLink);
+    }
+    
+    public void clickReloadLink() {
+        clickElement(reloadLink);
+    }
+    
+    public String getTopLinkText() {
+        return getElementText(topLink);
+    }
+    
+    public String getReloadLinkText() {
+        return getElementText(reloadLink);
+    }
+    
+    public String getTopLinkHref() {
+        return getElementAttribute(topLink, "href");
+    }
+    
+    public String getReloadLinkHref() {
+        return getElementAttribute(reloadLink, "href");
+    }
+    
+    public boolean isTopLinkClickable() {
+        try {
+            waitForElementToBeClickable(topLink);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean isReloadLinkClickable() {
+        try {
+            waitForElementToBeClickable(reloadLink);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public String getMouseHoverButtonText() {
+        return getElementText(mouseHoverButton);
     }
 }

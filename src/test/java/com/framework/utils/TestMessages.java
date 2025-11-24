@@ -315,6 +315,32 @@ public class TestMessages {
     public static final String AT_LEAST_2_ENGINEERS = "There should be at least 2 Engineers (Alex and Jack)";
     public static final String CHENNAI_APPEARS_TWICE = "Chennai should appear at least twice (Alex and Ivory)";
     
+    // ==================== MOUSE HOVER MESSAGES ====================
+    public static final String MOUSE_HOVER_BUTTON_DISPLAYED = "Mouse Hover button should be displayed";
+    public static final String MOUSE_HOVER_BUTTON_ENABLED = "Mouse Hover button should be enabled";
+    public static final String TOP_LINK_VISIBLE_ON_HOVER = "Top link should be visible when hovering over Mouse Hover button";
+    public static final String RELOAD_LINK_VISIBLE_ON_HOVER = "Reload link should be visible when hovering over Mouse Hover button";
+    public static final String TOP_LINK_NOT_VISIBLE_BEFORE_HOVER = "Top link should not be visible before hovering";
+    public static final String RELOAD_LINK_NOT_VISIBLE_BEFORE_HOVER = "Reload link should not be visible before hovering";
+    public static final String TOP_LINK_CLICKABLE = "Top link should be clickable";
+    public static final String RELOAD_LINK_CLICKABLE = "Reload link should be clickable";
+    public static final String TOP_LINK_HAS_CORRECT_TEXT = "Top link should have text 'Top'";
+    public static final String RELOAD_LINK_HAS_CORRECT_TEXT = "Reload link should have text 'Reload'";
+    public static final String TOP_LINK_HAS_HREF = "Top link should have href attribute";
+    public static final String RELOAD_LINK_HAS_HREF = "Reload link should have href attribute";
+    public static final String LINKS_HIDDEN_AFTER_MOUSE_OUT = "Links should be hidden after mouse moves away";
+    public static final String BOTH_LINKS_VISIBLE_ON_HOVER = "Both Top and Reload links should be visible on hover";
+    public static final String HOVER_MENU_DISAPPEARS = "Hover menu should disappear when mouse moves away";
+    public static final String TOP_LINK_HREF_CORRECT = "Top link href should be '#top'";
+    public static final String RELOAD_LINK_HREF_CORRECT = "Reload link href should be '#reload'";
+    public static final String PAGE_SCROLLS_TO_TOP = "Page should scroll to top after clicking Top link";
+    public static final String MULTIPLE_HOVERS_WORK = "Multiple consecutive hovers should work correctly";
+    public static final String HOVER_STATE_CONSISTENT = "Hover state should be consistent across multiple interactions";
+    public static final String TOP_LINK_DISPLAYED_ON_HOVER = "Top link should be displayed when hovering";
+    public static final String RELOAD_LINK_DISPLAYED_ON_HOVER = "Reload link should be displayed when hovering";
+    public static final String LINKS_APPEAR_IN_CORRECT_ORDER = "Links should appear in correct order (Top, Reload)";
+    public static final String MOUSE_HOVER_SECTION_FUNCTIONAL = "Mouse hover section should be functional";
+    
     // Private constructor to prevent instantiation
     private TestMessages() {
         throw new AssertionError("TestMessages class should not be instantiated");

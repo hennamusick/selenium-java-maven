@@ -3,6 +3,7 @@ package com.framework.utils;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -144,5 +145,23 @@ public class Wait {
                 return false;
             }
         });
+    }
+
+    /**
+     * Move mouse to an element (hover)
+     */
+    public void moveToElement(WebElement element) {
+        wait.until(ExpectedConditions.visibilityOf(element));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
+    }
+
+    /**
+     * Hover over an element and wait for it to be stable
+     */
+    public void hoverOverElement(WebElement element) {
+        waitForElementToBeVisible(element);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();
     }
 }

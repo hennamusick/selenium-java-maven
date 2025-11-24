@@ -194,4 +194,13 @@ public final class TestConstants {
     public static final int AMOUNT_JACK = 32;
     
     public static final int EXPECTED_TOTAL_AMOUNT = 296;
+    
+    // ==================== Mouse Hover Data ====================
+    
+    /**
+     * Expected text for mouse hover links
+     */
+    public static final String TOP_LINK_TEXT = "Top";
+    public static final String RELOAD_LINK_TEXT = "Reload";
+    public static final String MOUSE_HOVER_BUTTON_TEXT = "Mouse Hover";
 }
