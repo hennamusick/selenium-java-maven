@@ -6,7 +6,6 @@ import com.framework.utils.TestMessages;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -26,16 +25,18 @@ public class MouseHoverTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that Mouse Hover button is displayed on the page")
     public void testMouseHoverButtonDisplayed() {
-        Assert.assertTrue(homePage.isMouseHoverButtonDisplayed(), 
+        softAssert.assertTrue(homePage.isMouseHoverButtonDisplayed(), 
                 TestMessages.MOUSE_HOVER_BUTTON_DISPLAYED);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"smoke", "regression"}, priority = 2)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that Mouse Hover button is enabled")
     public void testMouseHoverButtonEnabled() {
-        Assert.assertTrue(homePage.isMouseHoverButtonEnabled(), 
+        softAssert.assertTrue(homePage.isMouseHoverButtonEnabled(), 
                 TestMessages.MOUSE_HOVER_BUTTON_ENABLED);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 3)
@@ -43,8 +44,9 @@ public class MouseHoverTest extends BaseTest {
     @Description("Verify Top link appears when hovering over Mouse Hover button")
     public void testTopLinkVisibleOnHover() {
         homePage.hoverOverMouseHoverButton();
-        Assert.assertTrue(homePage.isTopLinkDisplayed(), 
+        softAssert.assertTrue(homePage.isTopLinkDisplayed(), 
                 TestMessages.TOP_LINK_VISIBLE_ON_HOVER);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 4)
@@ -52,8 +54,9 @@ public class MouseHoverTest extends BaseTest {
     @Description("Verify Reload link appears when hovering over Mouse Hover button")
     public void testReloadLinkVisibleOnHover() {
         homePage.hoverOverMouseHoverButton();
-        Assert.assertTrue(homePage.isReloadLinkDisplayed(), 
+        softAssert.assertTrue(homePage.isReloadLinkDisplayed(), 
                 TestMessages.RELOAD_LINK_VISIBLE_ON_HOVER);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 5)
@@ -65,8 +68,9 @@ public class MouseHoverTest extends BaseTest {
         boolean topVisible = homePage.isTopLinkDisplayed();
         boolean reloadVisible = homePage.isReloadLinkDisplayed();
         
-        Assert.assertTrue(topVisible && reloadVisible, 
+        softAssert.assertTrue(topVisible && reloadVisible, 
                 TestMessages.BOTH_LINKS_VISIBLE_ON_HOVER);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 6)
@@ -75,8 +79,9 @@ public class MouseHoverTest extends BaseTest {
     public void testTopLinkText() {
         homePage.hoverOverMouseHoverButton();
         String actualText = homePage.getTopLinkText();
-        Assert.assertEquals(actualText, TestConstants.TOP_LINK_TEXT, 
+        softAssert.assertEquals(actualText, TestConstants.TOP_LINK_TEXT, 
                 TestMessages.TOP_LINK_HAS_CORRECT_TEXT);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 7)
@@ -85,8 +90,9 @@ public class MouseHoverTest extends BaseTest {
     public void testReloadLinkText() {
         homePage.hoverOverMouseHoverButton();
         String actualText = homePage.getReloadLinkText();
-        Assert.assertEquals(actualText, TestConstants.RELOAD_LINK_TEXT, 
+        softAssert.assertEquals(actualText, TestConstants.RELOAD_LINK_TEXT, 
                 TestMessages.RELOAD_LINK_HAS_CORRECT_TEXT);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 8)
@@ -95,8 +101,9 @@ public class MouseHoverTest extends BaseTest {
     public void testTopLinkHasHref() {
         homePage.hoverOverMouseHoverButton();
         String href = homePage.getTopLinkHref();
-        Assert.assertNotNull(href, TestMessages.TOP_LINK_HAS_HREF);
-        Assert.assertTrue(href.contains("#top"), TestMessages.TOP_LINK_HREF_CORRECT);
+        softAssert.assertNotNull(href, TestMessages.TOP_LINK_HAS_HREF);
+        softAssert.assertTrue(href.contains("#top"), TestMessages.TOP_LINK_HREF_CORRECT);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 9)
@@ -105,8 +112,9 @@ public class MouseHoverTest extends BaseTest {
     public void testReloadLinkHasHref() {
         homePage.hoverOverMouseHoverButton();
         String href = homePage.getReloadLinkHref();
-        Assert.assertNotNull(href, TestMessages.RELOAD_LINK_HAS_HREF);
-        Assert.assertTrue(href.contains("#reload"), TestMessages.RELOAD_LINK_HREF_CORRECT);
+        softAssert.assertNotNull(href, TestMessages.RELOAD_LINK_HAS_HREF);
+        softAssert.assertTrue(href.contains("#reload"), TestMessages.RELOAD_LINK_HREF_CORRECT);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 10)
@@ -114,8 +122,9 @@ public class MouseHoverTest extends BaseTest {
     @Description("Verify Top link is clickable when hovering")
     public void testTopLinkClickable() {
         homePage.hoverOverMouseHoverButton();
-        Assert.assertTrue(homePage.isTopLinkClickable(), 
+        softAssert.assertTrue(homePage.isTopLinkClickable(), 
                 TestMessages.TOP_LINK_CLICKABLE);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 11)
@@ -123,8 +132,9 @@ public class MouseHoverTest extends BaseTest {
     @Description("Verify Reload link is clickable when hovering")
     public void testReloadLinkClickable() {
         homePage.hoverOverMouseHoverButton();
-        Assert.assertTrue(homePage.isReloadLinkClickable(), 
+        softAssert.assertTrue(homePage.isReloadLinkClickable(), 
                 TestMessages.RELOAD_LINK_CLICKABLE);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 12)
@@ -135,7 +145,8 @@ public class MouseHoverTest extends BaseTest {
         homePage.clickTopLink();
         
         // Verify page scrolled (no exception thrown means success)
-        Assert.assertTrue(true, TestMessages.PAGE_SCROLLS_TO_TOP);
+        softAssert.assertTrue(true, TestMessages.PAGE_SCROLLS_TO_TOP);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 13)
@@ -146,8 +157,9 @@ public class MouseHoverTest extends BaseTest {
         homePage.clickReloadLink();
         
         // After clicking reload, verify page is still functional
-        Assert.assertTrue(homePage.isMouseHoverButtonDisplayed(), 
+        softAssert.assertTrue(homePage.isMouseHoverButtonDisplayed(), 
                 TestMessages.MOUSE_HOVER_SECTION_FUNCTIONAL);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 14)
@@ -166,8 +178,9 @@ public class MouseHoverTest extends BaseTest {
         homePage.hoverOverMouseHoverButton();
         boolean secondHoverTopVisible = homePage.isTopLinkDisplayed();
         
-        Assert.assertTrue(firstHoverTopVisible && secondHoverTopVisible, 
+        softAssert.assertTrue(firstHoverTopVisible && secondHoverTopVisible, 
                 TestMessages.MULTIPLE_HOVERS_WORK);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 15)
@@ -184,8 +197,9 @@ public class MouseHoverTest extends BaseTest {
         String topText2 = homePage.getTopLinkText();
         String reloadText2 = homePage.getReloadLinkText();
         
-        Assert.assertEquals(topText1, topText2, TestMessages.HOVER_STATE_CONSISTENT);
-        Assert.assertEquals(reloadText1, reloadText2, TestMessages.HOVER_STATE_CONSISTENT);
+        softAssert.assertEquals(topText1, topText2, TestMessages.HOVER_STATE_CONSISTENT);
+        softAssert.assertEquals(reloadText1, reloadText2, TestMessages.HOVER_STATE_CONSISTENT);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 16)
@@ -197,10 +211,11 @@ public class MouseHoverTest extends BaseTest {
         String topText = homePage.getTopLinkText();
         String reloadText = homePage.getReloadLinkText();
         
-        Assert.assertEquals(topText, TestConstants.TOP_LINK_TEXT, 
+        softAssert.assertEquals(topText, TestConstants.TOP_LINK_TEXT, 
                 TestMessages.LINKS_APPEAR_IN_CORRECT_ORDER);
-        Assert.assertEquals(reloadText, TestConstants.RELOAD_LINK_TEXT, 
+        softAssert.assertEquals(reloadText, TestConstants.RELOAD_LINK_TEXT, 
                 TestMessages.LINKS_APPEAR_IN_CORRECT_ORDER);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 17)
@@ -208,8 +223,9 @@ public class MouseHoverTest extends BaseTest {
     @Description("Verify Mouse Hover button has correct text")
     public void testMouseHoverButtonText() {
         String buttonText = homePage.getMouseHoverButtonText();
-        Assert.assertEquals(buttonText, TestConstants.MOUSE_HOVER_BUTTON_TEXT, 
+        softAssert.assertEquals(buttonText, TestConstants.MOUSE_HOVER_BUTTON_TEXT, 
                 "Mouse Hover button should have correct text");
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 18)
@@ -217,8 +233,9 @@ public class MouseHoverTest extends BaseTest {
     @Description("Verify Top link displays after hovering")
     public void testTopLinkDisplayedAfterHover() {
         homePage.hoverOverMouseHoverButton();
-        Assert.assertTrue(homePage.isTopLinkDisplayed(), 
+        softAssert.assertTrue(homePage.isTopLinkDisplayed(), 
                 TestMessages.TOP_LINK_DISPLAYED_ON_HOVER);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 19)
@@ -226,8 +243,9 @@ public class MouseHoverTest extends BaseTest {
     @Description("Verify Reload link displays after hovering")
     public void testReloadLinkDisplayedAfterHover() {
         homePage.hoverOverMouseHoverButton();
-        Assert.assertTrue(homePage.isReloadLinkDisplayed(), 
+        softAssert.assertTrue(homePage.isReloadLinkDisplayed(), 
                 TestMessages.RELOAD_LINK_DISPLAYED_ON_HOVER);
+        softAssert.assertAll();
     }
     
     @Test(groups = {"regression"}, priority = 20)
@@ -242,9 +260,10 @@ public class MouseHoverTest extends BaseTest {
         homePage.hoverOverMouseHoverButton();
         
         // Verify both links are still functional
-        Assert.assertTrue(homePage.isTopLinkDisplayed(), 
+        softAssert.assertTrue(homePage.isTopLinkDisplayed(), 
                 TestMessages.TOP_LINK_VISIBLE_AFTER_CLICK_AND_HOVER);
-        Assert.assertTrue(homePage.isReloadLinkDisplayed(), 
+        softAssert.assertTrue(homePage.isReloadLinkDisplayed(), 
                 TestMessages.RELOAD_LINK_VISIBLE_AFTER_TOP_CLICK);
+        softAssert.assertAll();
     }
 }
