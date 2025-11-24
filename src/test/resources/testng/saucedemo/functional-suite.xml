@@ -1,0 +1,36 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo - Functional Test Suite">
+    <listeners>
+        <listener class-name="com.framework.utils.AllureListener"/>
+    </listeners>
+    
+    <!-- Run only functional tests for SauceDemo -->
+    <test name="SauceDemo - Functional Tests">
+        <classes>
+            <class name="com.framework.tests.saucedemo.LoginTest">
+                <methods>
+                    <include name="testLoginWithStandardUser"/>
+                    <include name="testLoginWithLockedUser"/>
+                    <include name="testLoginWithProblemUser"/>
+                    <include name="testLoginWithPerformanceUser"/>
+                    <include name="testLoginWithErrorUser"/>
+                    <include name="testLoginWithVisualUser"/>
+                    <include name="testLoginWithInvalidUsername"/>
+                    <include name="testLoginWithInvalidPassword"/>
+                    <include name="testLoginWithEmptyUsername"/>
+                    <include name="testLoginWithEmptyPassword"/>
+                    <include name="testLoginWithEmptyCredentials"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.saucedemo.SauceDemoTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                    <include name="testInventoryPageAfterLogin"/>
+                    <include name="testInventoryPageElements"/>
+                    <include name="testInventoryItemsDisplayed"/>
+                    <include name="testProductNamesDisplayed"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

@@ -312,17 +312,17 @@ public class LoginTest extends BaseTest {
         // First attempt
         loginPage.login("invalid_user1", "wrong_pass1");
         softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
-            "Error message should display after first failed attempt");
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
         
         // Second attempt
         loginPage.login("invalid_user2", "wrong_pass2");
         softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
-            "Error message should display after second failed attempt");
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
         
         // Third attempt
         loginPage.login("invalid_user3", "wrong_pass3");
         softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
-            "Error message should display after third failed attempt");
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
         
         softAssert.assertAll();
     }
@@ -332,7 +332,7 @@ public class LoginTest extends BaseTest {
         // Try with invalid credentials
         loginPage.login("invalid_user", "wrong_password");
         softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), 
-            "Error message should be displayed for invalid credentials");
+            SauceDemoMessages.ERROR_MESSAGE_DISPLAYED);
         
         // Clear and try with valid credentials
         loginPage.clearUsername();

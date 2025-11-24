@@ -1,0 +1,27 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo - Smoke Test Suite">
+    <listeners>
+        <listener class-name="com.framework.utils.AllureListener"/>
+    </listeners>
+    
+    <!-- Run only smoke tests for SauceDemo -->
+    <test name="SauceDemo - Smoke Tests">
+        <classes>
+            <class name="com.framework.tests.saucedemo.LoginTest">
+                <methods>
+                    <include name="testLoginPageLoads"/>
+                    <include name="testPageTitle"/>
+                    <include name="testLoginElementsEnabled"/>
+                    <include name="testLoginWithStandardUser"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.saucedemo.SauceDemoTest">
+                <methods>
+                    <include name="testSuccessfulLogin"/>
+                    <include name="testInventoryPageElements"/>
+                    <include name="testInventoryItemsDisplayed"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

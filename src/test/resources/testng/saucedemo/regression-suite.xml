@@ -1,0 +1,72 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="SauceDemo - Regression Test Suite">
+    <listeners>
+        <listener class-name="com.framework.utils.AllureListener"/>
+    </listeners>
+    
+    <!-- Run all regression tests for SauceDemo -->
+    <test name="SauceDemo - Regression Tests">
+        <classes>
+            <class name="com.framework.tests.saucedemo.LoginTest">
+                <methods>
+                    <!-- Login Page Element Tests -->
+                    <include name="testLoginPageLoads"/>
+                    <include name="testPageTitle"/>
+                    <include name="testLoginElementsEnabled"/>
+                    <include name="testLoginButtonText"/>
+                    
+                    <!-- Input Field Tests -->
+                    <include name="testUsernameFieldAcceptsInput"/>
+                    <include name="testPasswordFieldAcceptsInput"/>
+                    <include name="testClearUsernameField"/>
+                    <include name="testClearPasswordField"/>
+                    
+                    <!-- Valid Login Scenarios - All User Types -->
+                    <include name="testLoginWithStandardUser"/>
+                    <include name="testLoginWithLockedUser"/>
+                    <include name="testLoginWithProblemUser"/>
+                    <include name="testLoginWithPerformanceUser"/>
+                    <include name="testLoginWithErrorUser"/>
+                    <include name="testLoginWithVisualUser"/>
+                    
+                    <!-- Invalid Credentials Tests -->
+                    <include name="testLoginWithInvalidUsername"/>
+                    <include name="testLoginWithInvalidPassword"/>
+                    <include name="testLoginWithEmptyUsername"/>
+                    <include name="testLoginWithEmptyPassword"/>
+                    <include name="testLoginWithEmptyCredentials"/>
+                    
+                    <!-- Edge Case and Security Tests -->
+                    <include name="testLoginWithSpecialCharactersUsername"/>
+                    <include name="testLoginWithSQLInjection"/>
+                    <include name="testLoginWithWrongCase"/>
+                    <include name="testLoginWithSpacesInUsername"/>
+                    <include name="testMultipleFailedLoginAttempts"/>
+                    <include name="testLoginAfterClearingInvalidCredentials"/>
+                </methods>
+            </class>
+            <class name="com.framework.tests.saucedemo.SauceDemoTest">
+                <methods>
+                    <!-- Basic Login and Page Tests -->
+                    <include name="testLoginPageLoads"/>
+                    <include name="testPageTitle"/>
+                    <include name="testSuccessfulLogin"/>
+                    <include name="testLoginElementsEnabled"/>
+                    
+                    <!-- Input Field Tests -->
+                    <include name="testUsernameFieldAcceptsInput"/>
+                    <include name="testPasswordFieldAcceptsInput"/>
+                    <include name="testClearUsernameField"/>
+                    <include name="testClearPasswordField"/>
+                    
+                    <!-- Inventory Page Tests -->
+                    <include name="testInventoryPageAfterLogin"/>
+                    <include name="testInventoryPageElements"/>
+                    <include name="testInventoryItemsDisplayed"/>
+                    <include name="testProductNamesDisplayed"/>
+                    <include name="testLoginButtonText"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
