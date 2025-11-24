@@ -1,6 +1,6 @@
 package com.framework.utils;
 
-import com.framework.pages.HomePage;
+import com.framework.pages.rahulshetty.HomePage;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;

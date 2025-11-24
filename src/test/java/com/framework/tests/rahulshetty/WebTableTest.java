@@ -1,6 +1,6 @@
 package com.framework.tests.rahulshetty;
 
-import com.framework.pages.WebTablePage;
+import com.framework.pages.rahulshetty.WebTablePage;
 import com.framework.utils.BaseTest;
 import com.framework.utils.TestMessages;
 import io.qameta.allure.*;

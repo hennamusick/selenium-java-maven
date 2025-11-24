@@ -1,6 +1,6 @@
 package com.framework.tests.rahulshetty;
 
-import com.framework.pages.HomePage;
+import com.framework.pages.rahulshetty.HomePage;
 import com.framework.utils.BaseTest;
 import com.framework.utils.TestConstants;
 import com.framework.utils.TestMessages;
