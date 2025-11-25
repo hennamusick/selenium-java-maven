@@ -20,6 +20,9 @@ public class HideShowTest extends BaseTest {
         homePage.scrollToHideShowSection(); // Scroll to make elements fully visible
     }
 
+    @Description("Validate that Hide and Show buttons are displayed and enabled on the page")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Button Display")
     @Test(priority = 1, groups = {"smoke", "functional", "regression"}, description = "Verify Hide and Show buttons are displayed and enabled")
     public void testHideShowButtonsVisibilityAndState() {
         softAssert.assertTrue(homePage.isHideButtonDisplayed(), 
@@ -34,6 +37,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that the text box is visible by default when page loads")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Element Visibility")
     @Test(priority = 2, groups = {"smoke", "functional", "regression"}, description = "Verify text box is displayed by default")
     public void testTextBoxDisplayedByDefault() {
         softAssert.assertTrue(homePage.isDisplayedTextBoxVisible(), 
@@ -42,6 +48,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that clicking Hide button hides the text box from view")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Hide Functionality")
     @Test(priority = 3, groups = {"functional", "regression"}, description = "Verify clicking Hide button hides the text box")
     public void testHideButtonHidesTextBox() {
         // Verify text box is visible initially
@@ -59,6 +68,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that clicking Show button makes the hidden text box visible again")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Show Functionality")
     @Test(priority = 4, groups = {"functional", "regression"}, description = "Verify clicking Show button shows the text box")
     public void testShowButtonShowsTextBox() {
         // Hide the text box first
@@ -80,6 +92,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that multiple hide/show cycles work correctly and toggle visibility properly")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Toggle Behavior")
     @Test(priority = 5, groups = {"functional", "regression"}, description = "Verify Hide and Show cycle works correctly")
     public void testHideShowCycle() {
         // Initially visible
@@ -113,6 +128,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that text box accepts and retains user input when visible")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Input Functionality")
     @Test(priority = 6, groups = {"functional", "regression"}, description = "Verify text box accepts input when visible")
     public void testTextBoxAcceptsInputWhenVisible() {
         // Ensure text box is visible
@@ -132,6 +150,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that entered text value persists after hiding and showing the text box")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Value Persistence")
     @Test(priority = 7, groups = {"functional", "regression"}, description = "Verify text box value persists after hide/show cycle")
     public void testTextBoxValuePersistsAfterHideShow() {
         // Ensure text box is visible and enter text
@@ -163,6 +184,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that Hide and Show buttons remain visible regardless of text box state")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Button Display")
     @Test(priority = 8, groups = {"regression"}, description = "Verify Hide and Show buttons remain visible throughout")
     public void testHideShowButtonsAlwaysVisible() {
         // Initially visible
@@ -190,6 +214,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that clicking Hide button multiple times maintains hidden state")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Hide Functionality")
     @Test(priority = 9, groups = {"regression"}, description = "Verify clicking Hide button multiple times")
     public void testMultipleHideClicks() {
         // Ensure text box is visible
@@ -219,6 +246,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that clicking Show button multiple times maintains visible state")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Show Functionality")
     @Test(priority = 10, groups = {"regression"}, description = "Verify clicking Show button multiple times")
     public void testMultipleShowClicks() {
         // Hide the text box first
@@ -246,6 +276,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that text box is enabled and interactive when visible")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Element Visibility")
     @Test(priority = 11, groups = {"functional", "regression"}, description = "Verify text box is enabled when visible")
     public void testTextBoxEnabledWhenVisible() {
         // Ensure text box is visible
@@ -263,6 +296,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that cleared text box value persists as empty after hide/show cycle")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Value Persistence")
     @Test(priority = 12, groups = {"functional", "regression"}, description = "Verify clearing text box and hide/show cycle")
     public void testClearTextBoxAndHideShow() {
         // Ensure text box is visible
@@ -294,6 +330,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that new text can be entered after hide/show cycle")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Input Functionality")
     @Test(priority = 13, groups = {"functional", "regression"}, description = "Verify entering new text after show")
     public void testEnterNewTextAfterShow() {
         // Hide and show cycle
@@ -314,6 +353,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that rapid consecutive hide/show clicks work correctly")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Toggle Behavior")
     @Test(priority = 14, groups = {"functional", "regression"}, description = "Verify rapid Hide/Show clicks")
     public void testRapidHideShowClicks() {
         // Rapid clicks - Hide
@@ -331,6 +373,9 @@ public class HideShowTest extends BaseTest {
         softAssert.assertAll();
     }
 
+    @Description("Validate that starting with Hide then Show properly restores element visibility")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Toggle Behavior")
     @Test(priority = 15, groups = {"regression"}, description = "Verify starting with Hide then Show restores visibility")
     public void testStartWithHide() {
         // Click Hide first (even if already visible)

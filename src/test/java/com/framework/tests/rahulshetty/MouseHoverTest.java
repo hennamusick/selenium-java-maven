@@ -24,6 +24,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"smoke", "regression"}, priority = 1)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that Mouse Hover button is displayed on the page")
+    @Story("Mouse Hover Button Display")
     public void testMouseHoverButtonDisplayed() {
         softAssert.assertTrue(homePage.isMouseHoverButtonDisplayed(), 
                 RahulShettyMessages.MOUSE_HOVER_BUTTON_DISPLAYED);
@@ -33,6 +34,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"smoke", "regression"}, priority = 2)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that Mouse Hover button is enabled")
+    @Story("Mouse Hover Button Display")
     public void testMouseHoverButtonEnabled() {
         softAssert.assertTrue(homePage.isMouseHoverButtonEnabled(), 
                 RahulShettyMessages.MOUSE_HOVER_BUTTON_ENABLED);
@@ -42,6 +44,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 3)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Top link appears when hovering over Mouse Hover button")
+    @Story("Hover Menu Display")
     public void testTopLinkVisibleOnHover() {
         homePage.hoverOverMouseHoverButton();
         softAssert.assertTrue(homePage.isTopLinkDisplayed(), 
@@ -52,6 +55,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 4)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Reload link appears when hovering over Mouse Hover button")
+    @Story("Hover Menu Display")
     public void testReloadLinkVisibleOnHover() {
         homePage.hoverOverMouseHoverButton();
         softAssert.assertTrue(homePage.isReloadLinkDisplayed(), 
@@ -62,6 +66,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 5)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify both Top and Reload links are visible when hovering")
+    @Story("Hover Menu Display")
     public void testBothLinksVisibleOnHover() {
         homePage.hoverOverMouseHoverButton();
         
@@ -76,6 +81,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 6)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Top link has correct text")
+    @Story("Link Properties")
     public void testTopLinkText() {
         homePage.hoverOverMouseHoverButton();
         String actualText = homePage.getTopLinkText();
@@ -87,6 +93,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 7)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Reload link has correct text")
+    @Story("Link Properties")
     public void testReloadLinkText() {
         homePage.hoverOverMouseHoverButton();
         String actualText = homePage.getReloadLinkText();
@@ -98,6 +105,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 8)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Top link has href attribute")
+    @Story("Link Properties")
     public void testTopLinkHasHref() {
         homePage.hoverOverMouseHoverButton();
         String href = homePage.getTopLinkHref();
@@ -109,6 +117,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 9)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Reload link has href attribute")
+    @Story("Link Properties")
     public void testReloadLinkHasHref() {
         homePage.hoverOverMouseHoverButton();
         String href = homePage.getReloadLinkHref();
@@ -120,6 +129,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 10)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Top link is clickable when hovering")
+    @Story("Link Interactions")
     public void testTopLinkClickable() {
         homePage.hoverOverMouseHoverButton();
         softAssert.assertTrue(homePage.isTopLinkClickable(), 
@@ -130,6 +140,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 11)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Reload link is clickable when hovering")
+    @Story("Link Interactions")
     public void testReloadLinkClickable() {
         homePage.hoverOverMouseHoverButton();
         softAssert.assertTrue(homePage.isReloadLinkClickable(), 
@@ -140,6 +151,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 12)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Top link can be clicked")
+    @Story("Link Interactions")
     public void testClickTopLink() {
         homePage.hoverOverMouseHoverButton();
         homePage.clickTopLink();
@@ -152,6 +164,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 13)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Reload link can be clicked")
+    @Story("Link Interactions")
     public void testClickReloadLink() {
         homePage.hoverOverMouseHoverButton();
         homePage.clickReloadLink();
@@ -165,6 +178,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 14)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify multiple consecutive hovers work correctly")
+    @Story("Hover Behavior")
     public void testMultipleHovers() {
         // First hover
         homePage.hoverOverMouseHoverButton();
@@ -186,6 +200,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 15)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify hover state is consistent")
+    @Story("Hover Behavior")
     public void testHoverStateConsistent() {
         homePage.hoverOverMouseHoverButton();
         
@@ -205,6 +220,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 16)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify links appear in correct order")
+    @Story("Hover Menu Display")
     public void testLinksAppearInCorrectOrder() {
         homePage.hoverOverMouseHoverButton();
         
@@ -221,6 +237,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 17)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify Mouse Hover button has correct text")
+    @Story("Mouse Hover Button Display")
     public void testMouseHoverButtonText() {
         String buttonText = homePage.getMouseHoverButtonText();
         softAssert.assertEquals(buttonText, RahulShettyConstants.MOUSE_HOVER_BUTTON_TEXT, 
@@ -231,6 +248,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 18)
     @Severity(SeverityLevel.MINOR)
     @Description("Verify Top link displays after hovering")
+    @Story("Hover Menu Display")
     public void testTopLinkDisplayedAfterHover() {
         homePage.hoverOverMouseHoverButton();
         softAssert.assertTrue(homePage.isTopLinkDisplayed(), 
@@ -241,6 +259,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 19)
     @Severity(SeverityLevel.MINOR)
     @Description("Verify Reload link displays after hovering")
+    @Story("Hover Menu Display")
     public void testReloadLinkDisplayedAfterHover() {
         homePage.hoverOverMouseHoverButton();
         softAssert.assertTrue(homePage.isReloadLinkDisplayed(), 
@@ -251,6 +270,7 @@ public class MouseHoverTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 20)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify clicking Top link and then hovering again works")
+    @Story("Link Interactions")
     public void testClickTopAndHoverAgain() {
         homePage.hoverOverMouseHoverButton();
         homePage.clickTopLink();
