@@ -3,9 +3,7 @@ package com.framework.tests.rahulshetty;
 import com.framework.utils.BaseTest;
 import com.framework.utils.rahulshetty.RahulShettyConstants;
 import com.framework.utils.rahulshetty.RahulShettyMessages;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,6 +11,8 @@ import org.testng.annotations.Test;
  * Test class for Mouse Hover functionality
  * Tests the mouse hover menu with Top and Reload links
  */
+@Epic("Rahul Shetty Academy")
+@Feature("Mouse Hover Actions")
 public class MouseHoverTest extends BaseTest {
     
     @BeforeMethod(alwaysRun = true, dependsOnMethods = "setUp")

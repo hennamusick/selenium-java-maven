@@ -3,9 +3,7 @@ package com.framework.tests.rahulshetty;
 import com.framework.utils.BaseTest;
 import com.framework.utils.rahulshetty.RahulShettyConstants;
 import com.framework.utils.rahulshetty.RahulShettyMessages;
-import io.qameta.allure.Description;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.BeforeMethod;
@@ -15,6 +13,8 @@ import org.testng.annotations.Test;
  * Test class for iFrame functionality
  * Tests iframe switching, content verification, and context management
  */
+@Epic("Rahul Shetty Academy")
+@Feature("IFrame Handling")
 public class IFrameTest extends BaseTest {
     
     @BeforeMethod(alwaysRun = true, dependsOnMethods = "setUp")
@@ -26,6 +26,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"smoke", "regression"}, priority = 1)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that iFrame is displayed on the page")
+    @Story("IFrame Display")
     public void testIFrameDisplayed() {
         softAssert.assertTrue(homePage.isIFrameDisplayed(), 
                 RahulShettyMessages.IFRAME_DISPLAYED);
@@ -35,6 +36,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"smoke", "regression"}, priority = 2)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify that iFrame is enabled")
+    @Story("IFrame Display")
     public void testIFrameEnabled() {
         softAssert.assertTrue(homePage.isIFrameEnabled(), 
                 RahulShettyMessages.IFRAME_ENABLED);
@@ -44,6 +46,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 3)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify iFrame has correct ID attribute")
+    @Story("IFrame Attributes")
     public void testIFrameHasCorrectId() {
         String iframeId = homePage.getIFrameId();
         softAssert.assertEquals(iframeId, RahulShettyConstants.IFRAME_ID, 
@@ -54,6 +57,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 4)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify iFrame has src attribute")
+    @Story("IFrame Attributes")
     public void testIFrameHasSrc() {
         String src = homePage.getIFrameSrc();
         softAssert.assertNotNull(src, RahulShettyMessages.IFRAME_HAS_SRC);
@@ -64,6 +68,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 5)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify iFrame src contains expected domain")
+    @Story("IFrame Attributes")
     public void testIFrameSrcContainsDomain() {
         String src = homePage.getIFrameSrc();
         softAssert.assertTrue(src.contains(RahulShettyConstants.IFRAME_SRC_DOMAIN), 
@@ -74,6 +79,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 6)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify can switch to iFrame successfully")
+    @Story("IFrame Context Switching")
     public void testSwitchToIFrame() {
         try {
             homePage.switchToIFrame();
@@ -90,6 +96,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 7)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify iFrame content is visible after switching")
+    @Story("IFrame Content")
     public void testIFrameContentVisible() {
         homePage.switchToIFrame();
         
@@ -107,6 +114,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 8)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify iFrame contains expected content")
+    @Story("IFrame Content")
     public void testIFrameHasExpectedContent() {
         homePage.switchToIFrame();
         
@@ -128,6 +136,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 9)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify header is visible inside iFrame")
+    @Story("IFrame Content")
     public void testIFrameHeaderVisible() {
         homePage.switchToIFrame();
         
@@ -149,6 +158,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 10)
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify can switch back to main content from iFrame")
+    @Story("IFrame Context Switching")
     public void testSwitchBackToMainContent() {
         homePage.switchToIFrame();
         homePage.switchToDefaultContent();
@@ -162,6 +172,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 11)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify main page is interactive after switching back from iFrame")
+    @Story("IFrame Context Switching")
     public void testMainPageInteractiveAfterIFrame() {
         homePage.switchToIFrame();
         homePage.switchToDefaultContent();
@@ -177,6 +188,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 12)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify multiple switches between main and iFrame work correctly")
+    @Story("IFrame Context Switching")
     public void testMultipleIFrameSwitches() {
         // First switch to iframe
         homePage.switchToIFrame();
@@ -201,6 +213,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 13)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify elements inside iFrame are clickable")
+    @Story("IFrame Interactions")
     public void testIFrameElementsClickable() {
         homePage.switchToIFrame();
         
@@ -226,6 +239,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 14)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify text can be extracted from iFrame elements")
+    @Story("IFrame Interactions")
     public void testExtractTextFromIFrame() {
         homePage.switchToIFrame();
         
@@ -246,6 +260,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 15)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify main page elements are not accessible while in iFrame context")
+    @Story("IFrame Context Isolation")
     public void testMainPageElementsNotAccessibleInIFrame() {
         homePage.switchToIFrame();
         
@@ -263,6 +278,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 16)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify iFrame elements are not accessible while in main page context")
+    @Story("IFrame Context Isolation")
     public void testIFrameElementsNotAccessibleInMain() {
         // Stay in main context, don't switch to iframe
         
@@ -277,6 +293,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 17)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify iFrame context is maintained until explicitly switched")
+    @Story("IFrame Context Isolation")
     public void testIFrameContextMaintained() {
         homePage.switchToIFrame();
         
@@ -305,6 +322,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 18)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify can get iFrame attributes while on main page")
+    @Story("IFrame Attributes")
     public void testIFrameAttributesAccessible() {
         // Stay on main page
         String iframeId = homePage.getIFrameId();
@@ -318,6 +336,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 19)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify iFrame is still displayed after page refresh")
+    @Story("IFrame Display")
     public void testIFrameDisplayedAfterRefresh() {
         softAssert.assertTrue(homePage.isIFrameDisplayed());
         
@@ -334,6 +353,7 @@ public class IFrameTest extends BaseTest {
     @Test(groups = {"regression"}, priority = 20)
     @Severity(SeverityLevel.NORMAL)
     @Description("Verify can interact with main page after multiple iframe operations")
+    @Story("IFrame Context Switching")
     public void testMainPageInteractiveAfterMultipleIFrameOps() {
         // Switch to iframe multiple times
         homePage.switchToIFrame();

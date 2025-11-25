@@ -3,9 +3,15 @@ package com.framework.tests.rahulshetty;
 import com.framework.utils.BaseTest;
 import com.framework.utils.rahulshetty.RahulShettyConstants;
 import com.framework.utils.rahulshetty.RahulShettyMessages;
+import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+/**
+ * Tests for show/hide element functionality on Rahul Shetty Academy practice page.
+ */
+@Epic("Rahul Shetty Academy")
+@Feature("Element Visibility Controls")
 public class HideShowTest extends BaseTest {
 
     @BeforeMethod(alwaysRun = true)
