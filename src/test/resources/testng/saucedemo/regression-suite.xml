@@ -4,24 +4,25 @@
         <listener class-name="com.framework.utils.AllureListener"/>
     </listeners>
     
-    <!-- Run all regression tests for SauceDemo -->
+    <!-- Run all regression tests for SauceDemo (30 tests total) -->
     <test name="SauceDemo - Regression Tests">
         <classes>
+            <!-- LoginTest: 26 comprehensive login scenario tests -->
             <class name="com.framework.tests.saucedemo.LoginTest">
                 <methods>
-                    <!-- Login Page Element Tests -->
+                    <!-- Login Page Element Tests (4 tests) -->
                     <include name="testLoginPageLoads"/>
                     <include name="testPageTitle"/>
                     <include name="testLoginElementsEnabled"/>
                     <include name="testLoginButtonText"/>
                     
-                    <!-- Input Field Tests -->
+                    <!-- Input Field Tests (4 tests) -->
                     <include name="testUsernameFieldAcceptsInput"/>
                     <include name="testPasswordFieldAcceptsInput"/>
                     <include name="testClearUsernameField"/>
                     <include name="testClearPasswordField"/>
                     
-                    <!-- Valid Login Scenarios - All User Types -->
+                    <!-- Valid Login Scenarios - All User Types (6 tests) -->
                     <include name="testLoginWithStandardUser"/>
                     <include name="testLoginWithLockedUser"/>
                     <include name="testLoginWithProblemUser"/>
@@ -29,14 +30,14 @@
                     <include name="testLoginWithErrorUser"/>
                     <include name="testLoginWithVisualUser"/>
                     
-                    <!-- Invalid Credentials Tests -->
+                    <!-- Invalid Credentials Tests (5 tests) -->
                     <include name="testLoginWithInvalidUsername"/>
                     <include name="testLoginWithInvalidPassword"/>
                     <include name="testLoginWithEmptyUsername"/>
                     <include name="testLoginWithEmptyPassword"/>
                     <include name="testLoginWithEmptyCredentials"/>
                     
-                    <!-- Edge Case and Security Tests -->
+                    <!-- Edge Case and Security Tests (6 tests) -->
                     <include name="testLoginWithSpecialCharactersUsername"/>
                     <include name="testLoginWithSQLInjection"/>
                     <include name="testLoginWithWrongCase"/>
@@ -45,26 +46,14 @@
                     <include name="testLoginAfterClearingInvalidCredentials"/>
                 </methods>
             </class>
-            <class name="com.framework.tests.saucedemo.SauceDemoTest">
+            
+            <!-- InventoryPageTest: 4 focused inventory page tests -->
+            <class name="com.framework.tests.saucedemo.InventoryPageTest">
                 <methods>
-                    <!-- Basic Login and Page Tests -->
-                    <include name="testLoginPageLoads"/>
-                    <include name="testPageTitle"/>
-                    <include name="testSuccessfulLogin"/>
-                    <include name="testLoginElementsEnabled"/>
-                    
-                    <!-- Input Field Tests -->
-                    <include name="testUsernameFieldAcceptsInput"/>
-                    <include name="testPasswordFieldAcceptsInput"/>
-                    <include name="testClearUsernameField"/>
-                    <include name="testClearPasswordField"/>
-                    
-                    <!-- Inventory Page Tests -->
-                    <include name="testInventoryPageAfterLogin"/>
+                    <include name="testInventoryPageDisplay"/>
                     <include name="testInventoryPageElements"/>
                     <include name="testInventoryItemsDisplayed"/>
                     <include name="testProductNamesDisplayed"/>
-                    <include name="testLoginButtonText"/>
                 </methods>
             </class>
         </classes>
