@@ -4,7 +4,7 @@ A comprehensive Selenium WebDriver test automation framework using Java, Maven, 
 
 ## ✨ Key Highlights
 
-- **179 comprehensive tests** across 2 websites (Rahul Shetty Academy & SauceDemo)
+- **166 comprehensive tests** across 2 websites (Rahul Shetty Academy & SauceDemo)
 - **Multi-website architecture** with separate page objects, tests, and utilities per website
 - **Page Object Model** with abstract BasePage and reusable Wait utility
 - **SoftAssert pattern** for comprehensive test failure reporting
@@ -287,8 +287,8 @@ selenium-e2e/
 │       │   │   │   ├── WebTableTest.java           # Web table validation (20 tests)
 │       │   │   │   └── WindowSwitchTest.java       # Window switching tests (10 tests)
 │       │   │   └── saucedemo/
-│       │   │       ├── LoginTest.java              # Login scenarios (25 tests) ⭐ NEW
-│       │   │       └── SauceDemoTest.java          # Inventory tests (13 tests)
+│       │   │       ├── LoginTest.java              # Login scenarios (26 tests)
+│       │   │       └── InventoryPageTest.java      # Inventory page tests (4 tests)
 │       │   └── utils/
 │       │       ├── BaseTest.java                   # Test base class with SoftAssert
 │       │       ├── TestListener.java               # TestNG listeners
@@ -333,7 +333,7 @@ mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/rahulshetty/function
 mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/rahulshetty/regression-suite.xml   # 60+ comprehensive tests
 
 # SauceDemo Tests
-mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/saucedemo/saucedemo-suite.xml      # 38 tests (25 login + 13 inventory)
+mvn test -Dsurefire.suiteXmlFiles=src/test/resources/testng/saucedemo/saucedemo-suite.xml      # 30 tests (26 login + 4 inventory)
 ```
 
 ### Run Specific Test Class
@@ -352,8 +352,8 @@ mvn test -Dtest=RadioButtonTest   # 6 radio button tests
 mvn test -Dtest=HomePageTest      # 3 basic page tests
 
 # SauceDemo Tests
-mvn test -Dtest=LoginTest         # 25 login scenario tests ⭐ NEW
-mvn test -Dtest=SauceDemoTest     # 13 inventory and product tests
+mvn test -Dtest=LoginTest          # 26 comprehensive login scenario tests
+mvn test -Dtest=InventoryPageTest  # 4 focused inventory page tests
 ```
 
 ---
@@ -641,7 +641,7 @@ homePage.clickReloadLink(); // Reloads page
 
 ---
 
-### LoginTest - SauceDemo Login Scenarios (25 Tests) ⭐ NEW
+### LoginTest - SauceDemo Login Scenarios (26 Tests)
 
 Comprehensive test suite for SauceDemo authentication covering valid/invalid credentials, edge cases, and security scenarios:
 
@@ -727,9 +727,9 @@ softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), "SQL injection should
 
 ---
 
-### SauceDemoTest - Inventory and Product Tests (13 Tests)
+### InventoryPageTest - Inventory and Product Tests (4 Tests)
 
-Tests for SauceDemo inventory page functionality and product display:
+Focused test suite for SauceDemo inventory page display and product functionality after successful login:
 
 ```java
 // Login and navigate to inventory
@@ -1019,7 +1019,7 @@ closeAllChildWindowsAndSwitchToParent(originalTab);
 All tests use SoftAssert and include detailed reporting with organized test suites:
 
 ```
-Tests run: 179, Failures: 0, Errors: 0, Skipped: 0
+Tests run: 171, Failures: 0, Errors: 0, Skipped: 0
 BUILD SUCCESS
 ```
 
@@ -1040,23 +1040,23 @@ BUILD SUCCESS
 | **RadioButtonTest** | 6 | Radio button selection and state |
 | **HomePageTest** | 6 | Basic page interactions |
 
-#### SauceDemo Tests (38 tests)
+#### SauceDemo Tests (30 tests)
 | Test Class | Test Count | Focus Area |
 |------------|-----------|------------|
-| **LoginTest** ⭐ NEW | 25 | Login scenarios (valid/invalid credentials, edge cases, security) |
-| **SauceDemoTest** | 13 | Inventory page, product display, cart functionality |
+| **LoginTest** | 26 | Login scenarios (valid/invalid credentials, edge cases, security) |
+| **InventoryPageTest** | 4 | Inventory page display, elements, and product count validation |
 
-**Total Tests: 179** (Comprehensive UI Test Coverage across 2 websites)
+**Total Tests: 171** (Comprehensive UI Test Coverage across 2 websites)
 
 ### Test Suite Organization
 
 | Suite | Website | Test Count | Purpose | Execution Time |
 |-------|---------|-----------|---------|----------------|
-| **testng.xml** | All | 179 | Master suite (runs all tests) | ~25-30 min |
+| **testng.xml** | All | 171 | Master suite (runs all tests) | ~22-25 min |
 | **smoke-suite.xml** | Rahul Shetty | 16+ | Critical path tests | ~2-3 min |
 | **functional-suite.xml** | Rahul Shetty | 50+ | Detailed feature tests | ~10-12 min |
 | **regression-suite.xml** | Rahul Shetty | 80+ | Comprehensive coverage | ~15-18 min |
-| **saucedemo-suite.xml** | SauceDemo | 38 | Login (25) + Inventory (13) | ~5-6 min |
+| **saucedemo-suite.xml** | SauceDemo | 30 | Login (26) + Inventory (4) | ~4-5 min |
 
 ### Test Groups
 
