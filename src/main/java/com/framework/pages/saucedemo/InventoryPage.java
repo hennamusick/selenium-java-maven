@@ -4,6 +4,7 @@ import com.framework.pages.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
@@ -150,5 +151,55 @@ public class InventoryPage extends BasePage {
 
     public boolean isShoppingCartEnabled() {
         return shoppingCartLink.isEnabled();
+    }
+
+    // Sort/Filter functionality
+    public void selectSortOption(String option) {
+        Select select = new Select(sortDropdown);
+        select.selectByVisibleText(option);
+    }
+
+    public void selectSortByValue(String value) {
+        Select select = new Select(sortDropdown);
+        select.selectByValue(value);
+    }
+
+    public String getSelectedSortOption() {
+        Select select = new Select(sortDropdown);
+        return select.getFirstSelectedOption().getText();
+    }
+
+    public List<String> getAllSortOptions() {
+        Select select = new Select(sortDropdown);
+        return select.getOptions().stream()
+                .map(WebElement::getText)
+                .toList();
+    }
+
+    public boolean isSortDropdownEnabled() {
+        return sortDropdown.isEnabled();
+    }
+
+    // Cart management
+    public void addAllItemsToCart() {
+        for (WebElement button : addToCartButtons) {
+            button.click();
+        }
+    }
+
+    public void removeItemFromCartByIndex(int index) {
+        if (index >= 0 && index < removeButtons.size()) {
+            removeButtons.get(index).click();
+        }
+    }
+
+    public void removeAllItemsFromCart() {
+        // Create a copy to avoid ConcurrentModificationException
+        int count = removeButtons.size();
+        for (int i = 0; i < count; i++) {
+            if (!removeButtons.isEmpty()) {
+                removeButtons.get(0).click();
+            }
+        }
     }
 }
