@@ -42,7 +42,6 @@ public final class SauceDemoMessages {
     public static final String MENU_BUTTON_ENABLED = "Menu button should be enabled";
     public static final String SHOPPING_CART_DISPLAYED = "Shopping cart should be displayed";
     public static final String SHOPPING_CART_ENABLED = "Shopping cart should be enabled";
-    public static final String SORT_DROPDOWN_DISPLAYED = "Sort dropdown should be displayed";
     public static final String INVENTORY_ITEMS_DISPLAYED = "Inventory items should be displayed";
     public static final String INVENTORY_COUNT_CORRECT = "Should have correct number of inventory items";
     public static final String PRODUCT_NAMES_DISPLAYED = "Product names should be displayed";
@@ -59,6 +58,48 @@ public final class SauceDemoMessages {
     public static final String CART_BADGE_NOT_DISPLAYED_WHEN_EMPTY = "Cart badge should not be displayed when cart is empty";
     public static final String MULTIPLE_ITEMS_ADDED = "Multiple items should be added to cart";
     public static final String ALL_ITEMS_REMOVED = "All items should be removed from cart";
+    
+    // ==================== SORT/FILTER MESSAGES ====================
+    
+    public static final String SORT_DROPDOWN_DISPLAYED = "Sort dropdown should be displayed";
+    public static final String SORT_DROPDOWN_ENABLED = "Sort dropdown should be enabled";
+    public static final String DEFAULT_SORT_CORRECT = "Default sort should be 'Name (A to Z)'";
+    public static final String SORT_OPTIONS_COUNT_CORRECT = "Should have 4 sort options";
+    public static final String SORT_OPTION_NAME_ASC_AVAILABLE = "Should contain 'Name (A to Z)'";
+    public static final String SORT_OPTION_NAME_DESC_AVAILABLE = "Should contain 'Name (Z to A)'";
+    public static final String SORT_OPTION_PRICE_LOW_HIGH_AVAILABLE = "Should contain 'Price (low to high)'";
+    public static final String SORT_OPTION_PRICE_HIGH_LOW_AVAILABLE = "Should contain 'Price (high to low)'";
+    public static final String PRODUCTS_SORTED_A_TO_Z = "Products should be sorted A to Z";
+    public static final String PRODUCTS_SORTED_Z_TO_A = "Products should be sorted Z to A";
+    public static final String PRODUCTS_SORTED_PRICE_LOW_HIGH = "Products should be sorted by price low to high";
+    public static final String PRODUCTS_SORTED_PRICE_HIGH_LOW = "Products should be sorted by price high to low";
+    public static final String SELECTED_SORT_OPTION_CORRECT = "Selected sort option should be correct";
+    
+    // ==================== CART BADGE MESSAGES ====================
+    
+    public static final String CART_BADGE_DISPLAYED = "Cart badge should be displayed";
+    public static final String CART_BADGE_SHOWS_ONE = "Cart badge should show 1 item";
+    public static final String CART_BADGE_SHOWS_THREE = "Cart badge should show 3 items";
+    public static final String CART_BADGE_SHOWS_SIX = "Cart badge should show 6 items";
+    public static final String CART_BADGE_NOT_DISPLAYED = "Cart badge should not be displayed";
+    public static final String CART_BADGE_STILL_DISPLAYED = "Cart badge should still be displayed";
+    public static final String CART_BADGE_COUNT_UPDATED = "Cart badge count should be updated";
+    
+    // ==================== BUTTON STATE MESSAGES ====================
+    
+    public static final String ADD_TO_CART_BUTTONS_COUNT_CORRECT = "Should have correct number of 'Add to cart' buttons";
+    public static final String REMOVE_BUTTONS_COUNT_CORRECT = "Should have correct number of 'Remove' buttons";
+    public static final String ADD_BUTTON_BECOMES_REMOVE = "'Add to cart' button should become 'Remove' button";
+    public static final String REMOVE_BUTTON_BECOMES_ADD = "'Remove' button should become 'Add to cart' button";
+    public static final String ALL_ADD_BUTTONS_PRESENT = "All 'Add to cart' buttons should be present";
+    public static final String ALL_REMOVE_BUTTONS_PRESENT = "All 'Remove' buttons should be present";
+    public static final String SHOPPING_CART_CLICKABLE = "Shopping cart should be enabled/clickable";
+    
+    // ==================== CART PERSISTENCE MESSAGES ====================
+    
+    public static final String CART_PERSISTS_AFTER_SORT = "Cart should persist after sorting";
+    public static final String CART_COUNT_UNCHANGED = "Cart count should remain unchanged";
+    public static final String CART_ITEMS_REMAIN = "Cart items should remain after operation";
     
     // ==================== PRODUCT MESSAGES ====================
     

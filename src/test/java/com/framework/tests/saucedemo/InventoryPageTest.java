@@ -92,8 +92,8 @@ public class InventoryPageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Sort Functionality")
     public void testSortDropdownDisplayedAndEnabled() {
-        softAssert.assertTrue(inventoryPage.isSortDropdownDisplayed(), "Sort dropdown should be displayed");
-        softAssert.assertTrue(inventoryPage.isSortDropdownEnabled(), "Sort dropdown should be enabled");
+        softAssert.assertTrue(inventoryPage.isSortDropdownDisplayed(), SauceDemoMessages.SORT_DROPDOWN_DISPLAYED);
+        softAssert.assertTrue(inventoryPage.isSortDropdownEnabled(), SauceDemoMessages.SORT_DROPDOWN_ENABLED);
         
         softAssert.assertAll();
     }
@@ -105,7 +105,7 @@ public class InventoryPageTest extends BaseTest {
     public void testDefaultSortOption() {
         String selectedOption = inventoryPage.getSelectedSortOption();
         softAssert.assertEquals(selectedOption, SauceDemoConstants.SORT_NAME_ASC, 
-            "Default sort should be 'Name (A to Z)'");
+            SauceDemoMessages.DEFAULT_SORT_CORRECT);
         
         softAssert.assertAll();
     }
@@ -117,15 +117,15 @@ public class InventoryPageTest extends BaseTest {
     public void testAllSortOptionsAvailable() {
         List<String> sortOptions = inventoryPage.getAllSortOptions();
         
-        softAssert.assertEquals(sortOptions.size(), 4, "Should have 4 sort options");
+        softAssert.assertEquals(sortOptions.size(), 4, SauceDemoMessages.SORT_OPTIONS_COUNT_CORRECT);
         softAssert.assertTrue(sortOptions.contains(SauceDemoConstants.SORT_NAME_ASC), 
-            "Should contain 'Name (A to Z)'");
+            SauceDemoMessages.SORT_OPTION_NAME_ASC_AVAILABLE);
         softAssert.assertTrue(sortOptions.contains(SauceDemoConstants.SORT_NAME_DESC), 
-            "Should contain 'Name (Z to A)'");
+            SauceDemoMessages.SORT_OPTION_NAME_DESC_AVAILABLE);
         softAssert.assertTrue(sortOptions.contains(SauceDemoConstants.SORT_PRICE_LOW_HIGH), 
-            "Should contain 'Price (low to high)'");
+            SauceDemoMessages.SORT_OPTION_PRICE_LOW_HIGH_AVAILABLE);
         softAssert.assertTrue(sortOptions.contains(SauceDemoConstants.SORT_PRICE_HIGH_LOW), 
-            "Should contain 'Price (high to low)'");
+            SauceDemoMessages.SORT_OPTION_PRICE_HIGH_LOW_AVAILABLE);
         
         softAssert.assertAll();
     }
@@ -140,9 +140,9 @@ public class InventoryPageTest extends BaseTest {
         List<String> productNames = inventoryPage.getAllProductNames();
         List<String> sortedNames = productNames.stream().sorted().toList();
         
-        softAssert.assertEquals(productNames, sortedNames, "Products should be sorted A to Z");
+        softAssert.assertEquals(productNames, sortedNames, SauceDemoMessages.PRODUCTS_SORTED_A_TO_Z);
         softAssert.assertEquals(inventoryPage.getSelectedSortOption(), SauceDemoConstants.SORT_NAME_ASC,
-            "Selected option should be 'Name (A to Z)'");
+            SauceDemoMessages.SELECTED_SORT_OPTION_CORRECT);
         
         softAssert.assertAll();
     }
@@ -159,9 +159,9 @@ public class InventoryPageTest extends BaseTest {
                 .sorted((a, b) -> b.compareTo(a))
                 .toList();
         
-        softAssert.assertEquals(productNames, sortedNames, "Products should be sorted Z to A");
+        softAssert.assertEquals(productNames, sortedNames, SauceDemoMessages.PRODUCTS_SORTED_Z_TO_A);
         softAssert.assertEquals(inventoryPage.getSelectedSortOption(), SauceDemoConstants.SORT_NAME_DESC,
-            "Selected option should be 'Name (Z to A)'");
+            SauceDemoMessages.SELECTED_SORT_OPTION_CORRECT);
         
         softAssert.assertAll();
     }
@@ -180,9 +180,9 @@ public class InventoryPageTest extends BaseTest {
         
         List<Double> sortedPrices = priceValues.stream().sorted().toList();
         
-        softAssert.assertEquals(priceValues, sortedPrices, "Products should be sorted by price low to high");
+        softAssert.assertEquals(priceValues, sortedPrices, SauceDemoMessages.PRODUCTS_SORTED_PRICE_LOW_HIGH);
         softAssert.assertEquals(inventoryPage.getSelectedSortOption(), SauceDemoConstants.SORT_PRICE_LOW_HIGH,
-            "Selected option should be 'Price (low to high)'");
+            SauceDemoMessages.SELECTED_SORT_OPTION_CORRECT);
         
         softAssert.assertAll();
     }
@@ -203,9 +203,9 @@ public class InventoryPageTest extends BaseTest {
                 .sorted((a, b) -> b.compareTo(a))
                 .toList();
         
-        softAssert.assertEquals(priceValues, sortedPrices, "Products should be sorted by price high to low");
+        softAssert.assertEquals(priceValues, sortedPrices, SauceDemoMessages.PRODUCTS_SORTED_PRICE_HIGH_LOW);
         softAssert.assertEquals(inventoryPage.getSelectedSortOption(), SauceDemoConstants.SORT_PRICE_HIGH_LOW,
-            "Selected option should be 'Price (high to low)'");
+            SauceDemoMessages.SELECTED_SORT_OPTION_CORRECT);
         
         softAssert.assertAll();
     }
@@ -242,13 +242,13 @@ public class InventoryPageTest extends BaseTest {
     public void testAddSingleItemToCart() {
         int initialAddButtons = inventoryPage.getAddToCartButtonCount();
         softAssert.assertEquals(initialAddButtons, SauceDemoConstants.PRODUCT_COUNT, 
-            "Should have 6 'Add to cart' buttons initially");
+            SauceDemoMessages.ADD_TO_CART_BUTTONS_COUNT_CORRECT);
         
         inventoryPage.addFirstItemToCart();
         
-        softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed(), "Cart badge should be displayed");
-        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "1", "Cart badge should show 1 item");
-        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 1, "Should have 1 'Remove' button");
+        softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed(), SauceDemoMessages.CART_BADGE_DISPLAYED);
+        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "1", SauceDemoMessages.CART_BADGE_SHOWS_ONE);
+        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 1, SauceDemoMessages.ADD_BUTTON_BECOMES_REMOVE);
         
         softAssert.assertAll();
     }
@@ -262,9 +262,9 @@ public class InventoryPageTest extends BaseTest {
         inventoryPage.addItemToCartByIndex(1);
         inventoryPage.addItemToCartByIndex(2);
         
-        softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed(), "Cart badge should be displayed");
-        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "3", "Cart badge should show 3 items");
-        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 3, "Should have 3 'Remove' buttons");
+        softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed(), SauceDemoMessages.CART_BADGE_DISPLAYED);
+        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "3", SauceDemoMessages.CART_BADGE_SHOWS_THREE);
+        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 3, SauceDemoMessages.REMOVE_BUTTONS_COUNT_CORRECT);
         
         softAssert.assertAll();
     }
@@ -275,14 +275,14 @@ public class InventoryPageTest extends BaseTest {
     @Story("Shopping Cart")
     public void testRemoveItemFromCart() {
         inventoryPage.addFirstItemToCart();
-        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "1", "Cart should have 1 item");
+        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "1", SauceDemoMessages.CART_BADGE_SHOWS_ONE);
         
         inventoryPage.removeFirstItemFromCart();
         
-        softAssert.assertFalse(inventoryPage.isCartBadgeDisplayed(), "Cart badge should not be displayed");
-        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 0, "Should have 0 'Remove' buttons");
+        softAssert.assertFalse(inventoryPage.isCartBadgeDisplayed(), SauceDemoMessages.CART_BADGE_NOT_DISPLAYED);
+        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 0, SauceDemoMessages.REMOVE_BUTTON_BECOMES_ADD);
         softAssert.assertEquals(inventoryPage.getAddToCartButtonCount(), SauceDemoConstants.PRODUCT_COUNT,
-            "Should have 6 'Add to cart' buttons");
+            SauceDemoMessages.ADD_TO_CART_BUTTONS_COUNT_CORRECT);
         
         softAssert.assertAll();
     }
@@ -294,10 +294,10 @@ public class InventoryPageTest extends BaseTest {
     public void testAddAllItemsToCart() {
         inventoryPage.addAllItemsToCart();
         
-        softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed(), "Cart badge should be displayed");
-        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "6", "Cart badge should show 6 items");
-        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 6, "Should have 6 'Remove' buttons");
-        softAssert.assertEquals(inventoryPage.getAddToCartButtonCount(), 0, "Should have 0 'Add to cart' buttons");
+        softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed(), SauceDemoMessages.CART_BADGE_DISPLAYED);
+        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "6", SauceDemoMessages.CART_BADGE_SHOWS_SIX);
+        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 6, SauceDemoMessages.ALL_REMOVE_BUTTONS_PRESENT);
+        softAssert.assertEquals(inventoryPage.getAddToCartButtonCount(), 0, SauceDemoMessages.ALL_ADD_BUTTONS_PRESENT);
         
         softAssert.assertAll();
     }
@@ -308,14 +308,14 @@ public class InventoryPageTest extends BaseTest {
     @Story("Shopping Cart")
     public void testRemoveAllItemsFromCart() {
         inventoryPage.addAllItemsToCart();
-        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "6", "Cart should have 6 items");
+        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "6", SauceDemoMessages.CART_BADGE_SHOWS_SIX);
         
         inventoryPage.removeAllItemsFromCart();
         
-        softAssert.assertFalse(inventoryPage.isCartBadgeDisplayed(), "Cart badge should not be displayed");
-        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 0, "Should have 0 'Remove' buttons");
+        softAssert.assertFalse(inventoryPage.isCartBadgeDisplayed(), SauceDemoMessages.CART_BADGE_NOT_DISPLAYED);
+        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 0, SauceDemoMessages.REMOVE_BUTTON_BECOMES_ADD);
         softAssert.assertEquals(inventoryPage.getAddToCartButtonCount(), SauceDemoConstants.PRODUCT_COUNT,
-            "All 6 'Add to cart' buttons should be restored");
+            SauceDemoMessages.ALL_ADD_BUTTONS_PRESENT);
         
         softAssert.assertAll();
     }
@@ -327,13 +327,13 @@ public class InventoryPageTest extends BaseTest {
     public void testCartPersistsAfterSorting() {
         inventoryPage.addItemToCartByIndex(0);
         inventoryPage.addItemToCartByIndex(2);
-        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "2", "Cart should have 2 items");
+        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "2", SauceDemoMessages.CART_BADGE_COUNT_UPDATED);
         
         inventoryPage.selectSortOption(SauceDemoConstants.SORT_PRICE_HIGH_LOW);
         
-        softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed(), "Cart badge should still be displayed");
-        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "2", "Cart should still have 2 items");
-        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 2, "Should still have 2 'Remove' buttons");
+        softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed(), SauceDemoMessages.CART_BADGE_STILL_DISPLAYED);
+        softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "2", SauceDemoMessages.CART_COUNT_UNCHANGED);
+        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 2, SauceDemoMessages.CART_ITEMS_REMAIN);
         
         softAssert.assertAll();
     }
@@ -344,8 +344,8 @@ public class InventoryPageTest extends BaseTest {
     @Story("Shopping Cart")
     public void testCartBadgeNotDisplayedWhenEmpty() {
         softAssert.assertFalse(inventoryPage.isCartBadgeDisplayed(), 
-            "Cart badge should not be displayed when cart is empty");
-        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 0, "Should have 0 'Remove' buttons");
+            SauceDemoMessages.CART_BADGE_NOT_DISPLAYED);
+        softAssert.assertEquals(inventoryPage.getRemoveButtonCount(), 0, SauceDemoMessages.REMOVE_BUTTON_BECOMES_ADD);
         
         softAssert.assertAll();
     }
@@ -355,8 +355,8 @@ public class InventoryPageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Story("Shopping Cart")
     public void testShoppingCartLinkClickable() {
-        softAssert.assertTrue(inventoryPage.isShoppingCartDisplayed(), "Shopping cart should be displayed");
-        softAssert.assertTrue(inventoryPage.isShoppingCartEnabled(), "Shopping cart should be enabled/clickable");
+        softAssert.assertTrue(inventoryPage.isShoppingCartDisplayed(), SauceDemoMessages.SHOPPING_CART_DISPLAYED);
+        softAssert.assertTrue(inventoryPage.isShoppingCartEnabled(), SauceDemoMessages.SHOPPING_CART_CLICKABLE);
         
         softAssert.assertAll();
     }
