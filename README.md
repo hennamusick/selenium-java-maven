@@ -4,7 +4,7 @@ A comprehensive Selenium WebDriver test automation framework using Java, Maven, 
 
 ## ✨ Key Highlights
 
-- **166 comprehensive tests** across 2 websites (Rahul Shetty Academy & SauceDemo)
+- **187 comprehensive tests** across 2 websites (Rahul Shetty Academy & SauceDemo)
 - **Multi-website architecture** with separate page objects, tests, and utilities per website
 - **Page Object Model** with abstract BasePage and reusable Wait utility
 - **SoftAssert pattern** for comprehensive test failure reporting
@@ -288,7 +288,7 @@ selenium-e2e/
 │       │   │   │   └── WindowSwitchTest.java       # Window switching tests (10 tests)
 │       │   │   └── saucedemo/
 │       │   │       ├── LoginTest.java              # Login scenarios (26 tests)
-│       │   │       └── InventoryPageTest.java      # Inventory page tests (4 tests)
+│       │   │       └── InventoryPageTest.java      # Inventory page tests (20 tests)
 │       │   └── utils/
 │       │       ├── BaseTest.java                   # Test base class with SoftAssert
 │       │       ├── TestListener.java               # TestNG listeners
@@ -353,7 +353,7 @@ mvn test -Dtest=HomePageTest      # 3 basic page tests
 
 # SauceDemo Tests
 mvn test -Dtest=LoginTest          # 26 comprehensive login scenario tests
-mvn test -Dtest=InventoryPageTest  # 4 focused inventory page tests
+mvn test -Dtest=InventoryPageTest  # 20 focused inventory page tests (display, sort, cart)
 ```
 
 ---
@@ -370,7 +370,7 @@ The framework is organized to support testing multiple websites with clear separ
 
 #### Test Organization
 - **`tests/rahulshetty/`** - 11 test classes with 141 tests for Rahul Shetty Academy
-- **`tests/saucedemo/`** - 2 test classes with 38 tests for SauceDemo (LoginTest, SauceDemoTest)
+- **`tests/saucedemo/`** - 2 test classes with 46 tests for SauceDemo (LoginTest, InventoryPageTest)
 
 #### Utility Classes
 - **`utils/rahulshetty/`** - RahulShettyConstants, RahulShettyMessages
@@ -727,9 +727,9 @@ softAssert.assertTrue(loginPage.isErrorMessageDisplayed(), "SQL injection should
 
 ---
 
-### InventoryPageTest - Inventory and Product Tests (4 Tests)
+### InventoryPageTest - Inventory and Product Tests (20 Tests)
 
-Focused test suite for SauceDemo inventory page display and product functionality after successful login:
+Comprehensive test suite for SauceDemo inventory page covering display validation, sort/filter functionality, and shopping cart operations:
 
 ```java
 // Login and navigate to inventory
@@ -738,20 +738,23 @@ softAssert.assertTrue(inventoryPage.isInventoryPageDisplayed());
 
 // Verify inventory elements
 softAssert.assertTrue(inventoryPage.isAppLogoDisplayed());
-softAssert.assertTrue(inventoryPage.isShoppingCartLinkDisplayed());
-softAssert.assertTrue(inventoryPage.isMenuButtonDisplayed());
+softAssert.assertTrue(inventoryPage.isSortDropdownDisplayed());
+softAssert.assertTrue(inventoryPage.isShoppingCartDisplayed());
 
-// Verify product display
-int itemCount = inventoryPage.getInventoryItemsCount();
-softAssert.assertTrue(itemCount >= 6, "Should display at least 6 products");
-
+// Test sort functionality
+inventoryPage.selectSortOption(SauceDemoConstants.SORT_NAME_ASC);
 List<String> productNames = inventoryPage.getAllProductNames();
-softAssert.assertTrue(productNames.size() > 0, "Product names should be displayed");
+List<String> sortedNames = productNames.stream().sorted().toList();
+softAssert.assertEquals(productNames, sortedNames, "Products should be sorted A to Z");
 
-// Verify product details
-softAssert.assertTrue(inventoryPage.isProductDisplayed("Sauce Labs Backpack"));
-String price = inventoryPage.getProductPrice("Sauce Labs Backpack");
-softAssert.assertEquals(price, "$29.99");
+// Test shopping cart
+inventoryPage.addItemToCart(0);
+softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed());
+softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "1");
+
+// Verify cart persists after sorting
+inventoryPage.selectSortOption(SauceDemoConstants.SORT_PRICE_LOW_HIGH);
+softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "1", "Cart count unchanged");
 ```
 
 ---
@@ -1040,23 +1043,23 @@ BUILD SUCCESS
 | **RadioButtonTest** | 6 | Radio button selection and state |
 | **HomePageTest** | 6 | Basic page interactions |
 
-#### SauceDemo Tests (30 tests)
+#### SauceDemo Tests (46 tests)
 | Test Class | Test Count | Focus Area |
 |------------|-----------|------------|
 | **LoginTest** | 26 | Login scenarios (valid/invalid credentials, edge cases, security) |
-| **InventoryPageTest** | 4 | Inventory page display, elements, and product count validation |
+| **InventoryPageTest** | 20 | Inventory page display (4), sort/filter functionality (8), shopping cart operations (8) |
 
-**Total Tests: 171** (Comprehensive UI Test Coverage across 2 websites)
+**Total Tests: 187** (Comprehensive UI Test Coverage across 2 websites)
 
 ### Test Suite Organization
 
 | Suite | Website | Test Count | Purpose | Execution Time |
 |-------|---------|-----------|---------|----------------|
-| **testng.xml** | All | 171 | Master suite (runs all tests) | ~22-25 min |
+| **testng.xml** | All | 187 | Master suite (runs all tests) | ~25-28 min |
 | **smoke-suite.xml** | Rahul Shetty | 16+ | Critical path tests | ~2-3 min |
 | **functional-suite.xml** | Rahul Shetty | 50+ | Detailed feature tests | ~10-12 min |
 | **regression-suite.xml** | Rahul Shetty | 80+ | Comprehensive coverage | ~15-18 min |
-| **saucedemo-suite.xml** | SauceDemo | 30 | Login (26) + Inventory (4) | ~4-5 min |
+| **saucedemo-suite.xml** | SauceDemo | 46 | Login (26) + Inventory (20) | ~6-8 min |
 
 ### Test Groups
 
