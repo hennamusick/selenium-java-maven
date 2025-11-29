@@ -90,16 +90,6 @@ A comprehensive Selenium WebDriver test automation framework using Java, Maven, 
   - [SauceDemo Test Execution Strategy](#test-execution-strategy-1)
   - [SauceDemo Common Test Scenarios](#common-test-scenarios-1)
   - [SauceDemo Test Maintenance Tips](#test-maintenance-tips-1)
-- [InventoryPageTest Mind Map](#-inventorypagetest-mind-map)
-  - [Test Structure Overview](#test-structure-overview)
-  - [Test Distribution by Category](#test-distribution-by-category-1)
-  - [Test Priority Matrix](#test-priority-matrix)
-  - [Test Execution Flow](#test-execution-flow)
-  - [Test Groups & Suite Coverage](#test-groups--suite-coverage)
-  - [Validation Techniques](#validation-techniques)
-  - [Coverage Summary](#coverage-summary)
-  - [Allure Report Integration](#allure-report-integration)
-  - [Key Testing Insights](#key-testing-insights)
 
 ### 📚 Additional Information
 - [Additional Resources](#-additional-resources)
@@ -1936,7 +1926,7 @@ SauceDemoMessages.java
 
 ---
 
-## 🧠 InventoryPageTest Mind Map
+## 🤝 Contributing
 
 ### Test Structure Overview
 
@@ -2271,14 +2261,5 @@ Epic: SauceDemo E-Commerce
    - Centralized constants and messages (50+ message constants)
    - Reusable page objects
    - Independent tests with fresh login
-
-5. **Priority-Based Execution**
-   - Blocker tests run first
-   - Can run by priority groups for quick feedback
-   - Flexible suite configurations (smoke, functional, regression)
-
----
-
-## 🤝 Contributing
 
 This is a learning project. Feel free to explore and enhance the framework!
