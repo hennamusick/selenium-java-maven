@@ -13,6 +13,100 @@ A comprehensive Selenium WebDriver test automation framework using Java, Maven, 
 - **Allure Reports** for beautiful HTML test reporting with screenshots
 - **Website-specific organization** for easy maintenance and scalability
 
+---
+
+## 📑 Table of Contents
+
+### 🏗️ Framework & Architecture
+- [Framework Architecture](#️-framework-architecture)
+  - [Page Object Model (POM)](#page-object-model-pom)
+  - [BasePage Class - The Foundation](#basepage-class---the-foundation)
+  - [Wait Utility Class](#wait-utility-class---centralized-wait-management)
+  - [Example Page Object](#example-page-object)
+- [Test Framework Features](#-test-framework-features)
+  - [SoftAssert Implementation](#softassert-implementation)
+  - [FluentWait - Intelligent Waiting](#fluentwait---intelligent-waiting)
+
+### 📂 Project Organization
+- [Project Structure](#-project-structure)
+- [Multi-Website Organization](#-multi-website-organization)
+  - [Website-Specific Structure](#website-specific-structure)
+  - [Benefits of This Organization](#benefits-of-this-organization)
+  - [Adding a New Website](#adding-a-new-website)
+- [Configuration](#-configuration)
+
+### 🚀 Execution & Testing
+- [Running Tests](#-running-tests)
+  - [Run All Tests](#run-all-tests)
+  - [Run Specific Test Suite](#run-specific-test-suite)
+  - [Run Specific Test Class](#run-specific-test-class)
+
+### 🧩 Test Examples & Documentation
+- [Test Examples](#-test-examples)
+  - [Radio Button Verification Best Practices](#radio-button-verification-best-practices)
+  - [WebTableTest - Web Table Validation (20 Tests)](#webtabletest---web-table-validation-tests-20-tests--new)
+  - [MouseHoverTest - Mouse Hover Interactions (20 Tests)](#mousehovertest---mouse-hover-interaction-tests-20-tests--new)
+  - [LoginTest - SauceDemo Login Scenarios (26 Tests)](#logintest---saucedemo-login-scenarios-26-tests)
+  - [InventoryPageTest - Inventory and Product Tests (20 Tests)](#inventorypagetest---inventory-and-product-tests-20-tests)
+  - [SearchBarTest - Autocomplete/Suggestion Tests (7 Tests)](#searchbartest---autocompletesuggestion-tests-7-tests)
+  - [DropdownTest - Dropdown Selection Tests (8 Tests)](#dropdowntest---dropdown-selection-tests-8-tests)
+  - [CheckboxTest - Checkbox Interaction Tests (12 Tests)](#checkboxtest---checkbox-interaction-tests-12-tests)
+  - [WindowSwitchTest - Window Handling Tests (10 Tests)](#windowswitchtest---window-handling-tests-10-tests)
+  - [AlertTest - Alert and Confirm Box Tests (20 Tests)](#alerttest---alert-and-confirm-box-tests-20-tests--new)
+  - [TabSwitchTest - Tab Switching Tests (12 Tests)](#tabswitchtest---tab-switching-tests-12-tests)
+
+### 📊 Results & Reporting
+- [Test Results](#-test-results)
+  - [Test Breakdown by Website](#test-breakdown-by-website)
+  - [Test Suite Organization](#test-suite-organization)
+  - [Test Groups](#test-groups)
+- [Technologies Used](#️-technologies-used)
+- [Allure Reports](#-allure-reports)
+  - [Quick Start](#quick-start)
+  - [Installation](#installation)
+
+### 🧠 Test Suite Mind Maps
+- [Rahul Shetty Academy Test Suite Mind Map](#-rahul-shetty-academy-test-suite-mind-map)
+  - [Test Structure Overview - 170 Tests](#test-structure-overview---170-tests-across-13-classes)
+  - [Test Distribution by Category](#test-distribution-by-category)
+  - [Test Classes Breakdown](#test-classes-breakdown)
+  - [Test Priority Distribution](#test-priority-distribution)
+  - [Test Coverage Matrix](#test-coverage-matrix)
+  - [Allure Report Structure](#allure-report-structure)
+  - [Key Testing Patterns](#key-testing-patterns)
+  - [Test Execution Strategy](#test-execution-strategy)
+  - [Common Test Scenarios](#common-test-scenarios)
+  - [Test Maintenance Tips](#test-maintenance-tips)
+- [SauceDemo Complete Test Suite Mind Map](#-saucedemo-complete-test-suite-mind-map)
+  - [Test Structure Overview - All SauceDemo Tests (45 Tests)](#test-structure-overview---all-saucedemo-tests-45-tests)
+  - [SauceDemo Test Distribution](#saucedemo-test-distribution)
+  - [Test Categories Breakdown](#test-categories-breakdown)
+  - [LoginTest Detailed Breakdown (25 Tests)](#logintest-detailed-breakdown-25-tests)
+  - [InventoryPageTest Detailed Breakdown (20 Tests)](#inventorypagetest-detailed-breakdown-20-tests)
+  - [Test Priority Distribution](#test-priority-distribution-1)
+  - [SauceDemo Test Coverage Matrix](#saucedemo-test-coverage-matrix)
+  - [Allure Report Structure for SauceDemo](#allure-report-structure-for-saucedemo)
+  - [Key Testing Patterns in SauceDemo Suite](#key-testing-patterns-in-saucedemo-suite)
+  - [Test Execution Strategy](#test-execution-strategy-1)
+  - [Common Test Scenarios](#common-test-scenarios-1)
+  - [Test Maintenance Tips](#test-maintenance-tips-1)
+- [InventoryPageTest Mind Map](#-inventorypagetest-mind-map)
+  - [Test Structure Overview](#test-structure-overview)
+  - [Test Distribution by Category](#test-distribution-by-category-1)
+  - [Test Priority Matrix](#test-priority-matrix)
+  - [Test Execution Flow](#test-execution-flow)
+  - [Test Groups & Suite Coverage](#test-groups--suite-coverage)
+  - [Validation Techniques](#validation-techniques)
+  - [Coverage Summary](#coverage-summary)
+  - [Allure Report Integration](#allure-report-integration)
+  - [Key Testing Insights](#key-testing-insights)
+
+### 📚 Additional Information
+- [Additional Resources](#-additional-resources)
+- [Contributing](#-contributing)
+
+---
+
 ## 🏗️ Framework Architecture
 
 ### Page Object Model (POM)
