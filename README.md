@@ -1133,6 +1133,349 @@ For detailed Allure setup and features, see [ALLURE_REPORTS.md](ALLURE_REPORTS.m
 
 ---
 
+## 🧠 InventoryPageTest Mind Map
+
+### Test Structure Overview
+
+```mermaid
+mindmap
+  root((InventoryPageTest<br/>20 Tests))
+    Display Tests
+      testInventoryPageDisplay
+        ::icon(fa fa-check-circle)
+        Priority 1 - BLOCKER
+        Page Title
+        App Logo
+      testInventoryPageElements
+        ::icon(fa fa-check-circle)
+        Priority 2 - CRITICAL
+        Menu Button
+        Shopping Cart
+        Sort Dropdown
+      testInventoryItemsDisplayed
+        ::icon(fa fa-check-circle)
+        Priority 3 - CRITICAL
+        Item Count = 6
+      testProductNamesDisplayed
+        ::icon(fa fa-check-circle)
+        Priority 4 - CRITICAL
+        Product Names List
+    Sort/Filter Tests
+      Dropdown Validation
+        testSortDropdownDisplayedAndEnabled
+          ::icon(fa fa-filter)
+          Priority 5 - CRITICAL
+          Visibility
+          Enabled State
+        testDefaultSortOption
+          ::icon(fa fa-filter)
+          Priority 6 - NORMAL
+          Default: Name A-Z
+        testAllSortOptionsAvailable
+          ::icon(fa fa-filter)
+          Priority 7 - NORMAL
+          4 Options Available
+      Sort by Name
+        testSortByNameAtoZ
+          ::icon(fa fa-sort-alpha-asc)
+          Priority 8 - CRITICAL
+          Alphabetical Ascending
+          Stream Validation
+        testSortByNameZtoA
+          ::icon(fa fa-sort-alpha-desc)
+          Priority 9 - CRITICAL
+          Alphabetical Descending
+      Sort by Price
+        testSortByPriceLowToHigh
+          ::icon(fa fa-dollar)
+          Priority 10 - CRITICAL
+          Price Ascending
+          Dollar Parsing
+        testSortByPriceHighToLow
+          ::icon(fa fa-dollar)
+          Priority 11 - CRITICAL
+          Price Descending
+      testSwitchingSortOptions
+        ::icon(fa fa-exchange)
+        Priority 12 - NORMAL
+        Dynamic Switching
+    Shopping Cart Tests
+      Add to Cart
+        testAddSingleItemToCart
+          ::icon(fa fa-shopping-cart)
+          Priority 13 - BLOCKER
+          Badge Shows 1
+          Button → Remove
+        testAddMultipleItemsToCart
+          ::icon(fa fa-shopping-cart)
+          Priority 14 - CRITICAL
+          3 Items
+          Badge Count
+        testAddAllItemsToCart
+          ::icon(fa fa-shopping-cart)
+          Priority 16 - NORMAL
+          All 6 Items
+          All Buttons Change
+      Remove from Cart
+        testRemoveItemFromCart
+          ::icon(fa fa-trash)
+          Priority 15 - CRITICAL
+          Badge Disappears
+          Button → Add
+        testRemoveAllItemsFromCart
+          ::icon(fa fa-trash)
+          Priority 17 - NORMAL
+          Empty Cart
+          All Buttons Restore
+      Cart Persistence
+        testCartPersistsAfterSorting
+          ::icon(fa fa-history)
+          Priority 18 - NORMAL
+          Sort Changes
+          Count Unchanged
+        testCartBadgeNotDisplayedWhenEmpty
+          ::icon(fa fa-eye-slash)
+          Priority 19 - NORMAL
+          Empty State
+          No Badge
+      testShoppingCartLinkClickable
+        ::icon(fa fa-mouse-pointer)
+        Priority 20 - CRITICAL
+        Link Enabled
+```
+
+### Test Distribution by Category
+
+#### 1️⃣ Display Tests (4 tests) - Foundation Layer
+```
+├── testInventoryPageDisplay ★★★★★ (BLOCKER)
+├── testInventoryPageElements ★★★★☆ (CRITICAL)
+├── testInventoryItemsDisplayed ★★★★☆ (CRITICAL)
+└── testProductNamesDisplayed ★★★★☆ (CRITICAL)
+```
+
+**Purpose:** Validate basic page structure and elements are present
+**Dependencies:** Login via @BeforeMethod
+**Test Data:** Standard user credentials
+
+#### 2️⃣ Sort/Filter Tests (8 tests) - Functionality Layer
+```
+Sort Dropdown Validation (3 tests)
+├── testSortDropdownDisplayedAndEnabled ★★★★☆ (CRITICAL)
+├── testDefaultSortOption ★★★☆☆ (NORMAL)
+└── testAllSortOptionsAvailable ★★★☆☆ (NORMAL)
+
+Sort by Name (2 tests)
+├── testSortByNameAtoZ ★★★★☆ (CRITICAL)
+└── testSortByNameZtoA ★★★★☆ (CRITICAL)
+
+Sort by Price (2 tests)
+├── testSortByPriceLowToHigh ★★★★☆ (CRITICAL)
+└── testSortByPriceHighToLow ★★★★☆ (CRITICAL)
+
+Sort Switching (1 test)
+└── testSwitchingSortOptions ★★★☆☆ (NORMAL)
+```
+
+**Purpose:** Validate product sorting functionality
+**Test Approach:** Java Streams for validation
+**Sort Options:** Name (A-Z, Z-A), Price (Low-High, High-Low)
+
+#### 3️⃣ Shopping Cart Tests (8 tests) - User Interaction Layer
+```
+Add to Cart (3 tests)
+├── testAddSingleItemToCart ★★★★★ (BLOCKER)
+├── testAddMultipleItemsToCart ★★★★☆ (CRITICAL)
+└── testAddAllItemsToCart ★★★☆☆ (NORMAL)
+
+Remove from Cart (2 tests)
+├── testRemoveItemFromCart ★★★★☆ (CRITICAL)
+└── testRemoveAllItemsFromCart ★★★☆☆ (NORMAL)
+
+Cart State Management (3 tests)
+├── testCartPersistsAfterSorting ★★★☆☆ (NORMAL)
+├── testCartBadgeNotDisplayedWhenEmpty ★★★☆☆ (NORMAL)
+└── testShoppingCartLinkClickable ★★★★☆ (CRITICAL)
+```
+
+**Purpose:** Validate cart operations and state persistence
+**Validations:** Badge display, count accuracy, button state changes
+**Edge Cases:** Empty cart, full cart, sorting with items
+
+### Test Priority Matrix
+
+```mermaid
+graph TD
+    A[BLOCKER Tests - 2] -->|Priority 1, 13| B[Critical Path]
+    C[CRITICAL Tests - 11] -->|Priority 2-15, 20| D[Core Features]
+    E[NORMAL Tests - 7] -->|Priority 6-7, 12, 16-19| F[Edge Cases]
+    
+    B --> G[Must Pass]
+    D --> H[Should Pass]
+    F --> I[Nice to Have]
+    
+    style A fill:#ff6b6b
+    style C fill:#ffa94d
+    style E fill:#74c0fc
+    style G fill:#ff6b6b
+    style H fill:#ffa94d
+    style I fill:#74c0fc
+```
+
+**Priority Levels:**
+- **BLOCKER (2 tests):** Core functionality that must work
+  - testInventoryPageDisplay, testAddSingleItemToCart
+- **CRITICAL (11 tests):** Essential features for user experience
+  - Display elements, item counts, all sort operations, cart add/remove operations, cart link clickability
+- **NORMAL (7 tests):** Edge cases and advanced scenarios
+  - Default sort option, sort options list, sort switching, add/remove all items, cart persistence, empty cart state
+
+### Test Execution Flow
+
+```mermaid
+sequenceDiagram
+    participant Test as Test Method
+    participant Setup as @BeforeMethod
+    participant Login as LoginPage
+    participant Inventory as InventoryPage
+    participant Assert as SoftAssert
+    
+    Setup->>Login: Navigate to SauceDemo
+    Setup->>Login: login(standard_user, password)
+    Login->>Inventory: Navigate to inventory
+    
+    Test->>Inventory: Perform actions
+    Inventory->>Assert: Verify conditions
+    Assert->>Assert: Collect all assertions
+    Test->>Assert: assertAll()
+    
+    Note over Test,Assert: Each test independent<br/>Fresh login via @BeforeMethod
+```
+
+### Test Groups & Suite Coverage
+
+**Group Coverage:**
+```
+smoke (5 tests)
+├── Display Tests (2): testInventoryPageDisplay, testInventoryPageElements
+├── Sort Tests (1): testSortDropdownDisplayedAndEnabled
+└── Cart Tests (2): testAddSingleItemToCart, testShoppingCartLinkClickable
+
+functional (14 tests)
+├── Display Tests (2)
+├── Sort Tests (7)
+└── Cart Tests (5)
+
+regression (19 tests)
+└── All tests except testSwitchingSortOptions
+```
+
+**Suite Execution:**
+- **saucedemo-suite.xml:** Runs all 46 SauceDemo tests (LoginTest + InventoryPageTest)
+- **Execution Time:** ~6-8 minutes
+- **Parallel Execution:** Supported with thread-count configuration
+
+### Validation Techniques
+
+**Stream-Based Validation (Sort Tests):**
+```java
+// Verify alphabetical sorting
+List<String> productNames = inventoryPage.getAllProductNames();
+List<String> sortedNames = productNames.stream().sorted().toList();
+softAssert.assertEquals(productNames, sortedNames);
+
+// Verify price sorting with transformation
+List<Double> priceValues = prices.stream()
+    .map(p -> Double.parseDouble(p.replace("$", "")))
+    .toList();
+```
+
+**State Change Validation (Cart Tests):**
+```java
+// Before: Add to Cart button
+// After: Remove button
+int beforeAdd = inventoryPage.getAddToCartButtonCount(); // 6
+inventoryPage.addFirstItemToCart();
+int afterAdd = inventoryPage.getRemoveButtonCount(); // 1
+```
+
+**Badge Count Validation:**
+```java
+// Badge appears with correct count
+softAssert.assertTrue(inventoryPage.isCartBadgeDisplayed());
+softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "3");
+```
+
+### Coverage Summary
+
+| Category | Tests | Coverage |
+|----------|-------|----------|
+| **Display Validation** | 4 | Page structure, elements, product list |
+| **Sort Functionality** | 8 | Dropdown, name sort, price sort, switching |
+| **Cart Operations** | 8 | Add, remove, persistence, state management |
+| **Total** | **20** | **Comprehensive inventory page coverage** |
+
+**Feature Coverage Checklist:**
+- ✅ Page Load & Display
+- ✅ Element Visibility
+- ✅ Product List Rendering
+- ✅ Sort Dropdown (4 options)
+- ✅ Alphabetical Sorting (A-Z, Z-A)
+- ✅ Price Sorting (Low-High, High-Low)
+- ✅ Sort Option Switching
+- ✅ Add Single/Multiple/All Items
+- ✅ Remove Single/All Items
+- ✅ Cart Badge Display & Count
+- ✅ Button State Changes
+- ✅ Cart Persistence After Sorting
+- ✅ Empty Cart State
+- ✅ Shopping Cart Link Interaction
+
+### Allure Report Integration
+
+**Epic/Feature/Story Hierarchy:**
+```
+Epic: SauceDemo E-Commerce
+├── Feature: Inventory and Products
+    ├── Story: Inventory Page Display (4 tests)
+    ├── Story: Product Display (1 test)
+    ├── Story: Sort Functionality (8 tests)
+    └── Story: Shopping Cart (8 tests)
+```
+
+**Severity Distribution:**
+- **BLOCKER:** 2 tests (must pass for release)
+- **CRITICAL:** 11 tests (essential for UX)
+- **NORMAL:** 7 tests (quality improvements)
+
+### Key Testing Insights
+
+1. **Layered Testing Approach**
+   - Foundation → Functionality → User Interaction
+   - Each layer builds on previous validations
+
+2. **Comprehensive Sort Testing**
+   - All 4 sort options validated
+   - Both name and price dimensions covered
+   - Dynamic switching tested
+
+3. **Cart State Management**
+   - Full lifecycle: empty → add → persist → remove → empty
+   - Badge visibility and count accuracy
+   - Button state transitions (Add ↔ Remove)
+
+4. **Maintainable Design**
+   - Centralized constants and messages (50+ message constants)
+   - Reusable page objects
+   - Independent tests with fresh login
+
+5. **Priority-Based Execution**
+   - Blocker tests run first
+   - Can run by priority groups for quick feedback
+   - Flexible suite configurations (smoke, functional, regression)
+
+---
+
 ## 🤝 Contributing
 
 This is a learning project. Feel free to explore and enhance the framework!
