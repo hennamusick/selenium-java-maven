@@ -10,6 +10,8 @@ import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 /**
  * Inventory Page Test Class for SauceDemo
  * Contains tests for inventory page display, product functionality, and navigation
