@@ -1477,6 +1477,371 @@ softAssert.assertTrue(allData.size() > 10);
 
 ---
 
+## 🧠 SauceDemo Complete Test Suite Mind Map
+
+### Test Structure Overview - All SauceDemo Tests (45 Tests)
+
+```mermaid
+mindmap
+  root((SauceDemo Test Suite<br/>45 Tests))
+    LoginTest - 25 Tests
+      Page Display Tests
+        ::icon(fa fa-desktop)
+        testLoginPageLoads
+        testPageTitle
+        testLoginElementsEnabled
+        testLoginButtonText
+      Input Field Tests
+        ::icon(fa fa-keyboard)
+        testUsernameInput
+        testPasswordInput
+        testClearUsername
+        testClearPassword
+      Valid Login Tests
+        ::icon(fa fa-check-circle)
+        testStandardUserLogin
+        testProblemUserLogin
+        testPerformanceUserLogin
+        testErrorUserLogin
+        testVisualUserLogin
+      Invalid Login Tests
+        ::icon(fa fa-times-circle)
+        testLockedOutUser
+        testInvalidUsername
+        testInvalidPassword
+        testEmptyUsername
+        testEmptyPassword
+        testBothFieldsEmpty
+      Security Tests
+        ::icon(fa fa-shield)
+        testSpecialCharacters
+        testSQLInjection
+        testXSSAttempt
+        testCaseSensitivePassword
+    InventoryPageTest - 20 Tests
+      Display Tests
+        ::icon(fa fa-eye)
+        testInventoryPageDisplay
+        testInventoryPageElements
+        testProductListDisplay
+        testProductDetailsDisplay
+      Sort & Filter Tests
+        ::icon(fa fa-sort)
+        testSortAtoZ
+        testSortZtoA
+        testSortPriceLowHigh
+        testSortPriceHighLow
+        testDefaultSortOption
+        testSortDropdownDisplay
+        testSortOptionsCount
+        testSortFunctionality
+      Shopping Cart Tests
+        ::icon(fa fa-shopping-cart)
+        testAddToCart
+        testRemoveFromCart
+        testCartBadgeUpdate
+        testMultipleItems
+        testCartBadgeDisplay
+        testAddRemoveButtons
+        testCartPersistence
+        testEmptyCartBadge
+```
+
+### SauceDemo Test Distribution
+
+```mermaid
+pie title SauceDemo Test Distribution (45 Tests)
+    "LoginTest: Authentication" : 25
+    "InventoryPageTest: E-Commerce" : 20
+```
+
+### Test Categories Breakdown
+
+| Test Class | Tests | Category | Key Features | Test Groups |
+|------------|-------|----------|--------------|-------------|
+| **LoginTest** | 25 | Authentication | Multi-user login, validation, security | Smoke, Functional, Regression |
+| **InventoryPageTest** | 20 | E-Commerce | Product display, sorting, cart operations | Smoke, Functional, Regression |
+| **Total** | **45** | - | Complete e-commerce flow testing | - |
+
+### LoginTest Detailed Breakdown (25 Tests)
+
+#### 1. Page Display Tests (4 tests)
+- **testLoginPageLoads** (Priority 1, BLOCKER): URL validation, page load verification
+- **testPageTitle** (Priority 2, CRITICAL): Title verification
+- **testLoginElementsEnabled** (Priority 3, CRITICAL): Element accessibility check
+- **testLoginButtonText** (Priority 4, NORMAL): Button text validation
+
+#### 2. Input Field Tests (4 tests)
+- **testUsernameInput** (Priority 5, NORMAL): Username field accepts input
+- **testPasswordInput** (Priority 6, NORMAL): Password field accepts input
+- **testClearUsername** (Priority 7, NORMAL): Clear username field functionality
+- **testClearPassword** (Priority 8, NORMAL): Clear password field functionality
+
+#### 3. Valid Login Tests (6 tests)
+- **testStandardUserLogin** (Priority 9, BLOCKER): Standard user successful login
+- **testLockedOutUser** (Priority 10, CRITICAL): Locked user error message
+- **testProblemUserLogin** (Priority 11, CRITICAL): Problem user successful login
+- **testPerformanceUserLogin** (Priority 12, CRITICAL): Performance glitch user login
+- **testErrorUserLogin** (Priority 13, CRITICAL): Error user successful login
+- **testVisualUserLogin** (Priority 14, CRITICAL): Visual user successful login
+
+#### 4. Invalid Login Tests (7 tests)
+- **testInvalidUsername** (Priority 15, CRITICAL): Invalid username error handling
+- **testInvalidPassword** (Priority 16, CRITICAL): Invalid password error handling
+- **testEmptyUsername** (Priority 17, CRITICAL): Empty username validation
+- **testEmptyPassword** (Priority 18, CRITICAL): Empty password validation
+- **testBothFieldsEmpty** (Priority 19, CRITICAL): Both fields empty validation
+- **testSpecialCharacters** (Priority 20, NORMAL): Special character handling
+- **testSQLInjection** (Priority 21, NORMAL): SQL injection prevention
+
+#### 5. Security Tests (4 tests)
+- **testXSSAttempt** (Priority 22, NORMAL): Cross-site scripting prevention
+- **testPasswordMasking** (Priority 23, NORMAL): Password field security
+- **testCaseSensitivePassword** (Priority 24, NORMAL): Case sensitivity validation
+- **testErrorMessageCloses** (Priority 25, NORMAL): Error message dismissal
+
+### InventoryPageTest Detailed Breakdown (20 Tests)
+
+*(See detailed InventoryPageTest Mind Map section below)*
+
+### Test Priority Distribution
+
+```mermaid
+graph TB
+    Smoke[Smoke Tests - 5 tests] --> LoginTest1[Login: Page Load, Elements, Standard Login]
+    Smoke --> InvTest1[Inventory: Page Display, Elements]
+    
+    Functional[Functional Tests - 24 tests] --> LoginTest2[Login: User types, validation]
+    Functional --> InvTest2[Inventory: Sort, Cart operations]
+    
+    Regression[Regression Tests - 45 tests] --> AllTests[All smoke + functional tests]
+    
+    style Smoke fill:#90EE90
+    style Functional fill:#87CEEB
+    style Regression fill:#FFB6C1
+```
+
+### SauceDemo Test Coverage Matrix
+
+| Feature Area | Tests | Priority | Allure Severity | Coverage |
+|--------------|-------|----------|-----------------|----------|
+| **Authentication** | 25 | 1-25 | BLOCKER, CRITICAL, NORMAL | 100% |
+| Login Page Display | 4 | 1-4 | BLOCKER, CRITICAL | ✅ Complete |
+| Input Validation | 4 | 5-8 | NORMAL | ✅ Complete |
+| Multi-User Login | 6 | 9-14 | BLOCKER, CRITICAL | ✅ All user types |
+| Error Handling | 7 | 15-21 | CRITICAL, NORMAL | ✅ Complete |
+| Security Testing | 4 | 22-25 | NORMAL | ✅ XSS, SQL, Special chars |
+| **E-Commerce Operations** | 20 | 1-20 | BLOCKER, CRITICAL, NORMAL | 100% |
+| Product Display | 4 | 1-4 | BLOCKER, CRITICAL | ✅ Complete |
+| Sort & Filter | 8 | 5-12 | CRITICAL, NORMAL | ✅ All sort options |
+| Shopping Cart | 8 | 13-20 | BLOCKER, CRITICAL, NORMAL | ✅ Add/Remove/Persist |
+
+### Allure Report Structure for SauceDemo
+
+```
+📊 SauceDemo Test Suite
+├── 🎯 Epic: SauceDemo Authentication (25 tests)
+│   ├── 🔹 Feature: Login Functionality
+│   │   ├── 📖 Story: Login Page Display (4 tests)
+│   │   ├── 📖 Story: Input Field Validation (4 tests)
+│   │   ├── 📖 Story: Multi-User Authentication (6 tests)
+│   │   ├── 📖 Story: Login Error Handling (7 tests)
+│   │   └── 📖 Story: Security Testing (4 tests)
+│   │
+├── 🎯 Epic: SauceDemo E-Commerce (20 tests)
+│   ├── 🔹 Feature: Product Inventory
+│   │   ├── 📖 Story: Inventory Display (4 tests)
+│   │   ├── 📖 Story: Product Sorting (8 tests)
+│   │   └── 📖 Story: Shopping Cart Operations (8 tests)
+```
+
+### Key Testing Patterns in SauceDemo Suite
+
+#### 1. **SoftAssert Pattern**
+- Used across all test classes for comprehensive validation
+- Multiple assertions per test method
+- Continued execution after assertion failures
+- Example from LoginTest:
+```java
+@Test(priority = 9, groups = {"smoke", "functional", "regression"})
+public void testStandardUserLogin() {
+    loginPage.login(SauceDemoConstants.STANDARD_USER, SauceDemoConstants.PASSWORD);
+    
+    softAssert.assertTrue(inventoryPage.isInventoryPageDisplayed(), 
+        SauceDemoMessages.INVENTORY_PAGE_DISPLAYED);
+    softAssert.assertTrue(inventoryPage.isAppLogoDisplayed(), 
+        SauceDemoMessages.APP_LOGO_DISPLAYED);
+    softAssert.assertAll();
+}
+```
+
+#### 2. **Multi-User Testing Pattern**
+- Tests multiple user personas: standard, locked_out, problem, performance, error, visual
+- Each user type validated for specific behaviors
+- Example:
+```java
+// Standard user - expected to succeed
+testStandardUserLogin() -> Inventory page displayed
+
+// Locked out user - expected to fail
+testLockedOutUser() -> Error message: "Epic sadface: Sorry, this user has been locked out."
+
+// Problem user - succeeds but with UI issues
+testProblemUserLogin() -> Inventory page displayed with image errors
+```
+
+#### 3. **Centralized Constants Pattern**
+- All test data in `SauceDemoConstants.java`
+- All assertion messages in `SauceDemoMessages.java`
+- Consistent error message validation
+```java
+// Constants
+public static final String STANDARD_USER = "standard_user";
+public static final String LOCKED_OUT_USER = "locked_out_user";
+
+// Messages
+public static final String INVENTORY_PAGE_DISPLAYED = "Inventory page should be displayed after login";
+public static final String ERROR_MESSAGE_DISPLAYED = "Error message should be displayed for invalid credentials";
+```
+
+#### 4. **Page Object Model**
+- LoginPage and InventoryPage classes encapsulate element interactions
+- Clear separation between test logic and page interactions
+```java
+// Test class
+loginPage.login(username, password);
+
+// Page class method
+public void login(String username, String password) {
+    enterUsername(username);
+    enterPassword(password);
+    clickLoginButton();
+}
+```
+
+#### 5. **TestNG Groups Organization**
+- **smoke**: Critical path tests (5 tests) - fast execution
+- **functional**: Feature validation (24 tests) - medium execution
+- **regression**: All tests (45 tests) - full validation
+
+### Test Execution Strategy
+
+```mermaid
+sequenceDiagram
+    participant T as Test Runner
+    participant L as LoginTest
+    participant I as InventoryPageTest
+    participant D as Driver
+    participant R as Report
+    
+    T->>L: Execute 25 login tests
+    L->>D: Initialize browser
+    L->>D: Navigate to SauceDemo
+    L->>L: Test authentication flows
+    L->>R: Log results (Allure)
+    
+    T->>I: Execute 20 inventory tests
+    I->>D: Reuse browser session
+    I->>L: Perform login (setup)
+    I->>I: Test e-commerce operations
+    I->>R: Log results (Allure)
+    
+    R-->>T: Generate comprehensive report
+```
+
+### Common Test Scenarios
+
+#### Authentication Testing
+```java
+// Positive test: Valid login
+@Test(priority = 9, groups = {"smoke", "functional", "regression"})
+public void testStandardUserLogin() {
+    loginPage.login(SauceDemoConstants.STANDARD_USER, SauceDemoConstants.PASSWORD);
+    softAssert.assertTrue(inventoryPage.isInventoryPageDisplayed());
+    softAssert.assertAll();
+}
+
+// Negative test: Invalid credentials
+@Test(priority = 15, groups = {"functional", "regression"})
+public void testInvalidUsername() {
+    loginPage.login("invalid_user", SauceDemoConstants.PASSWORD);
+    softAssert.assertTrue(loginPage.isErrorMessageDisplayed());
+    softAssert.assertEquals(loginPage.getErrorMessage(), 
+        SauceDemoConstants.INVALID_CREDENTIALS_ERROR);
+    softAssert.assertAll();
+}
+
+// Security test: SQL injection prevention
+@Test(priority = 21, groups = {"regression"})
+public void testSQLInjection() {
+    loginPage.login("admin' OR '1'='1", "password");
+    softAssert.assertTrue(loginPage.isErrorMessageDisplayed());
+    softAssert.assertAll();
+}
+```
+
+#### E-Commerce Operations Testing
+```java
+// Product sorting
+@Test(priority = 5, groups = {"functional", "regression"})
+public void testSortAtoZ() {
+    inventoryPage.selectSortOption(SauceDemoConstants.SORT_NAME_A_TO_Z);
+    List<String> actualNames = inventoryPage.getProductNames();
+    List<String> sortedNames = new ArrayList<>(actualNames);
+    Collections.sort(sortedNames);
+    softAssert.assertEquals(actualNames, sortedNames, 
+        SauceDemoMessages.PRODUCTS_SORTED_A_TO_Z);
+    softAssert.assertAll();
+}
+
+// Shopping cart operations
+@Test(priority = 13, groups = {"smoke", "functional", "regression"})
+public void testAddToCart() {
+    String productName = inventoryPage.getFirstProductName();
+    inventoryPage.addFirstProductToCart();
+    softAssert.assertEquals(inventoryPage.getCartBadgeCount(), "1", 
+        SauceDemoMessages.CART_BADGE_COUNT_CORRECT);
+    softAssert.assertAll();
+}
+```
+
+### Test Maintenance Tips
+
+#### 1. **Adding New Login Tests**
+- Add test method to `LoginTest.java`
+- Use appropriate priority (26+)
+- Add message constants to `SauceDemoMessages.java`
+- Assign to relevant TestNG groups
+- Add Allure annotations for reporting
+
+#### 2. **Extending E-Commerce Tests**
+- Create new test methods in `InventoryPageTest.java` or new test classes
+- Follow Page Object Model pattern
+- Use centralized constants and messages
+- Maintain priority sequence (21+)
+
+#### 3. **User Type Management**
+- All user credentials in `SauceDemoConstants.java`
+- Test each user type for relevant scenarios
+- Document expected behaviors in test descriptions
+
+#### 4. **Test Data Organization**
+```
+SauceDemoConstants.java
+├── User Credentials (STANDARD_USER, LOCKED_OUT_USER, etc.)
+├── URLs and Navigation (DOMAIN, INVENTORY_URL)
+├── Expected Error Messages
+└── Sort Options
+
+SauceDemoMessages.java
+├── Login Validation Messages
+├── Inventory Display Messages
+├── Sort/Filter Messages
+└── Cart Operation Messages
+```
+
+---
+
 ## 🧠 InventoryPageTest Mind Map
 
 ### Test Structure Overview
