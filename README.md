@@ -259,7 +259,7 @@ selenium-e2e/
 │   │   │   │   │   └── WebTablePage.java           # Web table page object
 │   │   │   │   └── saucedemo/
 │   │   │   │       ├── LoginPage.java              # SauceDemo login page
-│   │   │   │       └── InventoryPage.java          # SauceDemo inventory page
+│   │   │   │       └── InventoryPage.java          # SauceDemo inventory page (enhanced with sort/cart)
 │   │   │   └── utils/
 │   │   │       ├── AllureListener.java      # Allure report listener
 │   │   │       ├── ConfigReader.java        # Configuration management
@@ -269,48 +269,60 @@ selenium-e2e/
 │   │   │       └── Wait.java                # Explicit wait utility class
 │   │   └── resources/
 │   │       ├── config/
-│   │       │   └── config.properties        # Test configurations
-│   │       └── logback.xml
+│   │       │   └── config.properties        # Test configurations (3 base URLs)
+│   │       └── logback.xml                  # Logging configuration
 │   └── test/
 │       ├── java/com/framework/
 │       │   ├── tests/
-│       │   │   ├── rahulshetty/
+│       │   │   ├── rahulshetty/             # 13 test classes - 170 tests total
 │       │   │   │   ├── AlertTest.java              # Alert/confirm box tests (20 tests)
 │       │   │   │   ├── CheckboxTest.java           # Checkbox tests (12 tests)
 │       │   │   │   ├── DropdownTest.java           # Dropdown tests (8 tests)
+│       │   │   │   ├── FixedHeaderTableTest.java   # Fixed header table tests (20 tests)
+│       │   │   │   ├── HideShowTest.java           # Show/hide element tests (15 tests)
 │       │   │   │   ├── HomePageTest.java           # Basic page tests (3 tests)
 │       │   │   │   ├── IFrameTest.java             # iFrame tests (20 tests)
 │       │   │   │   ├── MouseHoverTest.java         # Mouse hover tests (20 tests)
 │       │   │   │   ├── RadioButtonTest.java        # Radio button tests (6 tests)
 │       │   │   │   ├── SearchBarTest.java          # Autocomplete tests (7 tests)
 │       │   │   │   ├── TabSwitchTest.java          # Tab switching tests (12 tests)
-│       │   │   │   ├── WebTableTest.java           # Web table validation (20 tests)
+│       │   │   │   ├── WebTableTest.java           # Web table validation (17 tests)
 │       │   │   │   └── WindowSwitchTest.java       # Window switching tests (10 tests)
-│       │   │   └── saucedemo/
+│       │   │   └── saucedemo/               # 2 test classes - 46 tests total
 │       │   │       ├── LoginTest.java              # Login scenarios (26 tests)
-│       │   │       └── InventoryPageTest.java      # Inventory page tests (20 tests)
+│       │   │       └── InventoryPageTest.java      # Inventory tests (20 tests: 4 display + 8 sort + 8 cart)
 │       │   └── utils/
+│       │       ├── AppTest.java                    # Sample test
 │       │       ├── BaseTest.java                   # Test base class with SoftAssert
-│       │       ├── TestListener.java               # TestNG listeners
+│       │       ├── TestConstants.java              # Shared test constants
+│       │       ├── TestMessages.java               # Shared test messages
 │       │       ├── rahulshetty/
 │       │       │   ├── RahulShettyConstants.java   # Rahul Shetty test constants
-│       │       │   └── RahulShettyMessages.java    # Rahul Shetty test messages
+│       │       │   └── RahulShettyMessages.java    # Rahul Shetty test messages (100+ constants)
 │       │       └── saucedemo/
-│       │           ├── SauceDemoConstants.java     # SauceDemo test constants
-│       │           └── SauceDemoMessages.java      # SauceDemo test messages
+│       │           ├── SauceDemoConstants.java     # SauceDemo test constants (users, URLs, sort options)
+│       │           └── SauceDemoMessages.java      # SauceDemo test messages (85+ constants)
 │       └── resources/
-│           ├── allure.properties
+│           ├── allure.properties            # Allure configuration
 │           └── testng/
-│               ├── testng.xml                      # Master suite (all tests)
+│               ├── testng.xml                      # Master suite (187 tests)
 │               ├── rahulshetty/
-│               │   ├── smoke-suite.xml             # Smoke tests (14+ tests)
-│               │   ├── functional-suite.xml        # Functional tests (50+ tests)
-│               │   └── regression-suite.xml        # Regression tests (60+ tests)
+│               │   ├── smoke-suite.xml             # Smoke tests
+│               │   ├── functional-suite.xml        # Functional tests
+│               │   └── regression-suite.xml        # Regression tests
 │               └── saucedemo/
-│                   └── saucedemo-suite.xml         # SauceDemo tests (38 tests)
+│                   ├── smoke-suite.xml             # SauceDemo smoke tests
+│                   ├── functional-suite.xml        # SauceDemo functional tests
+│                   ├── regression-suite.xml        # SauceDemo regression tests
+│                   └── saucedemo-suite.xml         # All SauceDemo tests (46 tests)
+├── .allure/                                        # Allure command-line tool
+├── .github/workflows/                              # GitHub Actions (if configured)
 ├── ALLURE_REPORTS.md                               # Allure reporting guide
+├── PRESENTATION.md                                 # Framework presentation
+├── TEST_GROUPS.md                                  # Test groups documentation
+├── USAGE_EXAMPLES.md                               # Usage examples
 ├── WEB_TABLE_VALIDATION_SUMMARY.md                 # Web table test documentation
-└── pom.xml
+└── pom.xml                                         # Maven dependencies and plugins
 ```
 
 ---
@@ -1119,6 +1131,338 @@ scoop install allure
 ```
 
 For detailed Allure setup and features, see [ALLURE_REPORTS.md](ALLURE_REPORTS.md)
+
+---
+
+## 🧠 Rahul Shetty Academy Test Suite Mind Map
+
+### Test Structure Overview - 170 Tests Across 13 Classes
+
+```mermaid
+mindmap
+  root((Rahul Shetty<br/>Academy Tests<br/>170 Total))
+    Alert & Dialog Tests
+      AlertTest 20
+        ::icon(fa fa-bell)
+        Alert Popups 8
+          Button Display
+          Alert Message
+          Empty Name
+          Special Characters
+        Confirm Box 9
+          Accept/Dismiss
+          Message Format
+          Multiple Triggers
+        Input Field 3
+          Field Validation
+          Text Input
+          Clear Field
+    Form Element Tests
+      CheckboxTest 12
+        ::icon(fa fa-check-square)
+        Display & State 2
+        Individual Check 5
+        Multiple Selection 3
+        Toggle Behavior 2
+      RadioButtonTest 6
+        ::icon(fa fa-dot-circle)
+        Display & Enabled 1
+        Selection 3
+        Mutual Exclusivity 1
+        Default State 1
+      DropdownTest 8
+        ::icon(fa fa-caret-down)
+        Display & Options 2
+        Select by Text 3
+        Select by Index 1
+        Select by Value 1
+        Default Option 1
+    Dynamic Content Tests
+      SearchBarTest 7
+        ::icon(fa fa-search)
+        Autocomplete Suggestions 3
+        Selection Methods 2
+        Case Insensitivity 1
+        Multiple Matches 1
+      HideShowTest 15
+        ::icon(fa fa-eye)
+        Element Visibility 4
+        Button State 3
+        Hide/Show Toggle 4
+        Multiple Cycles 2
+        State Persistence 2
+      MouseHoverTest 20
+        ::icon(fa fa-mouse-pointer)
+        Hover Actions 6
+        Dropdown Menus 6
+        Top/Reload Options 4
+        Link Navigation 2
+        State Validation 2
+    Table & Data Tests
+      WebTableTest 17
+        ::icon(fa fa-table)
+        Structure 3
+        Headers & Data 3
+        Instructor Search 2
+        Price Validation 4
+        Data Extraction 3
+        Row Validation 2
+      FixedHeaderTableTest 20
+        ::icon(fa fa-table)
+        Table Display 2
+        Header Validation 2
+        Scrolling 2
+        Column Count 2
+        Data Extraction 6
+        Specific Values 4
+        Row Operations 2
+    Window & Frame Tests
+      IFrameTest 20
+        ::icon(fa fa-window-restore)
+        Frame Switch 4
+        Element Interaction 6
+        Multiple Frames 4
+        Content Validation 4
+        Frame Recovery 2
+      TabSwitchTest 12
+        ::icon(fa fa-external-link)
+        Tab Opening 3
+        Tab Switching 3
+        Tab Closing 2
+        Multiple Tabs 2
+        Content Validation 2
+      WindowSwitchTest 10
+        ::icon(fa fa-window-maximize)
+        Window Opening 3
+        Window Switching 3
+        Window Closing 1
+        Window Reuse 1
+        Handle Validation 2
+    Basic Tests
+      HomePageTest 3
+        ::icon(fa fa-home)
+        Alert Test 1
+        Confirm Box 1
+        Input Field 1
+```
+
+### Test Distribution by Category
+
+```mermaid
+pie title Test Distribution (170 Total Tests)
+    "Alert & Dialogs (20)" : 20
+    "Checkboxes (12)" : 12
+    "Radio Buttons (6)" : 6
+    "Dropdown (8)" : 8
+    "Search/Autocomplete (7)" : 7
+    "Show/Hide (15)" : 15
+    "Mouse Hover (20)" : 20
+    "Web Table (17)" : 17
+    "Fixed Header Table (20)" : 20
+    "IFrame (20)" : 20
+    "Tab Switch (12)" : 12
+    "Window Switch (10)" : 10
+    "HomePage Basic (3)" : 3
+```
+
+### Test Classes Breakdown
+
+| Test Class | Tests | Category | Key Features |
+|------------|-------|----------|--------------|
+| **AlertTest** | 20 | Alerts & Dialogs | Alert popups, confirm boxes, accept/dismiss, message validation |
+| **CheckboxTest** | 12 | Form Elements | Multiple checkboxes, independent selection, toggle behavior |
+| **DropdownTest** | 8 | Form Elements | Dropdown selection (text/index/value), option validation |
+| **RadioButtonTest** | 6 | Form Elements | Radio buttons, mutual exclusivity, selection state |
+| **SearchBarTest** | 7 | Dynamic Content | Autocomplete, suggestions, case insensitivity |
+| **HideShowTest** | 15 | Dynamic Content | Element visibility, show/hide toggle, state persistence |
+| **MouseHoverTest** | 20 | Dynamic Content | Hover actions, dropdown menus, link navigation |
+| **WebTableTest** | 17 | Data Tables | Table structure, data extraction, price validation |
+| **FixedHeaderTableTest** | 20 | Data Tables | Fixed headers, scrolling, column operations |
+| **IFrameTest** | 20 | Windows & Frames | Frame switching, nested frames, content validation |
+| **TabSwitchTest** | 12 | Windows & Frames | Tab management, switching, multiple tabs |
+| **WindowSwitchTest** | 10 | Windows & Frames | Window handling, switching, handle validation |
+| **HomePageTest** | 3 | Basic Tests | Basic page interactions, alerts, confirm boxes |
+
+### Test Priority Distribution
+
+```mermaid
+graph LR
+    A[Smoke Tests] -->|Critical Path| B[20-25 tests]
+    C[Functional Tests] -->|Feature Testing| D[80-90 tests]
+    E[Regression Tests] -->|Full Coverage| F[150+ tests]
+    
+    style A fill:#ff6b6b
+    style C fill:#ffa94d
+    style E fill:#74c0fc
+    style B fill:#ff6b6b
+    style D fill:#ffa94d
+    style F fill:#74c0fc
+```
+
+### Test Coverage Matrix
+
+| Feature Area | Test Classes | Coverage | Priority |
+|--------------|--------------|----------|----------|
+| **Form Controls** | CheckboxTest, RadioButtonTest, DropdownTest | Input elements, selection, validation | HIGH |
+| **Alert Handling** | AlertTest | All alert types, accept/dismiss | CRITICAL |
+| **Dynamic Content** | SearchBarTest, HideShowTest, MouseHoverTest | Autocomplete, visibility, hover | HIGH |
+| **Data Validation** | WebTableTest, FixedHeaderTableTest | Table parsing, data extraction | MEDIUM |
+| **Window Management** | IFrameTest, TabSwitchTest, WindowSwitchTest | Multi-window, frames, tabs | HIGH |
+| **Basic Interactions** | HomePageTest | Page load, basic elements | LOW |
+
+### Allure Report Structure
+
+```
+Epic: Rahul Shetty Academy Practice
+├── Feature: Form Elements
+│   ├── Story: Checkbox Interactions (12 tests)
+│   ├── Story: Radio Button Selection (6 tests)
+│   └── Story: Dropdown Operations (8 tests)
+├── Feature: JavaScript Alerts
+│   └── Story: Alert and Confirm Boxes (20 tests)
+├── Feature: Dynamic Content
+│   ├── Story: Autocomplete Functionality (7 tests)
+│   ├── Story: Show/Hide Elements (15 tests)
+│   └── Story: Mouse Hover Actions (20 tests)
+├── Feature: Data Tables
+│   ├── Story: Web Table Validation (17 tests)
+│   └── Story: Fixed Header Table (20 tests)
+├── Feature: Window & Frame Handling
+│   ├── Story: IFrame Interaction (20 tests)
+│   ├── Story: Tab Switching (12 tests)
+│   └── Story: Window Switching (10 tests)
+└── Feature: Basic Page Interactions
+    └── Story: Homepage Tests (3 tests)
+```
+
+### Key Testing Patterns
+
+1. **SoftAssert Pattern**
+   - All tests use SoftAssert for comprehensive failure reporting
+   - Multiple assertions per test
+   - Final assertAll() collects all failures
+
+2. **Page Object Model**
+   - HomePage: Form elements, alerts, navigation
+   - WebTablePage: Table parsing and validation
+   - BasePage: Common functionality, waits, frame handling
+
+3. **Explicit Waits**
+   - FluentWait for dynamic content (autocomplete, hover menus)
+   - WebDriverWait for alerts and windows
+   - Custom wait utilities in Wait class
+
+4. **Test Organization**
+   - Priority-based execution (1-20)
+   - TestNG groups: smoke, functional, regression
+   - Independent tests with proper cleanup
+
+5. **Data Validation**
+   - Stream API for table data processing
+   - Price validation with numeric parsing
+   - Instructor filtering and course searches
+
+### Test Execution Strategy
+
+```mermaid
+sequenceDiagram
+    participant Suite as Test Suite
+    participant Setup as @BeforeMethod
+    participant Test as Test Method
+    participant Page as Page Object
+    participant Assert as SoftAssert
+    
+    Suite->>Setup: Navigate to homepage
+    Setup->>Page: Initialize page objects
+    Setup->>Assert: Create SoftAssert instance
+    
+    Test->>Page: Perform actions
+    Page->>Assert: Verify conditions
+    Assert->>Assert: Collect assertions
+    
+    Test->>Assert: assertAll()
+    Assert->>Suite: Report results
+    
+    Note over Suite,Assert: Each test independent<br/>Fresh navigation per test
+```
+
+### Common Test Scenarios
+
+**Form Element Testing:**
+```java
+// Checkbox - multiple selection
+homePage.checkCheckbox1();
+homePage.checkCheckbox2();
+softAssert.assertTrue(homePage.isCheckbox1Selected());
+softAssert.assertTrue(homePage.isCheckbox2Selected());
+
+// Dropdown - selection methods
+homePage.selectDropdownByText("Option1");
+softAssert.assertEquals(homePage.getSelectedDropdownOption(), "option1");
+```
+
+**Dynamic Content Testing:**
+```java
+// Autocomplete
+homePage.enterSearchText("ind");
+wait.waitForAutocompleteSuggestions();
+List<String> suggestions = homePage.getAllSuggestions();
+softAssert.assertTrue(suggestions.size() > 0);
+
+// Mouse Hover
+homePage.hoverOverTopButton();
+softAssert.assertTrue(homePage.isTopDropdownDisplayed());
+```
+
+**Window/Frame Testing:**
+```java
+// IFrame switching
+driver.switchTo().frame("iframe-name");
+softAssert.assertTrue(homePage.isElementInFrameDisplayed());
+driver.switchTo().defaultContent();
+
+// Tab switching
+homePage.clickOpenTabButton();
+wait.waitForNumberOfWindows(2);
+String newTab = homePage.switchToNewTab();
+softAssert.assertTrue(driver.getCurrentUrl().contains("expected-url"));
+```
+
+**Table Validation:**
+```java
+// Web table data extraction
+List<String> courseNames = webTablePage.getAllCourseNames();
+String price = webTablePage.getCoursePrice("Selenium WebDriver");
+softAssert.assertEquals(price, "₹50");
+
+// Fixed header table scrolling
+fixedTablePage.scrollTableToBottom();
+List<String> allData = fixedTablePage.getColumnData("Engineer");
+softAssert.assertTrue(allData.size() > 10);
+```
+
+### Test Maintenance Tips
+
+1. **Centralized Constants**
+   - RahulShettyConstants: URLs, expected values, timeouts
+   - RahulShettyMessages: 100+ assertion messages
+   - Promotes consistency and easy updates
+
+2. **Reusable Page Objects**
+   - HomePage handles 80% of test scenarios
+   - WebTablePage for specialized table operations
+   - BasePage provides frame and window utilities
+
+3. **Flexible Test Execution**
+   - Run by class, group, or suite
+   - Priority-based ordering
+   - Parallel execution support (thread-safe)
+
+4. **Comprehensive Reporting**
+   - Allure annotations on all tests
+   - @Description for detailed documentation
+   - @Severity for test prioritization
+   - Screenshots on failure
 
 ---
 
