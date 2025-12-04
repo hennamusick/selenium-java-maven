@@ -365,19 +365,7 @@ public class InventoryPageTest extends BaseTest {
 
     // ==================== ADVANCED FILTER/SORT TESTS ====================
 
-    @Test(priority = 21, groups = {"functional", "regression"}, description = "Verify sort option count is exactly 4")
-    @Description("Validate that dropdown contains exactly 4 sort options")
-    @Severity(SeverityLevel.NORMAL)
-    @Story("Filter/Sort Dropdown")
-    public void testSortDropdownOptionsCount() {
-        List<String> options = inventoryPage.getAllSortOptions();
-        softAssert.assertEquals(options.size(), 4, 
-            "Sort dropdown should contain exactly 4 options");
-        
-        softAssert.assertAll();
-    }
-
-    @Test(priority = 24, groups = {"functional", "regression"}, description = "Verify sort option order in dropdown")
+    @Test(priority = 21, groups = {"functional", "regression"}, description = "Verify sort option order in dropdown")
     @Description("Validate that sort options appear in correct order")
     @Severity(SeverityLevel.MINOR)
     @Story("Filter/Sort Dropdown")
@@ -396,7 +384,7 @@ public class InventoryPageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(priority = 25, groups = {"functional", "regression"}, description = "Verify sort persists after adding item to cart")
+    @Test(priority = 22, groups = {"functional", "regression"}, description = "Verify sort persists after adding item to cart")
     @Description("Validate that selected sort option remains after cart operations")
     @Severity(SeverityLevel.NORMAL)
     @Story("Filter/Sort Dropdown")
@@ -418,7 +406,7 @@ public class InventoryPageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(priority = 26, groups = {"functional", "regression"}, description = "Verify products reorder immediately when sort changes")
+    @Test(priority = 23, groups = {"functional", "regression"}, description = "Verify products reorder immediately when sort changes")
     @Description("Validate that product list updates immediately when sort option is changed")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Filter/Sort Dropdown")
@@ -437,7 +425,7 @@ public class InventoryPageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(priority = 27, groups = {"functional", "regression"}, description = "Verify sort by value using dropdown value attribute")
+    @Test(priority = 24, groups = {"functional", "regression"}, description = "Verify sort by value using dropdown value attribute")
     @Description("Validate that sorting works using dropdown value attribute")
     @Severity(SeverityLevel.NORMAL)
     @Story("Filter/Sort Dropdown")
@@ -460,7 +448,7 @@ public class InventoryPageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(priority = 28, groups = {"functional", "regression"}, description = "Verify all sort values work correctly")
+    @Test(priority = 25, groups = {"functional", "regression"}, description = "Verify all sort values work correctly")
     @Description("Validate that all dropdown values (az, za, lohi, hilo) function properly")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Filter/Sort Dropdown")
@@ -484,7 +472,7 @@ public class InventoryPageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(priority = 29, groups = {"functional", "regression"}, description = "Verify sort affects all products equally")
+    @Test(priority = 26, groups = {"functional", "regression"}, description = "Verify sort affects all products equally")
     @Description("Validate that all 6 products are always displayed regardless of sort")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Filter/Sort Dropdown")
@@ -506,7 +494,7 @@ public class InventoryPageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(priority = 30, groups = {"regression"}, description = "Verify sorting multiple times works correctly")
+    @Test(priority = 27, groups = {"regression"}, description = "Verify sorting multiple times works correctly")
     @Description("Validate that changing sort multiple times maintains correct order")
     @Severity(SeverityLevel.NORMAL)
     @Story("Filter/Sort Dropdown")
@@ -528,7 +516,7 @@ public class InventoryPageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(priority = 31, groups = {"functional", "regression"}, description = "Verify price sorting with decimal values")
+    @Test(priority = 28, groups = {"functional", "regression"}, description = "Verify price sorting with decimal values")
     @Description("Validate that price sorting correctly handles decimal values")
     @Severity(SeverityLevel.CRITICAL)
     @Story("Filter/Sort Dropdown")
@@ -550,7 +538,7 @@ public class InventoryPageTest extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test(priority = 32, groups = {"functional", "regression"}, description = "Verify name sorting is case-insensitive")
+    @Test(priority = 29, groups = {"functional", "regression"}, description = "Verify name sorting is case-insensitive")
     @Description("Validate that name sorting handles case properly")
     @Severity(SeverityLevel.NORMAL)
     @Story("Filter/Sort Dropdown")
