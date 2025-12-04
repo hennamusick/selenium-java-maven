@@ -67,7 +67,6 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Description("Verify all form fields are displayed on checkout page")
     @Severity(SeverityLevel.BLOCKER)
     public void testAllFormFieldsDisplayed() {
-        SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(checkoutPage.isFirstNameFieldDisplayed(), 
                             "First Name field should be displayed");
         softAssert.assertTrue(checkoutPage.isLastNameFieldDisplayed(), 
@@ -82,7 +81,6 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Description("Verify placeholder text is displayed in all form fields")
     @Severity(SeverityLevel.NORMAL)
     public void testFormFieldPlaceholders() {
-        SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(checkoutPage.getFirstNamePlaceholder(), "First Name",
                               "First Name placeholder should be correct");
         softAssert.assertEquals(checkoutPage.getLastNamePlaceholder(), "Last Name",
@@ -97,7 +95,6 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Description("Verify all form fields are enabled and editable")
     @Severity(SeverityLevel.CRITICAL)
     public void testFormFieldsEnabled() {
-        SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(checkoutPage.isFirstNameFieldEnabled(), 
                             "First Name field should be enabled");
         softAssert.assertTrue(checkoutPage.isLastNameFieldEnabled(), 

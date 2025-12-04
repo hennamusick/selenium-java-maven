@@ -81,27 +81,27 @@ public class CheckoutStepOnePage extends BasePage {
     }
 
     public void enterFirstName(String firstName) {
-        sendKeys(firstNameField, firstName);
+        sendKeysToElement(firstNameField, firstName);
     }
 
     public void enterLastName(String lastName) {
-        sendKeys(lastNameField, lastName);
+        sendKeysToElement(lastNameField, lastName);
     }
 
     public void enterPostalCode(String postalCode) {
-        sendKeys(postalCodeField, postalCode);
+        sendKeysToElement(postalCodeField, postalCode);
     }
 
     public void clearFirstName() {
-        clearElement(firstNameField);
+        firstNameField.clear();
     }
 
     public void clearLastName() {
-        clearElement(lastNameField);
+        lastNameField.clear();
     }
 
     public void clearPostalCode() {
-        clearElement(postalCodeField);
+        postalCodeField.clear();
     }
 
     public String getFirstNameValue() {

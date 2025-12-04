@@ -75,8 +75,8 @@ public class CartPageTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void testContinueShoppingButtonDisplay() {
         inventoryPage.clickShoppingCart();
-        // Button should be present and functional (clicking will be tested separately)
-        assertNotNull(cartPage, "Cart page should be initialized");
+        assertTrue(cartPage.isContinueShoppingButtonDisplayed(), 
+                  "Continue Shopping button should be displayed");
     }
 
     @Test(priority = 4, groups = {"functional", "cart", "regression"})
@@ -85,8 +85,8 @@ public class CartPageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testCheckoutButtonDisplay() {
         inventoryPage.clickShoppingCart();
-        // Button should be present (navigation will be tested separately)
-        assertNotNull(cartPage, "Cart page should be initialized");
+        assertTrue(cartPage.isCheckoutButtonDisplayed(), 
+                  "Checkout button should be displayed");
     }
 
     // ==================== CART ITEMS DISPLAY TESTS ====================

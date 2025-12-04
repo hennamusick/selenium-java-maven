@@ -28,7 +28,6 @@ public class LoginTest extends BaseTest {
     public void setUpTest() {
         // Using baseUrl.2 - https://www.saucedemo.com
         driver.get(ConfigReader.getBaseUrl(2));
-        waitForPageToLoad();
         loginPage = new LoginPage(driver);
         inventoryPage = new InventoryPage(driver);
     }

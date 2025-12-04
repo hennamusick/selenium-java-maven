@@ -10,6 +10,7 @@ import io.qameta.allure.*;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -28,7 +29,6 @@ public class InventoryPageTest extends BaseTest {
     public void setUpTest() {
         // Using baseUrl.2 - https://www.saucedemo.com
         driver.get(ConfigReader.getBaseUrl(2));
-        waitForPageToLoad();
         loginPage = new LoginPage(driver);
         inventoryPage = new InventoryPage(driver);
         
@@ -158,7 +158,7 @@ public class InventoryPageTest extends BaseTest {
         
         List<String> productNames = inventoryPage.getAllProductNames();
         List<String> sortedNames = productNames.stream()
-                .sorted((a, b) -> b.compareTo(a))
+                .sorted(Comparator.reverseOrder())
                 .toList();
         
         softAssert.assertEquals(productNames, sortedNames, SauceDemoMessages.PRODUCTS_SORTED_Z_TO_A);
@@ -202,7 +202,7 @@ public class InventoryPageTest extends BaseTest {
                 .toList();
         
         List<Double> sortedPrices = priceValues.stream()
-                .sorted((a, b) -> b.compareTo(a))
+                .sorted(Comparator.reverseOrder())
                 .toList();
         
         softAssert.assertEquals(priceValues, sortedPrices, SauceDemoMessages.PRODUCTS_SORTED_PRICE_HIGH_LOW);
@@ -499,14 +499,14 @@ public class InventoryPageTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Story("Filter/Sort Dropdown")
     public void testMultipleSortChanges() {
-        // Sort by name A-Z
+        // Sort by name A-Z and capture initial order
         inventoryPage.selectSortOption(SauceDemoConstants.SORT_NAME_ASC);
         List<String> namesAZ = inventoryPage.getAllProductNames();
         
-        // Sort by price
+        // Sort by price (intermediate sort)
         inventoryPage.selectSortOption(SauceDemoConstants.SORT_PRICE_LOW_HIGH);
         
-        // Sort back to name A-Z
+        // Sort back to name A-Z and verify order is restored
         inventoryPage.selectSortOption(SauceDemoConstants.SORT_NAME_ASC);
         List<String> namesAZAgain = inventoryPage.getAllProductNames();
         
