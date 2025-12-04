@@ -22,6 +22,16 @@
                     <include name="testInventoryItemsDisplayed"/>
                 </methods>
             </class>
+            
+            <!-- CartPageTest: Critical cart functionality tests -->
+            <class name="com.framework.tests.saucedemo.CartPageTest">
+                <methods>
+                    <include name="testCartPageDisplay"/>
+                    <include name="testCartPageTitle"/>
+                    <include name="testContinueShoppingButton"/>
+                    <include name="testCheckoutButton"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

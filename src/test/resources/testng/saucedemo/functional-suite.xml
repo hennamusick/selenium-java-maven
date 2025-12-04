@@ -31,6 +31,69 @@
                     <include name="testProductNamesDisplayed"/>
                 </methods>
             </class>
+            
+            <!-- CartPageTest: All cart functionality tests -->
+            <class name="com.framework.tests.saucedemo.CartPageTest">
+                <methods>
+                    <include name="testCartPageDisplay"/>
+                    <include name="testCartPageTitle"/>
+                    <include name="testCartPageHasQtyLabel"/>
+                    <include name="testCartPageHasDescriptionLabel"/>
+                    <include name="testCartItemsDisplayed"/>
+                    <include name="testCartItemsNames"/>
+                    <include name="testCartItemsDescriptions"/>
+                    <include name="testCartItemsPrices"/>
+                    <include name="testCartItemsQuantities"/>
+                    <include name="testCartItemsRemoveButtons"/>
+                    <include name="testRemoveSingleItemFromCart"/>
+                    <include name="testRemoveMultipleItemsFromCart"/>
+                    <include name="testRemoveAllItemsFromCart"/>
+                    <include name="testRemoveItemByIndex"/>
+                    <include name="testCartBadgeCountMatches"/>
+                    <include name="testCartBadgeUpdatesAfterRemoval"/>
+                    <include name="testContinueShoppingButton"/>
+                    <include name="testCheckoutButton"/>
+                    <include name="testCalculateTotalPrice"/>
+                    <include name="testIndividualItemPriceRetrieval"/>
+                    <include name="testGetAllItemNames"/>
+                    <include name="testVerifyItemInCart"/>
+                    <include name="testVerifyMultipleItemsInCart"/>
+                </methods>
+            </class>
+            
+            <!-- CheckoutStepOnePageTest: All checkout form tests -->
+            <class name="com.framework.tests.saucedemo.CheckoutStepOnePageTest">
+                <methods>
+                    <include name="testCheckoutPageDisplay"/>
+                    <include name="testCheckoutPageTitle"/>
+                    <include name="testCheckoutFormElements"/>
+                    <include name="testFirstNameField"/>
+                    <include name="testLastNameField"/>
+                    <include name="testPostalCodeField"/>
+                    <include name="testCancelButton"/>
+                    <include name="testContinueButton"/>
+                    <include name="testContinueButtonDisabled"/>
+                    <include name="testValidFormSubmission"/>
+                    <include name="testEmptyFirstNameValidation"/>
+                    <include name="testEmptyLastNameValidation"/>
+                    <include name="testEmptyPostalCodeValidation"/>
+                    <include name="testAllFieldsEmptyValidation"/>
+                    <include name="testPartiallyFilledFormValidation"/>
+                    <include name="testFirstNameTooLong"/>
+                    <include name="testLastNameTooLong"/>
+                    <include name="testErrorMessageForEmptyFirstName"/>
+                    <include name="testErrorMessageForEmptyLastName"/>
+                    <include name="testErrorMessageForEmptyPostalCode"/>
+                    <include name="testErrorMessageDismissal"/>
+                    <include name="testMultipleValidationErrors"/>
+                    <include name="testCancelButtonReturnsToCart"/>
+                    <include name="testCancelButtonClearsForm"/>
+                    <include name="testFormPersistenceOnError"/>
+                    <include name="testFormNavigationAfterError"/>
+                    <include name="testFormFieldAccessibility"/>
+                    <include name="testErrorMessageAccessibility"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

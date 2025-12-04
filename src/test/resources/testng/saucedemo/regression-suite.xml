@@ -47,13 +47,115 @@
                 </methods>
             </class>
             
-            <!-- InventoryPageTest: 4 focused inventory page tests -->
+            <!-- InventoryPageTest: All inventory page tests including filter/sort tests -->
             <class name="com.framework.tests.saucedemo.InventoryPageTest">
                 <methods>
+                    <!-- Basic Inventory Tests -->
                     <include name="testInventoryPageDisplay"/>
                     <include name="testInventoryPageElements"/>
                     <include name="testInventoryItemsDisplayed"/>
                     <include name="testProductNamesDisplayed"/>
+                    
+                    <!-- Filter/Sort Tests (Tests 21-32) -->
+                    <include name="testSortDropdownDisplayedAndEnabled"/>
+                    <include name="testDefaultSortOption"/>
+                    <include name="testSortDropdownOptions"/>
+                    <include name="testSortDropdownPlaceholderText"/>
+                    <include name="testSortByNameAtoZ"/>
+                    <include name="testSortByNameZtoA"/>
+                    <include name="testSortByPriceLowToHigh"/>
+                    <include name="testSortByPriceHighToLow"/>
+                    <include name="testSortPersistsAfterPageReload"/>
+                    <include name="testSortWithEmptyInventory"/>
+                    <include name="testSortWithSingleItem"/>
+                    <include name="testSortWithMultipleItemsSamePrice"/>
+                </methods>
+            </class>
+            
+            <!-- CartPageTest: All cart functionality tests -->
+            <class name="com.framework.tests.saucedemo.CartPageTest">
+                <methods>
+                    <!-- Page Display Tests -->
+                    <include name="testCartPageDisplay"/>
+                    <include name="testCartPageTitle"/>
+                    <include name="testCartPageHasQtyLabel"/>
+                    <include name="testCartPageHasDescriptionLabel"/>
+                    
+                    <!-- Cart Items Display Tests -->
+                    <include name="testCartItemsDisplayed"/>
+                    <include name="testCartItemsNames"/>
+                    <include name="testCartItemsDescriptions"/>
+                    <include name="testCartItemsPrices"/>
+                    <include name="testCartItemsQuantities"/>
+                    <include name="testCartItemsRemoveButtons"/>
+                    
+                    <!-- Remove Items Tests -->
+                    <include name="testRemoveSingleItemFromCart"/>
+                    <include name="testRemoveMultipleItemsFromCart"/>
+                    <include name="testRemoveAllItemsFromCart"/>
+                    <include name="testRemoveItemByIndex"/>
+                    
+                    <!-- Cart Badge Tests -->
+                    <include name="testCartBadgeCountMatches"/>
+                    <include name="testCartBadgeUpdatesAfterRemoval"/>
+                    
+                    <!-- Navigation Tests -->
+                    <include name="testContinueShoppingButton"/>
+                    <include name="testCheckoutButton"/>
+                    
+                    <!-- Price Calculations Tests -->
+                    <include name="testCalculateTotalPrice"/>
+                    <include name="testIndividualItemPriceRetrieval"/>
+                    <include name="testGetAllItemNames"/>
+                    
+                    <!-- Verification Tests -->
+                    <include name="testVerifyItemInCart"/>
+                    <include name="testVerifyMultipleItemsInCart"/>
+                </methods>
+            </class>
+            
+            <!-- CheckoutStepOnePageTest: All checkout form validation tests -->
+            <class name="com.framework.tests.saucedemo.CheckoutStepOnePageTest">
+                <methods>
+                    <!-- Page Display Tests -->
+                    <include name="testCheckoutPageDisplay"/>
+                    <include name="testCheckoutPageTitle"/>
+                    <include name="testCheckoutFormElements"/>
+                    
+                    <!-- Form Fields Tests -->
+                    <include name="testFirstNameField"/>
+                    <include name="testLastNameField"/>
+                    <include name="testPostalCodeField"/>
+                    <include name="testCancelButton"/>
+                    <include name="testContinueButton"/>
+                    <include name="testContinueButtonDisabled"/>
+                    
+                    <!-- Validation Tests -->
+                    <include name="testValidFormSubmission"/>
+                    <include name="testEmptyFirstNameValidation"/>
+                    <include name="testEmptyLastNameValidation"/>
+                    <include name="testEmptyPostalCodeValidation"/>
+                    <include name="testAllFieldsEmptyValidation"/>
+                    <include name="testPartiallyFilledFormValidation"/>
+                    <include name="testFirstNameTooLong"/>
+                    <include name="testLastNameTooLong"/>
+                    
+                    <!-- Error Message Tests -->
+                    <include name="testErrorMessageForEmptyFirstName"/>
+                    <include name="testErrorMessageForEmptyLastName"/>
+                    <include name="testErrorMessageForEmptyPostalCode"/>
+                    <include name="testErrorMessageDismissal"/>
+                    <include name="testMultipleValidationErrors"/>
+                    
+                    <!-- Navigation Tests -->
+                    <include name="testCancelButtonReturnsToCart"/>
+                    <include name="testCancelButtonClearsForm"/>
+                    <include name="testFormPersistenceOnError"/>
+                    <include name="testFormNavigationAfterError"/>
+                    
+                    <!-- Accessibility Tests -->
+                    <include name="testFormFieldAccessibility"/>
+                    <include name="testErrorMessageAccessibility"/>
                 </methods>
             </class>
         </classes>
