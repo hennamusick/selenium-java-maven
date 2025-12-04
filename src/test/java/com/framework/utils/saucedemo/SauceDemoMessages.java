@@ -119,6 +119,50 @@ public final class SauceDemoMessages {
     public static final String URL_CONTAINS_INVENTORY = "URL should contain inventory page pattern";
     public static final String URL_CONTAINS_CART = "URL should contain cart page pattern";
     
+    // ==================== CHECKOUT CONFIRMATION MESSAGES ====================
+    
+    public static final String CONFIRMATION_PAGE_TITLE_DISPLAYED = "Confirmation page title should be displayed";
+    public static final String CONFIRMATION_PAGE_TITLE_CORRECT = "Page title should be 'Checkout: Complete!'";
+    public static final String ON_CHECKOUT_COMPLETE_PAGE = "Should be on checkout complete page";
+    public static final String URL_CONTAINS_CHECKOUT_COMPLETE = "URL should contain 'checkout-complete'";
+    public static final String SUCCESS_ICON_DISPLAYED = "Success icon should be displayed";
+    public static final String CONFIRMATION_HEADER_DISPLAYED = "Confirmation header should be displayed";
+    public static final String CONFIRMATION_HEADER_NOT_EMPTY = "Confirmation header should contain text";
+    public static final String CONFIRMATION_MESSAGE_DISPLAYED = "Confirmation message should be displayed";
+    public static final String CONFIRMATION_MESSAGE_NOT_EMPTY = "Confirmation message should contain text";
+    public static final String CONFIRMATION_HEADER_INDICATES_SUCCESS = "Header should indicate successful completion";
+    public static final String CONFIRMATION_HEADER_VALIDATION_PASSED = "Confirmation header validation should pass";
+    public static final String CONFIRMATION_MESSAGE_MENTIONS_ORDER = "Message should mention 'order'";
+    public static final String CONFIRMATION_MESSAGE_INDICATES_DELIVERY = "Message should indicate delivery/dispatch";
+    public static final String CONFIRMATION_MESSAGE_VALIDATION_PASSED = "Confirmation message validation should pass";
+    public static final String ORDER_MARKED_SUCCESSFUL = "Order should be marked as successful";
+    public static final String BACK_HOME_BUTTON_DISPLAYED = "Back Home button should be displayed";
+    public static final String BACK_HOME_BUTTON_ENABLED = "Back Home button should be enabled";
+    public static final String BACK_HOME_BUTTON_TEXT_CORRECT = "Back Home button text should be 'Back Home'";
+    public static final String ALL_CONFIRMATION_ELEMENTS_DISPLAYED = "All order confirmation elements should be displayed";
+    public static final String NAVIGATE_TO_INVENTORY = "Should navigate back to inventory page";
+    public static final String CONFIRMATION_HEADER_MEANINGFUL = "Confirmation header should have meaningful content";
+    public static final String CONFIRMATION_MESSAGE_MEANINGFUL = "Confirmation message should have meaningful content";
+    public static final String MESSAGE_NO_REPEATED_PUNCTUATION = "Message should not have repeated punctuation";
+    public static final String MESSAGE_PROPER_SPACING = "Message should contain proper spacing";
+    public static final String SUCCESS_ICON_VISIBLE = "Success icon should be clearly visible";
+    public static final String ORDER_COMPLETION_IS_FINAL_STEP = "Order completion page should be final step";
+    public static final String ORDER_SUCCESSFUL_STATUS = "Order should be successful";
+    public static final String ALL_CONFIRMATION_ELEMENTS_PRESENT = "All confirmation elements should be present";
+    public static final String ON_CHECKOUT_COMPLETE_PAGE_TITLE = "Should be on checkout complete page";
+    public static final String PAGE_TITLE_NOT_NULL = "Page title should not be null";
+    public static final String CAN_RETURN_TO_HOME = "Should be able to return to home";
+    public static final String MESSAGE_INDICATES_DELIVERY_METHOD = "Should indicate how order will be delivered";
+    
+    // ==================== VALIDATION KEYWORDS ====================
+    
+    public static final String KEYWORD_COMPLETE = "complete";
+    public static final String KEYWORD_THANK = "thank";
+    public static final String KEYWORD_ORDER = "order";
+    public static final String KEYWORD_DISPATCH = "dispatch";
+    public static final String KEYWORD_DELIVER = "deliver";
+    public static final String KEYWORD_ARRIVE = "arrive";
+    
     // ==================== GENERAL MESSAGES ====================
     
     public static final String PAGE_LOADED_SUCCESSFULLY = "Page should load successfully";

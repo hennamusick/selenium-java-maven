@@ -9,6 +9,7 @@ import com.framework.pages.saucedemo.LoginPage;
 import com.framework.utils.BaseTest;
 import com.framework.utils.ConfigReader;
 import com.framework.utils.saucedemo.SauceDemoConstants;
+import com.framework.utils.saucedemo.SauceDemoMessages;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -78,9 +79,9 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     public void testConfirmationPageTitleDisplay() {
         assertTrue(checkoutCompletePage.isPageTitleDisplayed(), 
-                  "Confirmation page title should be displayed");
+                  SauceDemoMessages.CONFIRMATION_PAGE_TITLE_DISPLAYED);
         assertEquals(checkoutCompletePage.getPageTitle(), SauceDemoConstants.CHECKOUT_COMPLETE_TITLE,
-                    "Page title should be 'Checkout: Complete!'");
+                    SauceDemoMessages.CONFIRMATION_PAGE_TITLE_CORRECT);
     }
 
     @Test(priority = 2, groups = {"smoke", "confirmation", "regression"})
@@ -89,9 +90,9 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testCheckoutCompletePageUrl() {
         assertTrue(checkoutCompletePage.isOnCheckoutCompletePage(),
-                  "Should be on checkout complete page");
+                  SauceDemoMessages.ON_CHECKOUT_COMPLETE_PAGE);
         assertTrue(checkoutCompletePage.getCurrentUrl().contains("checkout-complete"),
-                  "URL should contain 'checkout-complete'");
+                  SauceDemoMessages.URL_CONTAINS_CHECKOUT_COMPLETE);
     }
 
     @Test(priority = 3, groups = {"smoke", "confirmation", "regression"})
@@ -100,7 +101,7 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testSuccessIconDisplay() {
         assertTrue(checkoutCompletePage.isSuccessIconDisplayed(),
-                  "Success icon should be displayed");
+                  SauceDemoMessages.SUCCESS_ICON_DISPLAYED);
     }
 
     @Test(priority = 4, groups = {"smoke", "confirmation", "regression"})
@@ -109,9 +110,9 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     public void testConfirmationHeaderDisplay() {
         assertTrue(checkoutCompletePage.isConfirmationHeaderDisplayed(),
-                  "Confirmation header should be displayed");
+                  SauceDemoMessages.CONFIRMATION_HEADER_DISPLAYED);
         assertFalse(checkoutCompletePage.getConfirmationHeader().isEmpty(),
-                   "Confirmation header should contain text");
+                   SauceDemoMessages.CONFIRMATION_HEADER_NOT_EMPTY);
     }
 
     @Test(priority = 5, groups = {"smoke", "confirmation", "regression"})
@@ -120,9 +121,9 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     public void testConfirmationMessageDisplay() {
         assertTrue(checkoutCompletePage.isConfirmationMessageDisplayed(),
-                  "Confirmation message should be displayed");
+                  SauceDemoMessages.CONFIRMATION_MESSAGE_DISPLAYED);
         assertFalse(checkoutCompletePage.getConfirmationMessage().isEmpty(),
-                   "Confirmation message should contain text");
+                   SauceDemoMessages.CONFIRMATION_MESSAGE_NOT_EMPTY);
     }
 
     // ==================== CONFIRMATION CONTENT TESTS ====================
@@ -133,11 +134,11 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testConfirmationHeaderContent() {
         String header = checkoutCompletePage.getConfirmationHeader();
-        assertTrue(header.toLowerCase().contains("complete") || 
-                  header.toLowerCase().contains("thank"),
-                  "Header should indicate successful completion");
+        assertTrue(header.toLowerCase().contains(SauceDemoMessages.KEYWORD_COMPLETE) || 
+                  header.toLowerCase().contains(SauceDemoMessages.KEYWORD_THANK),
+                  SauceDemoMessages.CONFIRMATION_HEADER_INDICATES_SUCCESS);
         assertTrue(checkoutCompletePage.isConfirmationHeaderCorrect(),
-                  "Confirmation header validation should pass");
+                  SauceDemoMessages.CONFIRMATION_HEADER_VALIDATION_PASSED);
     }
 
     @Test(priority = 7, groups = {"functional", "confirmation", "regression"})
@@ -146,14 +147,14 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testConfirmationMessageContent() {
         String message = checkoutCompletePage.getConfirmationMessage();
-        assertTrue(message.toLowerCase().contains("order"),
-                  "Message should mention 'order'");
-        assertTrue(message.toLowerCase().contains("dispatch") || 
-                  message.toLowerCase().contains("deliver") ||
-                  message.toLowerCase().contains("arrive"),
-                  "Message should indicate delivery/dispatch");
+        assertTrue(message.toLowerCase().contains(SauceDemoMessages.KEYWORD_ORDER),
+                  SauceDemoMessages.CONFIRMATION_MESSAGE_MENTIONS_ORDER);
+        assertTrue(message.toLowerCase().contains(SauceDemoMessages.KEYWORD_DISPATCH) || 
+                  message.toLowerCase().contains(SauceDemoMessages.KEYWORD_DELIVER) ||
+                  message.toLowerCase().contains(SauceDemoMessages.KEYWORD_ARRIVE),
+                  SauceDemoMessages.CONFIRMATION_MESSAGE_INDICATES_DELIVERY);
         assertTrue(checkoutCompletePage.isConfirmationMessageCorrect(),
-                  "Confirmation message validation should pass");
+                  SauceDemoMessages.CONFIRMATION_MESSAGE_VALIDATION_PASSED);
     }
 
     @Test(priority = 8, groups = {"functional", "confirmation", "regression"})
@@ -162,7 +163,7 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testOrderSuccessIndicators() {
         assertTrue(checkoutCompletePage.isOrderSuccessful(),
-                  "Order should be marked as successful");
+                  SauceDemoMessages.ORDER_MARKED_SUCCESSFUL);
     }
 
     // ==================== BACK HOME BUTTON TESTS ====================
@@ -173,7 +174,7 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     public void testBackHomeButtonDisplay() {
         assertTrue(checkoutCompletePage.isBackHomeButtonDisplayed(),
-                  "Back Home button should be displayed");
+                  SauceDemoMessages.BACK_HOME_BUTTON_DISPLAYED);
     }
 
     @Test(priority = 10, groups = {"functional", "confirmation", "regression"})
@@ -182,7 +183,7 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testBackHomeButtonEnabled() {
         assertTrue(checkoutCompletePage.isBackHomeButtonEnabled(),
-                  "Back Home button should be enabled");
+                  SauceDemoMessages.BACK_HOME_BUTTON_ENABLED);
     }
 
     @Test(priority = 11, groups = {"functional", "confirmation", "regression"})
@@ -192,7 +193,7 @@ public class CheckoutCompletePageTest extends BaseTest {
     public void testBackHomeButtonText() {
         String buttonText = checkoutCompletePage.getBackHomeButtonText();
         assertEquals(buttonText, SauceDemoConstants.BACK_HOME_BUTTON_TEXT,
-                    "Back Home button text should be 'Back Home'");
+                    SauceDemoMessages.BACK_HOME_BUTTON_TEXT_CORRECT);
     }
 
     // ==================== PAGE COMPLETENESS TESTS ====================
@@ -203,7 +204,7 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     public void testAllConfirmationElementsDisplay() {
         assertTrue(checkoutCompletePage.isOrderConfirmationComplete(),
-                  "All order confirmation elements should be displayed");
+                  SauceDemoMessages.ALL_CONFIRMATION_ELEMENTS_DISPLAYED);
     }
 
     @Test(priority = 13, groups = {"functional", "confirmation", "regression"})
@@ -239,7 +240,7 @@ public class CheckoutCompletePageTest extends BaseTest {
         
         // Should navigate back to inventory
         assertTrue(driver.getCurrentUrl().contains(SauceDemoConstants.INVENTORY_URL),
-                  "Should navigate back to inventory page");
+                  SauceDemoMessages.NAVIGATE_TO_INVENTORY);
     }
 
     // ==================== MESSAGE CONTENT TESTS ====================
@@ -251,9 +252,9 @@ public class CheckoutCompletePageTest extends BaseTest {
     public void testConfirmationHeaderNotEmpty() {
         String header = checkoutCompletePage.getConfirmationHeader();
         assertFalse(header.trim().isEmpty(),
-                   "Confirmation header should not be empty");
+                   SauceDemoMessages.CONFIRMATION_HEADER_NOT_EMPTY);
         assertTrue(header.length() > 5,
-                  "Confirmation header should have meaningful content");
+                  SauceDemoMessages.CONFIRMATION_HEADER_MEANINGFUL);
     }
 
     @Test(priority = 16, groups = {"functional", "confirmation", "regression"})
@@ -263,9 +264,9 @@ public class CheckoutCompletePageTest extends BaseTest {
     public void testConfirmationMessageNotEmpty() {
         String message = checkoutCompletePage.getConfirmationMessage();
         assertFalse(message.trim().isEmpty(),
-                   "Confirmation message should not be empty");
+                   SauceDemoMessages.CONFIRMATION_MESSAGE_NOT_EMPTY);
         assertTrue(message.length() > 10,
-                  "Confirmation message should have meaningful content");
+                  SauceDemoMessages.CONFIRMATION_MESSAGE_MEANINGFUL);
     }
 
     @Test(priority = 17, groups = {"functional", "confirmation", "regression"})
@@ -277,11 +278,11 @@ public class CheckoutCompletePageTest extends BaseTest {
         
         // Should not have excessive punctuation or malformed text
         assertTrue(!message.contains("!!") && !message.contains("??"),
-                  "Message should not have repeated punctuation");
+                  SauceDemoMessages.MESSAGE_NO_REPEATED_PUNCTUATION);
         
         // Should contain expected keywords
         assertTrue(message.toLowerCase().contains(" "),
-                  "Message should contain proper spacing");
+                  SauceDemoMessages.MESSAGE_PROPER_SPACING);
     }
 
     // ==================== SUCCESS INDICATOR TESTS ====================
@@ -294,7 +295,7 @@ public class CheckoutCompletePageTest extends BaseTest {
         // If icon is displayed, test passes
         // Icon should be visible and indicate success
         assertTrue(checkoutCompletePage.isSuccessIconDisplayed(),
-                  "Success icon should be clearly visible");
+                  SauceDemoMessages.SUCCESS_ICON_VISIBLE);
     }
 
     @Test(priority = 19, groups = {"functional", "confirmation", "regression"})
@@ -303,13 +304,16 @@ public class CheckoutCompletePageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testOrderCompletionPageIsFinalStep() {
         // Verify we're on correct page
-        assertTrue(checkoutCompletePage.isOnCheckoutCompletePage());
+        assertTrue(checkoutCompletePage.isOnCheckoutCompletePage(),
+                  SauceDemoMessages.ON_CHECKOUT_COMPLETE_PAGE_TITLE);
         
         // Verify order was successful
-        assertTrue(checkoutCompletePage.isOrderSuccessful());
+        assertTrue(checkoutCompletePage.isOrderSuccessful(),
+                  SauceDemoMessages.ORDER_SUCCESSFUL_STATUS);
         
         // Verify all confirmation elements present
-        assertTrue(checkoutCompletePage.isOrderConfirmationComplete());
+        assertTrue(checkoutCompletePage.isOrderConfirmationComplete(),
+                  SauceDemoMessages.ALL_CONFIRMATION_ELEMENTS_PRESENT);
     }
 
     // ==================== INTEGRATION TESTS ====================
@@ -322,9 +326,9 @@ public class CheckoutCompletePageTest extends BaseTest {
         // We've already completed the flow in setUp()
         // Verify we're at the end
         assertTrue(checkoutCompletePage.isPageTitleDisplayed(),
-                  "Should be on checkout complete page");
+                  SauceDemoMessages.ON_CHECKOUT_COMPLETE_PAGE_TITLE);
         assertTrue(checkoutCompletePage.isOrderSuccessful(),
-                  "Order should be successful");
+                  SauceDemoMessages.ORDER_SUCCESSFUL_STATUS);
     }
 
     @Test(priority = 21, groups = {"functional", "confirmation", "regression"})
@@ -352,12 +356,15 @@ public class CheckoutCompletePageTest extends BaseTest {
     public void testOrderConfirmationPageAppearance() {
         // Page should load correctly
         assertNotNull(checkoutCompletePage.getPageTitle(),
-                     "Page title should not be null");
+                     SauceDemoMessages.PAGE_TITLE_NOT_NULL);
         
         // Should show success elements
-        assertTrue(checkoutCompletePage.isSuccessIconDisplayed());
-        assertTrue(checkoutCompletePage.isConfirmationHeaderDisplayed());
-        assertTrue(checkoutCompletePage.isConfirmationMessageDisplayed());
+        assertTrue(checkoutCompletePage.isSuccessIconDisplayed(),
+                  SauceDemoMessages.SUCCESS_ICON_DISPLAYED);
+        assertTrue(checkoutCompletePage.isConfirmationHeaderDisplayed(),
+                  SauceDemoMessages.CONFIRMATION_HEADER_DISPLAYED);
+        assertTrue(checkoutCompletePage.isConfirmationMessageDisplayed(),
+                  SauceDemoMessages.CONFIRMATION_MESSAGE_DISPLAYED);
     }
 
     @Test(priority = 23, groups = {"functional", "confirmation", "regression"})
@@ -367,16 +374,16 @@ public class CheckoutCompletePageTest extends BaseTest {
     public void testConfirmationAccuracy() {
         // Verify this is the confirmation page
         assertTrue(checkoutCompletePage.isOnCheckoutCompletePage(),
-                  "Should be on checkout-complete page");
+                  SauceDemoMessages.ON_CHECKOUT_COMPLETE_PAGE);
         
         // Verify success indicators
         assertTrue(checkoutCompletePage.isOrderSuccessful(),
-                  "Order should be marked successful");
+                  SauceDemoMessages.ORDER_MARKED_SUCCESSFUL);
         
         // Verify user can proceed
         assertTrue(checkoutCompletePage.isBackHomeButtonDisplayed() &&
                   checkoutCompletePage.isBackHomeButtonEnabled(),
-                  "Should be able to return to home");
+                  SauceDemoMessages.CAN_RETURN_TO_HOME);
     }
 
     @Test(priority = 24, groups = {"functional", "confirmation", "regression"})
@@ -387,12 +394,12 @@ public class CheckoutCompletePageTest extends BaseTest {
         String message = checkoutCompletePage.getConfirmationMessage();
         
         // Should mention order
-        assertTrue(message.toLowerCase().contains("order"),
-                  "Should mention 'order'");
+        assertTrue(message.toLowerCase().contains(SauceDemoMessages.KEYWORD_ORDER),
+                  SauceDemoMessages.CONFIRMATION_MESSAGE_MENTIONS_ORDER);
         
         // Should indicate delivery
         assertTrue(message.toLowerCase().matches(".*(?:dispatch|deliver|arrive|send).*"),
-                  "Should indicate how order will be delivered");
+                  SauceDemoMessages.MESSAGE_INDICATES_DELIVERY_METHOD);
     }
 
     @Test(priority = 25, groups = {"smoke", "confirmation", "regression"})
