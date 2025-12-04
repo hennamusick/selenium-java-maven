@@ -75,6 +75,32 @@ public final class SauceDemoMessages {
     public static final String PRODUCTS_SORTED_PRICE_HIGH_LOW = "Products should be sorted by price high to low";
     public static final String SELECTED_SORT_OPTION_CORRECT = "Selected sort option should be correct";
     
+    // ==================== CART PAGE MESSAGES ====================
+    
+    public static final String CART_PAGE_TITLE_DISPLAYED = "Cart page title should be displayed";
+    public static final String CART_PAGE_TITLE_CORRECT = "Cart page title should be 'Your Cart'";
+    public static final String CART_EMPTY_WHEN_NO_ITEMS = "Cart should be empty when no items are added";
+    public static final String CART_SHOULD_HAVE_ZERO_ITEMS = "Cart should have 0 items";
+    public static final String CONTINUE_SHOPPING_BUTTON_DISPLAYED = "Continue Shopping button should be displayed";
+    public static final String CHECKOUT_BUTTON_DISPLAYED = "Checkout button should be displayed";
+    public static final String CART_CONTAINS_ONE_ITEM = "Cart should contain 1 item";
+    public static final String CART_CONTAINS_THREE_ITEMS = "Cart should contain 3 items";
+    public static final String CART_DISPLAY_THREE_PRICES = "Cart should display 3 item prices";
+    public static final String PRICE_STARTS_WITH_DOLLAR = "Price should start with $";
+    public static final String CART_DISPLAY_QUANTITIES_TWO = "Cart should display quantities for 2 items";
+    public static final String ITEM_QUANTITY_ONE = "Each item should have quantity of 1";
+    public static final String CART_DISPLAY_ONE_DESCRIPTION = "Cart should display 1 item description";
+    public static final String ITEM_DESCRIPTION_NOT_EMPTY = "Item description should not be empty";
+    public static final String REMOVE_BUTTON_COUNT_MATCH = "Remove button count should match item count";
+    public static final String CART_ONE_LESS_AFTER_REMOVAL = "Cart should have one less item after removal";
+    public static final String CART_NOT_EMPTY_BEFORE_REMOVAL = "Cart should not be empty before removing items";
+    public static final String CART_EMPTY_AFTER_REMOVING_ALL = "Cart should be empty after removing all items";
+    public static final String CART_ITEM_COUNT_ZERO = "Cart item count should be 0";
+    public static final String CONTINUE_SHOPPING_NAVIGATE_INVENTORY = "Should navigate back to inventory page";
+    public static final String CHECKOUT_NAVIGATE_TO_CHECKOUT = "Should navigate to checkout page";
+    public static final String TOTAL_PRICE_GREATER_THAN_ZERO = "Total price should be greater than 0";
+    public static final String TOTAL_PRICE_REASONABLE_THREE_ITEMS = "Total price should be reasonable for 3 items";
+    
     // ==================== CART BADGE MESSAGES ====================
     
     public static final String CART_BADGE_DISPLAYED = "Cart badge should be displayed";
@@ -118,6 +144,64 @@ public final class SauceDemoMessages {
     public static final String REDIRECTED_TO_LOGIN = "Should be redirected to login page after logout";
     public static final String URL_CONTAINS_INVENTORY = "URL should contain inventory page pattern";
     public static final String URL_CONTAINS_CART = "URL should contain cart page pattern";
+    
+    // ==================== CHECKOUT OVERVIEW MESSAGES ====================
+    
+    public static final String OVERVIEW_PAGE_TITLE_DISPLAYED = "Overview page title should be displayed";
+    public static final String OVERVIEW_PAGE_TITLE_CORRECT = "Page title should be 'Checkout: Overview'";
+    public static final String DISPLAY_ALL_THREE_ITEMS = "Should display all 3 items added to cart";
+    public static final String ALL_ITEMS_HAVE_DETAILS = "All items should have name, description, price, and quantity";
+    public static final String ITEM_NAMES_DISPLAYED = "Item names should be displayed";
+    public static final String DISPLAY_THREE_ITEM_NAMES = "Should display 3 item names";
+    public static final String FIRST_ITEM_BACKPACK = "First item should be Backpack";
+    public static final String ITEM_DESCRIPTIONS_DISPLAYED = "Item descriptions should be displayed";
+    public static final String DISPLAY_THREE_DESCRIPTIONS = "Should display 3 item descriptions";
+    public static final String DESCRIPTION_HAS_CONTENT = "Each description should have content";
+    public static final String DISPLAY_THREE_ITEM_PRICES = "Should display 3 item prices";
+    public static final String DISPLAY_THREE_QUANTITIES = "Should display 3 item quantities";
+    public static final String EACH_ITEM_QUANTITY_ONE = "Each item quantity should be 1";
+    public static final String ORDER_SUMMARY_DISPLAYED = "Order summary section should be displayed";
+    public static final String DISPLAY_SUBTOTAL_LABEL = "Should display subtotal label";
+    public static final String SUBTOTAL_CORRECT_FORMAT = "Subtotal should include price in correct format";
+    public static final String SUBTOTAL_GREATER_THAN_ZERO = "Subtotal should be greater than 0";
+    public static final String DISPLAY_TAX_LABEL = "Should display tax label";
+    public static final String TAX_CORRECT_FORMAT = "Tax should include price in correct format";
+    public static final String TAX_GREATER_THAN_ZERO = "Tax should be greater than 0";
+    public static final String DISPLAY_TOTAL_LABEL = "Should display total label";
+    public static final String TOTAL_GREATER_THAN_ZERO = "Total should be greater than 0";
+    public static final String ITEM_NAME_NOT_EMPTY = "Item name should not be empty";
+    public static final String ITEM_DESCRIPTION_NOT_EMPTY_CHECKOUT = "Item description should not be empty";
+    public static final String ITEM_PRICE_FORMAT_INVALID = "Item price format invalid";
+    public static final String ITEM_QUANTITY_ONE_TEXT = "Item quantity should be 1";
+    public static final String PRICE_SHOULD_BE_POSITIVE = "Price should be positive";
+    public static final String TAX_PERCENTAGE_REASONABLE = "Tax percentage should be reasonable (between 5-10%)";
+    public static final String QUANTITY_SHOULD_BE_POSITIVE = "Quantity should be positive";
+    
+    // ==================== CHECKOUT STEP ONE MESSAGES ====================
+    
+    public static final String CHECKOUT_PAGE_TITLE_DISPLAYED = "Checkout page title should be displayed";
+    public static final String CHECKOUT_PAGE_TITLE_CORRECT = "Page title should be 'Checkout: Your Information'";
+    public static final String FIRST_NAME_FIELD_DISPLAYED = "First Name field should be displayed";
+    public static final String LAST_NAME_FIELD_DISPLAYED = "Last Name field should be displayed";
+    public static final String POSTAL_CODE_FIELD_DISPLAYED = "Postal Code field should be displayed";
+    public static final String FIRST_NAME_PLACEHOLDER_CORRECT = "First Name placeholder should be correct";
+    public static final String LAST_NAME_PLACEHOLDER_CORRECT = "Last Name placeholder should be correct";
+    public static final String POSTAL_CODE_PLACEHOLDER_CORRECT = "Postal Code placeholder should be correct";
+    public static final String FIRST_NAME_FIELD_ENABLED = "First Name field should be enabled";
+    public static final String LAST_NAME_FIELD_ENABLED = "Last Name field should be enabled";
+    public static final String POSTAL_CODE_FIELD_ENABLED = "Postal Code field should be enabled";
+    public static final String CONTINUE_BUTTON_DISPLAYED = "Continue button should be displayed";
+    public static final String CANCEL_BUTTON_DISPLAYED = "Cancel button should be displayed";
+    public static final String CONTINUE_BUTTON_TEXT_CORRECT = "Continue button text should be 'Continue'";
+    public static final String CANCEL_BUTTON_TEXT_CORRECT = "Cancel button text should be 'Cancel'";
+    public static final String CART_BADGE_VISIBLE = "Cart badge should be visible";
+    public static final String CART_BADGE_SHOW_ONE_ITEM = "Cart badge should show 1 item";
+    public static final String ALL_FIELDS_FILLED = "All fields should be filled";
+    public static final String ALL_FIELDS_EMPTY_AFTER_CLEAR = "All fields should be empty after clearing";
+    public static final String ERROR_SHOULD_BE_DISPLAYED = "Error should be displayed";
+    public static final String CANCEL_NAVIGATE_TO_CART = "Should navigate back to cart page";
+    public static final String CONTINUE_BUTTON_ENABLED = "Continue button should be enabled";
+    public static final String CANCEL_BUTTON_ENABLED = "Cancel button should be enabled";
     
     // ==================== CHECKOUT CONFIRMATION MESSAGES ====================
     

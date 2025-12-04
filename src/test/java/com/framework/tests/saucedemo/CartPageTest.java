@@ -6,6 +6,7 @@ import com.framework.pages.saucedemo.LoginPage;
 import com.framework.utils.BaseTest;
 import com.framework.utils.ConfigReader;
 import com.framework.utils.saucedemo.SauceDemoConstants;
+import com.framework.utils.saucedemo.SauceDemoMessages;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -54,9 +55,9 @@ public class CartPageTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     public void testCartPageTitleDisplay() {
         inventoryPage.clickShoppingCart();
-        assertTrue(cartPage.isPageTitleDisplayed(), "Cart page title should be displayed");
+        assertTrue(cartPage.isPageTitleDisplayed(), SauceDemoMessages.CART_PAGE_TITLE_DISPLAYED);
         assertEquals(cartPage.getPageTitle(), SauceDemoConstants.CART_PAGE_TITLE, 
-                    "Cart page title should be 'Your Cart'");
+                    SauceDemoMessages.CART_PAGE_TITLE_CORRECT);
     }
 
     @Test(priority = 2, groups = {"smoke", "cart", "regression"})
@@ -65,8 +66,8 @@ public class CartPageTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void testEmptyCartDisplay() {
         inventoryPage.clickShoppingCart();
-        assertTrue(cartPage.isCartEmpty(), "Cart should be empty when no items are added");
-        assertEquals(cartPage.getCartItemCount(), 0, "Cart should have 0 items");
+        assertTrue(cartPage.isCartEmpty(), SauceDemoMessages.CART_EMPTY_WHEN_NO_ITEMS);
+        assertEquals(cartPage.getCartItemCount(), 0, SauceDemoMessages.CART_SHOULD_HAVE_ZERO_ITEMS);
     }
 
     @Test(priority = 3, groups = {"functional", "cart", "regression"})
@@ -76,7 +77,7 @@ public class CartPageTest extends BaseTest {
     public void testContinueShoppingButtonDisplay() {
         inventoryPage.clickShoppingCart();
         assertTrue(cartPage.isContinueShoppingButtonDisplayed(), 
-                  "Continue Shopping button should be displayed");
+                  SauceDemoMessages.CONTINUE_SHOPPING_BUTTON_DISPLAYED);
     }
 
     @Test(priority = 4, groups = {"functional", "cart", "regression"})
@@ -86,7 +87,7 @@ public class CartPageTest extends BaseTest {
     public void testCheckoutButtonDisplay() {
         inventoryPage.clickShoppingCart();
         assertTrue(cartPage.isCheckoutButtonDisplayed(), 
-                  "Checkout button should be displayed");
+                  SauceDemoMessages.CHECKOUT_BUTTON_DISPLAYED);
     }
 
     // ==================== CART ITEMS DISPLAY TESTS ====================
@@ -100,7 +101,7 @@ public class CartPageTest extends BaseTest {
         inventoryPage.addItemToCartByIndex(0);
         inventoryPage.clickShoppingCart();
         
-        assertEquals(cartPage.getCartItemCount(), 1, "Cart should contain 1 item");
+        assertEquals(cartPage.getCartItemCount(), 1, SauceDemoMessages.CART_CONTAINS_ONE_ITEM);
         List<String> itemNames = cartPage.getAllItemNames();
         assertTrue(itemNames.contains(SauceDemoConstants.PRODUCT_BACKPACK), 
                   "Cart should contain Sauce Labs Backpack");
@@ -118,7 +119,7 @@ public class CartPageTest extends BaseTest {
         
         inventoryPage.clickShoppingCart();
         
-        assertEquals(cartPage.getCartItemCount(), 3, "Cart should contain 3 items");
+        assertEquals(cartPage.getCartItemCount(), 3, SauceDemoMessages.CART_CONTAINS_THREE_ITEMS);
     }
 
     @Test(priority = 7, groups = {"functional", "cart", "regression"})
@@ -134,7 +135,7 @@ public class CartPageTest extends BaseTest {
         inventoryPage.clickShoppingCart();
         
         List<String> itemNames = cartPage.getAllItemNames();
-        assertEquals(itemNames.size(), 3, "Cart should contain 3 items");
+        assertEquals(itemNames.size(), 3, SauceDemoMessages.CART_CONTAINS_THREE_ITEMS);
     }
 
     @Test(priority = 8, groups = {"functional", "cart", "regression"})
@@ -150,11 +151,11 @@ public class CartPageTest extends BaseTest {
         inventoryPage.clickShoppingCart();
         
         List<String> prices = cartPage.getAllItemPrices();
-        assertEquals(prices.size(), 3, "Cart should display 3 item prices");
+        assertEquals(prices.size(), 3, SauceDemoMessages.CART_DISPLAY_THREE_PRICES);
         
         // Verify prices are displayed in correct format
         for (String price : prices) {
-            assertTrue(price.startsWith("$"), "Price should start with $");
+            assertTrue(price.startsWith("$"), SauceDemoMessages.PRICE_STARTS_WITH_DOLLAR);
         }
     }
 
@@ -170,11 +171,11 @@ public class CartPageTest extends BaseTest {
         inventoryPage.clickShoppingCart();
         
         List<String> quantities = cartPage.getAllItemQuantities();
-        assertEquals(quantities.size(), 2, "Cart should display quantities for 2 items");
+        assertEquals(quantities.size(), 2, SauceDemoMessages.CART_DISPLAY_QUANTITIES_TWO);
         
         // Each item should have quantity of 1 (SauceDemo doesn't support qty > 1)
         for (String quantity : quantities) {
-            assertEquals(quantity, "1", "Each item should have quantity of 1");
+            assertEquals(quantity, "1", SauceDemoMessages.ITEM_QUANTITY_ONE);
         }
     }
 
@@ -187,8 +188,8 @@ public class CartPageTest extends BaseTest {
         inventoryPage.clickShoppingCart();
         
         List<String> descriptions = cartPage.getAllItemDescriptions();
-        assertEquals(descriptions.size(), 1, "Cart should display 1 item description");
-        assertFalse(descriptions.get(0).isEmpty(), "Item description should not be empty");
+        assertEquals(descriptions.size(), 1, SauceDemoMessages.CART_DISPLAY_ONE_DESCRIPTION);
+        assertFalse(descriptions.get(0).isEmpty(), SauceDemoMessages.ITEM_DESCRIPTION_NOT_EMPTY);
     }
 
     // ==================== REMOVE ITEM TESTS ====================
@@ -206,7 +207,7 @@ public class CartPageTest extends BaseTest {
         inventoryPage.clickShoppingCart();
         
         assertEquals(cartPage.getRemoveButtonCount(), 3, 
-                    "Remove button count should match item count");
+                    SauceDemoMessages.REMOVE_BUTTON_COUNT_MATCH);
     }
 
     @Test(priority = 12, groups = {"functional", "cart", "regression"})
@@ -225,7 +226,7 @@ public class CartPageTest extends BaseTest {
         cartPage.removeItemByIndex(0);
         
         assertEquals(cartPage.getCartItemCount(), initialCount - 1, 
-                    "Cart should have one less item after removal");
+                    SauceDemoMessages.CART_ONE_LESS_AFTER_REMOVAL);
     }
 
     @Test(priority = 13, groups = {"functional", "cart", "regression"})
@@ -239,13 +240,13 @@ public class CartPageTest extends BaseTest {
         inventoryPage.addItemToCartByIndex(2);
         
         inventoryPage.clickShoppingCart();
-        assertFalse(cartPage.isCartEmpty(), "Cart should not be empty before removing items");
+        assertFalse(cartPage.isCartEmpty(), SauceDemoMessages.CART_NOT_EMPTY_BEFORE_REMOVAL);
         
         // Remove all items
         cartPage.removeAllItems();
         
-        assertTrue(cartPage.isCartEmpty(), "Cart should be empty after removing all items");
-        assertEquals(cartPage.getCartItemCount(), 0, "Cart item count should be 0");
+        assertTrue(cartPage.isCartEmpty(), SauceDemoMessages.CART_EMPTY_AFTER_REMOVING_ALL);
+        assertEquals(cartPage.getCartItemCount(), 0, SauceDemoMessages.CART_ITEM_COUNT_ZERO);
     }
 
     @Test(priority = 14, groups = {"functional", "cart", "regression"})
@@ -321,11 +322,9 @@ public class CartPageTest extends BaseTest {
         cartPage.clickContinueShopping();
         
         // Verify back on inventory page
-        assertTrue(driver.getCurrentUrl().contains(SauceDemoConstants.INVENTORY_URL), 
-                  "Should navigate back to inventory page");
-    }
-
-    @Test(priority = 18, groups = {"functional", "cart", "regression"})
+        assertTrue(driver.getCurrentUrl().contains(SauceDemoConstants.INVENTORY_URL),
+                  SauceDemoMessages.CONTINUE_SHOPPING_NAVIGATE_INVENTORY);
+    }    @Test(priority = 18, groups = {"functional", "cart", "regression"})
     @Story("Cart Navigation")
     @Description("Verify Checkout button navigates to checkout page")
     @Severity(SeverityLevel.CRITICAL)
@@ -337,11 +336,9 @@ public class CartPageTest extends BaseTest {
         cartPage.clickCheckout();
         
         // Verify on checkout page
-        assertTrue(driver.getCurrentUrl().contains(SauceDemoConstants.CHECKOUT_STEP_ONE_URL), 
-                  "Should navigate to checkout page");
-    }
-
-    // ==================== CART CALCULATIONS TESTS ====================
+        assertTrue(driver.getCurrentUrl().contains(SauceDemoConstants.CHECKOUT_STEP_ONE_URL),
+                  SauceDemoMessages.CHECKOUT_NAVIGATE_TO_CHECKOUT);
+    }    // ==================== CART CALCULATIONS TESTS ====================
 
     @Test(priority = 19, groups = {"functional", "cart", "regression"})
     @Story("Cart Calculations")
@@ -352,7 +349,7 @@ public class CartPageTest extends BaseTest {
         inventoryPage.clickShoppingCart();
         
         double totalPrice = cartPage.calculateTotalPrice();
-        assertTrue(totalPrice > 0, "Total price should be greater than 0");
+        assertTrue(totalPrice > 0, SauceDemoMessages.TOTAL_PRICE_GREATER_THAN_ZERO);
     }
 
     @Test(priority = 20, groups = {"functional", "cart", "regression"})
@@ -369,7 +366,7 @@ public class CartPageTest extends BaseTest {
         
         double totalPrice = cartPage.calculateTotalPrice();
         
-        assertTrue(totalPrice > 40.0, "Total price should be reasonable for 3 items");
+        assertTrue(totalPrice > 40.0, SauceDemoMessages.TOTAL_PRICE_REASONABLE_THREE_ITEMS);
     }
 
     @Test(priority = 21, groups = {"functional", "cart", "regression"})

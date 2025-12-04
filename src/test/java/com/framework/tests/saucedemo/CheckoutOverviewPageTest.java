@@ -8,6 +8,7 @@ import com.framework.pages.saucedemo.LoginPage;
 import com.framework.utils.BaseTest;
 import com.framework.utils.ConfigReader;
 import com.framework.utils.saucedemo.SauceDemoConstants;
+import com.framework.utils.saucedemo.SauceDemoMessages;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -74,9 +75,9 @@ public class CheckoutOverviewPageTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     public void testOverviewPageTitleDisplay() {
         assertTrue(checkoutOverviewPage.isPageTitleDisplayed(), 
-                  "Overview page title should be displayed");
+                  SauceDemoMessages.OVERVIEW_PAGE_TITLE_DISPLAYED);
         assertEquals(checkoutOverviewPage.getPageTitle(), SauceDemoConstants.CHECKOUT_OVERVIEW_TITLE,
-                    "Page title should be 'Checkout: Overview'");
+                    SauceDemoMessages.OVERVIEW_PAGE_TITLE_CORRECT);
     }
 
     @Test(priority = 2, groups = {"smoke", "overview", "regression"})
@@ -85,9 +86,9 @@ public class CheckoutOverviewPageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testAllItemsDisplayedOnOverview() {
         assertEquals(checkoutOverviewPage.getCartItemCount(), 3, 
-                    "Should display all 3 items added to cart");
+                    SauceDemoMessages.DISPLAY_ALL_THREE_ITEMS);
         assertTrue(checkoutOverviewPage.areAllItemsCompletelyDisplayed(),
-                  "All items should have name, description, price, and quantity");
+                  SauceDemoMessages.ALL_ITEMS_HAVE_DETAILS);
     }
 
     @Test(priority = 3, groups = {"functional", "overview", "regression"})
@@ -97,11 +98,11 @@ public class CheckoutOverviewPageTest extends BaseTest {
     public void testItemNamesDisplay() {
         List<String> itemNames = checkoutOverviewPage.getAllItemNames();
         
-        assertFalse(itemNames.isEmpty(), "Item names should be displayed");
-        assertEquals(itemNames.size(), 3, "Should display 3 item names");
+        assertFalse(itemNames.isEmpty(), SauceDemoMessages.ITEM_NAMES_DISPLAYED);
+        assertEquals(itemNames.size(), 3, SauceDemoMessages.DISPLAY_THREE_ITEM_NAMES);
         assertTrue(itemNames.get(0).contains("Backpack") || 
                   itemNames.get(0).contains("Sauce Labs"),
-                  "First item should be Backpack");
+                  SauceDemoMessages.FIRST_ITEM_BACKPACK);
     }
 
     @Test(priority = 4, groups = {"functional", "overview", "regression"})
@@ -111,9 +112,9 @@ public class CheckoutOverviewPageTest extends BaseTest {
     public void testItemDescriptionsDisplay() {
         List<String> descriptions = checkoutOverviewPage.getAllItemDescriptions();
         
-        assertFalse(descriptions.isEmpty(), "Item descriptions should be displayed");
-        assertEquals(descriptions.size(), 3, "Should display 3 item descriptions");
-        assertFalse(descriptions.get(0).isEmpty(), "Each description should have content");
+        assertFalse(descriptions.isEmpty(), SauceDemoMessages.ITEM_DESCRIPTIONS_DISPLAYED);
+        assertEquals(descriptions.size(), 3, SauceDemoMessages.DISPLAY_THREE_DESCRIPTIONS);
+        assertFalse(descriptions.get(0).isEmpty(), SauceDemoMessages.DESCRIPTION_HAS_CONTENT);
     }
 
     @Test(priority = 5, groups = {"functional", "overview", "regression"})
@@ -123,7 +124,7 @@ public class CheckoutOverviewPageTest extends BaseTest {
     public void testItemPricesDisplay() {
         List<String> prices = checkoutOverviewPage.getAllItemPrices();
         
-        assertEquals(prices.size(), 3, "Should display 3 item prices");
+        assertEquals(prices.size(), 3, SauceDemoMessages.DISPLAY_THREE_ITEM_PRICES);
         
         // Verify price format (e.g., $29.99)
         for (String price : prices) {
@@ -139,11 +140,11 @@ public class CheckoutOverviewPageTest extends BaseTest {
     public void testItemQuantitiesDisplay() {
         List<String> quantities = checkoutOverviewPage.getAllItemQuantities();
         
-        assertEquals(quantities.size(), 3, "Should display 3 item quantities");
+        assertEquals(quantities.size(), 3, SauceDemoMessages.DISPLAY_THREE_QUANTITIES);
         
         // Each item added once should have quantity of 1
         for (String qty : quantities) {
-            assertEquals(qty, "1", "Each item quantity should be 1");
+            assertEquals(qty, "1", SauceDemoMessages.EACH_ITEM_QUANTITY_ONE);
         }
     }
 
@@ -155,7 +156,7 @@ public class CheckoutOverviewPageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testSummaryInfoDisplay() {
         assertTrue(checkoutOverviewPage.isSummaryInfoDisplayed(), 
-                  "Order summary section should be displayed");
+                  SauceDemoMessages.ORDER_SUMMARY_DISPLAYED);
     }
 
     @Test(priority = 8, groups = {"functional", "overview", "regression"})
@@ -166,10 +167,10 @@ public class CheckoutOverviewPageTest extends BaseTest {
         String subtotalLabel = checkoutOverviewPage.getSubtotalLabel();
         double subtotal = checkoutOverviewPage.getSubtotal();
         
-        assertTrue(subtotalLabel.contains("Subtotal"), "Should display subtotal label");
+        assertTrue(subtotalLabel.contains("Subtotal"), SauceDemoMessages.DISPLAY_SUBTOTAL_LABEL);
         assertTrue(subtotalLabel.matches(".*\\$\\d+\\.\\d{2}.*"), 
-                  "Subtotal should include price in correct format");
-        assertTrue(subtotal > 0, "Subtotal should be greater than 0");
+                  SauceDemoMessages.SUBTOTAL_CORRECT_FORMAT);
+        assertTrue(subtotal > 0, SauceDemoMessages.SUBTOTAL_GREATER_THAN_ZERO);
     }
 
     @Test(priority = 9, groups = {"functional", "overview", "regression"})
@@ -180,10 +181,10 @@ public class CheckoutOverviewPageTest extends BaseTest {
         String taxLabel = checkoutOverviewPage.getTaxLabel();
         double tax = checkoutOverviewPage.getTax();
         
-        assertTrue(taxLabel.contains("Tax"), "Should display tax label");
+        assertTrue(taxLabel.contains("Tax"), SauceDemoMessages.DISPLAY_TAX_LABEL);
         assertTrue(taxLabel.matches(".*\\$\\d+\\.\\d{2}.*"), 
-                  "Tax should include price in correct format");
-        assertTrue(tax > 0, "Tax should be greater than 0");
+                  SauceDemoMessages.TAX_CORRECT_FORMAT);
+        assertTrue(tax > 0, SauceDemoMessages.TAX_GREATER_THAN_ZERO);
     }
 
     @Test(priority = 10, groups = {"functional", "overview", "regression"})
@@ -194,10 +195,10 @@ public class CheckoutOverviewPageTest extends BaseTest {
         String totalLabel = checkoutOverviewPage.getTotalLabel();
         double total = checkoutOverviewPage.getTotal();
         
-        assertTrue(totalLabel.contains("Total"), "Should display total label");
+        assertTrue(totalLabel.contains("Total"), SauceDemoMessages.DISPLAY_TOTAL_LABEL);
         assertTrue(totalLabel.matches(".*\\$\\d+\\.\\d{2}.*"), 
-                  "Total should include price in correct format");
-        assertTrue(total > 0, "Total should be greater than 0");
+                  SauceDemoMessages.SUBTOTAL_CORRECT_FORMAT);
+        assertTrue(total > 0, SauceDemoMessages.TOTAL_GREATER_THAN_ZERO);
     }
 
     @Test(priority = 11, groups = {"functional", "overview", "regression"})
@@ -242,10 +243,10 @@ public class CheckoutOverviewPageTest extends BaseTest {
         String firstItemPrice = checkoutOverviewPage.getItemPriceByIndex(0);
         String firstItemQty = checkoutOverviewPage.getItemQuantityByIndex(0);
         
-        assertFalse(firstItemName.isEmpty(), "Item name should not be empty");
-        assertFalse(firstItemDesc.isEmpty(), "Item description should not be empty");
-        assertTrue(firstItemPrice.matches("\\$\\d+\\.\\d{2}"), "Item price format invalid");
-        assertEquals(firstItemQty, "1", "Item quantity should be 1");
+        assertFalse(firstItemName.isEmpty(), SauceDemoMessages.ITEM_NAME_NOT_EMPTY);
+        assertFalse(firstItemDesc.isEmpty(), SauceDemoMessages.ITEM_DESCRIPTION_NOT_EMPTY_CHECKOUT);
+        assertTrue(firstItemPrice.matches("\\$\\d+\\.\\d{2}"), SauceDemoMessages.ITEM_PRICE_FORMAT_INVALID);
+        assertEquals(firstItemQty, "1", SauceDemoMessages.ITEM_QUANTITY_ONE_TEXT);
     }
 
     @Test(priority = 15, groups = {"functional", "overview", "regression"})
@@ -332,7 +333,7 @@ public class CheckoutOverviewPageTest extends BaseTest {
         
         for (String price : prices) {
             double priceValue = checkoutOverviewPage.extractPrice(price);
-            assertTrue(priceValue > 0, "Price should be positive: " + price);
+            assertTrue(priceValue > 0, SauceDemoMessages.PRICE_SHOULD_BE_POSITIVE + ": " + price);
         }
     }
 
@@ -373,7 +374,7 @@ public class CheckoutOverviewPageTest extends BaseTest {
         
         for (String qty : quantities) {
             int quantity = Integer.parseInt(qty);
-            assertTrue(quantity > 0, "Quantity should be positive: " + qty);
+            assertTrue(quantity > 0, SauceDemoMessages.QUANTITY_SHOULD_BE_POSITIVE + ": " + qty);
         }
     }
 

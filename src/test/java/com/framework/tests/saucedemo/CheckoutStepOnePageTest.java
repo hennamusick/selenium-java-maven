@@ -7,6 +7,7 @@ import com.framework.pages.saucedemo.LoginPage;
 import com.framework.utils.BaseTest;
 import com.framework.utils.ConfigReader;
 import com.framework.utils.saucedemo.SauceDemoConstants;
+import com.framework.utils.saucedemo.SauceDemoMessages;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -57,9 +58,9 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Description("Verify checkout page title is displayed correctly")
     @Severity(SeverityLevel.BLOCKER)
     public void testCheckoutPageTitleDisplay() {
-        assertTrue(checkoutPage.isPageTitleDisplayed(), "Checkout page title should be displayed");
+        assertTrue(checkoutPage.isPageTitleDisplayed(), SauceDemoMessages.CHECKOUT_PAGE_TITLE_DISPLAYED);
         assertEquals(checkoutPage.getPageTitle(), SauceDemoConstants.CHECKOUT_STEP_ONE_TITLE,
-                    "Page title should be 'Checkout: Your Information'");
+                    SauceDemoMessages.CHECKOUT_PAGE_TITLE_CORRECT);
     }
 
     @Test(priority = 2, groups = {"smoke", "checkout", "regression"})
@@ -68,11 +69,11 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Severity(SeverityLevel.BLOCKER)
     public void testAllFormFieldsDisplayed() {
         softAssert.assertTrue(checkoutPage.isFirstNameFieldDisplayed(), 
-                            "First Name field should be displayed");
+                            SauceDemoMessages.FIRST_NAME_FIELD_DISPLAYED);
         softAssert.assertTrue(checkoutPage.isLastNameFieldDisplayed(), 
-                            "Last Name field should be displayed");
+                            SauceDemoMessages.LAST_NAME_FIELD_DISPLAYED);
         softAssert.assertTrue(checkoutPage.isPostalCodeFieldDisplayed(), 
-                            "Postal Code field should be displayed");
+                            SauceDemoMessages.POSTAL_CODE_FIELD_DISPLAYED);
         softAssert.assertAll();
     }
 
@@ -82,11 +83,11 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void testFormFieldPlaceholders() {
         softAssert.assertEquals(checkoutPage.getFirstNamePlaceholder(), "First Name",
-                              "First Name placeholder should be correct");
+                              SauceDemoMessages.FIRST_NAME_PLACEHOLDER_CORRECT);
         softAssert.assertEquals(checkoutPage.getLastNamePlaceholder(), "Last Name",
-                              "Last Name placeholder should be correct");
+                              SauceDemoMessages.LAST_NAME_PLACEHOLDER_CORRECT);
         softAssert.assertEquals(checkoutPage.getPostalCodePlaceholder(), "Zip/Postal Code",
-                              "Postal Code placeholder should be correct");
+                              SauceDemoMessages.POSTAL_CODE_PLACEHOLDER_CORRECT);
         softAssert.assertAll();
     }
 
@@ -96,11 +97,11 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     public void testFormFieldsEnabled() {
         softAssert.assertTrue(checkoutPage.isFirstNameFieldEnabled(), 
-                            "First Name field should be enabled");
+                            SauceDemoMessages.FIRST_NAME_FIELD_ENABLED);
         softAssert.assertTrue(checkoutPage.isLastNameFieldEnabled(), 
-                            "Last Name field should be enabled");
+                            SauceDemoMessages.LAST_NAME_FIELD_ENABLED);
         softAssert.assertTrue(checkoutPage.isPostalCodeFieldEnabled(), 
-                            "Postal Code field should be enabled");
+                            SauceDemoMessages.POSTAL_CODE_FIELD_ENABLED);
         softAssert.assertAll();
     }
 
@@ -111,9 +112,9 @@ public class CheckoutStepOnePageTest extends BaseTest {
     public void testButtonsDisplayed() {
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(checkoutPage.isContinueButtonDisplayed(), 
-                            "Continue button should be displayed");
+                            SauceDemoMessages.CONTINUE_BUTTON_DISPLAYED);
         softAssert.assertTrue(checkoutPage.isCancelButtonDisplayed(), 
-                            "Cancel button should be displayed");
+                            SauceDemoMessages.CANCEL_BUTTON_DISPLAYED);
         softAssert.assertAll();
     }
 
@@ -123,9 +124,9 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     public void testButtonText() {
         assertEquals(checkoutPage.getContinueButtonText(), SauceDemoConstants.CONTINUE_BUTTON_TEXT,
-                    "Continue button text should be 'Continue'");
+                    SauceDemoMessages.CONTINUE_BUTTON_TEXT_CORRECT);
         assertEquals(checkoutPage.getCancelButtonText(), SauceDemoConstants.CANCEL_BUTTON_TEXT,
-                    "Cancel button text should be 'Cancel'");
+                    SauceDemoMessages.CANCEL_BUTTON_TEXT_CORRECT);
     }
 
     @Test(priority = 7, groups = {"functional", "checkout", "regression"})
@@ -133,8 +134,8 @@ public class CheckoutStepOnePageTest extends BaseTest {
     @Description("Verify cart badge is still visible on checkout page")
     @Severity(SeverityLevel.NORMAL)
     public void testCartBadgeVisible() {
-        assertTrue(checkoutPage.isCartBadgeDisplayed(), "Cart badge should be visible");
-        assertEquals(checkoutPage.getCartBadgeCount(), "1", "Cart badge should show 1 item");
+        assertTrue(checkoutPage.isCartBadgeDisplayed(), SauceDemoMessages.CART_BADGE_VISIBLE);
+        assertEquals(checkoutPage.getCartBadgeCount(), "1", SauceDemoMessages.CART_BADGE_SHOW_ONE_ITEM);
     }
 
     // ==================== FORM INPUT TESTS ====================
@@ -180,7 +181,7 @@ public class CheckoutStepOnePageTest extends BaseTest {
             SauceDemoConstants.CHECKOUT_POSTAL_CODE
         );
         
-        assertTrue(checkoutPage.areAllFieldsFilled(), "All fields should be filled");
+        assertTrue(checkoutPage.areAllFieldsFilled(), SauceDemoMessages.ALL_FIELDS_FILLED);
     }
 
     @Test(priority = 12, groups = {"functional", "checkout", "regression"})
@@ -191,7 +192,7 @@ public class CheckoutStepOnePageTest extends BaseTest {
         checkoutPage.fillCheckoutInformation("Test", "User", "11111");
         checkoutPage.clearAllFields();
         
-        assertTrue(checkoutPage.areAllFieldsEmpty(), "All fields should be empty after clearing");
+        assertTrue(checkoutPage.areAllFieldsEmpty(), SauceDemoMessages.ALL_FIELDS_EMPTY_AFTER_CLEAR);
     }
 
     @Test(priority = 13, groups = {"functional", "checkout", "regression"})
@@ -307,7 +308,7 @@ public class CheckoutStepOnePageTest extends BaseTest {
         checkoutPage.clickCancel();
         
         assertTrue(driver.getCurrentUrl().contains(SauceDemoConstants.CART_URL),
-                  "Should navigate back to cart page");
+                  SauceDemoMessages.CANCEL_NAVIGATE_TO_CART);
     }
 
     @Test(priority = 22, groups = {"functional", "checkout", "regression"})
