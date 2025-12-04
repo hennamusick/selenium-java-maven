@@ -53,6 +53,11 @@ public final class SauceDemoConstants {
     public static final String CHECKOUT_STEP_ONE_TITLE = "Checkout: Your Information";
     
     /**
+     * Checkout overview page title (step two)
+     */
+    public static final String CHECKOUT_OVERVIEW_TITLE = "Checkout: Overview";
+    
+    /**
      * Login button text
      */
     public static final String LOGIN_BUTTON_TEXT = "Login";
@@ -164,6 +169,7 @@ public final class SauceDemoConstants {
      */
     public static final String CONTINUE_BUTTON_TEXT = "Continue";
     public static final String CANCEL_BUTTON_TEXT = "Cancel";
+    public static final String FINISH_BUTTON_TEXT = "Finish";
     
     // ==================== ERROR MESSAGES ====================
     
