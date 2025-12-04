@@ -97,6 +97,13 @@ public class InventoryPage extends BasePage {
                 .toList();
     }
 
+    public String getProductNameByIndex(int index) {
+        if (index >= 0 && index < productNames.size()) {
+            return productNames.get(index).getText();
+        }
+        return "";
+    }
+
     public boolean isCartBadgeDisplayed() {
         try {
             return cartBadge.isDisplayed();
@@ -178,6 +185,10 @@ public class InventoryPage extends BasePage {
 
     public boolean isSortDropdownEnabled() {
         return sortDropdown.isEnabled();
+    }
+
+    public int getProductCount() {
+        return inventoryItems.size();
     }
 
     // Cart management

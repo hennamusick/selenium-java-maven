@@ -43,6 +43,16 @@ public final class SauceDemoConstants {
     public static final String PRODUCTS_TITLE = "Products";
     
     /**
+     * Cart page title
+     */
+    public static final String CART_PAGE_TITLE = "Your Cart";
+    
+    /**
+     * Checkout step one page title
+     */
+    public static final String CHECKOUT_STEP_ONE_TITLE = "Checkout: Your Information";
+    
+    /**
      * Login button text
      */
     public static final String LOGIN_BUTTON_TEXT = "Login";
@@ -139,4 +149,28 @@ public final class SauceDemoConstants {
     public static final String CHECKOUT_FIRST_NAME = "John";
     public static final String CHECKOUT_LAST_NAME = "Doe";
     public static final String CHECKOUT_POSTAL_CODE = "12345";
+    
+    // ==================== BUTTON TEXT ====================
+    
+    /**
+     * Cart page button text
+     */
+    public static final String CONTINUE_SHOPPING_BUTTON_TEXT = "Continue Shopping";
+    public static final String CHECKOUT_BUTTON_TEXT = "Checkout";
+    public static final String REMOVE_BUTTON_PREFIX = "Remove";
+    
+    /**
+     * Checkout page button text
+     */
+    public static final String CONTINUE_BUTTON_TEXT = "Continue";
+    public static final String CANCEL_BUTTON_TEXT = "Cancel";
+    
+    // ==================== ERROR MESSAGES ====================
+    
+    /**
+     * Checkout form error messages
+     */
+    public static final String ERROR_FIRST_NAME_REQUIRED = "Error: First Name is required";
+    public static final String ERROR_LAST_NAME_REQUIRED = "Error: Last Name is required";
+    public static final String ERROR_POSTAL_CODE_REQUIRED = "Error: Postal Code is required";
 }

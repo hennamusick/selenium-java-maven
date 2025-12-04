@@ -362,4 +362,212 @@ public class InventoryPageTest extends BaseTest {
         
         softAssert.assertAll();
     }
+
+    // ==================== ADVANCED FILTER/SORT TESTS ====================
+
+    @Test(priority = 21, groups = {"functional", "regression"}, description = "Verify sort option count is exactly 4")
+    @Description("Validate that dropdown contains exactly 4 sort options")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Filter/Sort Dropdown")
+    public void testSortDropdownOptionsCount() {
+        List<String> options = inventoryPage.getAllSortOptions();
+        softAssert.assertEquals(options.size(), 4, 
+            "Sort dropdown should contain exactly 4 options");
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 24, groups = {"functional", "regression"}, description = "Verify sort option order in dropdown")
+    @Description("Validate that sort options appear in correct order")
+    @Severity(SeverityLevel.MINOR)
+    @Story("Filter/Sort Dropdown")
+    public void testSortDropdownOptionsOrder() {
+        List<String> options = inventoryPage.getAllSortOptions();
+        
+        softAssert.assertEquals(options.get(0), SauceDemoConstants.SORT_NAME_ASC, 
+            "First option should be Name (A to Z)");
+        softAssert.assertEquals(options.get(1), SauceDemoConstants.SORT_NAME_DESC, 
+            "Second option should be Name (Z to A)");
+        softAssert.assertEquals(options.get(2), SauceDemoConstants.SORT_PRICE_LOW_HIGH, 
+            "Third option should be Price (low to high)");
+        softAssert.assertEquals(options.get(3), SauceDemoConstants.SORT_PRICE_HIGH_LOW, 
+            "Fourth option should be Price (high to low)");
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 25, groups = {"functional", "regression"}, description = "Verify sort persists after adding item to cart")
+    @Description("Validate that selected sort option remains after cart operations")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Filter/Sort Dropdown")
+    public void testSortPersistsAfterCartOperation() {
+        // Select a non-default sort option
+        inventoryPage.selectSortOption(SauceDemoConstants.SORT_PRICE_HIGH_LOW);
+        String sortBeforeCart = inventoryPage.getSelectedSortOption();
+        
+        // Add item to cart
+        inventoryPage.addFirstItemToCart();
+        
+        // Verify sort is still the same
+        String sortAfterCart = inventoryPage.getSelectedSortOption();
+        softAssert.assertEquals(sortAfterCart, sortBeforeCart, 
+            "Sort option should persist after adding item to cart");
+        softAssert.assertEquals(sortAfterCart, SauceDemoConstants.SORT_PRICE_HIGH_LOW, 
+            "Sort should still be Price (high to low)");
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 26, groups = {"functional", "regression"}, description = "Verify products reorder immediately when sort changes")
+    @Description("Validate that product list updates immediately when sort option is changed")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Filter/Sort Dropdown")
+    public void testProductsReorderImmediately() {
+        // Get first product with default sort (A to Z)
+        String firstProductDefault = inventoryPage.getProductNameByIndex(0);
+        
+        // Change to Z to A
+        inventoryPage.selectSortOption(SauceDemoConstants.SORT_NAME_DESC);
+        String firstProductReversed = inventoryPage.getProductNameByIndex(0);
+        
+        // Products should be different
+        softAssert.assertNotEquals(firstProductDefault, firstProductReversed, 
+            "First product should change when sort order changes");
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 27, groups = {"functional", "regression"}, description = "Verify sort by value using dropdown value attribute")
+    @Description("Validate that sorting works using dropdown value attribute")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Filter/Sort Dropdown")
+    public void testSortByValueAttribute() {
+        // Sort using value attribute
+        inventoryPage.selectSortByValue("za");
+        
+        String selectedOption = inventoryPage.getSelectedSortOption();
+        softAssert.assertEquals(selectedOption, SauceDemoConstants.SORT_NAME_DESC, 
+            "Sort by value 'za' should select Name (Z to A)");
+        
+        // Verify products are actually sorted Z to A
+        List<String> productNames = inventoryPage.getAllProductNames();
+        List<String> sortedNames = productNames.stream()
+                .sorted((a, b) -> b.compareTo(a))
+                .toList();
+        softAssert.assertEquals(productNames, sortedNames, 
+            "Products should be sorted Z to A");
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 28, groups = {"functional", "regression"}, description = "Verify all sort values work correctly")
+    @Description("Validate that all dropdown values (az, za, lohi, hilo) function properly")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Filter/Sort Dropdown")
+    public void testAllSortValuesFunctional() {
+        // Test az
+        inventoryPage.selectSortByValue("az");
+        softAssert.assertEquals(inventoryPage.getSelectedSortOption(), SauceDemoConstants.SORT_NAME_ASC);
+        
+        // Test za
+        inventoryPage.selectSortByValue("za");
+        softAssert.assertEquals(inventoryPage.getSelectedSortOption(), SauceDemoConstants.SORT_NAME_DESC);
+        
+        // Test lohi
+        inventoryPage.selectSortByValue("lohi");
+        softAssert.assertEquals(inventoryPage.getSelectedSortOption(), SauceDemoConstants.SORT_PRICE_LOW_HIGH);
+        
+        // Test hilo
+        inventoryPage.selectSortByValue("hilo");
+        softAssert.assertEquals(inventoryPage.getSelectedSortOption(), SauceDemoConstants.SORT_PRICE_HIGH_LOW);
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 29, groups = {"functional", "regression"}, description = "Verify sort affects all products equally")
+    @Description("Validate that all 6 products are always displayed regardless of sort")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Filter/Sort Dropdown")
+    public void testSortDoesNotFilterProducts() {
+        // Count products with default sort
+        int countDefault = inventoryPage.getProductCount();
+        
+        // Change sort and count again
+        inventoryPage.selectSortOption(SauceDemoConstants.SORT_PRICE_HIGH_LOW);
+        int countAfterSort = inventoryPage.getProductCount();
+        
+        softAssert.assertEquals(countDefault, SauceDemoConstants.PRODUCT_COUNT, 
+            "Should have 6 products with default sort");
+        softAssert.assertEquals(countAfterSort, SauceDemoConstants.PRODUCT_COUNT, 
+            "Should still have 6 products after sort change");
+        softAssert.assertEquals(countDefault, countAfterSort, 
+            "Product count should not change when sorting");
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 30, groups = {"regression"}, description = "Verify sorting multiple times works correctly")
+    @Description("Validate that changing sort multiple times maintains correct order")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Filter/Sort Dropdown")
+    public void testMultipleSortChanges() {
+        // Sort by name A-Z
+        inventoryPage.selectSortOption(SauceDemoConstants.SORT_NAME_ASC);
+        List<String> namesAZ = inventoryPage.getAllProductNames();
+        
+        // Sort by price
+        inventoryPage.selectSortOption(SauceDemoConstants.SORT_PRICE_LOW_HIGH);
+        
+        // Sort back to name A-Z
+        inventoryPage.selectSortOption(SauceDemoConstants.SORT_NAME_ASC);
+        List<String> namesAZAgain = inventoryPage.getAllProductNames();
+        
+        softAssert.assertEquals(namesAZ, namesAZAgain, 
+            "Product order should be identical when selecting same sort option twice");
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 31, groups = {"functional", "regression"}, description = "Verify price sorting with decimal values")
+    @Description("Validate that price sorting correctly handles decimal values")
+    @Severity(SeverityLevel.CRITICAL)
+    @Story("Filter/Sort Dropdown")
+    public void testPriceSortingWithDecimals() {
+        inventoryPage.selectSortOption(SauceDemoConstants.SORT_PRICE_LOW_HIGH);
+        
+        List<String> prices = inventoryPage.getAllProductPrices();
+        List<Double> priceValues = prices.stream()
+                .map(p -> Double.parseDouble(p.replace("$", "")))
+                .toList();
+        
+        // Verify ascending order
+        for (int i = 0; i < priceValues.size() - 1; i++) {
+            softAssert.assertTrue(priceValues.get(i) <= priceValues.get(i + 1), 
+                String.format("Price at index %d ($%.2f) should be <= price at index %d ($%.2f)", 
+                    i, priceValues.get(i), i+1, priceValues.get(i+1)));
+        }
+        
+        softAssert.assertAll();
+    }
+
+    @Test(priority = 32, groups = {"functional", "regression"}, description = "Verify name sorting is case-insensitive")
+    @Description("Validate that name sorting handles case properly")
+    @Severity(SeverityLevel.NORMAL)
+    @Story("Filter/Sort Dropdown")
+    public void testNameSortingCaseHandling() {
+        inventoryPage.selectSortOption(SauceDemoConstants.SORT_NAME_ASC);
+        
+        List<String> productNames = inventoryPage.getAllProductNames();
+        
+        // Verify alphabetical order (case-insensitive)
+        for (int i = 0; i < productNames.size() - 1; i++) {
+            String current = productNames.get(i).toLowerCase();
+            String next = productNames.get(i + 1).toLowerCase();
+            softAssert.assertTrue(current.compareTo(next) <= 0, 
+                String.format("'%s' should come before or equal to '%s' in alphabetical order", 
+                    productNames.get(i), productNames.get(i + 1)));
+        }
+        
+        softAssert.assertAll();
+    }
 }

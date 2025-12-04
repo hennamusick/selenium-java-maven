@@ -13,7 +13,7 @@
     
     <test name="SauceDemo - Inventory Tests">
         <classes>
-            <class name="com.framework.tests.saucedemo.SauceDemoTest"/>
+            <class name="com.framework.tests.saucedemo.InventoryPageTest"/>
         </classes>
     </test>
 </suite>
