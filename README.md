@@ -121,6 +121,83 @@ public abstract class BasePage {
 }
 ```
 
+**Complete Code Breakdown - Line by Line:**
+
+```java
+// Line 1: Abstract class declaration
+public abstract class BasePage {
+```
+- **`public`** - Accessible from any package (page objects in different packages can extend it)
+- **`abstract`** - Cannot be instantiated directly, must be extended
+- **`class BasePage`** - Template for all page objects
+- **Why abstract?** Prevents `new BasePage(driver)` which would be meaningless (not a real page)
+
+```java
+// Line 2: WebDriver instance variable
+protected WebDriver driver;
+```
+- **`protected`** - Accessible to subclasses (HomePage, LoginPage, etc.) but not outside package
+- **`WebDriver driver`** - Interface reference (allows Chrome, Firefox, Edge, etc.)
+- **Why protected?** Child classes need direct access to driver for complex interactions
+- **Example usage in child:** `driver.getCurrentUrl()` in page object methods
+
+```java
+// Line 3: Wait utility instance variable
+protected Wait wait;
+```
+- **`protected Wait wait`** - Custom utility class for explicit waits
+- **Why protected?** Child classes use `wait.waitForElementVisible(element)`
+- **Benefit:** Centralized wait logic, no duplicate wait code in page objects
+
+```java
+// Line 4-5: Constructor
+public BasePage(WebDriver driver) {
+```
+- **`public`** - Constructor must be accessible to subclasses
+- **`WebDriver driver`** - Parameter passed from test class
+- **Flow:** Test creates `HomePage` → `HomePage` calls `super(driver)` → Executes this constructor
+
+```java
+// Line 6: Store driver reference (1️⃣)
+this.driver = driver;
+```
+- **`this.driver`** - Instance variable (belongs to this object)
+- **`= driver`** - Parameter value (passed from test)
+- **Purpose:** Makes driver accessible to all methods in page class
+- **Without this:** Every method would need driver as parameter (messy!)
+- **Example:** `clickElement(loginButton)` can use `this.driver` internally
+
+```java
+// Line 7: Initialize Wait utility (2️⃣)
+this.wait = new Wait(driver);
+```
+- **`new Wait(driver)`** - Creates new Wait instance with 10-second default timeout
+- **Why here?** Every page object needs wait functionality
+- **Benefit:** Page methods can call `wait.waitForElementClickable(element)` without creating Wait instance
+- **Alternative (bad):** Creating new Wait in every page method wastes memory
+
+```java
+// Line 8: Initialize PageFactory (3️⃣)
+PageFactory.initElements(driver, this);
+```
+- **`PageFactory.initElements`** - Selenium's built-in initialization method
+- **`driver`** - WebDriver instance to use for finding elements
+- **`this`** - Current page object (HomePage, LoginPage, etc.)
+- **What it does:** Finds all `@FindBy` annotated elements in the page class
+- **Example:** `@FindBy(id = "username")` → Selenium finds element with id="username"
+- **When:** Elements initialized lazily (found when first accessed, not immediately)
+- **Benefit:** Clean syntax, no `driver.findElement()` everywhere
+
+```java
+// Line 9: Reset to default frame (4️⃣)
+switchToDefaultContent();
+```
+- **`switchToDefaultContent()`** - Method in BasePage that calls `driver.switchTo().defaultContent()`
+- **Why?** Ensures we're in main HTML context, not stuck in iframe
+- **When needed:** After test fails in iframe, next test needs clean state
+- **Example scenario:** IFrameTest fails while in frame → next test (CheckboxTest) would fail without this reset
+- **Alternative (bad):** Every test calls `driver.switchTo().defaultContent()` in @BeforeMethod (duplicate code)
+
 **Why Abstract?**
 - ❌ Prevents direct instantiation (BasePage is a template, not a real page)
 - ✅ Enforces inheritance - all page objects must extend it
@@ -128,14 +205,21 @@ public abstract class BasePage {
 - ✅ Follows Template Method Pattern
 - ✅ Ensures consistent structure across all page objects
 
-**Constructor Breakdown:**
+**Constructor Execution Flow:**
 
-| Line | Purpose | Why It's Needed |
-|------|---------|-----------------|
-| **1️⃣ `this.driver = driver;`** | Stores WebDriver instance | Makes driver accessible to all methods in page classes |
-| **2️⃣ `this.wait = new Wait(driver);`** | Creates Wait utility instance | Provides reusable explicit wait methods with 10-second default timeout |
-| **3️⃣ `PageFactory.initElements(...)`** | Initializes all `@FindBy` elements | Connects WebElement annotations to actual DOM elements |
-| **4️⃣ `switchToDefaultContent()`** | Resets to main frame | Ensures clean state, prevents iframe context issues |
+```
+1. Test creates page object: HomePage homePage = new HomePage(driver);
+2. HomePage constructor executes
+3. First line in HomePage constructor: super(driver);
+4. BasePage constructor executes:
+   a. this.driver = driver           → Store driver reference
+   b. this.wait = new Wait(driver)   → Create Wait utility
+   c. PageFactory.initElements()     → Initialize @FindBy elements
+   d. switchToDefaultContent()       → Reset frame context
+5. Control returns to HomePage constructor
+6. HomePage-specific initialization (if any)
+7. HomePage object ready to use
+```
 
 **Benefits:**
 - ✅ **DRY Principle** - Write initialization once, use everywhere
@@ -143,6 +227,8 @@ public abstract class BasePage {
 - ✅ **Maintainability** - Change timeout/config in one place
 - ✅ **Reliability** - Automatic frame reset prevents errors
 - ✅ **Type Safety** - Polymorphism support for page objects
+- ✅ **Memory Efficient** - Single Wait instance per page object
+- ✅ **Clean Code** - No boilerplate in page object classes
 
 #### **Wait Utility Class - Centralized Wait Management**
 
